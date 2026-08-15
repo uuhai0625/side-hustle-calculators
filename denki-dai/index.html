@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>在宅ワークのパソコン電気代 計算機|副業そろばん</title>
+<meta name="description" content="パソコンの種類・モニター台数・使用時間を選ぶだけで、AI副業でかかるパソコンの電気代を月額・年額で計算できる無料ツールです。">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="在宅ワークのパソコン電気代 計算機|副業そろばん">
+<meta property="og:description" content="パソコンの種類・使用時間を選ぶだけで、AI副業の電気代の目安がわかります。">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:url" content="https://uuhai0625.github.io/side-hustle-calculators/denki-dai/">
+<link rel="canonical" href="https://uuhai0625.github.io/side-hustle-calculators/denki-dai/">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="在宅ワークのパソコン電気代 計算機">
+<meta name="twitter:description" content="パソコンの種類・使用時間を選ぶだけで、電気代の月額・年額目安がわかります。">
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧮</text></svg>">
+<meta name="theme-color" content="#1f5c4f" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1a1c19" media="(prefers-color-scheme: dark)">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@700;900&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "電気代の単価は全国一律ですか?", "acceptedAnswer": { "@type": "Answer", "text": "いいえ、地域や契約している電力会社・プランによって異なります。この計算機では業界団体が示す目安単価31円/kWhを初期値にしていますが、電気料金の明細から実際の単価を確認して入力し直すと、より正確な金額になります。" } },
+    { "@type": "Question", "name": "モニターの電気代も含まれますか?", "acceptedAnswer": { "@type": "Answer", "text": "はい。外部モニターの台数を入力すると、1台あたり約35Wとして電気代に加算します。ノートPC本体のみで作業している場合は0台のままで構いません。" } },
+    { "@type": "Question", "name": "画像生成AIをよく使う場合はどれを選べばいい?", "acceptedAnswer": { "@type": "Answer", "text": "GPUを積んだ高性能デスクトップPCを選んでください。ただし画像生成中はGPU使用率が上がり消費電力も一時的に増えるため、ここでの金額はあくまで平均的な使用時の目安です。" } },
+    { "@type": "Question", "name": "この電気代は経費にできますか?", "acceptedAnswer": { "@type": "Answer", "text": "在宅ワークで使った分は、業務利用の割合に応じて経費計上できる場合があります。按分の考え方は「副業の経費按分計算機」で確認できます。" } },
+    { "@type": "Question", "name": "もっと正確な金額を知るには?", "acceptedAnswer": { "@type": "Answer", "text": "ワットチェッカー(電力量計)をコンセントとパソコンの間に挟むと、実際の消費電力を実測できます。特にゲーミングPCなど消費電力の変動が大きい機種では、実測の方が正確です。" } }
+  ]
+}
+</script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <h1 class="site-logo">副業<span class="accent">そろばん</span></h1>
+    <p class="site-tagline">在宅ワークのパソコン電気代計算機</p>
+  </div>
+</header>
+
+<main class="wrap">
+  <a class="back-link" href="../">← ツール一覧にもどる</a>
+
+  <div class="calc-card">
+    <div class="field">
+      <label for="select-device">パソコンの種類</label>
+      <select id="select-device">
+        <option value="laptop">ノートPC</option>
+        <option value="desktop" selected>デスクトップPC(標準・オフィス用途)</option>
+        <option value="desktop_gpu">デスクトップPC(高性能・画像生成AI/動画編集用)</option>
+        <option value="desktop_gaming">デスクトップPC(ハイエンドゲーミング)</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="select-monitors">外部モニターの台数</label>
+      <select id="select-monitors">
+        <option value="0">0台(ノートPC単体など)</option>
+        <option value="1" selected>1台</option>
+        <option value="2">2台</option>
+        <option value="3">3台</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="input-hours">1日の使用時間(時間)</label>
+      <input type="number" id="input-hours" min="0.5" max="24" step="0.5" value="4">
+    </div>
+    <div class="field">
+      <label for="input-days">月の稼働日数(日)</label>
+      <input type="number" id="input-days" min="1" max="31" step="1" value="20">
+    </div>
+    <div class="field">
+      <label for="input-price">電気代の単価(円/kWh)</label>
+      <input type="number" id="input-price" min="1" max="100" step="0.1" value="31">
+      <span class="field-hint">目安単価です。電気料金の明細に記載の単価がわかれば、そちらを入力するとより正確になります。</span>
+    </div>
+    <button class="btn-calc" id="btn-calc" type="button">電気代を計算する</button>
+  </div>
+
+  <div class="result-card" id="result-card">
+    <p class="result-label">月間の電気代目安</p>
+    <p class="result-amount"><span class="yen">¥</span><span id="result-amount">--</span></p>
+    <p class="result-note" id="result-note"></p>
+    <p class="result-sub" id="result-sub"></p>
+    <div class="result-advice" id="result-advice"></div>
+    <div class="share-row" id="share-row">
+      <button class="share-btn" id="btn-copy-link" type="button">🔗 結果のURLをコピー</button>
+      <button class="share-btn" id="btn-share-x" type="button">𝕏 Xで共有</button>
+    </div>
+  </div>
+
+  <div id="product-section">
+    <p class="product-grid-label" id="product-grid-label" style="display:none;">🛒 電気代を正確に知るための人気アイテム</p>
+    <div class="product-grid" id="product-grid"></div>
+  </div>
+
+  <a class="aff-card" id="aff-card" href="#" target="_blank" rel="noopener sponsored">
+    <div class="aff-icon">💡</div>
+    <div class="aff-text">
+      <p class="aff-title">ワットチェッカーを探す</p>
+      <p class="aff-sub">楽天市場で見てみる</p>
+    </div>
+    <span class="aff-pr">PR</span>
+  </a>
+
+  <p class="follow-x">🧮 制作の裏側や新しいツールの告知は <a href="https://x.com/uuhai0625" target="_blank" rel="noopener">@uuhai0625</a> で発信しています</p>
+
+  <div class="manner-box show">
+    <h3>💡 電気代を抑えるヒント</h3>
+    <ul>
+      <li>スリープ・休止状態をこまめに使うと、待機時の消費電力を抑えられます。</li>
+      <li>ゲーミングPCは負荷の高い作業(画像生成・動画エンコード)で瞬間的に消費電力が跳ね上がるため、この計算機の数字より高くなることがあります。</li>
+      <li>電力会社やプランによって単価は大きく異なるため、まずは検針票や電力会社のマイページで実際の単価を確認するのが近道です。</li>
+      <li>複数モニターを常時点灯している場合、輝度を下げるだけでも消費電力が下がります。</li>
+    </ul>
+  </div>
+
+  <div class="rate-table-box show">
+    <h3>📋 機器別 消費電力の目安表</h3>
+    <p class="rate-table-note">電力量料金単価は目安31円/kWhで試算。実際の機種・使用状況により変動します。</p>
+    <table class="rate-table">
+      <tr><th>機器</th><th>消費電力の目安</th></tr>
+      <tr><td>ノートPC</td><td>20〜30W</td></tr>
+      <tr><td>デスクトップPC(標準)</td><td>50〜150W</td></tr>
+      <tr><td>デスクトップPC(高性能・GPU搭載)</td><td>300〜500W</td></tr>
+      <tr><td>デスクトップPC(ハイエンドゲーミング)</td><td>500〜700W</td></tr>
+      <tr><td>外部モニター(24〜27インチ)1台</td><td>30〜40W</td></tr>
+    </table>
+    <p class="rate-source">参考: <a href="https://www.dospara.co.jp/desktop/str_desk_pwrcons.html" target="_blank" rel="noopener">ドスパラ通販「デスクトップパソコンの消費電力」</a>、<a href="https://www.eneos-power.co.jp/article/saving/pc-electric-bill/" target="_blank" rel="noopener">ENEOSでんき「パソコンの消費電力」</a>、電力量料金単価は全国家庭電気製品公正取引協議会の目安単価(2026年8月確認)</p>
+  </div>
+
+  <div class="faq-section">
+    <h3>よくある質問</h3>
+    <details class="faq-item">
+      <summary>電気代の単価は全国一律ですか?</summary>
+      <p>いいえ、地域や契約している電力会社・プランによって異なります。この計算機では業界団体が示す目安単価31円/kWhを初期値にしていますが、電気料金の明細から実際の単価を確認して入力し直すと、より正確な金額になります。</p>
+    </details>
+    <details class="faq-item">
+      <summary>モニターの電気代も含まれますか?</summary>
+      <p>はい。外部モニターの台数を入力すると、1台あたり約35Wとして電気代に加算します。ノートPC本体のみで作業している場合は0台のままで構いません。</p>
+    </details>
+    <details class="faq-item">
+      <summary>画像生成AIをよく使う場合はどれを選べばいい?</summary>
+      <p>GPUを積んだ高性能デスクトップPCを選んでください。ただし画像生成中はGPU使用率が上がり消費電力も一時的に増えるため、ここでの金額はあくまで平均的な使用時の目安です。</p>
+    </details>
+    <details class="faq-item">
+      <summary>この電気代は経費にできますか?</summary>
+      <p>在宅ワークで使った分は、業務利用の割合に応じて経費計上できる場合があります。按分の考え方は「副業の経費按分計算機」で確認できます。</p>
+    </details>
+    <details class="faq-item">
+      <summary>もっと正確な金額を知るには?</summary>
+      <p>ワットチェッカー(電力量計)をコンセントとパソコンの間に挟むと、実際の消費電力を実測できます。特にゲーミングPCなど消費電力の変動が大きい機種では、実測の方が正確です。</p>
+    </details>
+  </div>
+
+  <div class="detail-section">
+    <h3>用途別にみる電気代の考え方</h3>
+
+    <h4>文章生成・ブラウザ作業が中心の場合</h4>
+    <p>ChatGPTやClaudeをブラウザで使う程度の作業であれば、ノートPCでも十分こなせます。消費電力も20〜30W程度と小さく、1日4時間・月20日使っても電気代は数百円程度に収まることがほとんどです。</p>
+
+    <h4>画像生成AI・動画編集が中心の場合</h4>
+    <p>Stable DiffusionやローカルLLM、動画エンコードなどGPUに負荷がかかる作業では、高性能デスクトップPCの消費電力(300〜500W)が電気代を大きく左右します。作業時間が長いほど差が開くため、まとめて処理する・不要な常駐アプリを閉じるといった工夫でも変わってきます。</p>
+
+    <h4>複数モニターで作業する場合</h4>
+    <p>資料を見ながらの作業や動画編集では2〜3画面を使うことも多く、モニター自体の電気代も無視できません。使わない時間はスリープにする、輝度を必要以上に上げないといった対策が効果的です。</p>
+  </div>
+
+  <div class="related-tools">
+    <h3>こんな計算機もあります</h3>
+    <div class="related-tools-list">
+      <a class="related-tool-link" href="../keihi-anbun/"><span class="icon">🧾</span>副業の経費按分計算機</a>
+    </div>
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <p>掲載している消費電力・単価は、公的機関や業界団体、メーカー公表資料をもとにした目安です。実際の金額は機種・使用状況・契約プランにより異なりますので、判断材料としてご利用ください。</p>
+  <p>🔖 商品リンクにはアフィリエイト(広告)リンクを含みます。リンク経由の購入により、当サイトが紹介料を得ることがあります。</p>
+  <p><a href="../#about">運営者情報・お問い合わせ</a></p>
+</footer>
+
+<script src="../ga.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

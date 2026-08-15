@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>副業の経費按分 計算機|副業そろばん</title>
+<meta name="description" content="電気代・家賃・通信費などを、使用時間または専有面積の割合で按分して、副業の経費計上額の目安を計算できる無料ツールです。">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="副業の経費按分 計算機|副業そろばん">
+<meta property="og:description" content="使用時間または専有面積の割合を選ぶだけで、経費計上額の目安がわかります。">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:url" content="https://uuhai0625.github.io/side-hustle-calculators/keihi-anbun/">
+<link rel="canonical" href="https://uuhai0625.github.io/side-hustle-calculators/keihi-anbun/">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="副業の経費按分 計算機">
+<meta name="twitter:description" content="使用時間または専有面積の割合を選ぶだけで、経費計上額の目安がわかります。">
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧮</text></svg>">
+<meta name="theme-color" content="#1f5c4f" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1a1c19" media="(prefers-color-scheme: dark)">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@700;900&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "按分の基準は面積と時間、どちらを選べばいい?", "acceptedAnswer": { "@type": "Answer", "text": "決まったルールはなく、実態に合った合理的な基準であればどちらでも構いません。作業スペースが独立した部屋になっている場合は面積按分、リビングの一角などで時間帯によって使い分けている場合は時間按分の方が説明しやすい傾向があります。" } },
+    { "@type": "Question", "name": "白色申告でも経費にできますか?", "acceptedAnswer": { "@type": "Answer", "text": "白色申告では、業務に使った割合が全体の50%を超えるか、業務のために使ったことが明確に区分できる場合に経費計上できるとされています。按分割合が50%に満たない場合は、区分が明確であることを説明できるようにしておく必要があります。" } },
+    { "@type": "Question", "name": "青色申告なら何%でも按分できますか?", "acceptedAnswer": { "@type": "Answer", "text": "青色申告(特に65万円控除)では、白色申告のような50%基準がなくても、業務使用分を合理的な基準で按分すれば経費にできるとされています。ただし基準は毎年一貫して使い、税務調査等で説明できるようにしておくことが望ましいとされています。" } },
+    { "@type": "Question", "name": "家賃も按分できますか?", "acceptedAnswer": { "@type": "Answer", "text": "賃貸物件であれば、家賃・管理費・共益費が家事按分の対象になります。面積割合か時間割合で計算するのが一般的です。持ち家の場合は減価償却など別の考え方になるため、この計算機では賃貸を想定しています。" } },
+    { "@type": "Question", "name": "スマホ代・通信費も同じ考え方ですか?", "acceptedAnswer": { "@type": "Answer", "text": "基本的には使用時間の割合で按分するのが一般的です。通話明細やアプリの利用時間で仕事用とプライベート用を明確に分けられる場合は、そちらの実績を使う方がより正確です。" } }
+  ]
+}
+</script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <h1 class="site-logo">副業<span class="accent">そろばん</span></h1>
+    <p class="site-tagline">副業の経費按分計算機</p>
+  </div>
+</header>
+
+<main class="wrap">
+  <a class="back-link" href="../">← ツール一覧にもどる</a>
+
+  <div class="scene-tabs">
+    <button class="scene-tab active" data-mode="time" type="button">⏱ 時間で按分</button>
+    <button class="scene-tab" data-mode="area" type="button">📐 面積で按分</button>
+  </div>
+
+  <div class="calc-card">
+    <div class="field">
+      <label for="select-expense">対象の費用</label>
+      <select id="select-expense">
+        <option value="electricity" selected>電気代</option>
+        <option value="rent">家賃(管理費・共益費含む、賃貸のみ)</option>
+        <option value="internet">通信費(自宅のネット回線)</option>
+        <option value="phone">スマホ代</option>
+        <option value="other">その他</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="input-amount">月額の支払額(円)</label>
+      <input type="number" id="input-amount" min="0" step="100" value="8000">
+    </div>
+
+    <div id="fields-time">
+      <div class="field">
+        <label for="input-hours">1日の副業使用時間(時間)</label>
+        <input type="number" id="input-hours" min="0" max="24" step="0.5" value="6">
+      </div>
+      <div class="field">
+        <label for="input-workdays">週の稼働日数(日)</label>
+        <input type="number" id="input-workdays" min="1" max="7" step="1" value="5">
+        <span class="field-hint">按分率は「週あたりの使用時間 ÷ 168時間(24時間×7日)」で計算します。</span>
+      </div>
+    </div>
+
+    <div id="fields-area" style="display:none;">
+      <div class="field">
+        <label for="input-work-area">作業スペースの面積(㎡)</label>
+        <input type="number" id="input-work-area" min="0" step="0.5" value="6">
+      </div>
+      <div class="field">
+        <label for="input-total-area">自宅の延床面積(㎡)</label>
+        <input type="number" id="input-total-area" min="1" step="0.5" value="50">
+      </div>
+    </div>
+
+    <button class="btn-calc" id="btn-calc" type="button">経費計上額を計算する</button>
+  </div>
+
+  <div class="result-card" id="result-card">
+    <p class="result-label">月間の経費計上額目安</p>
+    <p class="result-amount"><span class="yen">¥</span><span id="result-amount">--</span></p>
+    <p class="result-note" id="result-note"></p>
+    <p class="result-sub" id="result-sub"></p>
+    <div class="result-advice" id="result-advice"></div>
+    <div class="share-row" id="share-row">
+      <button class="share-btn" id="btn-copy-link" type="button">🔗 結果のURLをコピー</button>
+      <button class="share-btn" id="btn-share-x" type="button">𝕏 Xで共有</button>
+    </div>
+  </div>
+
+  <div id="product-section">
+    <p class="product-grid-label" id="product-grid-label" style="display:none;">🛒 経費の記録・管理に人気のアイテム</p>
+    <div class="product-grid" id="product-grid"></div>
+  </div>
+
+  <a class="aff-card" id="aff-card" href="#" target="_blank" rel="noopener sponsored">
+    <div class="aff-icon">🧾</div>
+    <div class="aff-text">
+      <p class="aff-title">領収書・書類の整理グッズを探す</p>
+      <p class="aff-sub">楽天市場で見てみる</p>
+    </div>
+    <span class="aff-pr">PR</span>
+  </a>
+
+  <p class="follow-x">🧮 制作の裏側や新しいツールの告知は <a href="https://x.com/uuhai0625" target="_blank" rel="noopener">@uuhai0625</a> で発信しています</p>
+
+  <div class="manner-box show">
+    <h3>💡 家事按分のポイント</h3>
+    <ul>
+      <li>按分の基準(時間か面積か)は、一度決めたら毎年同じ考え方で計算するのが基本です。</li>
+      <li>白色申告は業務割合が50%を超えるか、明確に区分できる場合のみ経費算入できます。50%に満たない場合は要注意です。</li>
+      <li>青色申告は50%基準がなくても合理的な按分であれば経費にできますが、説明できる根拠(使用時間の記録など)を残しておくと安心です。</li>
+      <li>持ち家の家賃相当分(減価償却)は考え方が異なるため、この計算機は賃貸物件を想定しています。</li>
+    </ul>
+  </div>
+
+  <div class="rate-table-box show">
+    <h3>📋 費目別 按分基準の目安</h3>
+    <p class="rate-table-note">どちらの基準を使うかは費目や作業環境の実態に合わせて選びます。</p>
+    <table class="rate-table">
+      <tr><th>費目</th><th>よく使われる基準</th></tr>
+      <tr><td>電気代</td><td>時間 or 面積</td></tr>
+      <tr><td>家賃・管理費(賃貸)</td><td>面積 or 時間</td></tr>
+      <tr><td>通信費(ネット回線)</td><td>時間</td></tr>
+      <tr><td>スマホ代</td><td>時間</td></tr>
+    </table>
+    <p class="rate-source">参考: <a href="https://www.freee.co.jp/kb/kb-kakuteishinkoku/apportionment_of_housework/" target="_blank" rel="noopener">freee「家事按分とは」</a>、<a href="https://www.yayoi-kk.co.jp/shinkoku/oyakudachi/20230105-17/" target="_blank" rel="noopener">弥生「按分とは」</a>(2026年8月確認)</p>
+  </div>
+
+  <div class="faq-section">
+    <h3>よくある質問</h3>
+    <details class="faq-item">
+      <summary>按分の基準は面積と時間、どちらを選べばいい?</summary>
+      <p>決まったルールはなく、実態に合った合理的な基準であればどちらでも構いません。作業スペースが独立した部屋になっている場合は面積按分、リビングの一角などで時間帯によって使い分けている場合は時間按分の方が説明しやすい傾向があります。</p>
+    </details>
+    <details class="faq-item">
+      <summary>白色申告でも経費にできますか?</summary>
+      <p>白色申告では、業務に使った割合が全体の50%を超えるか、業務のために使ったことが明確に区分できる場合に経費計上できるとされています。按分割合が50%に満たない場合は、区分が明確であることを説明できるようにしておく必要があります。</p>
+    </details>
+    <details class="faq-item">
+      <summary>青色申告なら何%でも按分できますか?</summary>
+      <p>青色申告(特に65万円控除)では、白色申告のような50%基準がなくても、業務使用分を合理的な基準で按分すれば経費にできるとされています。ただし基準は毎年一貫して使い、税務調査等で説明できるようにしておくことが望ましいとされています。</p>
+    </details>
+    <details class="faq-item">
+      <summary>家賃も按分できますか?</summary>
+      <p>賃貸物件であれば、家賃・管理費・共益費が家事按分の対象になります。面積割合か時間割合で計算するのが一般的です。持ち家の場合は減価償却など別の考え方になるため、この計算機では賃貸を想定しています。</p>
+    </details>
+    <details class="faq-item">
+      <summary>スマホ代・通信費も同じ考え方ですか?</summary>
+      <p>基本的には使用時間の割合で按分するのが一般的です。通話明細やアプリの利用時間で仕事用とプライベート用を明確に分けられる場合は、そちらの実績を使う方がより正確です。</p>
+    </details>
+  </div>
+
+  <div class="detail-section">
+    <h3>按分の考え方をもう少し詳しく</h3>
+
+    <h4>時間按分の考え方</h4>
+    <p>1日のうち何時間・週に何日その費用を業務に使ったかを、1週間全体の時間(24時間×7日=168時間)に対する割合として計算する方法です。例えば1日8時間・週6日使う場合は、48時間÷168時間で約29%が按分率の目安になります。</p>
+
+    <h4>面積按分の考え方</h4>
+    <p>自宅の延床面積のうち、作業スペースとして使っている面積の割合で計算する方法です。独立した書斎や仕事部屋がある場合に説明しやすい基準です。</p>
+
+    <h4>白色申告と青色申告の違い</h4>
+    <p>白色申告では、業務利用の割合が50%を超えるか、明確に区分できる場合に限り経費算入が認められるとされています。一方、青色申告(特に65万円控除)では、50%に満たなくても合理的な基準による按分であれば経費にできるとされています。いずれの場合も、按分の根拠(使用時間の記録やスペースの図面など)を残しておくと安心です。</p>
+  </div>
+
+  <div class="related-tools">
+    <h3>こんな計算機もあります</h3>
+    <div class="related-tools-list">
+      <a class="related-tool-link" href="../denki-dai/"><span class="icon">💡</span>在宅ワークのパソコン電気代計算機</a>
+    </div>
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <p>本ページの内容は一般的な家事按分の考え方の紹介であり、税務上の助言ではありません。実際の按分割合の妥当性や申告方法については、税理士または税務署にご確認のうえご自身の判断で行ってください。</p>
+  <p>🔖 商品リンクにはアフィリエイト(広告)リンクを含みます。リンク経由の購入により、当サイトが紹介料を得ることがあります。</p>
+  <p><a href="../#about">運営者情報・お問い合わせ</a></p>
+</footer>
+
+<script src="../ga.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
