@@ -399,10 +399,20 @@ a { color: var(--navy); }
   font-size: 0.78rem;
   color: var(--ink-sub);
 }
+/* 記事内など、rate-table-boxで囲まずtable単体を置く場合の横スクロール安全弁
+   (2026-08-15追加: line-stamp-kankyoの4列早見表がモバイル幅ではみ出すバグの修正、
+   既存のrate-table-box内の表には影響しない) */
+.rate-table-wrap {
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
 .rate-table {
   width: 100%;
   border-collapse: collapse;
   font-size: 0.86rem;
+}
+.rate-table-wrap .rate-table {
+  min-width: 480px;
 }
 .rate-table th, .rate-table td {
   text-align: left;
