@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>絵本(Kindle出版)の申請作業。自動化できない手作業から選ぶモニター・ノート|AI副業そろばん</title>
+<meta name="description" content="生成AIでKindle絵本を制作する中で実際に起きた、Midjourneyダウンロードの限界とKDP申請約15画面の手作業から、サブモニター・チェックリストノートの選び方を整理しました。">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="絵本(Kindle出版)の申請作業。自動化できない手作業から選ぶモニター・ノート">
+<meta property="og:description" content="生成AIでKindle絵本を制作する中で実際に起きた手作業の実態から、サブモニター・チェックリストノートの選び方を整理しました。">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:url" content="https://uuhai0625.github.io/side-hustle-calculators/ehon-shinsei/">
+<meta property="og:image" content="https://uuhai0625.github.io/side-hustle-calculators/images/og-image.jpg">
+<meta property="og:image:width" content="1520">
+<meta property="og:image:height" content="800">
+<link rel="canonical" href="https://uuhai0625.github.io/side-hustle-calculators/ehon-shinsei/">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="絵本(Kindle出版)の申請作業。自動化できない手作業から選ぶ道具">
+<meta name="twitter:description" content="実際に起きた手作業の実態から、サブモニター・チェックリストノートの選び方を整理しました。">
+<meta name="twitter:image" content="https://uuhai0625.github.io/side-hustle-calculators/images/og-image.jpg">
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧮</text></svg>">
+<meta name="theme-color" content="#0a0d0c">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "Kindle CreateやKDPサイトの操作は自動化できないのですか?", "acceptedAnswer": { "@type": "Answer", "text": "ブラウザ自動操作もWindowsのUI自動化も効かず、スクリーンショットを見ながら一画面ずつ手作業で進めています。テキストを画像に合成する工程まではスクリプトで自動化できていますが、その先は手作業が残っています。" } },
+    { "@type": "Question", "name": "AI生成コンテンツの開示を忘れるとどうなりますか?", "acceptedAnswer": { "@type": "Answer", "text": "該当タイトルの削除だけでなく、アカウント全体の停止につながる可能性があると言われています。申請のたびに必ず確認する項目にしています。" } },
+    { "@type": "Question", "name": "Midjourneyの画像はまとめてダウンロードできませんか?", "acceptedAnswer": { "@type": "Answer", "text": "複数の方法を試しましたが、同一セッション内では1枚目しか成功せず、原因は特定できていません。2枚目以降は手動で保存しています。" } },
+    { "@type": "Question", "name": "どのモニター・ノートを使っていますか?", "acceptedAnswer": { "@type": "Answer", "text": "まだ実機で選び切れておらず、記事内の紹介は基準に基づくものです。実際に購入して確認できた際は、この記事を更新して機種名を追記します。" } },
+    { "@type": "Question", "name": "絵本は何冊制作していますか?", "acceptedAnswer": { "@type": "Answer", "text": "2026年8月時点で2巻(「われた いしの、ひみつ」「たねの、やくそく」)を公開済みで、週1ペースでの刊行を目指しています。" } }
+  ]
+}
+</script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <h1 class="site-logo">AI副業<span class="accent">そろばん</span></h1>
+    <p class="site-tagline">絵本(Kindle出版)の申請作業</p>
+  </div>
+</header>
+
+<main class="wrap">
+  <a class="back-link" href="../">← ツール一覧にもどる</a>
+
+  <div class="detail-section" style="margin-top: 20px;">
+    <p>AI絵本のKDP出版では、画像生成後の「ダウンロード」と「出版申請」が自動化しきれず、手作業として毎週残ります。この記事では、その手作業の実態と、そこから見えてきた道具の選定基準(サブモニターとチェックリスト用ノート)を整理します。</p>
+
+    <h3>実際に起きたこと(1) Midjourneyのダウンロード自動化は1枚目しか成功しなかった</h3>
+    <p>運営者はAmazon KDPで3〜6歳向けのKindle絵本シリーズを制作しています。イラストはMidjourneyで生成し、週1ペースでの刊行が目標です(2026年8月時点で2巻を公開済み)。1冊の絵本には表紙・見開き・裏表紙などで11〜12枚の画像が必要になります。</p>
+    <p>このダウンロードを自動化しようとしたところ、ネイティブボタンの操作やJavaScriptでの取得など複数の方法を試しても、同じ自動化セッション内では1枚目しか成功しませんでした。原因は特定できていません。1巻ではCDNの画像URLを直接開いて保存し、2巻では新しいブラウザセッションでネイティブボタンが安定して動いた、という違いもあり、再現条件がはっきりしないままです。結果として、2枚目以降は運営者自身が手動でダウンロードすることになり、これを巻ごとに11〜12回、毎週繰り返すのが現状です。</p>
+
+    <h3>実際に起きたこと(2) Kindle CreateとKDP申請は約15画面の手作業になった</h3>
+    <p>テキストをページ画像に合成する工程まではPowerShellスクリプトで完全自動化できました。しかしその先の、Kindle Create(デスクトップアプリ)での体裁調整と、KDPサイトでの出版申請は、ブラウザ自動操作もWindowsのUI自動化も効きませんでした。そのため、スクリーンショットを見せながら次の入力・クリックを一画面ずつ確認して進める手作業が、約15画面分続きます。</p>
+    <p>この申請には見落とせない項目があります。特に「AI生成コンテンツの開示」は、画像・テキストともAI使用なら必ず「はい」にする必要があり、申告しないとタイトル削除だけでなくアカウント全体の停止につながる可能性があると言われています。カテゴリー・キーワード7枠・対象年齢なども毎回同じ確認が必要で、手作業のなかで必須項目を落とさない工夫が求められます。</p>
+
+    <h3>サブモニターを選ぶときの基準</h3>
+    <p>この手作業は「指示を見る画面」と「操作する画面」を行き来する作業です。画面を分けられる環境があると、この往復がしやすくなります。姉妹記事「<a href="../line-stamp-kankyo/">LINEスタンプ制作の確認環境</a>」ではモニターの色精度を基準にしましたが、今回の用途は多画面での並行作業です。基準になるのは、複数ウィンドウを同時に開いても文字が読みやすい画面サイズ・解像度かどうか、という点が目安です。運営者自身も、この用途に向くモデルはまだ実機で選び切れていません。下記は基準に近い人気アイテムの紹介であり、実機レビューではありません。</p>
+  </div>
+
+  <div id="product-section-monitor">
+    <p class="product-grid-label" id="product-grid-label-monitor" style="display:none;">並行作業向けの人気アイテム</p>
+    <div class="product-grid" id="product-grid-monitor"></div>
+  </div>
+
+  <a class="aff-card show" id="aff-card-monitor" href="#" target="_blank" rel="noopener sponsored">
+    <span class="aff-icon icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="1.5"/><line x1="8" y1="20" x2="16" y2="20"/><line x1="12" y1="16" x2="12" y2="20"/></svg></span>
+    <div class="aff-text">
+      <p class="aff-title">並行作業に使えるモニターを探す</p>
+      <p class="aff-sub">楽天市場で見てみる</p>
+    </div>
+    <span class="aff-pr">PR</span>
+  </a>
+
+  <div class="detail-section">
+    <h3>チェックリストノートを選ぶときの基準</h3>
+    <p>約15画面の手作業を毎巻繰り返すと、AI開示のような「絶対に外せない項目」をうっかり飛ばすリスクがあります。そこで、チェック項目をあらかじめ紙に書き出し、一つずつ確認しながら進める運用が有効ではないかと考えています。基準は、机の上で邪魔にならないサイズであること、必須項目を箇条書きしやすい方眼罫や手帳サイズであること、が目安です。こちらもまだ特定の製品は選び切れていません。</p>
+  </div>
+
+  <div id="product-section-notebook">
+    <p class="product-grid-label" id="product-grid-label-notebook" style="display:none;">申請チェックに使えるノートの人気アイテム</p>
+    <div class="product-grid" id="product-grid-notebook"></div>
+  </div>
+
+  <a class="aff-card show" id="aff-card-notebook" href="#" target="_blank" rel="noopener sponsored">
+    <span class="aff-icon icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2h12v19l-3-2-3 2-3-2-3 2V2z"/><line x1="9" y1="7" x2="15" y2="7"/><line x1="9" y1="11" x2="15" y2="11"/><line x1="9" y1="15" x2="13" y2="15"/></svg></span>
+    <div class="aff-text">
+      <p class="aff-title">チェックリスト用のノートを探す</p>
+      <p class="aff-sub">楽天市場で見てみる</p>
+    </div>
+    <span class="aff-pr">PR</span>
+  </a>
+
+  <div class="detail-section">
+    <h3>まとめ</h3>
+    <p>AI絵本出版は「生成は速いが、確認と申請は人の手」という構造です。手作業が残る前提に立つと、必要な道具は高性能なものではなく、並行作業と確認漏れ防止を支えるものになります。</p>
+  </div>
+
+  <p class="follow-x">制作の裏側や新しいツールの告知は <a href="https://x.com/uuhai0625" target="_blank" rel="noopener">@uuhai0625</a> で発信しています</p>
+
+  <div class="faq-section">
+    <h3>よくある質問</h3>
+    <details class="faq-item">
+      <summary>Kindle CreateやKDPサイトの操作は自動化できないのですか?</summary>
+      <p>ブラウザ自動操作もWindowsのUI自動化も効かず、スクリーンショットを見ながら一画面ずつ手作業で進めています。テキストを画像に合成する工程まではスクリプトで自動化できていますが、その先は手作業が残っています。</p>
+    </details>
+    <details class="faq-item">
+      <summary>AI生成コンテンツの開示を忘れるとどうなりますか?</summary>
+      <p>該当タイトルの削除だけでなく、アカウント全体の停止につながる可能性があると言われています。申請のたびに必ず確認する項目にしています。</p>
+    </details>
+    <details class="faq-item">
+      <summary>Midjourneyの画像はまとめてダウンロードできませんか?</summary>
+      <p>複数の方法を試しましたが、同一セッション内では1枚目しか成功せず、原因は特定できていません。2枚目以降は手動で保存しています。</p>
+    </details>
+    <details class="faq-item">
+      <summary>どのモニター・ノートを使っていますか?</summary>
+      <p>まだ実機で選び切れておらず、記事内の紹介は基準に基づくものです。実際に購入して確認できた際は、この記事を更新して機種名を追記します。</p>
+    </details>
+    <details class="faq-item">
+      <summary>絵本は何冊制作していますか?</summary>
+      <p>2026年8月時点で2巻(「われた いしの、ひみつ」「たねの、やくそく」)を公開済みで、週1ペースでの刊行を目指しています。</p>
+    </details>
+  </div>
+
+  <div class="related-tools">
+    <h3>こんなページもあります</h3>
+    <div class="related-tools-list">
+      <a class="related-tool-link" href="../kaishi-cost/"><span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c3 2 5 6 5 10 0 2-1 4-2 5l-3-1-3 1c-1-1-2-3-2-5 0-4 2-8 5-10z"/><circle cx="12" cy="10" r="1.5"/><path d="M9 17l-2 4M15 17l2 4"/></svg></span>AI副業を始める初期費用シミュレーター</a>
+      <a class="related-tool-link" href="../hajimekata/"><span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m14.5 9.5-2 5-5 2 2-5z"/></svg></span>AI副業の始め方</a>
+      <a class="related-tool-link" href="../denki-dai/"><span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z"/></svg></span>在宅ワークのパソコン電気代計算機</a>
+      <a class="related-tool-link" href="../keihi-anbun/"><span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2h12v19l-3-2-3 2-3-2-3 2V2z"/><line x1="9" y1="7" x2="15" y2="7"/><line x1="9" y1="11" x2="15" y2="11"/><line x1="9" y1="15" x2="13" y2="15"/></svg></span>副業の経費按分計算機</a>
+      <a class="related-tool-link" href="../douga-ryokin/"><span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="13" height="12" rx="1.5"/><path d="M16 10.5 21 7v10l-5-3.5z"/></svg></span>動画作成AIツールの月額料金シミュレーター</a>
+      <a class="related-tool-link" href="../line-stamp-kankyo/"><span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="1.5"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 16.5 15.5 11 5 20"/></svg></span>LINEスタンプ制作の確認環境</a>
+    </div>
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <p>本ページの内容は、生成AIでKindle絵本を制作する過程で実際に起きたことの記録と、そこから導いた選定基準です。具体的な製品の使用感については追って実機レビューを追加予定です。</p>
+  <p>商品リンクにはアフィリエイト(広告)リンクを含みます。リンク経由の購入により、当サイトが紹介料を得ることがあります。</p>
+  <p><a href="../#about">運営者情報・お問い合わせ</a></p>
+</footer>
+
+<script src="../ga.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
