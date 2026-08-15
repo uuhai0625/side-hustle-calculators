@@ -265,6 +265,79 @@ a { color: var(--navy); }
   background: var(--check-bg);
 }
 
+/* ---- 併用モードのツール選択リスト ---- */
+.combo-tool-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.combo-tool-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  border: 1.5px solid var(--line);
+  border-radius: 10px;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.combo-tool-row.active {
+  border-color: var(--navy);
+  background: var(--check-bg);
+}
+.combo-tool-row input[type="checkbox"] {
+  accent-color: var(--navy);
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+.combo-tool-row .combo-tool-name {
+  flex: 0 0 auto;
+  min-width: 150px;
+  font-weight: 700;
+  font-size: 0.88rem;
+  cursor: pointer;
+}
+.combo-tool-row select {
+  flex: 1;
+  min-width: 0;
+  padding: 8px 10px;
+  border: 1.5px solid var(--line);
+  border-radius: 8px;
+  background-color: #0e1210;
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 0.82rem;
+  appearance: none;
+  background-image: var(--select-arrow);
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+}
+.combo-tool-row select:disabled { opacity: 0.4; }
+
+/* ---- 併用モードの内訳表示 ---- */
+.result-breakdown {
+  display: none;
+  margin-top: 14px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--line);
+  font-size: 0.84rem;
+  text-align: left;
+}
+.result-breakdown.show { display: block; }
+.result-breakdown div {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 0;
+  color: var(--ink-sub);
+}
+.result-breakdown div:last-child {
+  color: var(--ink);
+  font-weight: 700;
+  border-top: 1px solid var(--line);
+  margin-top: 4px;
+  padding-top: 8px;
+}
+
 .btn-calc {
   width: 100%;
   padding: 15px;
