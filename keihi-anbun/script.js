@@ -139,7 +139,7 @@ function calc() {
 
   affCard.href = affiliateUrl('領収書 ファイル 整理');
   affCard.classList.add('show');
-  showProducts('書類 ファイルボックス', '🛒 経費の記録・管理に人気のアイテム');
+  showProducts('書類 ファイルボックス', '経費の記録・管理に人気のアイテム');
 
   resultCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
@@ -189,7 +189,7 @@ function legacyCopyFallback(text) {
 btnCopyLink.addEventListener('click', async () => {
   const original = btnCopyLink.textContent;
   const showCopied = () => {
-    btnCopyLink.textContent = 'コピーしました✓';
+    btnCopyLink.textContent = 'コピーしました ✓';
     setTimeout(() => { btnCopyLink.textContent = original; }, 2000);
   };
   try {

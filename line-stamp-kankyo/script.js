@@ -56,5 +56,5 @@ function cardHtml(item) {
 document.getElementById('aff-card-monitor').href = affiliateUrl('モニター 27インチ');
 document.getElementById('aff-card-storage').href = affiliateUrl('外付けSSD');
 
-showProducts('モニター 27インチ', 'product-grid-monitor', 'product-grid-label-monitor', '🛒 確認用モニターの人気アイテム');
-showProducts('外付けSSD', 'product-grid-storage', 'product-grid-label-storage', '🛒 外付けストレージの人気アイテム');
+showProducts('モニター 27インチ', 'product-grid-monitor', 'product-grid-label-monitor', '確認用モニターの人気アイテム');
+showProducts('外付けSSD', 'product-grid-storage', 'product-grid-label-storage', '外付けストレージの人気アイテム');

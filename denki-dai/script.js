@@ -121,7 +121,7 @@ function calc() {
 
   affCard.href = affiliateUrl('ワットチェッカー');
   affCard.classList.add('show');
-  showProducts('ワットチェッカー', '🛒 電気代を正確に知るための人気アイテム');
+  showProducts('ワットチェッカー', '電気代を正確に知るための人気アイテム');
 
   resultCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
@@ -166,7 +166,7 @@ function legacyCopyFallback(text) {
 btnCopyLink.addEventListener('click', async () => {
   const original = btnCopyLink.textContent;
   const showCopied = () => {
-    btnCopyLink.textContent = 'コピーしました✓';
+    btnCopyLink.textContent = 'コピーしました ✓';
     setTimeout(() => { btnCopyLink.textContent = original; }, 2000);
   };
   try {

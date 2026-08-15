@@ -1,44 +1,26 @@
 :root {
-  --bg: #f5f6f2;
-  --bg-card: #ffffff;
-  --ink: #262b28;
-  --ink-sub: #666f6a;
-  --navy: #1f5c4f;
-  --navy-dark: #163f37;
-  --gold: #c9902a;
-  --gold-soft: #f3e6c8;
-  --line: #e2e6e1;
-  --vermilion: #b7410e;
-  --vermilion-soft: #f7e2d6;
-  --slate: #4a4a4a;
-  --slate-soft: #e6e6e6;
-  --shadow: 0 10px 28px rgba(31, 92, 79, 0.10);
-  --shadow-soft: 0 4px 14px rgba(31, 92, 79, 0.08);
-  --radius: 16px;
-  --check-bg: #eaf3f0;
-  --select-arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9'%3E%3Cpath d='M1 1l6 6 6-6' stroke='%23666f6a' stroke-width='2' fill='none' fill-rule='evenodd'/%3E%3C/svg%3E");
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #1a1c19;
-    --bg-card: #23261f;
-    --ink: #e7e9e2;
-    --ink-sub: #a9b0a5;
-    --navy: #4fa08d;
-    --navy-dark: #23453d;
-    --gold: #d9a84f;
-    --gold-soft: #4a3a1f;
-    --line: #383c34;
-    --vermilion: #d9754a;
-    --vermilion-soft: #4a2a1c;
-    --slate: #b0b0b0;
-    --slate-soft: #3a3a3a;
-    --shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
-    --shadow-soft: 0 4px 14px rgba(0, 0, 0, 0.35);
-    --check-bg: #223a34;
-    --select-arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9'%3E%3Cpath d='M1 1l6 6 6-6' stroke='%23a9b0a5' stroke-width='2' fill='none' fill-rule='evenodd'/%3E%3C/svg%3E");
-  }
+  --bg: #0a0d0c;
+  --bg-card: #131916;
+  --bg-card-hover: #171e1a;
+  --ink: #eef4f0;
+  --ink-sub: #8b9c94;
+  --navy: #35f2b0;
+  --navy-dark: #1c8f6c;
+  --gold: #ffb454;
+  --gold-soft: rgba(255, 180, 84, 0.14);
+  --line: #232b27;
+  --vermilion: #ff6b5b;
+  --vermilion-soft: rgba(255, 107, 91, 0.14);
+  --slate: #9aa39c;
+  --slate-soft: #1a201c;
+  --shadow: 0 20px 50px rgba(0, 0, 0, 0.55);
+  --shadow-soft: 0 8px 22px rgba(0, 0, 0, 0.4);
+  --radius: 14px;
+  --check-bg: rgba(53, 242, 176, 0.10);
+  --glow: 0 0 28px rgba(53, 242, 176, 0.32);
+  --glow-soft: 0 0 14px rgba(53, 242, 176, 0.22);
+  --glow-amber: 0 0 22px rgba(255, 180, 84, 0.28);
+  --select-arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9'%3E%3Cpath d='M1 1l6 6 6-6' stroke='%238b9c94' stroke-width='2' fill='none' fill-rule='evenodd'/%3E%3C/svg%3E");
 }
 
 * { box-sizing: border-box; }
@@ -50,18 +32,31 @@ html, body {
 
 body {
   font-family: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", sans-serif;
-  background: var(--bg);
+  background:
+    radial-gradient(720px 420px at 50% -80px, rgba(53, 242, 176, 0.10), transparent 70%),
+    var(--bg);
   color: var(--ink);
   line-height: 1.7;
 }
 
 h1, h2, h3, .heading-font {
-  font-family: "Zen Old Mincho", "Hiragino Mincho ProN", serif;
-  font-weight: 700;
-  letter-spacing: 0.02em;
+  font-family: "Zen Kaku Gothic New", "Hiragino Sans", sans-serif;
+  font-weight: 900;
+  letter-spacing: -0.01em;
 }
 
 a { color: var(--navy); }
+
+.num, .result-amount, .result-sub, .rate-table td:last-child, .rate-table th:last-child {
+  font-family: "JetBrains Mono", "Noto Sans JP", monospace;
+}
+
+.icon-svg {
+  display: inline-block;
+  vertical-align: -0.2em;
+  flex-shrink: 0;
+}
+.icon-svg svg { display: block; width: 100%; height: 100%; }
 
 .wrap {
   max-width: 720px;
@@ -71,21 +66,25 @@ a { color: var(--navy); }
 
 /* ---- ヘッダー ---- */
 .site-header {
-  background: linear-gradient(160deg, var(--navy) 0%, var(--navy-dark) 100%);
-  color: #fff;
-  padding: 40px 0 32px;
+  background: transparent;
+  color: var(--ink);
+  padding: 44px 0 30px;
   text-align: center;
+  border-bottom: 1px solid var(--line);
 }
 .site-header .wrap { max-width: 720px; }
 .site-logo {
   font-size: 1.9rem;
   margin: 0 0 8px;
-  color: #fff;
+  color: var(--ink);
 }
-.site-logo .accent { color: var(--gold); }
+.site-logo .accent {
+  color: var(--navy);
+  text-shadow: 0 0 18px rgba(53, 242, 176, 0.55);
+}
 .site-tagline {
   margin: 0;
-  color: #dcebe6;
+  color: var(--ink-sub);
   font-size: 0.95rem;
 }
 
@@ -96,7 +95,7 @@ a { color: var(--navy); }
   font-size: 0.85rem;
   color: var(--navy);
   text-decoration: none;
-  opacity: 0.75;
+  opacity: 0.8;
 }
 .back-link:hover { opacity: 1; }
 
@@ -108,7 +107,9 @@ a { color: var(--navy); }
   margin: 28px 0;
 }
 .tool-card {
-  display: block;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
   background: var(--bg-card);
   border: 1px solid var(--line);
   border-radius: var(--radius);
@@ -116,21 +117,28 @@ a { color: var(--navy); }
   text-decoration: none;
   color: var(--ink);
   box-shadow: var(--shadow-soft);
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
 }
 .tool-card:hover {
   transform: translateY(-2px);
-  box-shadow: var(--shadow);
+  border-color: rgba(53, 242, 176, 0.4);
+  box-shadow: var(--shadow), var(--glow-soft);
 }
 .tool-card.disabled {
-  opacity: 0.55;
+  opacity: 0.5;
   pointer-events: none;
 }
-.tool-card-icon { font-size: 1.6rem; margin-bottom: 6px; }
+.tool-card-icon {
+  width: 34px;
+  height: 34px;
+  color: var(--navy);
+  margin-top: 2px;
+}
+.tool-card-body { flex: 1; min-width: 0; }
 .tool-card h2 {
   margin: 0 0 6px;
-  font-size: 1.15rem;
-  color: var(--navy);
+  font-size: 1.1rem;
+  color: var(--ink);
 }
 .tool-card p {
   margin: 0;
@@ -145,6 +153,7 @@ a { color: var(--navy); }
   color: var(--slate);
   padding: 2px 8px;
   border-radius: 999px;
+  border: 1px solid var(--line);
 }
 
 /* ---- タブ切り替え(按分基準の選択に使用) ---- */
@@ -155,9 +164,13 @@ a { color: var(--navy); }
 }
 .scene-tab {
   flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   padding: 14px 10px;
   border-radius: 12px;
-  border: 2px solid var(--line);
+  border: 1.5px solid var(--line);
   background: var(--bg-card);
   color: var(--ink-sub);
   font-size: 0.95rem;
@@ -166,10 +179,12 @@ a { color: var(--navy); }
   text-align: center;
   transition: all 0.15s ease;
 }
+.scene-tab .icon-svg { width: 17px; height: 17px; }
 .scene-tab.active {
   border-color: var(--navy);
   background: var(--check-bg);
   color: var(--navy);
+  box-shadow: var(--glow-soft);
 }
 
 /* ---- フォーム ---- */
@@ -205,11 +220,16 @@ a { color: var(--navy); }
   font-size: 1rem;
   font-family: inherit;
   color: var(--ink);
-  background-color: var(--bg-card);
+  background-color: #0e1210;
   appearance: none;
   background-image: var(--select-arrow);
   background-repeat: no-repeat;
   background-position: right 14px center;
+}
+.field select:focus, .field input:focus {
+  outline: none;
+  border-color: var(--navy);
+  box-shadow: var(--glow-soft);
 }
 .field input[type="number"] {
   width: 100%;
@@ -217,9 +237,9 @@ a { color: var(--navy); }
   border: 1.5px solid var(--line);
   border-radius: 10px;
   font-size: 1rem;
-  font-family: inherit;
+  font-family: "JetBrains Mono", inherit;
   color: var(--ink);
-  background-color: var(--bg-card);
+  background-color: #0e1210;
 }
 .radio-group {
   display: flex;
@@ -252,37 +272,41 @@ a { color: var(--navy); }
   border: none;
   border-radius: 12px;
   background: var(--navy);
-  color: #fff;
+  color: #05130d;
   font-size: 1.02rem;
-  font-weight: 700;
+  font-weight: 800;
   cursor: pointer;
   font-family: inherit;
+  box-shadow: var(--glow-soft);
+  transition: box-shadow 0.15s ease, transform 0.15s ease, background 0.15s ease;
 }
-.btn-calc:hover { background: var(--navy-dark); }
+.btn-calc:hover { background: #4bffc4; box-shadow: var(--glow); transform: translateY(-1px); }
 
 /* ---- 結果 ---- */
 .result-card {
-  background: var(--bg-card);
-  border: 2px solid var(--gold);
+  background: linear-gradient(180deg, #10150f 0%, #0d1210 100%);
+  border: 1px solid var(--line);
   border-radius: var(--radius);
-  padding: 26px 24px;
+  padding: 28px 24px;
   text-align: center;
-  box-shadow: var(--shadow);
+  box-shadow: var(--shadow), inset 0 0 0 1px rgba(53, 242, 176, 0.06);
   margin-bottom: 18px;
   display: none;
 }
 .result-card.show { display: block; }
 .result-label {
-  font-size: 0.82rem;
+  font-size: 0.78rem;
   color: var(--ink-sub);
-  margin: 0 0 4px;
+  margin: 0 0 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
 }
 .result-amount {
-  font-size: 2.1rem;
+  font-size: 2.3rem;
   font-weight: 700;
   color: var(--navy);
-  margin: 0 0 6px;
-  font-family: "Zen Old Mincho", serif;
+  margin: 0 0 8px;
+  text-shadow: 0 0 22px rgba(53, 242, 176, 0.45);
 }
 .result-amount .yen { font-size: 1.1rem; }
 .result-note {
@@ -300,6 +324,7 @@ a { color: var(--navy); }
 .result-advice {
   text-align: left;
   background: var(--gold-soft);
+  border: 1px solid rgba(255, 180, 84, 0.25);
   border-radius: 10px;
   padding: 14px 16px;
   margin-top: 16px;
@@ -329,6 +354,33 @@ a { color: var(--navy); }
 }
 .share-btn:hover { border-color: var(--navy); color: var(--navy); }
 
+/* ---- 見出しのアクセントバー(絵文字の代わりの統一装飾) ---- */
+.manner-box h3,
+.rate-table-box h3,
+.detail-section h3,
+.faq-section h3,
+.related-tools h3,
+.about-box h2 {
+  position: relative;
+  padding-left: 14px;
+}
+.manner-box h3::before,
+.rate-table-box h3::before,
+.detail-section h3::before,
+.faq-section h3::before,
+.related-tools h3::before,
+.about-box h2::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.15em;
+  width: 3px;
+  height: 0.85em;
+  background: var(--navy);
+  box-shadow: 0 0 8px rgba(53, 242, 176, 0.6);
+  border-radius: 2px;
+}
+
 /* ---- メモ・注意書き ---- */
 .manner-box {
   background: var(--bg-card);
@@ -342,7 +394,7 @@ a { color: var(--navy); }
 .manner-box h3 {
   margin: 0 0 10px;
   font-size: 1rem;
-  color: var(--navy);
+  color: var(--ink);
 }
 .manner-box ul {
   margin: 0;
@@ -358,25 +410,33 @@ a { color: var(--navy); }
   align-items: center;
   gap: 14px;
   background: var(--bg-card);
-  border: 1.5px dashed var(--gold);
+  border: 1.5px dashed rgba(255, 180, 84, 0.4);
   border-radius: var(--radius);
   padding: 16px 18px;
   text-decoration: none;
   color: var(--ink);
   margin-bottom: 24px;
+  transition: box-shadow 0.15s ease, border-color 0.15s ease;
 }
+.aff-card:hover { border-color: var(--gold); box-shadow: var(--glow-amber); }
 .aff-card.show { display: flex; }
-.aff-card .aff-icon { font-size: 1.8rem; }
+.aff-card .aff-icon {
+  width: 30px;
+  height: 30px;
+  color: var(--gold);
+  flex-shrink: 0;
+}
 .aff-card .aff-text { flex: 1; }
 .aff-card .aff-title { font-weight: 700; font-size: 0.92rem; margin: 0 0 2px; }
 .aff-card .aff-sub { font-size: 0.78rem; color: var(--ink-sub); margin: 0; }
 .aff-card .aff-pr {
   font-size: 0.68rem;
-  color: #2a2419;
+  color: #1a1206;
   background: var(--gold);
   padding: 2px 7px;
   border-radius: 999px;
   align-self: flex-start;
+  font-weight: 700;
 }
 
 /* ---- 早見表 ---- */
@@ -392,16 +452,13 @@ a { color: var(--navy); }
 .rate-table-box h3 {
   margin: 0 0 4px;
   font-size: 1rem;
-  color: var(--navy);
+  color: var(--ink);
 }
 .rate-table-box .rate-table-note {
   margin: 0 0 12px;
   font-size: 0.78rem;
   color: var(--ink-sub);
 }
-/* 記事内など、rate-table-boxで囲まずtable単体を置く場合の横スクロール安全弁
-   (2026-08-15追加: line-stamp-kankyoの4列早見表がモバイル幅ではみ出すバグの修正、
-   既存のrate-table-box内の表には影響しない) */
 .rate-table-wrap {
   overflow-x: auto;
   margin-bottom: 16px;
@@ -444,7 +501,7 @@ a { color: var(--navy); }
 .faq-section h3 {
   margin: 0 0 12px;
   font-size: 1.05rem;
-  color: var(--navy);
+  color: var(--ink);
 }
 .faq-item {
   background: var(--bg-card);
@@ -464,7 +521,7 @@ a { color: var(--navy); }
 .faq-item summary::-webkit-details-marker { display: none; }
 .faq-item summary::before {
   content: "Q. ";
-  color: var(--gold);
+  color: var(--navy);
 }
 .faq-item p {
   margin: 0 0 14px;
@@ -495,10 +552,6 @@ a { color: var(--navy); }
 }
 .product-band-grid {
   display: grid;
-  /* minmax(0, 1fr)必須: 楽天の実商品名は長い日本語が続くため、素の1frだと
-     グリッド列の暗黙のmin-width(auto)が中身の最小コンテンツ幅まで広がり、
-     モバイル幅でページ全体が横スクロールしてしまう(2026-08-15、line-stamp-kankyoの
-     実商品データで発覚。全ページ共通のコンポーネントのため一括修正) */
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
 }
@@ -512,14 +565,16 @@ a { color: var(--navy); }
   box-shadow: var(--shadow-soft);
   display: flex;
   flex-direction: column;
+  transition: border-color 0.15s ease;
 }
+.product-card:hover { border-color: rgba(53, 242, 176, 0.4); }
 .product-card img {
   width: 100%;
   aspect-ratio: 1 / 1;
   object-fit: contain;
   border-radius: 8px;
   margin-bottom: 8px;
-  background: #fff;
+  background: #f4f6f4;
 }
 .product-card .product-name {
   font-size: 0.76rem;
@@ -538,10 +593,25 @@ a { color: var(--navy); }
   margin: 0;
 }
 .product-grid-label {
-  font-size: 0.82rem;
+  position: relative;
+  padding-left: 14px;
+  font-size: 0.8rem;
   font-weight: 700;
   color: var(--ink-sub);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
   margin: 0 0 10px;
+}
+.product-grid-label::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.2em;
+  width: 3px;
+  height: 0.8em;
+  background: var(--gold);
+  box-shadow: 0 0 8px rgba(255, 180, 84, 0.55);
+  border-radius: 2px;
 }
 
 /* ---- Xフォロー導線 ---- */
@@ -568,7 +638,7 @@ a { color: var(--navy); }
 }
 .detail-section h3 {
   font-size: 1.05rem;
-  color: var(--navy);
+  color: var(--ink);
   margin: 0 0 14px;
 }
 .detail-section h4 {
@@ -583,6 +653,7 @@ a { color: var(--navy); }
   color: var(--ink-sub);
   line-height: 1.8;
 }
+.detail-section strong { color: var(--ink); }
 
 /* ---- サイトについて(運営者情報) ---- */
 .about-box {
@@ -592,7 +663,7 @@ a { color: var(--navy); }
 }
 .about-box h2 {
   font-size: 1.05rem;
-  color: var(--navy);
+  color: var(--ink);
   margin: 0 0 14px;
 }
 .about-list {
@@ -620,7 +691,7 @@ a { color: var(--navy); }
 .related-tools h3 {
   margin: 0 0 12px;
   font-size: 1rem;
-  color: var(--navy);
+  color: var(--ink);
 }
 .related-tools-list {
   display: flex;
@@ -639,8 +710,10 @@ a { color: var(--navy); }
   color: var(--ink);
   font-size: 0.88rem;
   font-weight: 700;
+  transition: border-color 0.15s ease;
 }
-.related-tool-link .icon { font-size: 1.2rem; }
+.related-tool-link:hover { border-color: rgba(53, 242, 176, 0.4); }
+.related-tool-link .icon-svg { width: 19px; height: 19px; color: var(--navy); }
 
 /* ---- フッター ---- */
 .site-footer {
@@ -650,10 +723,12 @@ a { color: var(--navy); }
   font-size: 0.76rem;
   color: var(--ink-sub);
   line-height: 1.8;
+  border-top: 1px solid var(--line);
 }
 .site-footer p { margin: 0 0 8px; }
+.site-footer a { color: var(--ink-sub); }
 
 @media (max-width: 480px) {
-  .result-amount { font-size: 1.7rem; }
+  .result-amount { font-size: 1.9rem; }
   .site-logo { font-size: 1.6rem; }
 }
