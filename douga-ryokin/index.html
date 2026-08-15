@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>動画作成AIツールの月額料金 シミュレーター|副業そろばん</title>
+<meta name="description" content="Midjourney・Runwayで動画を作るとき、月にどれくらいかかるかを本数・秒数から試算できる無料ツールです。プランごとのFast時間・クレジットの目安もわかります。">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="動画作成AIツールの月額料金 シミュレーター|副業そろばん">
+<meta property="og:description" content="Midjourney・Runwayで動画を作るとき、月にどれくらいかかるかを本数・秒数から試算できます。">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:url" content="https://uuhai0625.github.io/side-hustle-calculators/douga-ryokin/">
+<meta property="og:image" content="https://uuhai0625.github.io/side-hustle-calculators/images/og-image.jpg">
+<meta property="og:image:width" content="1520">
+<meta property="og:image:height" content="800">
+<link rel="canonical" href="https://uuhai0625.github.io/side-hustle-calculators/douga-ryokin/">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="動画作成AIツールの月額料金 シミュレーター">
+<meta name="twitter:description" content="Midjourney・Runwayで動画を作るとき、月にどれくらいかかるかを本数・秒数から試算できます。">
+<meta name="twitter:image" content="https://uuhai0625.github.io/side-hustle-calculators/images/og-image.jpg">
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧮</text></svg>">
+<meta name="theme-color" content="#0a0d0c">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "Midjourneyの「Fast時間」とは何ですか?", "acceptedAnswer": { "@type": "Answer", "text": "高速に生成できるモードを使える月間の割り当て時間です。動画のAnimateは静止画1枚の目安の約26倍のFast時間を消費するため、動画を作るほど早く使い切ります。使い切るとStandard以上ではRelaxモード(低速・無制限)に切り替わるか、追加購入(1時間$4)が必要です。" } },
+    { "@type": "Question", "name": "Runwayのクレジットはどのように消費されますか?", "acceptedAnswer": { "@type": "Answer", "text": "選んだモデルと秒数に応じて消費されます。目安はGen-4.5が1秒25クレジット、Gen-4が1秒12クレジット、Gen-4 Turboが1秒5クレジットです(2026年8月確認)。同じ秒数でもモデルによって消費量が大きく変わります。" } },
+    { "@type": "Question", "name": "Midjourney・Runwayのどちらを選べばいいですか?", "acceptedAnswer": { "@type": "Answer", "text": "制作フロー次第です。静止画の生成から動画化まで1つのツールで完結させたい場合はMidjourney、より高品質な動画表現を優先する場合はRunwayが選択肢になります。運営者自身は現在、Midjourneyで静止画を生成しそのままAnimateする「1画像→1クリップ」のシンプルな運用をしています。" } },
+    { "@type": "Question", "name": "為替レートを変えるとどうなりますか?", "acceptedAnswer": { "@type": "Answer", "text": "「為替レート」欄の数値を書き換えると、そのレートで円換算した金額に再計算されます。初期値は2026年8月時点の実勢レートを目安にしています。" } },
+    { "@type": "Question", "name": "追加クレジット・追加Fast時間の単価はずっと同じですか?", "acceptedAnswer": { "@type": "Answer", "text": "いいえ、各社の価格改定により変わる可能性があります。この計算機の単価は2026年8月に確認した公開情報をもとにしており、最新の金額は各サービスの料金ページでご確認ください。" } }
+  ]
+}
+</script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <h1 class="site-logo">副業<span class="accent">そろばん</span></h1>
+    <p class="site-tagline">動画作成AIツールの月額料金シミュレーター</p>
+  </div>
+</header>
+
+<main class="wrap">
+  <a class="back-link" href="../">← ツール一覧にもどる</a>
+
+  <div class="scene-tabs">
+    <button class="scene-tab active" data-mode="mj" type="button"><span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="1.5"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 16.5 15.5 11 5 20"/></svg></span>Midjourney</button>
+    <button class="scene-tab" data-mode="rw" type="button"><span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="13" height="12" rx="1.5"/><path d="M16 10.5 21 7v10l-5-3.5z"/></svg></span>Runway</button>
+  </div>
+
+  <div class="calc-card">
+    <div id="fields-mj">
+      <div class="field">
+        <label for="select-mj-plan">契約プラン</label>
+        <select id="select-mj-plan">
+          <option value="basic">Basic($10/月・Fast 3.3時間)</option>
+          <option value="standard" selected>Standard($30/月・Fast 15時間)</option>
+          <option value="pro">Pro($60/月・Fast 30時間)</option>
+          <option value="mega">Mega($120/月・Fast 60時間)</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="input-mj-videos">月に作りたい動画の本数</label>
+        <input type="number" id="input-mj-videos" min="1" max="60" step="1" value="8">
+      </div>
+      <div class="field">
+        <label for="input-mj-candidates">1本あたりに試す静止画の候補数</label>
+        <input type="number" id="input-mj-candidates" min="1" max="20" step="1" value="4">
+        <span class="field-hint">動画化する1枚を選ぶまでに生成する静止画の枚数の目安です。動画化(Animate)自体は静止画1枚の約26倍のFast時間を消費します。</span>
+      </div>
+    </div>
+
+    <div id="fields-rw" style="display:none;">
+      <div class="field">
+        <label for="select-rw-plan">契約プラン</label>
+        <select id="select-rw-plan">
+          <option value="standard" selected>Standard($15/月・625クレジット)</option>
+          <option value="pro">Pro($35/月・2,250クレジット)</option>
+          <option value="max">Max($95/月・9,500クレジット)</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="select-rw-model">使用モデル</label>
+        <select id="select-rw-model">
+          <option value="gen45">Gen-4.5(1秒25クレジット・高品質)</option>
+          <option value="gen4" selected>Gen-4(1秒12クレジット)</option>
+          <option value="gen4turbo">Gen-4 Turbo(1秒5クレジット・高速)</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="input-rw-videos">月に作りたい動画の本数</label>
+        <input type="number" id="input-rw-videos" min="1" max="60" step="1" value="8">
+      </div>
+      <div class="field">
+        <label for="input-rw-seconds">1本あたりの秒数</label>
+        <input type="number" id="input-rw-seconds" min="1" max="30" step="1" value="5">
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="input-fx-rate">為替レート(円/ドル)</label>
+      <input type="number" id="input-fx-rate" min="100" max="300" step="0.1" value="159">
+      <span class="field-hint">2026年8月時点の実勢レートを初期値にしています。カード会社の実際の請求レートとは異なる場合があります。</span>
+    </div>
+
+    <button class="btn-calc" id="btn-calc" type="button">月額料金を試算する</button>
+  </div>
+
+  <div class="result-card" id="result-card">
+    <p class="result-label">月額料金の目安</p>
+    <p class="result-amount"><span class="yen">¥</span><span id="result-amount">--</span></p>
+    <p class="result-note" id="result-note"></p>
+    <p class="result-sub" id="result-sub"></p>
+    <div class="result-advice" id="result-advice"></div>
+    <div class="share-row" id="share-row">
+      <button class="share-btn" id="btn-copy-link" type="button">結果のURLをコピー</button>
+      <button class="share-btn" id="btn-share-x" type="button">𝕏 Xで共有</button>
+    </div>
+  </div>
+
+  <div id="product-section">
+    <p class="product-grid-label" id="product-grid-label" style="display:none;">動画ファイルの保存に人気のアイテム</p>
+    <div class="product-grid" id="product-grid"></div>
+  </div>
+
+  <a class="aff-card" id="aff-card" href="#" target="_blank" rel="noopener sponsored">
+    <span class="aff-icon icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="1.5"/><path d="M7 4v6h10V4"/><circle cx="12" cy="15" r="2.3"/></svg></span>
+    <div class="aff-text">
+      <p class="aff-title">動画・生成データ用の外付けSSDを探す</p>
+      <p class="aff-sub">楽天市場で見てみる</p>
+    </div>
+    <span class="aff-pr">PR</span>
+  </a>
+
+  <p class="follow-x">制作の裏側や新しいツールの告知は <a href="https://x.com/uuhai0625" target="_blank" rel="noopener">@uuhai0625</a> で発信しています</p>
+
+  <div class="manner-box show">
+    <h3>試算のポイント</h3>
+    <ul>
+      <li>Midjourneyの動画化(Animate)は静止画1枚の約26倍のFast時間を消費します。候補生成を絞り込むほど余裕が生まれます。</li>
+      <li>Fast時間・クレジットは使い切っても翌月には繰り越されません。</li>
+      <li>Runwayはモデルによって秒あたりの消費クレジットが大きく異なります(Gen-4 TurboはGen-4.5の1/5)。</li>
+      <li>為替レートは実際のカード請求時のレートと異なる場合があります。目安としてご利用ください。</li>
+    </ul>
+  </div>
+
+  <div class="rate-table-box show">
+    <h3>プラン別 月額の目安</h3>
+    <p class="rate-table-note">Midjourneyは動画8本(候補4枚+Animate)、Runwayは動画8本×1本8秒・Gen-4.5使用で試算。為替159円/ドル(2026年8月15日時点)で換算。</p>
+    <div class="rate-table-wrap">
+    <table class="rate-table">
+      <tr><th>ツール</th><th>プラン</th><th>月額目安</th></tr>
+      <tr><td>Midjourney</td><td>Basic($10)</td><td>¥2,035</td></tr>
+      <tr><td>Midjourney</td><td>Standard($30)</td><td>¥4,770</td></tr>
+      <tr><td>Midjourney</td><td>Pro($60)</td><td>¥9,540</td></tr>
+      <tr><td>Midjourney</td><td>Mega($120)</td><td>¥19,080</td></tr>
+      <tr><td>Runway</td><td>Standard($15)</td><td>¥3,935</td></tr>
+      <tr><td>Runway</td><td>Pro($35)</td><td>¥5,565</td></tr>
+      <tr><td>Runway</td><td>Max($95)</td><td>¥15,105</td></tr>
+    </table>
+    </div>
+    <p class="rate-source">参考: <a href="https://www.eesel.ai/blog/midjourney-pricing" target="_blank" rel="noopener">eesel AI「Midjourney pricing in 2026」</a>、<a href="https://www.eesel.ai/blog/runway-ai-pricing" target="_blank" rel="noopener">eesel AI「Runway AI pricing in 2026」</a>(2026年8月確認)</p>
+  </div>
+
+  <div class="faq-section">
+    <h3>よくある質問</h3>
+    <details class="faq-item">
+      <summary>Midjourneyの「Fast時間」とは何ですか?</summary>
+      <p>高速に生成できるモードを使える月間の割り当て時間です。動画のAnimateは静止画1枚の目安の約26倍のFast時間を消費するため、動画を作るほど早く使い切ります。使い切るとStandard以上ではRelaxモード(低速・無制限)に切り替わるか、追加購入(1時間$4)が必要です。</p>
+    </details>
+    <details class="faq-item">
+      <summary>Runwayのクレジットはどのように消費されますか?</summary>
+      <p>選んだモデルと秒数に応じて消費されます。目安はGen-4.5が1秒25クレジット、Gen-4が1秒12クレジット、Gen-4 Turboが1秒5クレジットです(2026年8月確認)。同じ秒数でもモデルによって消費量が大きく変わります。</p>
+    </details>
+    <details class="faq-item">
+      <summary>Midjourney・Runwayのどちらを選べばいいですか?</summary>
+      <p>制作フロー次第です。静止画の生成から動画化まで1つのツールで完結させたい場合はMidjourney、より高品質な動画表現を優先する場合はRunwayが選択肢になります。運営者自身は現在、Midjourneyで静止画を生成しそのままAnimateする「1画像→1クリップ」のシンプルな運用をしています。</p>
+    </details>
+    <details class="faq-item">
+      <summary>為替レートを変えるとどうなりますか?</summary>
+      <p>「為替レート」欄の数値を書き換えると、そのレートで円換算した金額に再計算されます。初期値は2026年8月時点の実勢レートを目安にしています。</p>
+    </details>
+    <details class="faq-item">
+      <summary>追加クレジット・追加Fast時間の単価はずっと同じですか?</summary>
+      <p>いいえ、各社の価格改定により変わる可能性があります。この計算機の単価は2026年8月に確認した公開情報をもとにしており、最新の金額は各サービスの料金ページでご確認ください。</p>
+    </details>
+  </div>
+
+  <div class="detail-section">
+    <h3>動画作成AIツールを選ぶときの考え方</h3>
+
+    <h4>Midjourneyで完結させる場合</h4>
+    <p>静止画の生成からAnimateによる動画化まで1つのツールで完結できるのが強みです。運営者自身も和サイバーパンク動画・ミニチュア動物動画のシリーズで、Midjourneyの「Animate Manually」を使い1つの画像を1つのクリップにする、複数カットをつながないシンプルな運用をしています。Fast時間は動画化で一気に消費するため、月の本数が増えるほどプラン選びが重要になります。</p>
+
+    <h4>Runwayを使う場合</h4>
+    <p>より高品質・多様な動画表現を狙う場合の選択肢です。モデルごとに秒あたりの消費クレジットが大きく異なるため、画質と本数のバランスを見てモデルを選ぶ必要があります。ここでの試算は公開されている料金情報をもとにしたものです。</p>
+
+    <h4>本数が多い・尺が長いほどプラン選びが効いてくる</h4>
+    <p>どちらのツールも、上位プランに切り替えたほうが割安になる分岐点があります。この計算機で「追加費用がどれくらい発生するか」を確認し、プラン変更と追加購入のどちらが得か比較する材料にしてください。</p>
+  </div>
+
+  <div class="related-tools">
+    <h3>こんなページもあります</h3>
+    <div class="related-tools-list">
+      <a class="related-tool-link" href="../denki-dai/"><span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z"/></svg></span>在宅ワークのパソコン電気代計算機</a>
+      <a class="related-tool-link" href="../keihi-anbun/"><span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2h12v19l-3-2-3 2-3-2-3 2V2z"/><line x1="9" y1="7" x2="15" y2="7"/><line x1="9" y1="11" x2="15" y2="11"/><line x1="9" y1="15" x2="13" y2="15"/></svg></span>副業の経費按分計算機</a>
+      <a class="related-tool-link" href="../line-stamp-kankyo/"><span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="1.5"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 16.5 15.5 11 5 20"/></svg></span>LINEスタンプ制作の確認環境</a>
+    </div>
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <p>掲載しているプラン内容・料金・クレジット消費量は、各サービスの公開情報および複数の料金比較記事をもとにした2026年8月時点の目安です。実際の料金・仕様は各サービスの公式サイトで最新情報をご確認ください。為替レートによる円換算額も変動します。</p>
+  <p>商品リンクにはアフィリエイト(広告)リンクを含みます。リンク経由の購入により、当サイトが紹介料を得ることがあります。</p>
+  <p><a href="../#about">運営者情報・お問い合わせ</a></p>
+</footer>
+
+<script src="../ga.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
