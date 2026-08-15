@@ -56,10 +56,14 @@ function cardHtml(item) {
   const imgRaw = item.mediumImageUrls && item.mediumImageUrls[0];
   const img = upscaleImage(typeof imgRaw === 'string' ? imgRaw : (imgRaw && imgRaw.imageUrl) || '');
   const price = Number(item.itemPrice).toLocaleString('ja-JP');
-  const name = String(item.itemName || '').replace(/</g, '&lt;');
+  const name = String(item.itemName || '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
   return `
     <a class="product-card" href="${item.itemUrl}" target="_blank" rel="noopener sponsored">
-      <img src="${img}" alt="" loading="lazy">
+      <img src="${img}" alt="${name}" loading="lazy">
       <p class="product-name">${name}</p>
       <p class="product-price">¥${price}</p>
     </a>`;
