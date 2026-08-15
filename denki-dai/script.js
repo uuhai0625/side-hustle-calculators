@@ -89,9 +89,13 @@ let lastMonthly = 0;
 function calc() {
   const device = DEVICES[selectDevice.value];
   const monitors = Number(selectMonitors.value);
-  const hours = Math.max(0, Number(inputHours.value) || 0);
-  const days = Math.max(0, Number(inputDays.value) || 0);
-  const price = Math.max(0, Number(inputPrice.value) || 0);
+  // HTMLのmin/max属性はフォーム送信を介さない直接入力・クエリパラメータ経由の値を弾かないため、
+  // 計算時に必ずここでも同じ範囲(1日24時間・1ヶ月31日・単価100円/kWh)にクランプする
+  // (2026-08-15デバッグで発覚: 999999を入れると704,997,885,002,115,100円のような非現実的な金額が
+  // そのまま表示されてしまうバグがあった)。
+  const hours = Math.min(24, Math.max(0, Number(inputHours.value) || 0));
+  const days = Math.min(31, Math.max(0, Number(inputDays.value) || 0));
+  const price = Math.min(100, Math.max(0, Number(inputPrice.value) || 0));
 
   const totalWatt = device.watt + monitors * MONITOR_WATT;
   const dailyKwh = (totalWatt * hours) / 1000;
