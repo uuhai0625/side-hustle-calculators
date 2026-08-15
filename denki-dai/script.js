@@ -48,9 +48,15 @@ async function showProducts(keyword, labelText) {
   }
 }
 
+// 楽天のサムネイルCDNはURL末尾の_ex=WxHパラメータで実際の画素数が変わる
+// (mediumImageUrlsは既定で128x128、レスポンシブなカード表示には粗すぎるため300x300に引き上げる)。
+function upscaleImage(url) {
+  return url.replace(/_ex=\d+x\d+/, '_ex=300x300');
+}
+
 function cardHtml(item) {
   const imgRaw = item.mediumImageUrls && item.mediumImageUrls[0];
-  const img = typeof imgRaw === 'string' ? imgRaw : (imgRaw && imgRaw.imageUrl) || '';
+  const img = upscaleImage(typeof imgRaw === 'string' ? imgRaw : (imgRaw && imgRaw.imageUrl) || '');
   const price = Number(item.itemPrice).toLocaleString('ja-JP');
   const name = String(item.itemName || '').replace(/</g, '&lt;');
   return `
