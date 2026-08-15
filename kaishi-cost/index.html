@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI副業を始める初期費用 シミュレーター|AI副業そろばん</title>
+<meta name="description" content="AI副業(LINEスタンプ制作・note記事執筆・動画制作・Kindle出版)を始めるのに、初期費用と月々の費用がいくらかかるかを、ジャンルと今のPC環境を選ぶだけで試算できる無料ツールです。">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="AI副業を始める初期費用 シミュレーター|AI副業そろばん">
+<meta property="og:description" content="ジャンルと今のPC環境を選ぶだけで、AI副業を始める初期費用と月々の費用の目安がわかります。">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:url" content="https://uuhai0625.github.io/side-hustle-calculators/kaishi-cost/">
+<meta property="og:image" content="https://uuhai0625.github.io/side-hustle-calculators/images/og-image.jpg">
+<meta property="og:image:width" content="1520">
+<meta property="og:image:height" content="800">
+<link rel="canonical" href="https://uuhai0625.github.io/side-hustle-calculators/kaishi-cost/">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AI副業を始める初期費用 シミュレーター">
+<meta name="twitter:description" content="ジャンルと今のPC環境を選ぶだけで、初期費用と月々の費用の目安がわかります。">
+<meta name="twitter:image" content="https://uuhai0625.github.io/side-hustle-calculators/images/og-image.jpg">
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧮</text></svg>">
+<meta name="theme-color" content="#0a0d0c">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<style>
+  .result-amount-range { font-size: 1.55rem; }
+  @media (max-width: 480px) { .result-amount-range { font-size: 1.25rem; } }
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "この診断はどれくらい正確ですか?", "acceptedAnswer": { "@type": "Answer", "text": "あくまで目安です。実際の費用は選ぶツール・作業量・PCの状態によって変わります。動画AIツールの月額をより正確に知りたい場合は動画作成AIツールの月額料金シミュレーター、電気代を細かく知りたい場合は電気代計算機をあわせてご利用ください。" } },
+    { "@type": "Question", "name": "無料ツールだけで始めることはできますか?", "acceptedAnswer": { "@type": "Answer", "text": "note記事執筆・Webアプリ制作は無料プランのAIツールだけで始められることが多いです。LINEスタンプ制作・Kindle出版は、無料ツールでの試作は可能なものの、キャラクターの一貫性を保つ段階で有料プランが必要になることが多い、というのが運営者の実感です。" } },
+    { "@type": "Question", "name": "どのジャンルが自分に向いているか分かりません", "acceptedAnswer": { "@type": "Answer", "text": "興味の方向性や時間の使い方でジャンルを選ぶ考え方を「AI副業の始め方」にまとめています。あわせてご覧ください。" } },
+    { "@type": "Question", "name": "収入がいくらになるかも分かりますか?", "acceptedAnswer": { "@type": "Answer", "text": "いいえ、この診断は費用(支出)の目安のみを試算するもので、収入や黒字化の見込みは扱っていません。運営者自身の収益状況は、誇張せず「AI副業の始め方」に実数で書いています。" } },
+    { "@type": "Question", "name": "この金額に含まれていない費用はありますか?", "acceptedAnswer": { "@type": "Answer", "text": "確認用モニターや外付けストレージなどの周辺機材、家賃・通信費の按分は含まれていません。それぞれLINEスタンプ制作の確認環境、副業の経費按分計算機で目安を試算できます。" } }
+  ]
+}
+</script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <h1 class="site-logo">AI副業<span class="accent">そろばん</span></h1>
+    <p class="site-tagline">AI副業を始める初期費用シミュレーター</p>
+  </div>
+</header>
+
+<main class="wrap">
+  <a class="back-link" href="../">← ツール一覧にもどる</a>
+
+  <div class="detail-section" style="margin-top: 20px;">
+    <p>これからAI副業を始めるとしたら、最初の3ヶ月でいくらかかるか。興味のあるジャンルと、今のパソコン環境を選ぶだけで目安がわかります。まだ何も始めていない方向けの試算です。</p>
+  </div>
+
+  <div class="calc-card">
+    <div class="field">
+      <label for="select-genre">興味のあるジャンル</label>
+      <select id="select-genre">
+        <option value="line-stamp" selected>LINEスタンプ制作</option>
+        <option value="ehon">Kindle出版(絵本)</option>
+        <option value="note">note記事執筆</option>
+        <option value="webapp">Webアプリ制作</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="select-pc">今のパソコン環境</label>
+      <select id="select-pc">
+        <option value="already">十分なPCを持っている</option>
+        <option value="unsure" selected>PCはあるが力不足かもしれない</option>
+        <option value="none">パソコンを持っていない</option>
+      </select>
+    </div>
+    <button class="btn-calc" id="btn-calc" type="button">初期費用を試算する</button>
+  </div>
+
+  <div class="result-card" id="result-card">
+    <p class="result-label">最初の3ヶ月にかかる費用の目安</p>
+    <p class="result-amount result-amount-range"><span id="result-amount">--</span></p>
+    <p class="result-note" id="result-note"></p>
+    <p class="result-sub" id="result-sub"></p>
+    <div class="result-advice" id="result-advice"></div>
+    <div class="share-row" id="share-row">
+      <button class="share-btn" id="btn-copy-link" type="button">結果のURLをコピー</button>
+      <button class="share-btn" id="btn-share-x" type="button">𝕏 Xで共有</button>
+    </div>
+  </div>
+
+  <div id="product-section">
+    <p class="product-grid-label" id="product-grid-label" style="display:none;">これから買うなら人気のノートPC</p>
+    <div class="product-grid" id="product-grid"></div>
+  </div>
+
+  <a class="aff-card" id="aff-card" href="#" target="_blank" rel="noopener sponsored">
+    <span class="aff-icon icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="1.5"/><line x1="8" y1="20" x2="16" y2="20"/><line x1="12" y1="16" x2="12" y2="20"/></svg></span>
+    <div class="aff-text">
+      <p class="aff-title">副業向けノートPCを探す</p>
+      <p class="aff-sub">楽天市場で見てみる</p>
+    </div>
+    <span class="aff-pr">PR</span>
+  </a>
+
+  <p class="follow-x">制作の裏側や新しいツールの告知は <a href="https://x.com/uuhai0625" target="_blank" rel="noopener">@uuhai0625</a> で発信しています</p>
+
+  <div class="manner-box show">
+    <h3>この試算に含まれていないもの</h3>
+    <ul>
+      <li>収入・利益の見込みは含みません。この診断は費用(支出)の目安のみを扱っています。</li>
+      <li>確認用モニターや外付けストレージなどの追加機材費は含みません。</li>
+      <li>家賃・通信費の按分など、確定申告に関わる経費計上は含みません。</li>
+      <li>電気代はノートPCを1日2時間・月20日使う想定で一律試算しています(デスクトップPCや長時間利用の場合は電気代計算機で個別に試算してください)。</li>
+    </ul>
+  </div>
+
+  <div class="rate-table-box show">
+    <h3>ジャンル別 月々のツール費用目安</h3>
+    <p class="rate-table-note">生成AIツールの月額料金の目安です。無料プランでどこまでできるかはジャンルにより異なります。</p>
+    <div class="rate-table-wrap">
+    <table class="rate-table rate-table-feature">
+      <tr><th>ジャンル</th><th>月々のツール費用目安</th></tr>
+      <tr><td>LINEスタンプ制作</td><td>¥0〜¥4,800</td></tr>
+      <tr><td>Kindle出版(絵本)</td><td>¥0〜¥4,800</td></tr>
+      <tr><td>note記事執筆</td><td>¥0〜¥3,000</td></tr>
+      <tr><td>Webアプリ制作</td><td>¥0〜¥3,000</td></tr>
+    </table>
+    </div>
+    <p class="rate-table-note" style="margin-top:12px;">今のパソコン環境別、買い替えが必要になった場合の目安です。</p>
+    <div class="rate-table-wrap">
+    <table class="rate-table rate-table-feature">
+      <tr><th>今のPC環境</th><th>初期費用の目安</th></tr>
+      <tr><td>十分なPCを持っている</td><td>¥0</td></tr>
+      <tr><td>PCはあるが力不足かもしれない</td><td>¥0(様子見)〜¥100,000(買い替え時)</td></tr>
+      <tr><td>パソコンを持っていない</td><td>¥50,000〜¥100,000</td></tr>
+    </table>
+    </div>
+    <p class="rate-source">参考: LINEスタンプ制作・Kindle出版の画像生成AI費用は<a href="../douga-ryokin/">動画作成AIツールの月額料金シミュレーター</a>でも使用しているMidjourneyの料金データ(2026年8月確認)、ノートPCの価格帯は在宅ワーク・副業向けノートPCの複数の価格比較記事(2026年8月確認)をもとにしています。</p>
+  </div>
+
+  <div class="faq-section">
+    <h3>よくある質問</h3>
+    <details class="faq-item">
+      <summary>この診断はどれくらい正確ですか?</summary>
+      <p>あくまで目安です。実際の費用は選ぶツール・作業量・PCの状態によって変わります。動画AIツールの月額をより正確に知りたい場合は<a href="../douga-ryokin/">動画作成AIツールの月額料金シミュレーター</a>、電気代を細かく知りたい場合は<a href="../denki-dai/">電気代計算機</a>をあわせてご利用ください。</p>
+    </details>
+    <details class="faq-item">
+      <summary>無料ツールだけで始めることはできますか?</summary>
+      <p>note記事執筆・Webアプリ制作は無料プランのAIツールだけで始められることが多いです。LINEスタンプ制作・Kindle出版は、無料ツールでの試作は可能なものの、キャラクターの一貫性を保つ段階で有料プランが必要になることが多い、というのが運営者の実感です。</p>
+    </details>
+    <details class="faq-item">
+      <summary>どのジャンルが自分に向いているか分かりません</summary>
+      <p>興味の方向性や時間の使い方でジャンルを選ぶ考え方を「<a href="../hajimekata/">AI副業の始め方</a>」にまとめています。あわせてご覧ください。</p>
+    </details>
+    <details class="faq-item">
+      <summary>収入がいくらになるかも分かりますか?</summary>
+      <p>いいえ、この診断は費用(支出)の目安のみを試算するもので、収入や黒字化の見込みは扱っていません。運営者自身の収益状況は、誇張せず「<a href="../hajimekata/">AI副業の始め方</a>」に実数で書いています。</p>
+    </details>
+    <details class="faq-item">
+      <summary>この金額に含まれていない費用はありますか?</summary>
+      <p>確認用モニターや外付けストレージなどの周辺機材、家賃・通信費の按分は含まれていません。それぞれ<a href="../line-stamp-kankyo/">LINEスタンプ制作の確認環境</a>、<a href="../keihi-anbun/">副業の経費按分計算機</a>で目安を試算できます。</p>
+    </details>
+  </div>
+
+  <div class="detail-section">
+    <h3>ジャンルを選ぶときの考え方</h3>
+    <p>コツコツした検証作業が苦にならないならLINEスタンプ制作、作品を完成させて世に出す体験を積みたいならKindle出版、初期費用を抑えて始めたいならnote記事執筆、仕組みを作って育てるのが好きならWebアプリ制作が、それぞれ向いています。迷ったら、初期費用が最も小さいnote記事執筆から試してみるのも一つの手です。くわしい判断材料は<a href="../hajimekata/">AI副業の始め方</a>にまとめています。</p>
+    <h3>試算の考え方</h3>
+    <p>「月々のツール費用」はジャンルごとの生成AIツールの料金目安、「電気代」はノートPCを1日2時間・月20日使う想定の一律試算(電気代計算機と同じ単価31円/kWhを使用)です。「初期費用」は今のパソコン環境によって変わり、買い替えが不要なら¥0、買い替えが必要そうな場合は5万〜10万円台のノートPCを目安にしています。これらを合算し、「初期費用+月々の目安×3ヶ月」を最初の3ヶ月の合計として表示しています。</p>
+  </div>
+
+  <div class="related-tools">
+    <h3>こんなページもあります</h3>
+    <div class="related-tools-list">
+      <a class="related-tool-link" href="../hajimekata/"><span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m14.5 9.5-2 5-5 2 2-5z"/></svg></span>AI副業の始め方</a>
+      <a class="related-tool-link" href="../denki-dai/"><span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z"/></svg></span>在宅ワークのパソコン電気代計算機</a>
+      <a class="related-tool-link" href="../keihi-anbun/"><span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2h12v19l-3-2-3 2-3-2-3 2V2z"/><line x1="9" y1="7" x2="15" y2="7"/><line x1="9" y1="11" x2="15" y2="11"/><line x1="9" y1="15" x2="13" y2="15"/></svg></span>副業の経費按分計算機</a>
+      <a class="related-tool-link" href="../douga-ryokin/"><span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="13" height="12" rx="1.5"/><path d="M16 10.5 21 7v10l-5-3.5z"/></svg></span>動画作成AIツールの月額料金シミュレーター</a>
+      <a class="related-tool-link" href="../line-stamp-kankyo/"><span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="1.5"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 16.5 15.5 11 5 20"/></svg></span>LINEスタンプ制作の確認環境</a>
+    </div>
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <p>掲載しているツール費用・PC価格帯は、公開されている料金情報や複数の価格比較記事をもとにした2026年8月時点の目安です。実際の金額は選ぶツール・作業量・購入時期により異なりますので、判断材料としてご利用ください。収入・利益を保証するものではありません。</p>
+  <p>商品リンクにはアフィリエイト(広告)リンクを含みます。リンク経由の購入により、当サイトが紹介料を得ることがあります。</p>
+  <p><a href="../#about">運営者情報・お問い合わせ</a></p>
+</footer>
+
+<script src="../ga.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
