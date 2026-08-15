@@ -559,6 +559,18 @@ a { color: var(--navy); }
   color: var(--navy);
   white-space: nowrap;
 }
+/* 最終列が価格・本数などの短い数値ではなく説明文になるテーブル用の上書き
+   (2026-08-15追加: ツール特徴比較表で長い日本語が折り返さず横にはみ出すのを防ぐ) */
+.rate-table-feature td:last-child {
+  text-align: left;
+  font-weight: 400;
+  color: var(--ink-sub);
+  white-space: normal;
+  font-family: "Noto Sans JP", "Hiragino Sans", sans-serif;
+}
+.rate-table-wrap .rate-table-feature {
+  min-width: 620px;
+}
 .rate-source {
   margin: 10px 0 0;
   font-size: 0.72rem;
