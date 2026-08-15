@@ -233,13 +233,18 @@ const inputRwVideos = document.getElementById('input-rw-videos');
 const inputRwSeconds = document.getElementById('input-rw-seconds');
 const inputRate = document.getElementById('input-fx-rate');
 
+// 各ツールの初期表示プラン。既定の試算条件(動画8本×5秒)で追加費用が出ない、
+// 一番安いプランをデフォルトにしている(veoのみ最安のAI Plusだと既定条件で
+// 足りないため、無理なく収まるAI Proを初期値にした)。
+const CREDIT5S_DEFAULT_PLAN = { kling: 'standard', luma: 'lite', pika: 'standard', pixverse: 'standard', veo: 'pro' };
+
 function refreshToolFields() {
   const tool = selectTool.value;
   fieldsMj.style.display = tool === 'mj' ? '' : 'none';
   fieldsRunway.style.display = tool === 'runway' ? '' : 'none';
   fieldsCredit5s.style.display = CREDIT5S_TOOLS[tool] ? '' : 'none';
   if (CREDIT5S_TOOLS[tool]) {
-    selectCredit5sPlan.innerHTML = buildOptionsHtml(CREDIT5S_TOOLS[tool].plans, null);
+    selectCredit5sPlan.innerHTML = buildOptionsHtml(CREDIT5S_TOOLS[tool].plans, CREDIT5S_DEFAULT_PLAN[tool]);
   }
   const info = TOOL_INFO[tool];
   toolOfficialLink.href = info.url;
@@ -324,7 +329,7 @@ function initComboSelects() {
     if (!select) return;
     if (row.key === 'mj') { select.innerHTML = buildOptionsHtml(MJ_PLANS, 'standard'); return; }
     if (row.key === 'runway') { select.innerHTML = buildOptionsHtml(RW_PLANS, 'standard'); return; }
-    select.innerHTML = buildOptionsHtml(CREDIT5S_TOOLS[row.key].plans, null);
+    select.innerHTML = buildOptionsHtml(CREDIT5S_TOOLS[row.key].plans, CREDIT5S_DEFAULT_PLAN[row.key]);
   });
 }
 initComboSelects();
@@ -349,6 +354,9 @@ function calcCombo() {
     resultBreakdown.classList.remove('show');
     resultBreakdown.innerHTML = '';
     resultCard.classList.add('show');
+    shareRow.classList.remove('show');
+    affCard.classList.remove('show');
+    document.getElementById('product-grid').classList.remove('show');
     resultCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     return;
   }
@@ -389,6 +397,7 @@ function calcCombo() {
   affCard.classList.add('show');
   showProducts('外付けSSD', '動画ファイルの保存に人気のアイテム');
 
+  updateShareUrl();
   resultCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 
@@ -441,6 +450,14 @@ function paramsFromState() {
     params.set('c5s_plan', selectCredit5sPlan.value);
     params.set('c5s_videos', inputC5sVideos.value);
     params.set('c5s_seconds', inputC5sSeconds.value);
+  } else {
+    params.set('combo_videos', inputComboVideos.value);
+    params.set('combo_seconds', inputComboSeconds.value);
+    params.set('combo_candidates', inputComboCandidates.value);
+    params.set('combo_rate', inputComboRate.value);
+    const checked = comboRows.filter((row) => document.getElementById(row.checkboxId).checked);
+    const tools = checked.map((row) => `${row.key}:${document.getElementById(row.selectId).value}`).join(',');
+    params.set('combo_tools', tools);
   }
   return params;
 }
@@ -496,6 +513,29 @@ function initFromQuery() {
   const tm = params.get('topmode');
   if (tm === 'combo') {
     document.querySelector('.top-mode-tab[data-topmode="combo"]').click();
+    const comboVideos = params.get('combo_videos');
+    if (comboVideos) inputComboVideos.value = comboVideos;
+    const comboSeconds = params.get('combo_seconds');
+    if (comboSeconds) inputComboSeconds.value = comboSeconds;
+    const comboCandidates = params.get('combo_candidates');
+    if (comboCandidates) inputComboCandidates.value = comboCandidates;
+    const comboRate = params.get('combo_rate');
+    if (comboRate) inputComboRate.value = comboRate;
+    const comboTools = params.get('combo_tools');
+    if (comboTools) {
+      comboTools.split(',').forEach((entry) => {
+        const [key, planValue] = entry.split(':');
+        const row = comboRows.find((r) => r.key === key);
+        if (!row) return;
+        const checkbox = document.getElementById(row.checkboxId);
+        const select = document.getElementById(row.selectId);
+        checkbox.checked = true;
+        select.disabled = false;
+        if (planValue) select.value = planValue;
+        document.getElementById(`combo-row-${row.key}`).classList.add('active');
+      });
+      calcCombo();
+    }
     return;
   }
   const tool = params.get('tool');
