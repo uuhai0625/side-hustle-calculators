@@ -65,6 +65,15 @@ function cardHtml(item) {
     </a>`;
 }
 
+// 収益文脈の参考値(2026-08-15追加): 副業所得の確定申告目安ライン(年間20万円)に対する規模感を示す。
+// 実際の申告要否は所得全体で判断されるため、あくまで規模の目安として添える。
+function taxLineNote(yearlyCost) {
+  const line = 200000;
+  const pct = Math.round((yearlyCost / line) * 1000) / 10;
+  if (pct < 1) return '';
+  return ` 参考までに、この年間経費計上額は、副業所得の確定申告目安ライン(年間20万円)の約${pct}%に相当する規模です(実際の申告要否は所得全体で判断されるため、目安としてご覧ください)。`;
+}
+
 const EXPENSES = {
   electricity: { label: '電気代', icon: '💡' },
   rent:        { label: '家賃(管理費・共益費含む)', icon: '🏠' },
@@ -135,6 +144,7 @@ function calc() {
   } else {
     advice += ' 50%を超えているため、白色申告でも比較的説明しやすい水準です(最終判断は税理士・税務署にご確認ください)。';
   }
+  advice += taxLineNote(yearlyCost);
   resultAdvice.textContent = advice;
 
   resultCard.classList.add('show');

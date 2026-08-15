@@ -69,6 +69,14 @@ function clamp(value, min, max) {
   return Math.min(max, Math.max(min, value));
 }
 
+// 収益文脈の参考値(2026-08-15追加): denki-daiと同じKindle絵本(¥480・70%印税想定)換算。
+function bookEquivalentNote(monthlyJpy) {
+  const perBook = 480 * 0.7;
+  if (monthlyJpy < perBook) return '';
+  const books = Math.round(monthlyJpy / perBook);
+  return ` 参考までに、Kindle絵本1冊(¥480・70%印税想定、配信コスト控除前の概算)に換算すると、月あたり約${books}冊分の売上に相当します。`;
+}
+
 // ---- ツール別の料金データ(2026年8月、Perplexity+WEB検索で複数の比較記事を横断確認した参考値) ----
 
 const MJ_INFO = { name: 'Midjourney', url: 'https://www.midjourney.com/' };
@@ -299,7 +307,7 @@ function calcSingle() {
   resultAmount.textContent = result.totalJpy.toLocaleString('ja-JP');
   resultNote.textContent = result.note;
   resultSub.textContent = `${result.sub}(月額目安 $${result.totalUsd.toFixed(2)})`;
-  resultAdvice.textContent = result.advice;
+  resultAdvice.textContent = result.advice + bookEquivalentNote(result.totalJpy);
   resultBreakdown.classList.remove('show');
   resultBreakdown.innerHTML = '';
 
@@ -389,7 +397,7 @@ function calcCombo() {
   resultAmount.textContent = totalJpy.toLocaleString('ja-JP');
   resultNote.textContent = `${parts.map((p) => p.name).join(' + ')} を併用した場合の合計`;
   resultSub.textContent = `動画${videos}本×${seconds}秒(Midjourneyのみ候補${candidates}枚+Animate)・為替${rate}円/ドル(合計 $${totalUsd.toFixed(2)})`;
-  resultAdvice.textContent = 'それぞれのツールの詳しい前提は下の内訳をご確認ください。同じ動画を複数ツールで作る想定のほか、工程を分担する場合(静止画はA、仕上げはBなど)の合計目安としてもご利用いただけます。';
+  resultAdvice.textContent = 'それぞれのツールの詳しい前提は下の内訳をご確認ください。同じ動画を複数ツールで作る想定のほか、工程を分担する場合(静止画はA、仕上げはBなど)の合計目安としてもご利用いただけます。' + bookEquivalentNote(totalJpy);
 
   resultBreakdown.innerHTML = parts.map((p) => `<div><span>${p.name}</span><span>¥${p.totalJpy.toLocaleString('ja-JP')}</span></div>`).join('')
     + `<div><span>合計</span><span>¥${totalJpy.toLocaleString('ja-JP')}</span></div>`;

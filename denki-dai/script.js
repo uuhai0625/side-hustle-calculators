@@ -67,6 +67,15 @@ function cardHtml(item) {
     </a>`;
 }
 
+// 収益文脈の参考値(2026-08-15追加): Kindle絵本(¥480・KDP70%印税想定)の印税目安¥336/冊。
+// 配信コスト控除前の概算のため、実際の手取りはこれよりわずかに少ない。孤立した金額に意味を持たせる目的で追加。
+function bookEquivalentNote(monthlyCost) {
+  const perBook = 480 * 0.7;
+  if (monthlyCost < perBook) return '';
+  const books = Math.round(monthlyCost / perBook);
+  return ` 参考までに、Kindle絵本1冊(¥480・70%印税想定、配信コスト控除前の概算)に換算すると、月あたり約${books}冊分の売上に相当します。`;
+}
+
 // 消費電力の目安(W)。ドスパラ・ENEOSでんき等の公表資料をもとに設定(2026-08-15確認、index.htmlの早見表と同じ出典)。
 const DEVICES = {
   laptop:         { label: 'ノートPC', watt: 25 },
@@ -118,6 +127,7 @@ function calc() {
     advice += ' 高性能デスクトップは負荷の高い作業で瞬間的に消費電力が上がるため、実際の電気代はこれより高くなることがあります。';
   }
   advice += ' 在宅ワーク分を経費計上したい場合は、下の「副業の経費按分計算機」で按分額の目安を確認できます。';
+  advice += bookEquivalentNote(monthlyCost);
   resultAdvice.textContent = advice;
 
   resultCard.classList.add('show');
