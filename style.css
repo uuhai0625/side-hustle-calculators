@@ -495,7 +495,11 @@ a { color: var(--navy); }
 }
 .product-band-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  /* minmax(0, 1fr)必須: 楽天の実商品名は長い日本語が続くため、素の1frだと
+     グリッド列の暗黙のmin-width(auto)が中身の最小コンテンツ幅まで広がり、
+     モバイル幅でページ全体が横スクロールしてしまう(2026-08-15、line-stamp-kankyoの
+     実商品データで発覚。全ページ共通のコンポーネントのため一括修正) */
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
 }
 .product-card {
