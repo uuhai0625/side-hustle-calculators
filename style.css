@@ -427,20 +427,20 @@ a { color: var(--navy); }
 .share-btn:hover { border-color: var(--navy); color: var(--navy); }
 
 /* ---- 見出しのアクセントバー(絵文字の代わりの統一装飾) ---- */
-.manner-box h3,
-.rate-table-box h3,
-.detail-section h3,
-.faq-section h3,
-.related-tools h3,
+.manner-box h2,
+.rate-table-box h2,
+.detail-section h2,
+.faq-section h2,
+.related-tools h2,
 .about-box h2 {
   position: relative;
   padding-left: 14px;
 }
-.manner-box h3::before,
-.rate-table-box h3::before,
-.detail-section h3::before,
-.faq-section h3::before,
-.related-tools h3::before,
+.manner-box h2::before,
+.rate-table-box h2::before,
+.detail-section h2::before,
+.faq-section h2::before,
+.related-tools h2::before,
 .about-box h2::before {
   content: "";
   position: absolute;
@@ -463,7 +463,7 @@ a { color: var(--navy); }
   display: none;
 }
 .manner-box.show { display: block; }
-.manner-box h3 {
+.manner-box h2 {
   margin: 0 0 10px;
   font-size: 1rem;
   color: var(--ink);
@@ -521,7 +521,7 @@ a { color: var(--navy); }
   display: none;
 }
 .rate-table-box.show { display: block; }
-.rate-table-box h3 {
+.rate-table-box h2 {
   margin: 0 0 4px;
   font-size: 1rem;
   color: var(--ink);
@@ -582,7 +582,7 @@ a { color: var(--navy); }
 .faq-section {
   margin-bottom: 24px;
 }
-.faq-section h3 {
+.faq-section h2 {
   margin: 0 0 12px;
   font-size: 1.05rem;
   color: var(--ink);
@@ -720,17 +720,17 @@ a { color: var(--navy); }
 .detail-section {
   margin-bottom: 24px;
 }
-.detail-section h3 {
+.detail-section h2 {
   font-size: 1.05rem;
   color: var(--ink);
   margin: 0 0 14px;
 }
-.detail-section h4 {
+.detail-section h3 {
   font-size: 0.92rem;
   color: var(--ink);
   margin: 18px 0 6px;
 }
-.detail-section h4:first-of-type { margin-top: 0; }
+.detail-section h3:first-of-type { margin-top: 0; }
 .detail-section p {
   margin: 0;
   font-size: 0.86rem;
@@ -772,7 +772,7 @@ a { color: var(--navy); }
 .related-tools {
   margin-bottom: 24px;
 }
-.related-tools h3 {
+.related-tools h2 {
   margin: 0 0 12px;
   font-size: 1rem;
   color: var(--ink);
