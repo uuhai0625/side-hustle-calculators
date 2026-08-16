@@ -28,50 +28,77 @@ const FREQ_LABELS = {
   allday: '一日中',
 };
 
+// highlight: マトリクス表([data-tool][data-tier]セル)のうち、診断結果に対応するセルを光らせるための対応表。
 const RECOMMENDATIONS = {
   completion: {
     few: {
       headline: 'まずは無料プランで様子見',
       advice: 'GitHub Copilot Free(コード補完2,000回/月)や、Claude Code・Codexの無料枠でまず試してみてください。本当に上限に達してから有料プランを検討すれば十分です。',
+      highlight: [['claude', 'free'], ['codex', 'free'], ['cursor', 'free'], ['copilot', 'free']],
     },
     daily: {
       headline: 'GitHub Copilot Pro($10/月)',
       advice: 'コード補完が無制限になる点が大きく、最も安く始められます。たまにチャットでAIに質問する程度なら、AIクレジット($15分/月)の範囲でも十分なことが多いです。',
+      highlight: [['copilot', 'entry']],
     },
     allday: {
       headline: 'GitHub Copilot Pro($10/月)',
       advice: 'まずはコード補完無制限のProで様子を見るのがおすすめです。チャットやエージェント機能の利用が増えて上限に当たるようなら、Pro+やMaxへの切り替えを検討してください。',
+      highlight: [['copilot', 'entry']],
     },
   },
   agent: {
     few: {
       headline: 'Claude Code Pro / Codex(ChatGPT Plus)クラス',
       advice: '日常的にエージェントへ実装を任せるスタイルなら、週数回の利用でもこの価格帯から始めるのが目安です。上限に当たる頻度を見ながら、必要ならプラン変更を検討してください。',
+      highlight: [['claude', 'entry'], ['codex', 'mid']],
     },
     daily: {
       headline: 'Claude Code Pro / Codex(ChatGPT Plus)クラス',
       advice: '運営者自身の実感としても、副業でサイトやアプリを継続的に作り込むならこの価格帯から始めて十分なことが多いです。',
+      highlight: [['claude', 'entry'], ['codex', 'mid']],
     },
     allday: {
       headline: 'Claude Code Max / Cursor Ultra / Copilot Maxクラス',
       advice: '一日中エージェントに実装を任せる使い方は上限に当たりやすくなります。ただし高額なプランなので、まずは下位プランでどのくらいの頻度で上限に当たるかを確認してから切り替えたほうが失敗しにくいです。',
+      highlight: [['claude', 'top'], ['cursor', 'top'], ['copilot', 'top']],
     },
   },
   large: {
     few: {
       headline: 'Claude Code Pro / Codex(ChatGPT Plus)クラス',
       advice: '複数ファイルにまたがる作業はエージェント型ツールが向いています。週数回の利用ならこの価格帯から始めて、作業量が増えたら上限に当たる頻度を見て上位プランを検討してください。',
+      highlight: [['claude', 'entry'], ['codex', 'mid']],
     },
     daily: {
       headline: 'Claude Code Pro / Codex(ChatGPT Plus)クラス',
       advice: '複数ファイルにまたがる作業をほぼ毎日任せるならこの価格帯が目安です。上限に当たる頻度が高いようなら、Claude Code MaxやCursor Ultraなどの上位プランも選択肢になります。',
+      highlight: [['claude', 'entry'], ['codex', 'mid']],
     },
     allday: {
       headline: 'Claude Code Max / Cursor Ultra / Copilot Maxクラス',
       advice: '大きめの作業を一日中任せるスタイルは、本数・作業量が多く上限に当たりやすい典型的なケースです。ただし高額なプランなので、まずは下位プランで上限に当たる頻度を確認してからの方が失敗しにくいです。',
+      highlight: [['claude', 'top'], ['cursor', 'top'], ['copilot', 'top']],
     },
   },
 };
+
+const matrixBox = document.getElementById('matrix-box');
+
+function clearHighlights() {
+  if (!matrixBox) return;
+  matrixBox.querySelectorAll('td.highlighted').forEach((td) => td.classList.remove('highlighted'));
+}
+
+function applyHighlight(pairs) {
+  if (!matrixBox || !pairs) return;
+  clearHighlights();
+  pairs.forEach(([tool, tier]) => {
+    const cell = matrixBox.querySelector(`td[data-tool="${tool}"][data-tier="${tier}"]`);
+    if (cell) cell.classList.add('highlighted');
+  });
+  matrixBox.open = true;
+}
 
 const selectTask = document.getElementById('select-task');
 const selectFreq = document.getElementById('select-freq');
@@ -99,6 +126,7 @@ function calc() {
   lastHeadline = rec.headline;
   updateShareUrl();
   shareRow.classList.add('show');
+  applyHighlight(rec.highlight);
 
   resultCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }

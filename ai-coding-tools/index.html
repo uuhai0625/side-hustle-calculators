@@ -137,29 +137,40 @@
 
   <p class="follow-x">制作の裏側や新しいツールの告知は <a href="https://x.com/uuhai0625" target="_blank" rel="noopener">@uuhai0625</a> で発信しています</p>
 
-  <details class="rate-table-box show">
-    <summary><h2>4ツールの全プラン比較表</h2></summary>
-    <p class="rate-table-note">2026年8月に公式サイトで確認した料金です。Claude Code・OpenAI Codexは正確な利用回数の上限を公式が非公開にしているため、「利用量の目安」欄に具体的な回数は記載していません。</p>
+  <details class="rate-table-box show" id="matrix-box">
+    <summary><h2>4ツールの料金マトリクス</h2></summary>
+    <p class="rate-table-note">2026年8月に公式サイトで確認した料金です。4ツールとも個人向けプランがちょうど4段階(無料/エントリー/ミドル/上位)あるため、価格帯の近さで横並びにしています。<strong>同じ段でも提供元・仕組みが違うため、同等の性能という意味ではありません</strong>(特にClaude Code・Codexは正確な利用回数の上限が非公開)。Cursorのチーム向けプラン(Teams $40/ユーザー)はこのマトリクスには含めていません。</p>
     <div class="rate-table-wrap">
-    <table class="rate-table rate-table-feature">
-      <tr><th>ツール</th><th>プラン</th><th>月額</th><th>利用量の目安</th></tr>
-      <tr><td>Claude Code</td><td>Free</td><td>$0</td><td>無料の範囲内で利用可(正確な上限は非公開)</td></tr>
-      <tr><td>Claude Code</td><td>Pro</td><td>$20(年払い$17)</td><td>5時間+週次のローリングウィンドウ、正確な回数は非公開</td></tr>
-      <tr><td>Claude Code</td><td>Max 5x</td><td>$100</td><td>Proの5倍の利用量</td></tr>
-      <tr><td>Claude Code</td><td>Max 20x</td><td>$200</td><td>Proの20倍の利用量</td></tr>
-      <tr><td>OpenAI Codex(ChatGPT)</td><td>Free</td><td>¥0</td><td>ChatGPT Freeに含まれる範囲、正確な上限は非公開</td></tr>
-      <tr><td>OpenAI Codex(ChatGPT)</td><td>Go</td><td>¥1,400</td><td>5時間+週次のローリングウィンドウ、正確な回数は非公開</td></tr>
-      <tr><td>OpenAI Codex(ChatGPT)</td><td>Plus</td><td>¥3,000</td><td>同上</td></tr>
-      <tr><td>OpenAI Codex(ChatGPT)</td><td>Pro</td><td>¥16,800</td><td>Plusの5〜20倍の利用枠、上限到達後は追加クレジット購入で継続可能</td></tr>
-      <tr><td>Cursor</td><td>Hobby</td><td>$0</td><td>エージェントリクエスト制限あり、クレジットカード不要</td></tr>
-      <tr><td>Cursor</td><td>Pro</td><td>$20</td><td>使い切るとオンデマンド従量課金に移行</td></tr>
-      <tr><td>Cursor</td><td>Pro+</td><td>$60</td><td>Proの3倍のエージェント利用上限</td></tr>
-      <tr><td>Cursor</td><td>Ultra</td><td>$200</td><td>Proの20倍の利用上限</td></tr>
-      <tr><td>Cursor</td><td>Teams</td><td>$40/ユーザー</td><td>チーム向けプラン</td></tr>
-      <tr><td>GitHub Copilot</td><td>Free</td><td>$0</td><td>コード補完2,000回/月、チャット等は制限あり</td></tr>
-      <tr><td>GitHub Copilot</td><td>Pro</td><td>$10/ユーザー</td><td>コード補完無制限、AIクレジット$15分/月</td></tr>
-      <tr><td>GitHub Copilot</td><td>Pro+</td><td>$39/ユーザー</td><td>AIクレジット$70分/月、Proの4倍以上の利用枠</td></tr>
-      <tr><td>GitHub Copilot</td><td>Max</td><td>$100/ユーザー</td><td>AIクレジット$200分/月、Pro+の2.9倍以上の利用枠</td></tr>
+    <table class="rate-table rate-table-matrix">
+      <tr><th>層</th><th>Claude Code</th><th>OpenAI Codex</th><th>Cursor</th><th>GitHub Copilot</th></tr>
+      <tr>
+        <td>無料</td>
+        <td data-tool="claude" data-tier="free"><span class="plan-name">Free</span><span class="price">$0</span></td>
+        <td data-tool="codex" data-tier="free"><span class="plan-name">Free</span><span class="price">¥0</span></td>
+        <td data-tool="cursor" data-tier="free"><span class="plan-name">Hobby</span><span class="price">$0</span></td>
+        <td data-tool="copilot" data-tier="free"><span class="plan-name">Free</span><span class="price">$0</span><span class="price-note">補完2,000回/月</span></td>
+      </tr>
+      <tr>
+        <td>エントリー</td>
+        <td data-tool="claude" data-tier="entry"><span class="plan-name">Pro</span><span class="price">$20/月</span><span class="price-note">年払い$17/月</span></td>
+        <td data-tool="codex" data-tier="entry"><span class="plan-name">Go</span><span class="price">¥1,400/月</span></td>
+        <td data-tool="cursor" data-tier="entry"><span class="plan-name">Pro</span><span class="price">$20/月</span></td>
+        <td data-tool="copilot" data-tier="entry"><span class="plan-name">Pro</span><span class="price">$10/月</span><span class="price-note">クレジット$15分</span></td>
+      </tr>
+      <tr>
+        <td>ミドル</td>
+        <td data-tool="claude" data-tier="mid"><span class="plan-name">Max 5x</span><span class="price">$100/月</span><span class="price-note">Proの5倍</span></td>
+        <td data-tool="codex" data-tier="mid"><span class="plan-name">Plus</span><span class="price">¥3,000/月</span></td>
+        <td data-tool="cursor" data-tier="mid"><span class="plan-name">Pro+</span><span class="price">$60/月</span><span class="price-note">Proの3倍</span></td>
+        <td data-tool="copilot" data-tier="mid"><span class="plan-name">Pro+</span><span class="price">$39/月</span><span class="price-note">クレジット$70分</span></td>
+      </tr>
+      <tr>
+        <td>上位</td>
+        <td data-tool="claude" data-tier="top"><span class="plan-name">Max 20x</span><span class="price">$200/月</span><span class="price-note">Proの20倍</span></td>
+        <td data-tool="codex" data-tier="top"><span class="plan-name">Pro</span><span class="price">¥16,800/月</span><span class="price-note">Plusの5〜20倍</span></td>
+        <td data-tool="cursor" data-tier="top"><span class="plan-name">Ultra</span><span class="price">$200/月</span><span class="price-note">Proの20倍</span></td>
+        <td data-tool="copilot" data-tier="top"><span class="plan-name">Max</span><span class="price">$100/月</span><span class="price-note">クレジット$200分</span></td>
+      </tr>
     </table>
     </div>
     <p class="rate-source">参考: <a href="https://support.claude.com/en/articles/8325606-what-is-the-pro-plan" target="_blank" rel="noopener">Anthropic「What is the Pro plan?」</a>、<a href="https://support.claude.com/en/articles/11049741-what-is-the-max-plan" target="_blank" rel="noopener">Anthropic「What is the Max plan?」</a>、<a href="https://code.claude.com/docs/en/costs" target="_blank" rel="noopener">Claude Code公式ドキュメント「Costs」</a>、<a href="https://chatgpt.com/ja-JP/pricing/" target="_blank" rel="noopener">ChatGPT料金ページ</a>、<a href="https://help.openai.com/en/articles/11369540-using-codex-with-your-chatgpt-plan" target="_blank" rel="noopener">OpenAI「Using Codex with your ChatGPT plan」</a>、<a href="https://cursor.com/pricing" target="_blank" rel="noopener">Cursor公式サイト</a>、<a href="https://github.com/features/copilot/plans?locale=ja" target="_blank" rel="noopener">GitHub Copilot公式サイト</a>(いずれも2026年8月確認)</p>

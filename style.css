@@ -609,6 +609,51 @@ a { color: var(--navy); }
 .rate-table-wrap .rate-table-feature {
   min-width: 620px;
 }
+/* ツール比較マトリクス(層×ツールの格子表)用の上書き
+   (2026-08-16追加: 通常のrate-tableは最終列=価格を前提にした右寄せ太字ルールを持つが、
+   マトリクスは全列がツールの列のため、価格は.price要素で個別にスタイルする) */
+.rate-table-matrix th, .rate-table-matrix td {
+  text-align: center;
+}
+.rate-table-matrix th:first-child, .rate-table-matrix td:first-child {
+  text-align: left;
+  color: var(--ink-sub);
+  font-weight: 700;
+}
+.rate-table-matrix td:last-child, .rate-table-matrix th:last-child {
+  text-align: center;
+  font-weight: 400;
+  color: var(--ink-sub);
+  white-space: normal;
+  font-family: "Noto Sans JP", "Hiragino Sans", sans-serif;
+}
+.rate-table-matrix .plan-name {
+  display: block;
+  color: var(--ink);
+}
+.rate-table-matrix .price {
+  display: block;
+  color: var(--navy);
+  font-weight: 700;
+  margin-top: 2px;
+}
+.rate-table-matrix .price-note {
+  display: block;
+  font-size: 0.72rem;
+  color: var(--ink-sub);
+  font-weight: 400;
+  margin-top: 2px;
+}
+.rate-table-wrap .rate-table-matrix {
+  min-width: 560px;
+}
+.rate-table-matrix td.highlighted {
+  background: var(--gold-soft);
+  box-shadow: inset 0 0 0 1px var(--gold), var(--glow-amber);
+  border-radius: 6px;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+.rate-table-matrix td.highlighted .price { color: var(--gold); }
 .rate-source {
   margin: 10px 0 0;
   font-size: 0.72rem;
