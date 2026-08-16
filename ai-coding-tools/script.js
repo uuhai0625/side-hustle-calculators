@@ -37,12 +37,12 @@ const RECOMMENDATIONS = {
       highlight: [['claude', 'free'], ['codex', 'free'], ['cursor', 'free'], ['copilot', 'free']],
     },
     daily: {
-      headline: 'GitHub Copilot Pro($10/月)',
-      advice: 'コード補完が無制限になる点が大きく、最も安く始められます。たまにチャットでAIに質問する程度なら、AIクレジット($15分/月)の範囲でも十分なことが多いです。',
+      headline: 'GitHub Copilot Pro($10/月・約¥1,590)',
+      advice: 'コード補完が無制限になる点が大きく、最も安く始められます。たまにチャットでAIに質問する程度なら、AIクレジット($15分/月・約¥2,385)の範囲でも十分なことが多いです。',
       highlight: [['copilot', 'entry']],
     },
     allday: {
-      headline: 'GitHub Copilot Pro($10/月)',
+      headline: 'GitHub Copilot Pro($10/月・約¥1,590)',
       advice: 'まずはコード補完無制限のProで様子を見るのがおすすめです。チャットやエージェント機能の利用が増えて上限に当たるようなら、Pro+やMaxへの切り替えを検討してください。',
       highlight: [['copilot', 'entry']],
     },

@@ -36,7 +36,7 @@
   "mainEntity": [
     { "@type": "Question", "name": "Claude CodeやOpenAI Codexの利用回数の上限は教えてもらえますか?", "acceptedAnswer": { "@type": "Answer", "text": "いいえ、AnthropicもOpenAIも正確な利用回数の上限は意図的に非公開にしています。どちらも5時間のローリングウィンドウと週次ウィンドウを組み合わせて利用量を管理していますが、「何回まで使えるか」という具体的な数字は公表されていません。実際にどのくらい使えるかは、運営者自身の体感で判断するしかないのが実情です。" } },
     { "@type": "Question", "name": "GitHub Copilotの無料プランでどこまで使えますか?", "acceptedAnswer": { "@type": "Answer", "text": "GitHub Copilot Freeはコード補完が月2,000回まで利用でき、チャットなど一部機能には別の制限があります。まずコストをかけずに試したい場合の入口として使いやすいプランです。" } },
-    { "@type": "Question", "name": "Cursorの料金体系はどうなっていますか?", "acceptedAnswer": { "@type": "Answer", "text": "Hobby($0)・Pro($20/月)・Pro+($60/月、Proの3倍のエージェント利用上限)・Ultra($200/月、Proの20倍)・Teams($40/ユーザー/月)の5段階です。含まれる利用量を使い切ると、モデルのAPI実費に基づくオンデマンド従量課金にシームレスに移行します。以前あった「◯ドル分」という絶対額の表記は、現在は相対的な倍率表記に変わっています。" } },
+    { "@type": "Question", "name": "Cursorの料金体系はどうなっていますか?", "acceptedAnswer": { "@type": "Answer", "text": "Hobby($0)・Pro($20/月、約¥3,180)・Pro+($60/月、約¥9,540、Proの3倍のエージェント利用上限)・Ultra($200/月、約¥31,800、Proの20倍)・Teams($40/ユーザー/月、約¥6,360)の5段階です(円額は為替159円/ドルで換算した目安)。含まれる利用量を使い切ると、モデルのAPI実費に基づくオンデマンド従量課金にシームレスに移行します。以前あった「◯ドル分」という絶対額の表記は、現在は相対的な倍率表記に変わっています。" } },
     { "@type": "Question", "name": "GitHub Copilotが他の3ツールと違う点は?", "acceptedAnswer": { "@type": "Answer", "text": "Claude Code・OpenAI Codexは自社モデル専用のCLIエージェント、Cursorは複数モデルを裏側で使うAI特化エディタです。これに対しGitHub Copilotは、Anthropic・OpenAI・Google・xAIなど複数ベンダーのモデルを選べるマルチベンダー型で、Pro以上のプランでは同じAIクレジットプール内でClaude CodeやOpenAI Codexそのものを「外部エージェント」として呼び出すこともできます。" } },
     { "@type": "Question", "name": "4ツールをそのまま金額だけで比較できますか?", "acceptedAnswer": { "@type": "Answer", "text": "単純比較はおすすめしません。Claude Code・Codexは単独プランがなく既存のチャットサブスクに含まれる形、Cursorは含まれる利用量を使い切ると従量課金、GitHub Copilotは明確なAIクレジット制と、それぞれ料金の仕組みが異なります。このページの比較表や簡易診断は、あくまで目安として使ってください。" } }
   ]
@@ -74,21 +74,45 @@
   <a class="back-link" href="../">← ツール一覧にもどる</a>
   <p class="stage-note">このページは、すでにAI副業に取り組んでいる方向けのコーディングツール料金比較です。まだ始めていない方は、先に<a href="../hajimekata/">AI副業の始め方</a>をご覧ください。</p>
 
-  <div class="trust-box">
-    <h2>正直な前置き</h2>
+  <details class="trust-box">
+    <summary><h2>正直な前置き</h2></summary>
     <p>Claude Code・OpenAI Codex・Cursor・GitHub Copilotは、料金の仕組みがそれぞれバラバラで単純比較ができません。Claude CodeとCodexは単独プランがなく既存のチャットサブスクに含まれる形、Cursorは含まれる利用量を使い切ると従量課金に移行、GitHub Copilotだけが明確な「AIクレジット」制です。しかも肝心のClaude CodeとCodexは、正確な利用回数の上限を公式が意図的に非公開にしています。このページでは、わからないことは「非公開」と正直に書いたうえで、公式に確認できた料金だけを比較表にまとめています。</p>
-  </div>
+  </details>
 
   <div class="manner-box show">
     <h2>どんな人に何がおすすめか</h2>
-    <ul>
-      <li><strong>AI副業を始めたばかり・まずコストを抑えたい人:</strong> 各ツールのFreeプランで様子を見るのが最初の一歩です(GitHub Copilot Freeはコード補完2,000回/月、Claude Code・CodexもFreeで一定利用可)。有料化は本当に上限に達してから検討で十分です。</li>
-      <li><strong>エディタでの日常的なコード補完がメインで、たまにAIに質問する程度の人:</strong> GitHub Copilot Pro($10/月)が最も安く、コード補完が無制限になる点が大きいです。</li>
-      <li><strong>副業でサイト・アプリを継続的に作り込む人:</strong> Claude Code ProまたはCodex(ChatGPT Plus)クラスが目安です。日常的にエージェントへ実装を任せるスタイルなら、この価格帯からで十分なことが多いです(運営者自身もこの使い方をしています)。</li>
-      <li><strong>本数・作業量が多く、頻繁に上限に当たる人:</strong> Claude Code Max・Cursor Ultra・Copilot Maxのような上位プランを検討してください。ただし高額プランなので、まず下位プランで上限に当たる頻度を確認してからの方が失敗しにくいです。</li>
-      <li><strong>複数のAIモデルを比較・使い分けたい人:</strong> GitHub Copilotが唯一のマルチベンダー型で、Claude・GPT・Gemini・Grok等を切り替えられます。Claude CodeやCodexを試したいがどれか1つに決めたくない場合の選択肢にもなります。</li>
-      <li><strong>すでにVS Code以外の特定IDE(JetBrains等)を使っている人:</strong> GitHub Copilotの対応エディタの広さが有利です。Cursorは専用エディタへの移行が必要な点に注意してください。</li>
-    </ul>
+    <div class="persona-grid">
+      <div class="persona-card">
+        <p class="persona-who">始めたばかり・コストを抑えたい</p>
+        <p class="persona-pick">まずは各ツールのFreeプランで様子見</p>
+        <p class="persona-why">本当に上限に達してから有料化を検討で十分</p>
+      </div>
+      <div class="persona-card">
+        <p class="persona-who">補完メイン、たまにAIに質問する程度</p>
+        <p class="persona-pick">GitHub Copilot Pro($10/月・約¥1,590)</p>
+        <p class="persona-why">補完無制限になるのが決め手、最安</p>
+      </div>
+      <div class="persona-card">
+        <p class="persona-who">副業でサイト・アプリを作り込む</p>
+        <p class="persona-pick">Claude Code Pro / Codex(ChatGPT Plus)クラス</p>
+        <p class="persona-why">運営者自身もこの価格帯で運用中</p>
+      </div>
+      <div class="persona-card">
+        <p class="persona-who">作業量が多く、頻繁に上限に当たる</p>
+        <p class="persona-pick">Max・Ultra級の上位プラン</p>
+        <p class="persona-why">高額なので、下位プランで頻度確認してから切替を</p>
+      </div>
+      <div class="persona-card">
+        <p class="persona-who">複数のAIモデルを比較・使い分けたい</p>
+        <p class="persona-pick">GitHub Copilot</p>
+        <p class="persona-why">唯一のマルチベンダー型、Claude/GPT/Gemini/Grok等を切替可</p>
+      </div>
+      <div class="persona-card">
+        <p class="persona-who">JetBrains等、特定IDEを使っている</p>
+        <p class="persona-pick">GitHub Copilot</p>
+        <p class="persona-why">対応エディタが幅広い、Cursorは専用エディタへの移行が必要</p>
+      </div>
+    </div>
   </div>
 
   <h2 class="heading-font" style="margin: 28px 0 4px; font-size: 1.05rem; color: var(--ink);">かんたん診断:あなたに合うプランは?</h2>
@@ -139,7 +163,7 @@
 
   <details class="rate-table-box show" id="matrix-box">
     <summary><h2>4ツールの料金マトリクス</h2></summary>
-    <p class="rate-table-note">2026年8月に公式サイトで確認した料金です。4ツールとも個人向けプランがちょうど4段階(無料/エントリー/ミドル/上位)あるため、価格帯の近さで横並びにしています。<strong>同じ段でも提供元・仕組みが違うため、同等の性能という意味ではありません</strong>(特にClaude Code・Codexは正確な利用回数の上限が非公開)。Cursorのチーム向けプラン(Teams $40/ユーザー)はこのマトリクスには含めていません。Codexのみ公式が日本円建て、他3ツールはドル建てのため、比較しやすいよう為替159円/ドル(2026年8月時点の目安)で換算した円額を併記しています。実際の請求は各サービスの契約通貨に従ってください。</p>
+    <p class="rate-table-note">2026年8月に公式サイトで確認した料金です。4ツールとも個人向けプランがちょうど4段階(無料/エントリー/ミドル/上位)あるため、価格帯の近さで横並びにしています。<strong>同じ段でも提供元・仕組みが違うため、同等の性能という意味ではありません</strong>(特にClaude Code・Codexは正確な利用回数の上限が非公開)。Cursorのチーム向けプラン(Teams $40/ユーザー、約¥6,360)はこのマトリクスには含めていません。Codexのみ公式が日本円建て、他3ツールはドル建てのため、比較しやすいよう為替159円/ドル(2026年8月時点の目安)で換算した円額を併記しています。実際の請求は各サービスの契約通貨に従ってください。</p>
     <div class="rate-table-wrap">
     <table class="rate-table rate-table-matrix">
       <tr><th>層</th><th>Claude Code</th><th>OpenAI Codex</th><th>Cursor</th><th>GitHub Copilot</th></tr>
@@ -188,7 +212,7 @@
     </details>
     <details class="faq-item">
       <summary>Cursorの料金体系はどうなっていますか?</summary>
-      <p>Hobby($0)・Pro($20/月)・Pro+($60/月、Proの3倍のエージェント利用上限)・Ultra($200/月、Proの20倍)・Teams($40/ユーザー/月)の5段階です。含まれる利用量を使い切ると、モデルのAPI実費に基づくオンデマンド従量課金にシームレスに移行します。以前あった「◯ドル分」という絶対額の表記は、現在は相対的な倍率表記に変わっています。</p>
+      <p>Hobby($0)・Pro($20/月、約¥3,180)・Pro+($60/月、約¥9,540、Proの3倍のエージェント利用上限)・Ultra($200/月、約¥31,800、Proの20倍)・Teams($40/ユーザー/月、約¥6,360)の5段階です(円額は為替159円/ドルで換算した目安)。含まれる利用量を使い切ると、モデルのAPI実費に基づくオンデマンド従量課金にシームレスに移行します。以前あった「◯ドル分」という絶対額の表記は、現在は相対的な倍率表記に変わっています。</p>
     </details>
     <details class="faq-item">
       <summary>GitHub Copilotが他の3ツールと違う点は?</summary>
@@ -204,7 +228,7 @@
     <h2>4ツールの性質の違い</h2>
 
     <h3>Claude Code・OpenAI Codex</h3>
-    <p>「どのAIにコードを書かせるか」を選ぶ、CLI中心のエージェント型ツールです。Claude CodeはAnthropicの自社モデルのみ、CodexはOpenAIの自社モデルのみを使用します。どちらも単独プランはなく、既存のチャットサブスク(Claude Pro/Max、ChatGPT Plus/Pro等)に含まれる形で利用します。なお、Anthropicが公開している目安データ(code.claude.com/docs/en/costs)では、エンタープライズ導入全体の平均で開発者1人あたり1日約$13、月$150〜250という数字がありますが、これはAPI従量課金ベースの数字で、Pro/Max定額プランの体感コストとは直接比較できない点に注意してください。</p>
+    <p>「どのAIにコードを書かせるか」を選ぶ、CLI中心のエージェント型ツールです。Claude CodeはAnthropicの自社モデルのみ、CodexはOpenAIの自社モデルのみを使用します。どちらも単独プランはなく、既存のチャットサブスク(Claude Pro/Max、ChatGPT Plus/Pro等)に含まれる形で利用します。なお、Anthropicが公開している目安データ(code.claude.com/docs/en/costs)では、エンタープライズ導入全体の平均で開発者1人あたり1日約$13(約¥2,070)、月$150〜250(約¥23,850〜39,750)という数字がありますが、これはAPI従量課金ベースの数字で、Pro/Max定額プランの体感コストとは直接比較できない点に注意してください。</p>
 
     <h3>Cursor</h3>
     <p>AI特化のコードエディタ(IDE)そのものです。複数のAIモデルを裏側で使いますが、Claude CodeやCodexのようなCLIツールではなく、エディタとして独立した製品という位置づけです。</p>

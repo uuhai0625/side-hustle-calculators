@@ -489,6 +489,42 @@ a { color: var(--navy); }
 }
 .manner-box li { margin-bottom: 6px; }
 
+/* ---- 層別おすすめ(パッと見て分かるカード形式) ---- */
+.persona-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin: 4px 0 0;
+}
+@media (max-width: 640px) {
+  .persona-grid { grid-template-columns: 1fr; }
+}
+.persona-card {
+  background: var(--bg-card-hover);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 12px 14px;
+}
+.persona-who {
+  margin: 0 0 6px;
+  font-size: 0.72rem;
+  color: var(--ink-sub);
+  font-weight: 700;
+}
+.persona-pick {
+  margin: 0 0 4px;
+  font-size: 0.92rem;
+  color: var(--navy);
+  font-weight: 700;
+  line-height: 1.4;
+}
+.persona-why {
+  margin: 0;
+  font-size: 0.76rem;
+  color: var(--ink-sub);
+  line-height: 1.6;
+}
+
 /* ---- アフィリエイト誘導 ---- */
 .aff-card {
   display: none;
@@ -862,6 +898,29 @@ a { color: var(--navy); }
   font-size: 0.86rem;
   color: var(--ink-sub);
   line-height: 1.8;
+}
+.trust-box summary {
+  cursor: pointer;
+  list-style: none;
+}
+.trust-box summary::-webkit-details-marker { display: none; }
+.trust-box summary h2 {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+}
+.trust-box summary h2::after {
+  content: "もっと見る ▾";
+  font-size: 0.72rem;
+  font-weight: 400;
+  color: var(--ink-sub);
+}
+.trust-box[open] summary h2::after {
+  content: "閉じる ▴";
+}
+.trust-box summary ~ p {
+  margin-top: 10px;
 }
 
 /* ---- 詳しい解説 ---- */
