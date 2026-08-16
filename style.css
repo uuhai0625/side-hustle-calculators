@@ -740,6 +740,40 @@ a { color: var(--navy); }
   border-bottom: 1px solid var(--gold);
 }
 
+/* ---- 差別化・信頼性訴求 ---- */
+.trust-box {
+  margin: 24px 0;
+  padding: 18px 20px;
+  background: var(--check-bg);
+  border: 1px solid rgba(53, 242, 176, 0.35);
+  border-radius: var(--radius);
+  box-shadow: var(--glow-soft);
+}
+.trust-box h2 {
+  margin: 0 0 8px;
+  font-size: 0.98rem;
+  color: var(--ink);
+  padding-left: 14px;
+  position: relative;
+}
+.trust-box h2::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.15em;
+  width: 3px;
+  height: 0.85em;
+  background: var(--navy);
+  box-shadow: 0 0 8px rgba(53, 242, 176, 0.6);
+  border-radius: 2px;
+}
+.trust-box p {
+  margin: 0;
+  font-size: 0.86rem;
+  color: var(--ink-sub);
+  line-height: 1.8;
+}
+
 /* ---- 詳しい解説 ---- */
 .detail-section {
   margin-bottom: 24px;
