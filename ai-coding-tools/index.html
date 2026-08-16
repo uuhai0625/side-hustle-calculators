@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIコーディングツール 料金比較|AI副業そろばん</title>
+<meta name="description" content="Claude Code・OpenAI Codex・Cursor・GitHub Copilotの料金プランを比較できる無料ツールです。作業内容から自分に合うプランの目安がわかる簡易診断つき。">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="AIコーディングツール 料金比較|AI副業そろばん">
+<meta property="og:description" content="Claude Code・OpenAI Codex・Cursor・GitHub Copilotの料金プランを比較できる無料ツールです。簡易診断で自分に合うプランの目安もわかります。">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:url" content="https://uuhai0625.github.io/side-hustle-calculators/ai-coding-tools/">
+<meta property="og:image" content="https://uuhai0625.github.io/side-hustle-calculators/images/og-image.jpg">
+<meta property="og:image:width" content="1520">
+<meta property="og:image:height" content="800">
+<link rel="canonical" href="https://uuhai0625.github.io/side-hustle-calculators/ai-coding-tools/">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AIコーディングツール 料金比較">
+<meta name="twitter:description" content="Claude Code・OpenAI Codex・Cursor・GitHub Copilotの料金プランを比較。簡易診断で自分に合うプランの目安もわかります。">
+<meta name="twitter:image" content="https://uuhai0625.github.io/side-hustle-calculators/images/og-image.jpg">
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧮</text></svg>">
+<meta name="theme-color" content="#0a0d0c">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "datePublished": "2026-08-16",
+  "dateModified": "2026-08-16",
+  "mainEntity": [
+    { "@type": "Question", "name": "Claude CodeやOpenAI Codexの利用回数の上限は教えてもらえますか?", "acceptedAnswer": { "@type": "Answer", "text": "いいえ、AnthropicもOpenAIも正確な利用回数の上限は意図的に非公開にしています。どちらも5時間のローリングウィンドウと週次ウィンドウを組み合わせて利用量を管理していますが、「何回まで使えるか」という具体的な数字は公表されていません。実際にどのくらい使えるかは、運営者自身の体感で判断するしかないのが実情です。" } },
+    { "@type": "Question", "name": "GitHub Copilotの無料プランでどこまで使えますか?", "acceptedAnswer": { "@type": "Answer", "text": "GitHub Copilot Freeはコード補完が月2,000回まで利用でき、チャットなど一部機能には別の制限があります。まずコストをかけずに試したい場合の入口として使いやすいプランです。" } },
+    { "@type": "Question", "name": "Cursorの料金体系はどうなっていますか?", "acceptedAnswer": { "@type": "Answer", "text": "Hobby($0)・Pro($20/月)・Pro+($60/月、Proの3倍のエージェント利用上限)・Ultra($200/月、Proの20倍)・Teams($40/ユーザー/月)の5段階です。含まれる利用量を使い切ると、モデルのAPI実費に基づくオンデマンド従量課金にシームレスに移行します。以前あった「◯ドル分」という絶対額の表記は、現在は相対的な倍率表記に変わっています。" } },
+    { "@type": "Question", "name": "GitHub Copilotが他の3ツールと違う点は?", "acceptedAnswer": { "@type": "Answer", "text": "Claude Code・OpenAI Codexは自社モデル専用のCLIエージェント、Cursorは複数モデルを裏側で使うAI特化エディタです。これに対しGitHub Copilotは、Anthropic・OpenAI・Google・xAIなど複数ベンダーのモデルを選べるマルチベンダー型で、Pro以上のプランでは同じAIクレジットプール内でClaude CodeやOpenAI Codexそのものを「外部エージェント」として呼び出すこともできます。" } },
+    { "@type": "Question", "name": "4ツールをそのまま金額だけで比較できますか?", "acceptedAnswer": { "@type": "Answer", "text": "単純比較はおすすめしません。Claude Code・Codexは単独プランがなく既存のチャットサブスクに含まれる形、Cursorは含まれる利用量を使い切ると従量課金、GitHub Copilotは明確なAIクレジット制と、それぞれ料金の仕組みが異なります。このページの比較表や簡易診断は、あくまで目安として使ってください。" } }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "AIコーディングツール料金比較",
+  "url": "https://uuhai0625.github.io/side-hustle-calculators/ai-coding-tools/",
+  "description": "Claude Code・OpenAI Codex・Cursor・GitHub Copilotの料金プランを比較できる無料ツールです。作業内容から自分に合うプランの目安がわかる簡易診断つき。",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "JPY"
+  },
+  "datePublished": "2026-08-16",
+  "dateModified": "2026-08-16"
+}
+</script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <p class="site-logo heading-font">AI副業<span class="accent">そろばん</span></p>
+    <h1 class="site-tagline">AIコーディングツール料金比較</h1>
+  </div>
+</header>
+
+<main class="wrap">
+  <a class="back-link" href="../">← ツール一覧にもどる</a>
+  <p class="stage-note">このページは、すでにAI副業に取り組んでいる方向けのコーディングツール料金比較です。まだ始めていない方は、先に<a href="../hajimekata/">AI副業の始め方</a>をご覧ください。</p>
+
+  <div class="trust-box">
+    <h2>正直な前置き</h2>
+    <p>Claude Code・OpenAI Codex・Cursor・GitHub Copilotは、料金の仕組みがそれぞれバラバラで単純比較ができません。Claude CodeとCodexは単独プランがなく既存のチャットサブスクに含まれる形、Cursorは含まれる利用量を使い切ると従量課金に移行、GitHub Copilotだけが明確な「AIクレジット」制です。しかも肝心のClaude CodeとCodexは、正確な利用回数の上限を公式が意図的に非公開にしています。このページでは、わからないことは「非公開」と正直に書いたうえで、公式に確認できた料金だけを比較表にまとめています。</p>
+  </div>
+
+  <div class="manner-box show">
+    <h2>どんな人に何がおすすめか</h2>
+    <ul>
+      <li><strong>AI副業を始めたばかり・まずコストを抑えたい人:</strong> 各ツールのFreeプランで様子を見るのが最初の一歩です(GitHub Copilot Freeはコード補完2,000回/月、Claude Code・CodexもFreeで一定利用可)。有料化は本当に上限に達してから検討で十分です。</li>
+      <li><strong>エディタでの日常的なコード補完がメインで、たまにAIに質問する程度の人:</strong> GitHub Copilot Pro($10/月)が最も安く、コード補完が無制限になる点が大きいです。</li>
+      <li><strong>副業でサイト・アプリを継続的に作り込む人:</strong> Claude Code ProまたはCodex(ChatGPT Plus)クラスが目安です。日常的にエージェントへ実装を任せるスタイルなら、この価格帯からで十分なことが多いです(運営者自身もこの使い方をしています)。</li>
+      <li><strong>本数・作業量が多く、頻繁に上限に当たる人:</strong> Claude Code Max・Cursor Ultra・Copilot Maxのような上位プランを検討してください。ただし高額プランなので、まず下位プランで上限に当たる頻度を確認してからの方が失敗しにくいです。</li>
+      <li><strong>複数のAIモデルを比較・使い分けたい人:</strong> GitHub Copilotが唯一のマルチベンダー型で、Claude・GPT・Gemini・Grok等を切り替えられます。Claude CodeやCodexを試したいがどれか1つに決めたくない場合の選択肢にもなります。</li>
+      <li><strong>すでにVS Code以外の特定IDE(JetBrains等)を使っている人:</strong> GitHub Copilotの対応エディタの広さが有利です。Cursorは専用エディタへの移行が必要な点に注意してください。</li>
+    </ul>
+  </div>
+
+  <h2 class="heading-font" style="margin: 28px 0 4px; font-size: 1.05rem; color: var(--ink);">かんたん診断:あなたに合うプランは?</h2>
+  <p style="margin: 0 0 12px; font-size: 0.86rem; color: var(--ink-sub);">主な作業内容と使う頻度を選ぶと、おすすめのプランの目安を表示します。ルールベースの簡易診断です。</p>
+
+  <div class="calc-card">
+    <div class="field">
+      <label for="select-task">主な作業内容</label>
+      <select id="select-task">
+        <option value="completion">コード補完中心(たまにAIに質問する程度)</option>
+        <option value="agent" selected>日常的にエージェントに実装を任せる</option>
+        <option value="large">複数ファイルにまたがる大きめの作業を任せる</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="select-freq">使う頻度</label>
+      <select id="select-freq">
+        <option value="few">週に数回</option>
+        <option value="daily" selected>ほぼ毎日</option>
+        <option value="allday">一日中</option>
+      </select>
+    </div>
+    <button class="btn-calc" id="btn-calc" type="button">おすすめプランを診断する</button>
+  </div>
+
+  <div class="result-card" id="result-card">
+    <p class="result-label">あなたにおすすめのプラン</p>
+    <p class="result-amount" id="result-amount">--</p>
+    <p class="result-note" id="result-note"></p>
+    <p class="result-sub" id="result-sub"></p>
+    <div class="result-advice" id="result-advice"></div>
+    <div class="share-row" id="share-row">
+      <button class="share-btn" id="btn-copy-link" type="button">結果のURLをコピー</button>
+      <button class="share-btn" id="btn-share-x" type="button">𝕏で共有</button>
+    </div>
+  </div>
+
+  <a class="aff-card show" id="aff-card" href="#" target="_blank" rel="noopener sponsored">
+    <span class="aff-icon icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="14" width="18" height="6" rx="1.5"/><path d="M6 14V9a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v5"/><path d="M8 20v1M16 20v1"/></svg></span>
+    <div class="aff-text">
+      <p class="aff-title">長時間タイピングするなら疲れにくいキーボードを探す</p>
+      <p class="aff-sub">楽天市場で見てみる</p>
+    </div>
+    <span class="aff-pr">PR</span>
+  </a>
+
+  <p class="follow-x">制作の裏側や新しいツールの告知は <a href="https://x.com/uuhai0625" target="_blank" rel="noopener">@uuhai0625</a> で発信しています</p>
+
+  <details class="rate-table-box show">
+    <summary><h2>4ツールの全プラン比較表</h2></summary>
+    <p class="rate-table-note">2026年8月に公式サイトで確認した料金です。Claude Code・OpenAI Codexは正確な利用回数の上限を公式が非公開にしているため、「利用量の目安」欄に具体的な回数は記載していません。</p>
+    <div class="rate-table-wrap">
+    <table class="rate-table rate-table-feature">
+      <tr><th>ツール</th><th>プラン</th><th>月額</th><th>利用量の目安</th></tr>
+      <tr><td>Claude Code</td><td>Free</td><td>$0</td><td>無料の範囲内で利用可(正確な上限は非公開)</td></tr>
+      <tr><td>Claude Code</td><td>Pro</td><td>$20(年払い$17)</td><td>5時間+週次のローリングウィンドウ、正確な回数は非公開</td></tr>
+      <tr><td>Claude Code</td><td>Max 5x</td><td>$100</td><td>Proの5倍の利用量</td></tr>
+      <tr><td>Claude Code</td><td>Max 20x</td><td>$200</td><td>Proの20倍の利用量</td></tr>
+      <tr><td>OpenAI Codex(ChatGPT)</td><td>Free</td><td>¥0</td><td>ChatGPT Freeに含まれる範囲、正確な上限は非公開</td></tr>
+      <tr><td>OpenAI Codex(ChatGPT)</td><td>Go</td><td>¥1,400</td><td>5時間+週次のローリングウィンドウ、正確な回数は非公開</td></tr>
+      <tr><td>OpenAI Codex(ChatGPT)</td><td>Plus</td><td>¥3,000</td><td>同上</td></tr>
+      <tr><td>OpenAI Codex(ChatGPT)</td><td>Pro</td><td>¥16,800</td><td>Plusの5〜20倍の利用枠、上限到達後は追加クレジット購入で継続可能</td></tr>
+      <tr><td>Cursor</td><td>Hobby</td><td>$0</td><td>エージェントリクエスト制限あり、クレジットカード不要</td></tr>
+      <tr><td>Cursor</td><td>Pro</td><td>$20</td><td>使い切るとオンデマンド従量課金に移行</td></tr>
+      <tr><td>Cursor</td><td>Pro+</td><td>$60</td><td>Proの3倍のエージェント利用上限</td></tr>
+      <tr><td>Cursor</td><td>Ultra</td><td>$200</td><td>Proの20倍の利用上限</td></tr>
+      <tr><td>Cursor</td><td>Teams</td><td>$40/ユーザー</td><td>チーム向けプラン</td></tr>
+      <tr><td>GitHub Copilot</td><td>Free</td><td>$0</td><td>コード補完2,000回/月、チャット等は制限あり</td></tr>
+      <tr><td>GitHub Copilot</td><td>Pro</td><td>$10/ユーザー</td><td>コード補完無制限、AIクレジット$15分/月</td></tr>
+      <tr><td>GitHub Copilot</td><td>Pro+</td><td>$39/ユーザー</td><td>AIクレジット$70分/月、Proの4倍以上の利用枠</td></tr>
+      <tr><td>GitHub Copilot</td><td>Max</td><td>$100/ユーザー</td><td>AIクレジット$200分/月、Pro+の2.9倍以上の利用枠</td></tr>
+    </table>
+    </div>
+    <p class="rate-source">参考: <a href="https://support.claude.com/en/articles/8325606-what-is-the-pro-plan" target="_blank" rel="noopener">Anthropic「What is the Pro plan?」</a>、<a href="https://support.claude.com/en/articles/11049741-what-is-the-max-plan" target="_blank" rel="noopener">Anthropic「What is the Max plan?」</a>、<a href="https://code.claude.com/docs/en/costs" target="_blank" rel="noopener">Claude Code公式ドキュメント「Costs」</a>、<a href="https://chatgpt.com/ja-JP/pricing/" target="_blank" rel="noopener">ChatGPT料金ページ</a>、<a href="https://help.openai.com/en/articles/11369540-using-codex-with-your-chatgpt-plan" target="_blank" rel="noopener">OpenAI「Using Codex with your ChatGPT plan」</a>、<a href="https://cursor.com/pricing" target="_blank" rel="noopener">Cursor公式サイト</a>、<a href="https://github.com/features/copilot/plans?locale=ja" target="_blank" rel="noopener">GitHub Copilot公式サイト</a>(いずれも2026年8月確認)</p>
+  </details>
+
+  <div class="faq-section">
+    <h2>よくある質問</h2>
+    <details class="faq-item">
+      <summary>Claude CodeやOpenAI Codexの利用回数の上限は教えてもらえますか?</summary>
+      <p>いいえ、AnthropicもOpenAIも正確な利用回数の上限は意図的に非公開にしています。どちらも5時間のローリングウィンドウと週次ウィンドウを組み合わせて利用量を管理していますが、「何回まで使えるか」という具体的な数字は公表されていません。実際にどのくらい使えるかは、運営者自身の体感で判断するしかないのが実情です。</p>
+    </details>
+    <details class="faq-item">
+      <summary>GitHub Copilotの無料プランでどこまで使えますか?</summary>
+      <p>GitHub Copilot Freeはコード補完が月2,000回まで利用でき、チャットなど一部機能には別の制限があります。まずコストをかけずに試したい場合の入口として使いやすいプランです。</p>
+    </details>
+    <details class="faq-item">
+      <summary>Cursorの料金体系はどうなっていますか?</summary>
+      <p>Hobby($0)・Pro($20/月)・Pro+($60/月、Proの3倍のエージェント利用上限)・Ultra($200/月、Proの20倍)・Teams($40/ユーザー/月)の5段階です。含まれる利用量を使い切ると、モデルのAPI実費に基づくオンデマンド従量課金にシームレスに移行します。以前あった「◯ドル分」という絶対額の表記は、現在は相対的な倍率表記に変わっています。</p>
+    </details>
+    <details class="faq-item">
+      <summary>GitHub Copilotが他の3ツールと違う点は?</summary>
+      <p>Claude Code・OpenAI Codexは自社モデル専用のCLIエージェント、Cursorは複数モデルを裏側で使うAI特化エディタです。これに対しGitHub Copilotは、Anthropic・OpenAI・Google・xAIなど複数ベンダーのモデルを選べるマルチベンダー型で、Pro以上のプランでは同じAIクレジットプール内でClaude CodeやOpenAI Codexそのものを「外部エージェント」として呼び出すこともできます。</p>
+    </details>
+    <details class="faq-item">
+      <summary>4ツールをそのまま金額だけで比較できますか?</summary>
+      <p>単純比較はおすすめしません。Claude Code・Codexは単独プランがなく既存のチャットサブスクに含まれる形、Cursorは含まれる利用量を使い切ると従量課金、GitHub Copilotは明確なAIクレジット制と、それぞれ料金の仕組みが異なります。このページの比較表や簡易診断は、あくまで目安として使ってください。</p>
+    </details>
+  </div>
+
+  <div class="detail-section">
+    <h2>4ツールの性質の違い</h2>
+
+    <h3>Claude Code・OpenAI Codex</h3>
+    <p>「どのAIにコードを書かせるか」を選ぶ、CLI中心のエージェント型ツールです。Claude CodeはAnthropicの自社モデルのみ、CodexはOpenAIの自社モデルのみを使用します。どちらも単独プランはなく、既存のチャットサブスク(Claude Pro/Max、ChatGPT Plus/Pro等)に含まれる形で利用します。なお、Anthropicが公開している目安データ(code.claude.com/docs/en/costs)では、エンタープライズ導入全体の平均で開発者1人あたり1日約$13、月$150〜250という数字がありますが、これはAPI従量課金ベースの数字で、Pro/Max定額プランの体感コストとは直接比較できない点に注意してください。</p>
+
+    <h3>Cursor</h3>
+    <p>AI特化のコードエディタ(IDE)そのものです。複数のAIモデルを裏側で使いますが、Claude CodeやCodexのようなCLIツールではなく、エディタとして独立した製品という位置づけです。</p>
+
+    <h3>GitHub Copilot</h3>
+    <p>元々はエディタ上のコード補完(オートコンプリート)から始まり、現在はチャット・エージェント・コードレビュー・PR自動作成まで拡張しています。VS Code/Visual Studio/JetBrains/Xcode等、幅広いエディタに対応。Anthropic/OpenAI/Google/xAI等のモデルを選べるマルチベンダー型で、Claude CodeやCodexそのものを内部から呼び出せる唯一のツールです。</p>
+  </div>
+
+  <div class="related-tools">
+    <h2>比較した4ツールの公式サイト</h2>
+    <div class="related-tools-list">
+      <a class="related-tool-link" href="https://code.claude.com/docs/en/costs" target="_blank" rel="noopener">Claude Code公式ドキュメント</a>
+      <a class="related-tool-link" href="https://chatgpt.com/ja-JP/pricing/" target="_blank" rel="noopener">ChatGPT料金ページ(Codex含む)</a>
+      <a class="related-tool-link" href="https://cursor.com/pricing" target="_blank" rel="noopener">Cursor公式サイト</a>
+      <a class="related-tool-link" href="https://github.com/features/copilot/plans?locale=ja" target="_blank" rel="noopener">GitHub Copilot公式サイト</a>
+    </div>
+  </div>
+
+  <div class="related-tools">
+    <h2>こんなページもあります</h2>
+    <div class="related-tools-list">
+      <a class="related-tool-link" href="../kaishi-cost/"><span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c3 2 5 6 5 10 0 2-1 4-2 5l-3-1-3 1c-1-1-2-3-2-5 0-4 2-8 5-10z"/><circle cx="12" cy="10" r="1.5"/><path d="M9 17l-2 4M15 17l2 4"/></svg></span>AI副業を始める初期費用シミュレーター</a>
+      <a class="related-tool-link" href="../ehon-shinsei/"><span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5c3-1.5 6-1.5 8 0v14c-2-1.5-5-1.5-8 0V5z"/><path d="M20 5c-3-1.5-6-1.5-8 0v14c2-1.5 5-1.5 8 0V5z"/></svg></span>絵本(Kindle出版)の申請作業</a>
+      <a class="related-tool-link" href="../denki-dai/"><span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z"/></svg></span>在宅ワークのパソコン電気代計算機</a>
+      <a class="related-tool-link" href="../keihi-anbun/"><span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2h12v19l-3-2-3 2-3-2-3 2V2z"/><line x1="9" y1="7" x2="15" y2="7"/><line x1="9" y1="11" x2="15" y2="11"/><line x1="9" y1="15" x2="13" y2="15"/></svg></span>副業の経費按分計算機</a>
+      <a class="related-tool-link" href="../douga-ryokin/"><span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="13" height="12" rx="1.5"/><path d="M16 10.5 21 7v10l-5-3.5z"/></svg></span>動画作成AIツールの月額料金シミュレーター</a>
+      <a class="related-tool-link" href="../line-stamp-kankyo/"><span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="1.5"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 16.5 15.5 11 5 20"/></svg></span>LINEスタンプ制作の確認環境</a>
+      <a class="related-tool-link" href="../hajimekata/"><span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m14.5 9.5-2 5-5 2 2-5z"/></svg></span>AI副業の始め方</a>
+    </div>
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <p>掲載している料金・プラン内容は、各サービスの公式サイトおよび公式ドキュメントをもとにした2026年8月時点の目安です。Claude Code・OpenAI Codexの利用回数の上限は公式が非公開にしているため、このページでも具体的な回数は記載していません。最新の料金・仕様は各サービスの公式サイトでご確認ください。</p>
+  <p>商品リンクにはアフィリエイト(広告)リンクを含みます。リンク経由の購入により、当サイトが紹介料を得ることがあります。</p>
+  <p><a href="../#about">運営者情報・お問い合わせ</a></p>
+</footer>
+
+<script src="../ga.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
