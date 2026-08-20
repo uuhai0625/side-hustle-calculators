@@ -54,6 +54,15 @@
 </header>
 
 <main class="wrap">
+  <div class="scene-tabs" id="portal-filter">
+    <button class="scene-tab active" data-filter="all" type="button">すべて</button>
+    <button class="scene-tab" data-filter="hajime" type="button">始める方へ</button>
+    <button class="scene-tab" data-filter="calc" type="button">計算機</button>
+    <button class="scene-tab" data-filter="toolguide" type="button">ツール選びガイド</button>
+    <button class="scene-tab" data-filter="craft" type="button">道具ガイド</button>
+  </div>
+
+  <div class="portal-group" data-group="hajime">
   <h2 class="heading-font" style="margin: 28px 0 4px; font-size: 1.15rem; color: var(--gold);">これからAI副業を始める方へ</h2>
   <p style="margin: 0 0 12px; font-size: 0.86rem; color: var(--ink-sub);">まだ何も始めていない方は、いきなり計算機ではなくこちらからどうぞ。実際の数字と正直なリアルをまとめています。</p>
   <div class="tool-list">
@@ -73,7 +82,9 @@
       </div>
     </a>
   </div>
+  </div>
 
+  <div class="portal-group" data-group="calc">
   <h2 class="heading-font" style="margin: 36px 0 4px; font-size: 1.15rem; color: var(--navy);">計算機</h2>
   <p style="margin: 0 0 12px; font-size: 0.86rem; color: var(--ink-sub);">すでに制作・運用している方向けに、コストを試算できます。</p>
   <div class="tool-list">
@@ -119,7 +130,9 @@
     </a>
 
   </div>
+  </div>
 
+  <div class="portal-group" data-group="toolguide">
   <h2 class="heading-font" style="margin: 36px 0 4px; font-size: 1.15rem; color: var(--navy);">AIツール選びガイド</h2>
   <p style="margin: 0 0 12px; font-size: 0.86rem; color: var(--ink-sub);">コスト試算ではなく、ツールそのものの料金プラン比較・選び方をまとめています。</p>
   <div class="tool-list">
@@ -141,7 +154,9 @@
     </a>
 
   </div>
+  </div>
 
+  <div class="portal-group" data-group="craft">
   <h2 class="heading-font" style="margin: 36px 0 4px; font-size: 1.15rem; color: var(--navy);">制作の道具ガイド</h2>
   <p style="margin: 0 0 12px; font-size: 0.86rem; color: var(--ink-sub);">実際の制作過程で起きたトラブルから、選ぶべき道具の基準を整理しています。</p>
   <div class="tool-list">
@@ -162,6 +177,7 @@
       </div>
     </a>
 
+  </div>
   </div>
 
   <div class="about-box" id="about">
@@ -187,5 +203,16 @@
 </footer>
 
 <script src="ga.js"></script>
+<script>
+document.querySelectorAll('#portal-filter .scene-tab').forEach((btn) => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('#portal-filter .scene-tab').forEach((b) => b.classList.toggle('active', b === btn));
+    const filter = btn.dataset.filter;
+    document.querySelectorAll('.portal-group').forEach((g) => {
+      g.style.display = (filter === 'all' || g.dataset.group === filter) ? '' : 'none';
+    });
+  });
+});
+</script>
 </body>
 </html>
