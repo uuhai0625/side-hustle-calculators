@@ -295,7 +295,7 @@ function renderForMethod(methodKey) {
     resultBreakdown.innerHTML = methods
       .map((m) => {
         const r = methodKey === m.key ? rows : (m.key === 'lump3' ? computeLump3Schedule(amount, ay) : m.key === 'instant' ? computeInstantSchedule(amount, ay) : computeNormalSchedule(amount, years, ay, am));
-        return `<div><span>${m.label}</span><span>¥${yen(r[0].amount)}(初年度)</span></div>`;
+        return `<div class="breakdown-plain-row"><span>${m.label}</span><span>¥${yen(r[0].amount)}(初年度)</span></div>`;
       })
       .join('');
     resultBreakdown.classList.add('show');

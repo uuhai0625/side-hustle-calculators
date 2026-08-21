@@ -113,8 +113,8 @@ function calc() {
   const nonZeroItems = items.filter((item) => item.amount > 0);
   if (nonZeroItems.length > 0) {
     resultBreakdown.innerHTML = nonZeroItems
-      .map((item) => `<div><span>${item.label}</span><span>¥${yen(item.amount)}</span></div>`)
-      .join('') + `<div><span>合計</span><span>¥${yen(total)}</span></div>`;
+      .map((item) => `<div class="breakdown-plain-row"><span>${item.label}</span><span>¥${yen(item.amount)}</span></div>`)
+      .join('') + `<div class="breakdown-plain-row"><span>合計</span><span>¥${yen(total)}</span></div>`;
     resultBreakdown.classList.add('show');
   } else {
     resultBreakdown.innerHTML = '';

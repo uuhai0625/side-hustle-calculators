@@ -337,18 +337,56 @@ a { color: var(--navy); }
   text-align: left;
 }
 .result-breakdown.show { display: block; }
-.result-breakdown div {
+.result-breakdown .breakdown-plain-row {
   display: flex;
   justify-content: space-between;
   padding: 4px 0;
   color: var(--ink-sub);
 }
-.result-breakdown div:last-child {
+.result-breakdown .breakdown-plain-row:last-child {
   color: var(--ink);
   font-weight: 700;
   border-top: 1px solid var(--line);
   margin-top: 4px;
   padding-top: 8px;
+}
+
+/* ---- 内訳の横棒グラフ表示(douga-ryokin併用モード) ---- */
+.breakdown-bar-row { padding: 6px 0; }
+.breakdown-bar-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 0.84rem;
+  color: var(--ink-sub);
+  margin-bottom: 5px;
+}
+.breakdown-bar-name { text-align: left; }
+.breakdown-bar-value {
+  color: var(--ink);
+  font-family: "JetBrains Mono", monospace;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.breakdown-bar-track {
+  height: 9px;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.07);
+  overflow: hidden;
+}
+.breakdown-bar-fill {
+  height: 100%;
+  border-radius: 5px;
+  background: linear-gradient(90deg, var(--navy-dark), var(--navy));
+}
+.breakdown-bar-total {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--line);
+  color: var(--ink);
+  font-weight: 700;
 }
 
 .btn-calc {
