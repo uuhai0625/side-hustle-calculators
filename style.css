@@ -369,16 +369,31 @@ a { color: var(--navy); }
 
 /* ---- 結果 ---- */
 .result-card {
+  position: relative;
   background: linear-gradient(180deg, #10150f 0%, #0d1210 100%);
   border: 1px solid var(--line);
+  border-top: 3px solid var(--navy);
   border-radius: var(--radius);
-  padding: 28px 24px;
+  padding: 32px 24px 44px;
   text-align: center;
   box-shadow: var(--shadow), inset 0 0 0 1px rgba(53, 242, 176, 0.06);
   margin-bottom: 18px;
   display: none;
 }
 .result-card.show { display: block; }
+/* SNSスクショ映え用のブランド透かし。全ページのresult-cardに自動で乗るCSS専用要素(HTML変更不要)。 */
+.result-card::after {
+  content: "AI副業そろばん";
+  position: absolute;
+  bottom: 14px;
+  right: 20px;
+  font-family: "Zen Kaku Gothic New", "Noto Sans JP", sans-serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: var(--navy);
+  opacity: 0.55;
+}
 .result-label {
   font-size: 0.78rem;
   color: var(--ink-sub);
@@ -387,8 +402,8 @@ a { color: var(--navy); }
   letter-spacing: 0.08em;
 }
 .result-amount {
-  font-size: 2.3rem;
-  font-weight: 700;
+  font-size: 2.75rem;
+  font-weight: 800;
   color: var(--navy);
   margin: 0 0 8px;
   text-shadow: 0 0 22px rgba(53, 242, 176, 0.45);
@@ -1020,6 +1035,8 @@ a { color: var(--navy); }
 .site-footer a { color: var(--ink-sub); }
 
 @media (max-width: 480px) {
-  .result-amount { font-size: 1.9rem; }
+  .result-amount { font-size: 2.2rem; }
+  .result-card { padding: 28px 18px 40px; }
+  .result-card::after { right: 16px; bottom: 12px; font-size: 0.62rem; }
   .site-logo { font-size: 1.6rem; }
 }
