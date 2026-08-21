@@ -122,6 +122,7 @@ function calc() {
   }
 
   resultCard.classList.add('show');
+  if (affCard) affCard.classList.add('show');
   lastTotal = total;
   updateShareUrl();
   shareRow.classList.add('show');

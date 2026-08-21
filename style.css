@@ -447,6 +447,11 @@ a { color: var(--navy); }
   text-shadow: 0 0 22px rgba(53, 242, 176, 0.45);
 }
 .result-amount .yen { font-size: 1.1rem; }
+/* 金額でなく文章見出しを表示するresult-amount用の縮小クラス(kaishi-costで導入、ai-coding-tools/ai-chat-toolsにも適用)
+   複合セレクタで.result-amount単体より詳細度を上げ、後続の@media (max-width:480px)上書きより
+   ソース順が先でも確実に勝つようにしている */
+.result-amount.result-amount-range { font-size: 1.55rem; }
+@media (max-width: 480px) { .result-amount.result-amount-range { font-size: 1.25rem; } }
 .result-note {
   font-size: 0.85rem;
   color: var(--ink-sub);

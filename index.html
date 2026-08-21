@@ -55,11 +55,11 @@
 
 <main class="wrap">
   <div class="scene-tabs" id="portal-filter">
-    <button class="scene-tab active" data-filter="all" type="button">すべて</button>
-    <button class="scene-tab" data-filter="hajime" type="button">始める方へ</button>
-    <button class="scene-tab" data-filter="calc" type="button">計算機</button>
-    <button class="scene-tab" data-filter="toolguide" type="button">ツール選びガイド</button>
-    <button class="scene-tab" data-filter="craft" type="button">道具ガイド</button>
+    <button class="scene-tab active" data-filter="all" type="button" aria-pressed="true">すべて</button>
+    <button class="scene-tab" data-filter="hajime" type="button" aria-pressed="false">始める方へ</button>
+    <button class="scene-tab" data-filter="calc" type="button" aria-pressed="false">計算機</button>
+    <button class="scene-tab" data-filter="toolguide" type="button" aria-pressed="false">ツール選びガイド</button>
+    <button class="scene-tab" data-filter="craft" type="button" aria-pressed="false">道具ガイド</button>
   </div>
 
   <div class="portal-group" data-group="hajime">
@@ -214,7 +214,11 @@
 <script>
 document.querySelectorAll('#portal-filter .scene-tab').forEach((btn) => {
   btn.addEventListener('click', () => {
-    document.querySelectorAll('#portal-filter .scene-tab').forEach((b) => b.classList.toggle('active', b === btn));
+    document.querySelectorAll('#portal-filter .scene-tab').forEach((b) => {
+      const selected = b === btn;
+      b.classList.toggle('active', selected);
+      b.setAttribute('aria-pressed', selected);
+    });
     const filter = btn.dataset.filter;
     document.querySelectorAll('.portal-group').forEach((g) => {
       g.style.display = (filter === 'all' || g.dataset.group === filter) ? '' : 'none';

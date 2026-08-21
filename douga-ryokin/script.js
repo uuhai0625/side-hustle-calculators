@@ -454,7 +454,11 @@ const panelCombo = document.getElementById('panel-combo');
 topTabButtons.forEach((btn) => {
   btn.addEventListener('click', () => {
     topMode = btn.dataset.topmode;
-    topTabButtons.forEach((b) => b.classList.toggle('active', b === btn));
+    topTabButtons.forEach((b) => {
+      const selected = b === btn;
+      b.classList.toggle('active', selected);
+      b.setAttribute('aria-pressed', selected);
+    });
     panelSingle.style.display = topMode === 'single' ? '' : 'none';
     panelCombo.style.display = topMode === 'combo' ? '' : 'none';
     resultCard.classList.remove('show');

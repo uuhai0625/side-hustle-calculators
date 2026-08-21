@@ -123,6 +123,7 @@ function calc() {
   resultAdvice.textContent = rec.advice;
 
   resultCard.classList.add('show');
+  if (affCard) affCard.classList.add('show');
   lastHeadline = rec.headline;
   updateShareUrl();
   shareRow.classList.add('show');

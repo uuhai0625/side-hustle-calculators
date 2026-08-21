@@ -138,9 +138,9 @@
     <button class="btn-calc" id="btn-calc" type="button">おすすめプランを診断する</button>
   </div>
 
-  <div class="result-card" id="result-card">
+  <div class="result-card" id="result-card" role="status" aria-live="polite">
     <p class="result-label">あなたにおすすめのプラン</p>
-    <p class="result-amount" id="result-amount">--</p>
+    <p class="result-amount result-amount-range" id="result-amount">--</p>
     <p class="result-note" id="result-note"></p>
     <p class="result-sub" id="result-sub"></p>
     <div class="result-advice" id="result-advice"></div>
@@ -150,7 +150,7 @@
     </div>
   </div>
 
-  <a class="aff-card show" id="aff-card" href="#" target="_blank" rel="noopener sponsored">
+  <a class="aff-card" id="aff-card" href="#" target="_blank" rel="noopener sponsored">
     <span class="aff-icon icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="14" width="18" height="6" rx="1.5"/><path d="M6 14V9a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v5"/><path d="M8 20v1M16 20v1"/></svg></span>
     <div class="aff-text">
       <p class="aff-title">長時間タイピングするなら疲れにくいキーボードを探す</p>

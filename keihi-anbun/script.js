@@ -94,7 +94,11 @@ const fieldsArea = document.getElementById('fields-area');
 tabButtons.forEach((btn) => {
   btn.addEventListener('click', () => {
     mode = btn.dataset.mode;
-    tabButtons.forEach((b) => b.classList.toggle('active', b === btn));
+    tabButtons.forEach((b) => {
+      const selected = b === btn;
+      b.classList.toggle('active', selected);
+      b.setAttribute('aria-pressed', selected);
+    });
     fieldsTime.style.display = mode === 'time' ? '' : 'none';
     fieldsArea.style.display = mode === 'area' ? '' : 'none';
   });
@@ -231,7 +235,11 @@ function initFromQuery() {
   const qMode = params.get('mode');
   if (!qMode || (qMode !== 'time' && qMode !== 'area')) return;
   mode = qMode;
-  tabButtons.forEach((b) => b.classList.toggle('active', b.dataset.mode === mode));
+  tabButtons.forEach((b) => {
+    const selected = b.dataset.mode === mode;
+    b.classList.toggle('active', selected);
+    b.setAttribute('aria-pressed', selected);
+  });
   fieldsTime.style.display = mode === 'time' ? '' : 'none';
   fieldsArea.style.display = mode === 'area' ? '' : 'none';
 
