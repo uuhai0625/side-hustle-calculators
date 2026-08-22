@@ -834,7 +834,7 @@ a { color: var(--navy); }
   background: var(--bg-card);
   border: 1px solid var(--line);
   border-radius: 12px;
-  padding: 10px;
+  padding: 13px;
   text-decoration: none;
   color: var(--ink);
   box-shadow: var(--shadow-soft);
@@ -843,13 +843,17 @@ a { color: var(--navy); }
   transition: border-color 0.15s ease;
 }
 .product-card:hover { border-color: rgba(53, 242, 176, 0.4); }
+/* 楽天CDN由来の商品画像(白背景・原色バナー)がダークUIの中で唐突に浮かないよう、
+   薄い縁取り+内側シャドウで「額縁」を作って馴染ませる(2026-08-22、デザインレビューD4対応) */
 .product-card img {
   width: 100%;
   aspect-ratio: 1 / 1;
   object-fit: contain;
   border-radius: 8px;
   margin-bottom: 8px;
-  background: #f4f6f4;
+  background: #eceee9;
+  border: 1px solid var(--line);
+  box-shadow: inset 0 0 14px rgba(10, 13, 12, 0.10);
 }
 .product-card .product-name {
   font-size: 0.76rem;
