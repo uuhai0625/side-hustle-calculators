@@ -143,7 +143,7 @@ function calc() {
   affCard.classList.add('show');
   showProducts('ワットチェッカー', '電気代を正確に知るための人気アイテム');
 
-  resultCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  resultCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 document.getElementById('btn-calc').addEventListener('click', calc);

@@ -74,9 +74,11 @@ a { color: var(--navy); }
 }
 .site-header .wrap { max-width: 720px; }
 .site-logo {
+  display: inline-block;
   font-size: 1.9rem;
   margin: 0 0 8px;
   color: var(--ink);
+  text-decoration: none;
 }
 .site-logo .accent {
   color: var(--navy);
@@ -190,6 +192,7 @@ a { color: var(--navy); }
   font-weight: 700;
   cursor: pointer;
   text-align: center;
+  white-space: nowrap;
   transition: all 0.15s ease;
 }
 .scene-tab .icon-svg { width: 17px; height: 17px; }
@@ -199,6 +202,10 @@ a { color: var(--navy); }
   color: var(--navy);
   box-shadow: var(--glow-soft);
 }
+/* ポータルの絞り込みタブ(5個・アイコンなし・ラベルが長め)専用の縮小調整。
+   .scene-tab共通のfont-size 0.95rem/padding 10pxのままだと「ツール選びガイド」が
+   幅720pxのコンテナで折り返してしまうため、この場所だけ詰める(2026-08-22)。 */
+#portal-filter .scene-tab { padding: 12px 6px; font-size: 0.86rem; }
 
 /* ---- フォーム ---- */
 .calc-card {

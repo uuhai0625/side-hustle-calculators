@@ -339,7 +339,7 @@ function calcSingle() {
   showProducts('外付けSSD', '動画ファイルの保存に人気のアイテム');
 
   updateShareUrl();
-  resultCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  resultCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 document.getElementById('btn-calc').addEventListener('click', calcSingle);
@@ -390,7 +390,7 @@ function calcCombo() {
     shareRow.classList.remove('show');
     affCard.classList.remove('show');
     document.getElementById('product-grid').classList.remove('show');
-    resultCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    resultCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
     return;
   }
 
@@ -430,7 +430,7 @@ function calcCombo() {
   showProducts('外付けSSD', '動画ファイルの保存に人気のアイテム');
 
   updateShareUrl();
-  resultCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  resultCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 document.getElementById('btn-calc-combo').addEventListener('click', calcCombo);

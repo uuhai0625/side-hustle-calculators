@@ -93,7 +93,7 @@ function calc() {
   updateShareUrl();
   shareRow.classList.add('show');
 
-  resultCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  resultCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 document.getElementById('btn-calc').addEventListener('click', calc);

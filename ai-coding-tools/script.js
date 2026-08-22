@@ -129,7 +129,7 @@ function calc() {
   shareRow.classList.add('show');
   applyHighlight(rec.highlight);
 
-  resultCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  resultCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 document.getElementById('btn-calc').addEventListener('click', calc);

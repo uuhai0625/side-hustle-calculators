@@ -165,7 +165,7 @@ function calc() {
   affCard.classList.add('show');
   showProducts('書類 ファイルボックス', '経費の記録・管理に人気のアイテム');
 
-  resultCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  resultCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 document.getElementById('btn-calc').addEventListener('click', calc);

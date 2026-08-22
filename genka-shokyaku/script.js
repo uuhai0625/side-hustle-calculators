@@ -239,7 +239,7 @@ function calc() {
     affCard.classList.add('show');
     showProducts('ラベルライター 家庭用', '固定資産の管理に人気のアイテム');
     updateShareUrl();
-    resultCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    resultCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
     return;
   }
 
@@ -313,7 +313,7 @@ function renderForMethod(methodKey) {
   lastResultText = `${base.category.label}(取得価額¥${yen(amount)})の減価償却を試算しました。\n${methodObj.label}:初年度¥${yen(firstYear.amount)}\n`;
   updateShareUrl();
   shareRow.classList.add('show');
-  resultCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  resultCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 document.getElementById('btn-calc').addEventListener('click', calc);
