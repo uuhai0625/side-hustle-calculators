@@ -1087,6 +1087,9 @@ a { color: var(--navy); }
 }
 .site-footer p { margin: 0 0 8px; }
 .site-footer a { color: var(--ink-sub); }
+/* 「運営者情報・お問い合わせ」リンクだけ他の免責文と同じ薄いグレーに埋もれないよう強調
+   (2026-08-22、デザインレビューD5対応。リンク自体は元から全ページに存在、視認性のみ改善) */
+.site-footer a[href*="#about"] { color: var(--navy); font-weight: 700; }
 
 @media (max-width: 480px) {
   .result-amount { font-size: 2.2rem; }
