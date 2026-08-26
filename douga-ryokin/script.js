@@ -73,6 +73,24 @@ function clamp(value, min, max) {
   return Math.min(max, Math.max(min, value));
 }
 
+// D6: 極端な入力値でも算出根拠を隠さず通知するため、クランプが実際に働いた項目を記録し、
+// calc完了時にresult-clamp-noticeへまとめて表示する。
+let clampNotes = [];
+function clampNoted(value, min, max, label) {
+  const clamped = clamp(value, min, max);
+  if (clamped !== value) clampNotes.push(`${label}を${clamped}`);
+  return clamped;
+}
+function flushClampNotice() {
+  if (clampNotes.length) {
+    resultClampNotice.textContent = `※ 入力値が範囲外だったため、${clampNotes.join('・')}に調整して計算しています。`;
+    resultClampNotice.classList.add('show');
+  } else {
+    resultClampNotice.classList.remove('show');
+  }
+  clampNotes = [];
+}
+
 // 併用モードの内訳を横棒グラフで表示(No.10、金額の大きい順に並べ替え。
 // バー幅は最大額のツールを100%とした相対比較)。
 function renderBreakdownBars(parts, totalJpy) {
@@ -291,6 +309,7 @@ const resultNote = document.getElementById('result-note');
 const resultSub = document.getElementById('result-sub');
 const resultAdvice = document.getElementById('result-advice');
 const resultBreakdown = document.getElementById('result-breakdown');
+const resultClampNotice = document.getElementById('result-clamp-notice');
 const affCard = document.getElementById('aff-card');
 const shareRow = document.getElementById('share-row');
 const btnCopyLink = document.getElementById('btn-copy-link');
@@ -300,26 +319,26 @@ let lastTotalJpy = 0;
 function calcSingle() {
   // HTMLのmin/max属性は直接入力・クエリパラメータ経由の値を弾かないため、
   // 計算時に必ずここでも同じ範囲にクランプする(denki-daiの実装と同じ方針)。
-  const rate = clamp(Number(inputRate.value) || 159, 100, 300);
+  const rate = clampNoted(Number(inputRate.value) || 159, 100, 300, '為替レート');
   const tool = selectTool.value;
   let result;
 
   if (tool === 'mj') {
     const plan = MJ_PLANS[selectMjPlan.value] || MJ_PLANS.standard;
-    const videos = clamp(Math.round(Number(inputMjVideos.value) || 0), 1, 60);
-    const candidates = clamp(Math.round(Number(inputMjCandidates.value) || 0), 1, 20);
+    const videos = clampNoted(Math.round(Number(inputMjVideos.value) || 0), 1, 60, '動画本数');
+    const candidates = clampNoted(Math.round(Number(inputMjCandidates.value) || 0), 1, 20, '候補数');
     result = calcMj(plan, videos, candidates, rate);
   } else if (tool === 'runway') {
     const plan = RW_PLANS[selectRwPlan.value] || RW_PLANS.standard;
     const model = RW_MODELS[selectRwModel.value] || RW_MODELS.gen4;
-    const videos = clamp(Math.round(Number(inputRwVideos.value) || 0), 1, 60);
-    const seconds = clamp(Math.round(Number(inputRwSeconds.value) || 0), 1, 30);
+    const videos = clampNoted(Math.round(Number(inputRwVideos.value) || 0), 1, 60, '動画本数');
+    const seconds = clampNoted(Math.round(Number(inputRwSeconds.value) || 0), 1, 30, '秒数');
     result = calcRunway(plan, model, videos, seconds, rate);
   } else {
     const toolData = CREDIT5S_TOOLS[tool];
     const plan = toolData.plans[selectCredit5sPlan.value] || Object.values(toolData.plans)[0];
-    const videos = clamp(Math.round(Number(inputC5sVideos.value) || 0), 1, 60);
-    const seconds = clamp(Math.round(Number(inputC5sSeconds.value) || 0), 1, 30);
+    const videos = clampNoted(Math.round(Number(inputC5sVideos.value) || 0), 1, 60, '動画本数');
+    const seconds = clampNoted(Math.round(Number(inputC5sSeconds.value) || 0), 1, 30, '秒数');
     result = calcCredit5s(tool, plan, videos, seconds, rate);
   }
 
@@ -329,6 +348,7 @@ function calcSingle() {
   resultAdvice.textContent = result.advice + bookEquivalentNote(result.totalJpy);
   resultBreakdown.classList.remove('show');
   resultBreakdown.innerHTML = '';
+  flushClampNotice();
 
   resultCard.classList.add('show');
   lastTotalJpy = result.totalJpy;
@@ -373,10 +393,10 @@ const inputComboCandidates = document.getElementById('input-combo-candidates');
 const inputComboRate = document.getElementById('input-combo-rate');
 
 function calcCombo() {
-  const rate = clamp(Number(inputComboRate.value) || 159, 100, 300);
-  const videos = clamp(Math.round(Number(inputComboVideos.value) || 0), 1, 60);
-  const seconds = clamp(Math.round(Number(inputComboSeconds.value) || 0), 1, 30);
-  const candidates = clamp(Math.round(Number(inputComboCandidates.value) || 0), 1, 20);
+  const rate = clampNoted(Number(inputComboRate.value) || 159, 100, 300, '為替レート');
+  const videos = clampNoted(Math.round(Number(inputComboVideos.value) || 0), 1, 60, '動画本数');
+  const seconds = clampNoted(Math.round(Number(inputComboSeconds.value) || 0), 1, 30, '秒数');
+  const candidates = clampNoted(Math.round(Number(inputComboCandidates.value) || 0), 1, 20, '候補数');
 
   const checked = comboRows.filter((row) => document.getElementById(row.checkboxId).checked);
   if (!checked.length) {
@@ -390,6 +410,8 @@ function calcCombo() {
     shareRow.classList.remove('show');
     affCard.classList.remove('show');
     document.getElementById('product-grid').classList.remove('show');
+    clampNotes = [];
+    resultClampNotice.classList.remove('show');
     resultCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
     return;
   }
@@ -420,6 +442,7 @@ function calcCombo() {
 
   resultBreakdown.innerHTML = renderBreakdownBars(parts, totalJpy);
   resultBreakdown.classList.add('show');
+  flushClampNotice();
 
   resultCard.classList.add('show');
   lastTotalJpy = totalJpy;
@@ -438,9 +461,17 @@ document.getElementById('btn-calc-combo').addEventListener('click', calcCombo);
 comboRows.forEach((row) => {
   const checkbox = document.getElementById(row.checkboxId);
   const select = document.getElementById(row.selectId);
+  const rowEl = document.getElementById(`combo-row-${row.key}`);
   checkbox.addEventListener('change', () => {
     select.disabled = !checkbox.checked;
-    document.getElementById(`combo-row-${row.key}`).classList.toggle('active', checkbox.checked);
+    rowEl.classList.toggle('active', checkbox.checked);
+  });
+  // R3: タッチターゲット拡大。チェックボックス・ラベル・セレクトは自前でクリックを処理するため、
+  // それ以外(行の余白部分)をクリックした場合のみここでチェック状態を切り替える。
+  rowEl.addEventListener('click', (e) => {
+    if (e.target === checkbox || e.target.tagName === 'LABEL' || e.target.tagName === 'SELECT') return;
+    checkbox.checked = !checkbox.checked;
+    checkbox.dispatchEvent(new Event('change'));
   });
 });
 

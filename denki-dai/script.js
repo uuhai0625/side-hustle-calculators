@@ -99,6 +99,7 @@ const resultAmount = document.getElementById('result-amount');
 const resultNote = document.getElementById('result-note');
 const resultSub = document.getElementById('result-sub');
 const resultAdvice = document.getElementById('result-advice');
+const resultClampNotice = document.getElementById('result-clamp-notice');
 const affCard = document.getElementById('aff-card');
 const shareRow = document.getElementById('share-row');
 const btnCopyLink = document.getElementById('btn-copy-link');
@@ -111,10 +112,25 @@ function calc() {
   // HTMLのmin/max属性はフォーム送信を介さない直接入力・クエリパラメータ経由の値を弾かないため、
   // 計算時に必ずここでも同じ範囲(1日24時間・1ヶ月31日・単価100円/kWh)にクランプする
   // (2026-08-15デバッグで発覚: 999999を入れると704,997,885,002,115,100円のような非現実的な金額が
-  // そのまま表示されてしまうバグがあった)。
-  const hours = Math.min(24, Math.max(0, Number(inputHours.value) || 0));
-  const days = Math.min(31, Math.max(0, Number(inputDays.value) || 0));
-  const price = Math.min(100, Math.max(0, Number(inputPrice.value) || 0));
+  // そのまま表示されてしまうバグがあった)。クランプが実際に働いた場合は入力値と表示金額の食い違いを
+  // ユーザーが不審に思わないよう、result-clamp-noticeで明示する(D6)。
+  const rawHours = Number(inputHours.value) || 0;
+  const rawDays = Number(inputDays.value) || 0;
+  const rawPrice = Number(inputPrice.value) || 0;
+  const hours = Math.min(24, Math.max(0, rawHours));
+  const days = Math.min(31, Math.max(0, rawDays));
+  const price = Math.min(100, Math.max(0, rawPrice));
+
+  const clampNotes = [];
+  if (hours !== rawHours) clampNotes.push(`使用時間を1日${hours}時間`);
+  if (days !== rawDays) clampNotes.push(`稼働日数を月${days}日`);
+  if (price !== rawPrice) clampNotes.push(`単価を${price}円/kWh`);
+  if (clampNotes.length) {
+    resultClampNotice.textContent = `※ 入力値が現実的な範囲を超えていたため、${clampNotes.join('・')}に調整して計算しています。`;
+    resultClampNotice.classList.add('show');
+  } else {
+    resultClampNotice.classList.remove('show');
+  }
 
   const totalWatt = device.watt + monitors * MONITOR_WATT;
   const dailyKwh = (totalWatt * hours) / 1000;

@@ -115,6 +115,7 @@ const resultAmount = document.getElementById('result-amount');
 const resultNote = document.getElementById('result-note');
 const resultSub = document.getElementById('result-sub');
 const resultAdvice = document.getElementById('result-advice');
+const resultClampNotice = document.getElementById('result-clamp-notice');
 const affCard = document.getElementById('aff-card');
 const shareRow = document.getElementById('share-row');
 const btnCopyLink = document.getElementById('btn-copy-link');
@@ -122,23 +123,33 @@ const btnShareX = document.getElementById('btn-share-x');
 let lastMonthly = 0;
 let lastRatioPct = 0;
 
+// 個々の入力欄には上限を設けず、按分率(週の使用時間÷168時間、または面積比)そのものを
+// calc()側で100%に一括クランプする(D6: 極端な入力値でも算出根拠を隠さず通知するため)。
 function calcRatio() {
   if (mode === 'time') {
     const hours = Math.max(0, Number(inputHours.value) || 0);
-    const workdays = Math.max(0, Math.min(7, Number(inputWorkdays.value) || 0));
+    const workdays = Math.max(0, Number(inputWorkdays.value) || 0);
     const weeklyHours = hours * workdays;
     return weeklyHours / (24 * 7);
   }
   const workArea = Math.max(0, Number(inputWorkArea.value) || 0);
   const totalArea = Math.max(0.1, Number(inputTotalArea.value) || 0.1);
-  return Math.min(1, workArea / totalArea);
+  return workArea / totalArea;
 }
 
 function calc() {
   const expense = EXPENSES[selectExpense.value];
   const amount = Math.max(0, Number(inputAmount.value) || 0);
-  const ratio = Math.min(1, calcRatio());
+  const rawRatio = calcRatio();
+  const ratio = Math.min(1, rawRatio);
   const ratioPct = Math.round(ratio * 1000) / 10;
+
+  if (rawRatio > 1) {
+    resultClampNotice.textContent = '※ 算出した按分率が100%を超えたため、100%に調整して計算しています。入力値(使用時間・稼働日数、または面積)をご確認ください。';
+    resultClampNotice.classList.add('show');
+  } else {
+    resultClampNotice.classList.remove('show');
+  }
   const monthlyCost = Math.round(amount * ratio);
   const yearlyCost = monthlyCost * 12;
 

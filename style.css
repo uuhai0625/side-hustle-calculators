@@ -47,6 +47,18 @@ h1, h2, h3, .heading-font {
 
 a { color: var(--navy); }
 
+/* かんたん診断セクションの見出し(ai-coding-tools/ai-chat-toolsで共通、旧インラインstyleを集約) */
+.section-heading {
+  margin: 28px 0 4px;
+  font-size: 1.05rem;
+  color: var(--ink);
+}
+.section-subtext {
+  margin: 0 0 12px;
+  font-size: 0.86rem;
+  color: var(--ink-sub);
+}
+
 .num, .result-amount, .result-sub, .rate-table td:last-child, .rate-table th:last-child {
   font-family: "JetBrains Mono", "Noto Sans JP", monospace;
 }
@@ -93,7 +105,8 @@ a { color: var(--navy); }
 /* ---- パンくず/戻る ---- */
 .back-link {
   display: inline-block;
-  margin: 18px 0 0;
+  margin: 8px 0 0;
+  padding: 11px 4px;
   font-size: 0.85rem;
   color: var(--navy);
   text-decoration: none;
@@ -163,7 +176,7 @@ a { color: var(--navy); }
 .tool-card .badge-soon {
   display: inline-block;
   margin-top: 8px;
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   background: var(--slate-soft);
   color: var(--slate);
   padding: 2px 8px;
@@ -298,6 +311,7 @@ a { color: var(--navy); }
   padding: 12px 14px;
   border: 1.5px solid var(--line);
   border-radius: 10px;
+  cursor: pointer;
   transition: border-color 0.15s ease, background 0.15s ease;
 }
 .combo-tool-row.active {
@@ -471,6 +485,13 @@ a { color: var(--navy); }
   padding-top: 10px;
   border-top: 1px dashed var(--line);
 }
+.clamp-notice {
+  display: none;
+  font-size: 0.8rem;
+  color: var(--gold);
+  margin: 6px 0 0;
+}
+.clamp-notice.show { display: block; }
 .result-advice {
   text-align: left;
   background: var(--gold-soft);
@@ -491,7 +512,7 @@ a { color: var(--navy); }
 .share-row.show { display: flex; }
 .share-btn {
   flex: 1;
-  padding: 10px 10px;
+  padding: 13px 10px;
   border-radius: 10px;
   border: 1.5px solid var(--line);
   background: var(--bg-card);
@@ -572,7 +593,7 @@ a { color: var(--navy); }
 }
 .persona-who {
   margin: 0 0 6px;
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   color: var(--ink-sub);
   font-weight: 700;
 }
@@ -652,7 +673,7 @@ a { color: var(--navy); }
 }
 .rate-table-box summary h2::after {
   content: "もっと見る ▾";
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   font-weight: 400;
   color: var(--ink-sub);
 }
@@ -740,7 +761,7 @@ a { color: var(--navy); }
 }
 .rate-table-matrix .price-note {
   display: block;
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   color: var(--ink-sub);
   font-weight: 400;
   margin-top: 2px;
@@ -764,7 +785,7 @@ a { color: var(--navy); }
 .rate-table-matrix td.highlighted .price { color: var(--gold); }
 .rate-source {
   margin: 10px 0 0;
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   color: var(--ink-sub);
 }
 .rate-source a { color: var(--ink-sub); }
@@ -881,6 +902,20 @@ a { color: var(--navy); }
   letter-spacing: 0.06em;
   margin: 0 0 10px;
 }
+.product-grid-label::after {
+  content: "PR";
+  display: inline-block;
+  margin-left: 8px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: none;
+  letter-spacing: normal;
+  color: #1a1206;
+  background: var(--gold);
+  padding: 2px 7px;
+  border-radius: 999px;
+  vertical-align: middle;
+}
 .product-grid-label::before {
   content: "";
   position: absolute;
@@ -981,7 +1016,7 @@ a { color: var(--navy); }
 }
 .trust-box summary h2::after {
   content: "もっと見る ▾";
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   font-weight: 400;
   color: var(--ink-sub);
 }
@@ -1096,4 +1131,9 @@ a { color: var(--navy); }
   .result-card { padding: 28px 18px 40px; }
   .result-card::after { right: 16px; bottom: 12px; font-size: 0.62rem; }
   .site-logo { font-size: 1.6rem; }
+  /* R5: 375px幅だとcombo-tool-nameの最小幅(150px)でselectが圧迫されるため、
+     selectを次の行に折り返してチェックボックス+ラベルとは別行にする */
+  .combo-tool-row { flex-wrap: wrap; }
+  .combo-tool-row .combo-tool-name { min-width: 0; flex: 1 1 auto; }
+  .combo-tool-row select { flex: 1 1 100%; margin: 8px 0 0 28px; width: calc(100% - 28px); }
 }
