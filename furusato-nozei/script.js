@@ -117,7 +117,7 @@ const SIDE_TYPE_LABEL = {
 };
 
 function calcResult(input) {
-  const salaryIncome = Math.max(0, salaryDeduction ? input.salary - salaryDeduction(input.salary) : input.salary);
+  const salaryIncome = Math.max(0, input.salary - salaryDeduction(input.salary));
   const sideProfit = Math.max(0, input.sideIncome - input.sideExpense);
   const blueDeduction = input.sideType === 'blue65' ? 650000 : input.sideType === 'blue10' ? 100000 : 0;
   const sideTaxableIncome = Math.max(0, sideProfit - blueDeduction);
@@ -147,6 +147,7 @@ function calcResult(input) {
     residentIncomeLevy, incomeTaxable, rate, limit,
     needsFinalReturn: sideTaxableIncome > 200000,
     blueAbsorbed: (input.sideType === 'blue10' || input.sideType === 'blue65') && sideProfit <= blueDeduction && sideProfit > 0,
+    outOfScope: totalIncome > 24000000,
   };
 }
 
@@ -174,7 +175,7 @@ function readInput() {
   return {
     salary: Math.max(0, Number(inputSalary.value) || 0),
     hasSpouse: selectSpouse.value === '1',
-    dependents: Math.max(0, Number(inputDependents.value) || 0),
+    dependents: Math.min(10, Math.max(0, Number(inputDependents.value) || 0)),
     sideIncome: Math.max(0, Number(inputSideIncome.value) || 0),
     sideExpense: Math.max(0, Number(inputSideExpense.value) || 0),
     sideType: selectSideType.value,
@@ -195,6 +196,9 @@ function calc() {
   }
   if (r.blueAbsorbed) {
     notices.push('副業の利益が青色申告特別控除額の範囲内に収まっているため、総所得金額への算入額は0円です(上限額は給与のみの場合とほぼ変わりません)。');
+  }
+  if (r.outOfScope) {
+    notices.push('総所得金額が2,400万円を超えており、この計算機が想定する範囲外です。基礎控除の逓減など考慮していない要素があるため、表示額の精度はさらに低くなります。');
   }
   if (notices.length) {
     resultClampNotice.textContent = `※ ${notices.join(' ')}`;
@@ -222,7 +226,6 @@ function calc() {
 document.getElementById('btn-calc').addEventListener('click', calc);
 
 selectProductCategory.addEventListener('change', () => {
-  if (!lastLimit && lastLimit !== 0) return;
   const category = selectProductCategory.value;
   affCard.href = affiliateUrl(furusatoSearchUrl(category, lastLimit));
   showFurusatoProducts(category, lastLimit || 3000);
