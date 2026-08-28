@@ -892,6 +892,12 @@ a { color: var(--navy); }
   color: var(--navy);
   margin: 0;
 }
+.pick-comment {
+  font-size: 0.72rem;
+  line-height: 1.4;
+  color: var(--ink-sub);
+  margin: 6px 0 0;
+}
 .product-grid-label {
   position: relative;
   padding-left: 14px;
