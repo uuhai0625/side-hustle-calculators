@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ふるさと納税 控除上限額シミュレーター(副業ありパターン対応)|AI副業そろばん</title>
+<meta name="description" content="会社員で副業(雑所得・事業所得)がある方向けの、ふるさと納税 控除上限額の概算シミュレーター。給与所得と副業所得を合算した目安額を無料で計算できます。">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="ふるさと納税 控除上限額シミュレーター(副業ありパターン対応)|AI副業そろばん">
+<meta property="og:description" content="給与収入と副業所得を入力するだけで、ふるさと納税の控除上限額の目安がわかります。">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:url" content="https://uuhai0625.github.io/side-hustle-calculators/furusato-nozei/">
+<meta property="og:image" content="https://uuhai0625.github.io/side-hustle-calculators/images/og-image.jpg">
+<meta property="og:image:width" content="1520">
+<meta property="og:image:height" content="800">
+<link rel="canonical" href="https://uuhai0625.github.io/side-hustle-calculators/furusato-nozei/">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ふるさと納税 控除上限額シミュレーター(副業対応)">
+<meta name="twitter:description" content="給与収入と副業所得を入力するだけで、控除上限額の目安がわかります。">
+<meta name="twitter:image" content="https://uuhai0625.github.io/side-hustle-calculators/images/og-image.jpg">
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧮</text></svg>">
+<meta name="theme-color" content="#0a0d0c">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "datePublished": "2026-08-28",
+  "dateModified": "2026-08-28",
+  "mainEntity": [
+    { "@type": "Question", "name": "副業がある場合、ふるさと納税の上限額はどう変わりますか?", "acceptedAnswer": { "@type": "Answer", "text": "給与所得に副業の所得(収入から必要経費を差し引いた利益、事業所得の場合はさらに青色申告特別控除を差し引いた後の金額)を合算して住民税所得割額を再計算するため、副業の利益が多いほど上限額は上がる傾向があります。給与収入だけで判断する簡易シミュレーターでは正確な目安が出ません。" } },
+    { "@type": "Question", "name": "副業の所得は売上と経費、どちらで計算しますか?", "acceptedAnswer": { "@type": "Answer", "text": "売上(収入)そのものではなく、そこから必要経費を差し引いた「利益」で計算します。売上を丸ごと合算するのは誤りです。" } },
+    { "@type": "Question", "name": "青色申告特別控除を使っていると上限額は変わりませんか?", "acceptedAnswer": { "@type": "Answer", "text": "副業の利益が青色申告特別控除額(65万円・55万円・10万円)の範囲内に収まる場合、事業所得は実質0円となり、総所得金額は増えないため上限額もほぼ増えません。「副業をしている=上限が増える」とは限らない点にご注意ください。" } },
+    { "@type": "Question", "name": "副業所得があるとワンストップ特例は使えませんか?", "acceptedAnswer": { "@type": "Answer", "text": "副業の所得(雑所得・事業所得の合計)が年間20万円を超える場合、原則として確定申告が必要になり、ワンストップ特例制度は利用できません。確定申告でふるさと納税の寄附金控除もあわせて申告することになります。" } },
+    { "@type": "Question", "name": "この計算結果はどのくらい正確ですか?", "acceptedAnswer": { "@type": "Answer", "text": "社会保険料控除や住民税の調整控除を概算(給与収入の一定割合等)で計算しているため、あくまで目安です。正確な金額は前年の住民税課税決定通知書に記載の「所得割額」等でご確認ください。" } }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "ふるさと納税 控除上限額シミュレーター(副業対応)",
+  "url": "https://uuhai0625.github.io/side-hustle-calculators/furusato-nozei/",
+  "description": "会社員で副業(雑所得・事業所得)がある方向けの、ふるさと納税 控除上限額の概算シミュレーターです。",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "JPY"
+  },
+  "datePublished": "2026-08-28",
+  "dateModified": "2026-08-28"
+}
+</script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="site-logo heading-font" href="../">AI副業<span class="accent">そろばん</span></a>
+    <h1 class="site-tagline">ふるさと納税 控除上限額シミュレーター(副業対応)</h1>
+  </div>
+</header>
+
+<main class="wrap">
+  <a class="back-link" href="../">← ツール一覧にもどる</a>
+  <p class="stage-note">会社員で副業(雑所得・事業所得)がある方向けの、ふるさと納税 控除上限額の概算シミュレーターです。給与所得と副業所得を合算して計算します。</p>
+
+  <div class="calc-card">
+    <div class="field">
+      <label for="input-salary">給与収入(額面年収、円)</label>
+      <input type="number" id="input-salary" min="0" step="10000" value="5000000">
+    </div>
+    <div class="field">
+      <label for="select-spouse">配偶者控除</label>
+      <select id="select-spouse">
+        <option value="0" selected>なし</option>
+        <option value="1">あり</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="input-dependents">扶養家族の人数(16歳以上・一般)</label>
+      <input type="number" id="input-dependents" min="0" max="10" step="1" value="0">
+    </div>
+    <div class="field">
+      <label for="input-side-income">副業の年間収入(円)</label>
+      <input type="number" id="input-side-income" min="0" step="10000" value="500000">
+    </div>
+    <div class="field">
+      <label for="input-side-expense">副業の年間必要経費(円)</label>
+      <input type="number" id="input-side-expense" min="0" step="10000" value="100000">
+      <span class="field-hint">「利益(収入−経費)」を給与所得に合算します。売上そのものではありません。</span>
+    </div>
+    <div class="field">
+      <label for="select-side-type">副業の所得区分</label>
+      <select id="select-side-type">
+        <option value="zatsu" selected>雑所得</option>
+        <option value="white">事業所得(白色申告)</option>
+        <option value="blue10">事業所得(青色申告・10万円控除)</option>
+        <option value="blue65">事業所得(青色申告・65万円控除)</option>
+      </select>
+    </div>
+
+    <button class="btn-calc" id="btn-calc" type="button">控除上限額を計算する</button>
+  </div>
+
+  <div class="result-card" id="result-card" role="status" aria-live="polite">
+    <p class="result-label">ふるさと納税 控除上限額の目安(年間)</p>
+    <p class="result-amount"><span class="yen">¥</span><span id="result-amount">--</span></p>
+    <p class="result-note" id="result-note"></p>
+    <p class="clamp-notice" id="result-clamp-notice"></p>
+    <p class="result-sub" id="result-sub"></p>
+    <div class="result-advice" id="result-advice"></div>
+    <div class="share-row" id="share-row">
+      <button class="share-btn" id="btn-copy-link" type="button">結果のURLをコピー</button>
+      <button class="share-btn" id="btn-share-x" type="button">𝕏で共有</button>
+    </div>
+  </div>
+
+  <div id="product-section">
+    <div class="field" id="product-category-field" style="display:none; max-width: 320px; margin: 24px auto 0;">
+      <label for="select-product-category">上限額で選べる返礼品ジャンル</label>
+      <select id="select-product-category">
+        <option value="肉" selected>肉</option>
+        <option value="海鮮">海鮮</option>
+        <option value="米">米</option>
+        <option value="フルーツ">フルーツ</option>
+        <option value="スイーツ">スイーツ</option>
+        <option value="日用品">日用品・家電</option>
+      </select>
+    </div>
+    <p class="product-grid-label" id="product-grid-label" style="display:none;">あなたの上限額で選べる人気の返礼品</p>
+    <div class="product-grid" id="product-grid"></div>
+  </div>
+
+  <a class="aff-card" id="aff-card" href="#" target="_blank" rel="noopener sponsored">
+    <span class="aff-icon icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></span>
+    <div class="aff-text">
+      <p class="aff-title">上限額の範囲で返礼品を探す</p>
+      <p class="aff-sub">楽天ふるさと納税で見てみる</p>
+    </div>
+    <span class="aff-pr">PR</span>
+  </a>
+
+  <p class="follow-x">制作の裏側や新しいツールの告知は <a href="https://x.com/uuhai0625" target="_blank" rel="noopener">@uuhai0625</a> で発信しています</p>
+
+  <div class="manner-box show">
+    <h2>この計算機について</h2>
+    <ul>
+      <li>社会保険料控除は給与収入の15%、住民税の調整控除は考慮しないなど、一般的な簡易シミュレーターと同水準の概算方式です。正確な金額ではありません。</li>
+      <li>合計所得金額が2,400万円を超える方など、控除額が大きく変動するケースは対象外です。</li>
+      <li>正確な金額は、前年の住民税課税決定通知書に記載の「所得割額」等でご確認ください。</li>
+      <li>税務上の最終判断は税理士・お住まいの自治体・税務署にご確認ください。</li>
+    </ul>
+  </div>
+
+  <div class="rate-table-box show">
+    <h2>副業所得の区分と上限額への影響</h2>
+    <p class="rate-table-note">同じ「利益」でも、所得区分によって総所得金額への算入額が変わります。</p>
+    <table class="rate-table">
+      <tr><th>所得区分</th><th>総所得金額への算入額</th></tr>
+      <tr><td>雑所得</td><td>利益(収入−必要経費)がそのまま算入</td></tr>
+      <tr><td>事業所得(白色申告)</td><td>利益(収入−必要経費)がそのまま算入</td></tr>
+      <tr><td>事業所得(青色申告・10万円控除)</td><td>利益から10万円を差し引いた額(0円が下限)</td></tr>
+      <tr><td>事業所得(青色申告・65万円控除)</td><td>利益から65万円を差し引いた額(0円が下限)</td></tr>
+    </table>
+    <p class="rate-source">参考: <a href="https://www.soumu.go.jp/main_sosiki/jichi_zeisei/czaisei/czaisei_seido/furusato/mechanism/deduction.html" target="_blank" rel="noopener">総務省「ふるさと納税のしくみ」</a>、<a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/2072.htm" target="_blank" rel="noopener">国税庁 No.2072 青色申告特別控除</a>(2026年8月確認)</p>
+  </div>
+
+  <div class="faq-section">
+    <h2>よくある質問</h2>
+    <details class="faq-item">
+      <summary>副業がある場合、ふるさと納税の上限額はどう変わりますか?</summary>
+      <p>給与所得に副業の所得(収入から必要経費を差し引いた利益、事業所得の場合はさらに青色申告特別控除を差し引いた後の金額)を合算して住民税所得割額を再計算するため、副業の利益が多いほど上限額は上がる傾向があります。給与収入だけで判断する簡易シミュレーターでは正確な目安が出ません。</p>
+    </details>
+    <details class="faq-item">
+      <summary>副業の所得は売上と経費、どちらで計算しますか?</summary>
+      <p>売上(収入)そのものではなく、そこから必要経費を差し引いた「利益」で計算します。売上を丸ごと合算するのは誤りです。</p>
+    </details>
+    <details class="faq-item">
+      <summary>青色申告特別控除を使っていると上限額は変わりませんか?</summary>
+      <p>副業の利益が青色申告特別控除額(65万円・55万円・10万円)の範囲内に収まる場合、事業所得は実質0円となり、総所得金額は増えないため上限額もほぼ増えません。「副業をしている=上限が増える」とは限らない点にご注意ください。</p>
+    </details>
+    <details class="faq-item">
+      <summary>副業所得があるとワンストップ特例は使えませんか?</summary>
+      <p>副業の所得(雑所得・事業所得の合計)が年間20万円を超える場合、原則として確定申告が必要になり、ワンストップ特例制度は利用できません。確定申告でふるさと納税の寄附金控除もあわせて申告することになります。</p>
+    </details>
+    <details class="faq-item">
+      <summary>この計算結果はどのくらい正確ですか?</summary>
+      <p>社会保険料控除や住民税の調整控除を概算(給与収入の一定割合等)で計算しているため、あくまで目安です。正確な金額は前年の住民税課税決定通知書に記載の「所得割額」等でご確認ください。</p>
+    </details>
+  </div>
+
+  <div class="detail-section">
+    <h2>計算の考え方をもう少し詳しく</h2>
+
+    <h3>基本の上限式</h3>
+    <p>自己負担2,000円で収まる寄附額の上限は、住民税所得割額を起点に「上限額 = 住民税所得割額 × 20% ÷ (90% − 所得税率 × 1.021) + 2,000円」で概算します。所得税率は課税所得金額に応じた7段階の超過累進税率(195万円以下5%〜4,000万円超45%)です。</p>
+
+    <h3>副業所得の合算方法</h3>
+    <p>合算対象は「所得」ベースです。給与所得(給与収入−給与所得控除)に副業の利益(収入−必要経費、事業所得はさらに青色申告特別控除を差し引いた後)を加算し、総所得金額を求めます。給与収入と副業収入を単純合算するのは誤りです。</p>
+
+    <h3>ワンストップ特例と確定申告</h3>
+    <p>ワンストップ特例は「寄附先が年間5自治体以内」かつ「確定申告・住民税申告が不要な人」が対象です。副業所得(雑所得・事業所得)が年間20万円を超える場合は原則として確定申告が必要になり、ワンストップ特例は使えません。</p>
+  </div>
+
+  <div class="related-tools">
+    <h2>こんなページもあります</h2>
+    <div class="related-tools-list">
+      <a class="related-tool-link" href="../keihi-anbun/"><span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2h12v19l-3-2-3 2-3-2-3 2V2z"/><line x1="9" y1="7" x2="15" y2="7"/><line x1="9" y1="11" x2="15" y2="11"/><line x1="9" y1="15" x2="13" y2="15"/></svg></span>副業の経費按分計算機</a>
+      <a class="related-tool-link" href="../genka-shokyaku/"><span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="4" height="17"/><rect x="10" y="9" width="4" height="12"/><rect x="17" y="14" width="4" height="7"/></svg></span>減価償却費計算機</a>
+      <a class="related-tool-link" href="../getsugaku-goukei/"><span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></span>AI副業 月間コスト合計シミュレーター</a>
+      <a class="related-tool-link" href="../kaishi-cost/"><span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c3 2 5 6 5 10 0 2-1 4-2 5l-3-1-3 1c-1-1-2-3-2-5 0-4 2-8 5-10z"/><circle cx="12" cy="10" r="1.5"/><path d="M9 17l-2 4M15 17l2 4"/></svg></span>AI副業を始める初期費用シミュレーター</a>
+      <a class="related-tool-link" href="../denki-dai/"><span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z"/></svg></span>在宅ワークのパソコン電気代計算機</a>
+      <a class="related-tool-link" href="../hajimekata/"><span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m14.5 9.5-2 5-5 2 2-5z"/></svg></span>AI副業の始め方</a>
+    </div>
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <p>本ページの内容は一般的なふるさと納税の控除上限額の考え方の紹介であり、税務上の助言ではありません。掲載の計算式・数値は総務省・国税庁等の公表情報をもとにした概算です。実際の金額・申告方法については、税理士・お住まいの自治体・税務署にご確認のうえご自身の判断で行ってください。</p>
+  <p>商品リンクにはアフィリエイト(広告)リンクを含みます。リンク経由の寄附・購入により、当サイトが紹介料を得ることがあります。</p>
+  <p><a href="../#about">運営者情報・お問い合わせ</a></p>
+</footer>
+
+<script src="../ga.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
