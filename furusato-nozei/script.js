@@ -72,7 +72,7 @@ function cardHtml(item) {
     .replace(/"/g, '&quot;');
   return `
     <a class="product-card" href="${item.itemUrl}" target="_blank" rel="noopener sponsored">
-      <img src="${img}" alt="${name}" loading="lazy">
+      <img src="${img}" alt="${name}" loading="lazy" width="300" height="300">
       <p class="product-name">${name}</p>
       <p class="product-price">¥${price}</p>
     </a>`;
