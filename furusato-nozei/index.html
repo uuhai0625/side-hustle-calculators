@@ -32,11 +32,11 @@
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "datePublished": "2026-08-28",
-  "dateModified": "2026-08-29",
+  "dateModified": "2026-08-30",
   "mainEntity": [
     { "@type": "Question", "name": "副業がある場合、ふるさと納税の上限額はどう変わりますか?", "acceptedAnswer": { "@type": "Answer", "text": "給与所得に副業の所得(収入から必要経費を差し引いた利益、事業所得の場合はさらに青色申告特別控除を差し引いた後の金額)を合算して住民税所得割額を再計算するため、副業の利益が多いほど上限額は上がる傾向があります。給与収入だけで判断する簡易シミュレーターでは正確な目安が出ません。" } },
     { "@type": "Question", "name": "副業の所得は売上と経費、どちらで計算しますか?", "acceptedAnswer": { "@type": "Answer", "text": "売上(収入)そのものではなく、そこから必要経費を差し引いた「利益」で計算します。売上を丸ごと合算するのは誤りです。" } },
-    { "@type": "Question", "name": "青色申告特別控除を使っていると上限額は変わりませんか?", "acceptedAnswer": { "@type": "Answer", "text": "副業の利益が青色申告特別控除額(65万円・55万円・10万円)の範囲内に収まる場合、事業所得は実質0円となり、総所得金額は増えないため上限額もほぼ増えません。「副業をしている=上限が増える」とは限らない点にご注意ください。" } },
+    { "@type": "Question", "name": "青色申告特別控除を使っていると上限額は変わりませんか?", "acceptedAnswer": { "@type": "Answer", "text": "副業の利益が青色申告特別控除額(65万円・55万円・10万円)の範囲内に収まる場合、事業所得は実質0円となり、総所得金額は増えないため上限額もほぼ増えません。「副業をしている=上限が増える」とは限らない点にご注意ください。なお65万円控除はe-Taxでの申告または電子帳簿保存の要件を満たす場合のみ適用され、未達の場合は55万円控除になります。" } },
     { "@type": "Question", "name": "副業所得があるとワンストップ特例は使えませんか?", "acceptedAnswer": { "@type": "Answer", "text": "副業の所得(雑所得・事業所得の合計)が年間20万円を超える場合、原則として確定申告が必要になり、ワンストップ特例制度は利用できません。確定申告でふるさと納税の寄附金控除もあわせて申告することになります。" } },
     { "@type": "Question", "name": "副業をしていることが、ふるさと納税がきっかけで会社にバレませんか?", "acceptedAnswer": { "@type": "Answer", "text": "ふるさと納税の寄附・控除自体で副業が会社に知られることは基本的にありません。ただし副業所得が年間20万円を超えて確定申告が必要になった場合、確定申告書で住民税の徴収方法を選べます。ここで「特別徴収(給与天引き)」のままにすると、副業分を含めた住民税額が給与から天引きされ、増加分から副業の存在が推測される可能性があります。これを避けたい場合は、確定申告時に副業分の住民税を「普通徴収(自分で納付)」に切り替えることで、給与天引き分を本来の給与所得分のみに保てます。" } },
     { "@type": "Question", "name": "この計算結果はどのくらい正確ですか?", "acceptedAnswer": { "@type": "Answer", "text": "社会保険料控除や住民税の調整控除を概算(給与収入の一定割合等)で計算しているため、あくまで目安です。正確な金額は前年の住民税課税決定通知書に記載の「所得割額」等でご確認ください。" } }
@@ -58,7 +58,7 @@
     "priceCurrency": "JPY"
   },
   "datePublished": "2026-08-28",
-  "dateModified": "2026-08-29"
+  "dateModified": "2026-08-30"
 }
 </script>
 </head>
@@ -73,12 +73,12 @@
 
 <main class="wrap">
   <a class="back-link" href="../">← ツール一覧にもどる</a>
-  <p class="stage-note">会社員で副業(雑所得・事業所得)がある方向けの、ふるさと納税 控除上限額の概算シミュレーターです。給与所得と副業所得を合算して計算します。</p>
+  <p class="stage-note">会社員で副業(雑所得・事業所得)がある方向けの、ふるさと納税 控除上限額(2026年・令和8年分)の概算シミュレーターです。給与所得と副業所得を合算して計算します。</p>
 
   <div class="calc-card">
     <div class="field">
       <label for="input-salary">給与収入(額面年収、円)</label>
-      <input type="number" id="input-salary" min="0" step="10000" value="5000000">
+      <input type="number" id="input-salary" min="0" step="10000" placeholder="例: 5000000">
     </div>
     <div class="field">
       <label for="select-spouse">配偶者控除</label>
@@ -126,6 +126,15 @@
     </div>
   </div>
 
+  <a class="aff-card" id="aff-card" href="#" target="_blank" rel="noopener sponsored">
+    <span class="aff-icon icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></span>
+    <div class="aff-text">
+      <p class="aff-title">上限額の範囲で返礼品を探す</p>
+      <p class="aff-sub">楽天ふるさと納税で見てみる</p>
+    </div>
+    <span class="aff-pr">PR</span>
+  </a>
+
   <div id="product-section">
     <div class="field" id="product-category-field" style="display:none; max-width: 320px; margin: 24px auto 0;">
       <label for="select-product-category">上限額で選べる返礼品ジャンル</label>
@@ -142,56 +151,53 @@
     <div class="product-grid" id="product-grid"></div>
   </div>
 
-  <a class="aff-card" id="aff-card" href="#" target="_blank" rel="noopener sponsored">
-    <span class="aff-icon icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></span>
-    <div class="aff-text">
-      <p class="aff-title">上限額の範囲で返礼品を探す</p>
-      <p class="aff-sub">楽天ふるさと納税で見てみる</p>
-    </div>
-    <span class="aff-pr">PR</span>
-  </a>
-
   <div class="editor-picks">
     <p class="product-grid-label">人気の返礼品(楽天レビュー数ベース)</p>
     <div class="product-band-grid">
       <a class="product-card" href="https://hb.afl.rakuten.co.jp/hgc/g00sn2fo.00mprc1c.g00sn2fo.00mpsa55/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ff402052-iizuka%2F10000315%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Ff402052-iizuka%2Fi%2F10000315%2F&rafcid=wsc_i_is_f9f8dd97-c7a4-4ae1-a2c1-38b4572a702e" target="_blank" rel="noopener sponsored">
+        <span class="pr-badge">PR</span>
         <img src="https://thumbnail.image.rakuten.co.jp/@0_mall/f402052-iizuka/cabinet/yoshiura/a-848_skuss.jpg?_ex=300x300" alt="鉄板焼ハンバーグ デミソース(福岡県飯塚市)" loading="lazy" width="300" height="300">
         <p class="product-name">鉄板焼ハンバーグ デミソース 10個~20個(福岡県飯塚市)</p>
         <p class="product-price">¥10,000〜</p>
         <p class="pick-comment">累計4000万個・レビュー2万件超の定番。冷凍で届いて温めるだけの手軽さが人気。</p>
       </a>
       <a class="product-card" href="https://hb.afl.rakuten.co.jp/hgc/g00tkt0o.00mprfd6.g00tkt0o.00mps144/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ff016918-betsukai%2Fbe018-0054%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Ff016918-betsukai%2Fi%2F10003150%2F&rafcid=wsc_i_is_f9f8dd97-c7a4-4ae1-a2c1-38b4572a702e" target="_blank" rel="noopener sponsored">
+        <span class="pr-badge">PR</span>
         <img src="https://thumbnail.image.rakuten.co.jp/@0_mall/f016918-betsukai/cabinet/07065206/maruhiro/imgrc0119269198.jpg?_ex=300x300" alt="訳ありホタテ 4点選び放題(北海道別海町)" loading="lazy" width="300" height="300">
         <p class="product-name">訳あり ホタテ 4点選び放題(北海道別海町)</p>
         <p class="product-price">¥8,500〜</p>
         <p class="pick-comment">レビュー3万件超え。サイズ不揃いの訳あり品で容量重視、刺身にも使える。</p>
       </a>
       <a class="product-card" href="https://hb.afl.rakuten.co.jp/hgc/g00t1hdo.00mpr861.g00t1hdo.00mpsc00/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ff434281-takamori%2F078-566%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Ff434281-takamori%2Fi%2F10000542%2F&rafcid=wsc_i_is_f9f8dd97-c7a4-4ae1-a2c1-38b4572a702e" target="_blank" rel="noopener sponsored">
+        <span class="pr-badge">PR</span>
         <img src="https://thumbnail.image.rakuten.co.jp/@0_mall/f434281-takamori/cabinet/08290156/078-4361x1_00r05.jpg?_ex=300x300" alt="阿蘇だわら 選べる容量・回数(熊本県高森町)" loading="lazy" width="300" height="300">
         <p class="product-name">阿蘇だわら 選べる容量・回数(熊本県高森町)</p>
         <p class="product-price">¥5,500〜</p>
         <p class="pick-comment">容量・回数を選べる定期便対応。普段使いの主食として続けやすい。</p>
       </a>
       <a class="product-card" href="https://hb.afl.rakuten.co.jp/hgc/g00tdwwo.00mpr5cc.g00tdwwo.00mps948/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ff404012-kotake%2F10000550%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Ff404012-kotake%2Fi%2F10000550%2F&rafcid=wsc_i_is_f9f8dd97-c7a4-4ae1-a2c1-38b4572a702e" target="_blank" rel="noopener sponsored">
+        <span class="pr-badge">PR</span>
         <img src="https://thumbnail.image.rakuten.co.jp/@0_mall/f404012-kotake/cabinet/08237198/amaou/kamaou001s_06.jpg?_ex=300x300" alt="あまおう 選べる内容量定期便(福岡県小竹町)" loading="lazy" width="300" height="300">
         <p class="product-name">あまおう 選べる内容量定期便(福岡県小竹町)</p>
         <p class="product-price">¥6,500〜</p>
         <p class="pick-comment">TVでも紹介された福岡産あまおう。先行予約の定期便で旬の時期に届く。</p>
       </a>
       <a class="product-card" href="https://hb.afl.rakuten.co.jp/hgc/g00sj1eo.00mprba5.g00sj1eo.00mpsf56/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ff062073-kaminoyama%2F10000039%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Ff062073-kaminoyama%2Fi%2F10001209%2F&rafcid=wsc_i_is_f9f8dd97-c7a4-4ae1-a2c1-38b4572a702e" target="_blank" rel="noopener sponsored">
+        <span class="pr-badge">PR</span>
         <img src="https://thumbnail.image.rakuten.co.jp/@0_mall/f062073-kaminoyama/cabinet/item/0048/0048-2401-01rrv5.jpg?_ex=300x300" alt="かみのやまシュー(山形県上山市)" loading="lazy" width="300" height="300">
         <p class="product-name">かみのやまシュー クッキーシュー(山形県上山市)</p>
         <p class="product-price">¥5,000〜</p>
         <p class="pick-comment">地元産米粉のカスタードを使い累計600万個突破。個包装の冷凍便で少しずつ楽しめる。</p>
       </a>
       <a class="product-card" href="https://hb.afl.rakuten.co.jp/hgc/g00u0mro.00mpr62a.g00u0mro.00mps548/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ff222038-numazu%2Ftsurumi03-p%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Ff222038-numazu%2Fi%2F10000205%2F&rafcid=wsc_i_is_f9f8dd97-c7a4-4ae1-a2c1-38b4572a702e" target="_blank" rel="noopener sponsored">
+        <span class="pr-badge">PR</span>
         <img src="https://thumbnail.image.rakuten.co.jp/@0_mall/f222038-numazu/cabinet/imgrc0167751077.jpg?_ex=300x300" alt="トイレットペーパー 再生紙(静岡県沼津市)" loading="lazy" width="300" height="300">
         <p class="product-name">トイレットペーパー ダブル 再生紙(静岡県沼津市)</p>
         <p class="product-price">¥12,000〜</p>
         <p class="pick-comment">消耗品ならではの実用系返礼品。ロール数を選べて備蓄用にもちょうどいい。</p>
       </a>
     </div>
-    <p class="rate-source">2026年8月時点の楽天市場レビュー数をもとに、ジャンルごとに上位1点を機械的に抽出したものです(編集部が実際に取り寄せて試した内容ではありません)。価格・在庫状況は変動するため、最新情報はリンク先でご確認ください。</p>
+    <p class="rate-source">楽天ふるさと納税は取扱自治体数・レビュー数の実績が豊富なため、本ページでは楽天市場の商品データを基準に紹介しています。2026年8月時点の楽天市場レビュー数をもとに、ジャンルごとに上位1点を機械的に抽出したものです(編集部が実際に取り寄せて試した内容ではありません)。価格・在庫状況は変動するため、最新情報はリンク先でご確認ください。</p>
   </div>
 
   <p class="follow-x">制作の裏側や新しいツールの告知は <a href="https://x.com/uuhai0625" target="_blank" rel="noopener">@uuhai0625</a> で発信しています</p>
@@ -199,7 +205,7 @@
   <div class="manner-box show">
     <h2>この計算機について</h2>
     <ul>
-      <li>社会保険料控除は給与収入の15%、住民税の調整控除は考慮しないなど、一般的な簡易シミュレーターと同水準の概算方式です。正確な金額ではありません。</li>
+      <li>社会保険料控除は給与収入の15%、住民税の調整控除は考慮しないなど、一般的な簡易シミュレーターと同水準の概算方式です。これらの未考慮分により、表示額は実際の上限より高めに出やすい傾向があります。正確な金額ではありません。</li>
       <li>合計所得金額が2,400万円を超える方など、控除額が大きく変動するケースは対象外です。</li>
       <li>正確な金額は、前年の住民税課税決定通知書に記載の「所得割額」等でご確認ください。</li>
       <li>税務上の最終判断は税理士・お住まいの自治体・税務署にご確認ください。</li>
@@ -216,7 +222,21 @@
       <tr><td>事業所得(青色申告・10万円控除)</td><td>利益から10万円を差し引いた額(0円が下限)</td></tr>
       <tr><td>事業所得(青色申告・65万円控除)</td><td>利益から65万円を差し引いた額(0円が下限)</td></tr>
     </table>
+    <p class="rate-table-note">※ 青色申告特別控除65万円の適用には、e-Taxによる申告または優良な電子帳簿保存の要件があります。要件を満たさない場合は55万円控除にとどまり、上限額も変わります。</p>
     <p class="rate-source">参考: <a href="https://www.soumu.go.jp/main_sosiki/jichi_zeisei/czaisei/czaisei_seido/furusato/mechanism/deduction.html" target="_blank" rel="noopener">総務省「ふるさと納税のしくみ」</a>、<a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/2072.htm" target="_blank" rel="noopener">国税庁 No.2072 青色申告特別控除</a>(2026年8月確認)</p>
+  </div>
+
+  <div class="rate-table-box show">
+    <h2>控除上限額の早見表(シミュレーション例)</h2>
+    <p class="rate-table-note">実際に入力して計算した場合の目安です。ご自身の条件で試すには上のフォームをご利用ください。</p>
+    <table class="rate-table">
+      <tr><th>条件</th><th>控除上限額の目安</th></tr>
+      <tr><td>給与400万円・独身・副業の利益25万円(雑所得)</td><td>¥48,000</td></tr>
+      <tr><td>給与500万円・独身・副業の利益40万円(雑所得)</td><td>¥71,000</td></tr>
+      <tr><td>給与600万円・配偶者あり扶養1人・副業の利益80万円(雑所得)</td><td>¥81,000</td></tr>
+      <tr><td>給与800万円・独身・副業の利益55万円(事業所得・青色65万円控除後)</td><td>¥146,000</td></tr>
+    </table>
+    <p class="rate-table-note">「副業の利益」は収入から必要経費(・青色申告特別控除)を差し引いた後の金額です。社会保険料控除は給与収入の15%概算、住民税の調整控除は考慮していません。</p>
   </div>
 
   <div class="faq-section">
@@ -231,7 +251,7 @@
     </details>
     <details class="faq-item">
       <summary>青色申告特別控除を使っていると上限額は変わりませんか?</summary>
-      <p>副業の利益が青色申告特別控除額(65万円・55万円・10万円)の範囲内に収まる場合、事業所得は実質0円となり、総所得金額は増えないため上限額もほぼ増えません。「副業をしている=上限が増える」とは限らない点にご注意ください。</p>
+      <p>副業の利益が青色申告特別控除額(65万円・55万円・10万円)の範囲内に収まる場合、事業所得は実質0円となり、総所得金額は増えないため上限額もほぼ増えません。「副業をしている=上限が増える」とは限らない点にご注意ください。なお65万円控除はe-Taxでの申告または電子帳簿保存の要件を満たす場合のみ適用され、未達の場合は55万円控除になります。</p>
     </details>
     <details class="faq-item">
       <summary>副業所得があるとワンストップ特例は使えませんか?</summary>
@@ -269,6 +289,12 @@
       <a class="related-tool-link" href="../kaishi-cost/"><span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c3 2 5 6 5 10 0 2-1 4-2 5l-3-1-3 1c-1-1-2-3-2-5 0-4 2-8 5-10z"/><circle cx="12" cy="10" r="1.5"/><path d="M9 17l-2 4M15 17l2 4"/></svg></span>AI副業を始める初期費用シミュレーター</a>
       <a class="related-tool-link" href="../denki-dai/"><span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z"/></svg></span>在宅ワークのパソコン電気代計算機</a>
       <a class="related-tool-link" href="../hajimekata/"><span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m14.5 9.5-2 5-5 2 2-5z"/></svg></span>AI副業の始め方</a>
+      <a class="related-tool-link" href="../ai-chat-tools/"><span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v12H8l-4 4V4z"/><line x1="8" y1="9" x2="16" y2="9"/><line x1="8" y1="13" x2="13" y2="13"/></svg></span>生成AIチャットツール料金比較</a>
+      <a class="related-tool-link" href="../ai-coding-tools/"><span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="8 9 4 12 8 15"/><polyline points="16 9 20 12 16 15"/><line x1="13" y1="6" x2="11" y2="18"/></svg></span>AIコーディングツール料金比較</a>
+      <a class="related-tool-link" href="../douga-ryokin/"><span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="13" height="12" rx="1.5"/><path d="M16 10.5 21 7v10l-5-3.5z"/></svg></span>動画作成AIツールの月額料金シミュレーター</a>
+      <a class="related-tool-link" href="../ehon-shinsei/"><span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5c3-1.5 6-1.5 8 0v14c-2-1.5-5-1.5-8 0V5z"/><path d="M20 5c-3-1.5-6-1.5-8 0v14c2-1.5 5-1.5 8 0V5z"/></svg></span>絵本(Kindle出版)の申請作業</a>
+      <a class="related-tool-link" href="../line-stamp-kankyo/"><span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="1.5"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 16.5 15.5 11 5 20"/></svg></span>LINEスタンプ制作の確認環境</a>
+      <a class="related-tool-link" href="../note-x-kankyo/"><span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="14" width="16" height="3" rx="1"/><path d="M7 14V9a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v5"/><line x1="9" y1="17" x2="9" y2="19"/><line x1="15" y1="17" x2="15" y2="19"/></svg></span>note・X運用の作業環境</a>
     </div>
   </div>
 
