@@ -27,6 +27,7 @@ async function showFurusatoProducts(category, maxPrice) {
   const label = document.getElementById('product-grid-label');
   if (!grid) return;
   const requestId = ++productRequestId;
+  grid.setAttribute('aria-busy', 'true');
   grid.innerHTML = '';
   grid.classList.remove('show');
   if (label) label.style.display = 'none';
@@ -52,6 +53,9 @@ async function showFurusatoProducts(category, maxPrice) {
     if (label) { label.textContent = 'あなたの上限額で選べる人気の返礼品'; label.style.display = ''; }
   } catch (e) {
     // 失敗時は既存の検索リンクCTA(aff-card)に静かにフォールバック
+  } finally {
+    // 新しいリクエストに追い越されている場合はそちらがaria-busyを管理するので触らない
+    if (requestId === productRequestId) grid.setAttribute('aria-busy', 'false');
   }
 }
 
@@ -186,10 +190,14 @@ function readInput() {
 function calc() {
   const input = readInput();
   const r = calcResult(input);
+  // 計算実行率を見るためのGA4イベント(2026-08-31追加)。ローカル環境ではga.jsがgtagを定義しないため存在チェック必須。
+  if (typeof gtag === 'function') {
+    gtag('event', 'calc_click', { page_path: location.pathname });
+  }
 
   resultAmount.textContent = r.limit.toLocaleString('ja-JP');
   resultNote.textContent = `給与所得¥${Math.round(r.salaryIncome).toLocaleString('ja-JP')} + 副業所得¥${Math.round(r.sideTaxableIncome).toLocaleString('ja-JP')}(${SIDE_TYPE_LABEL[input.sideType]}) = 総所得金額¥${Math.round(r.totalIncome).toLocaleString('ja-JP')}`;
-  resultSub.textContent = `住民税所得割額(概算):¥${Math.round(r.residentIncomeLevy).toLocaleString('ja-JP')} / 適用した所得税率(限界):${Math.round(r.rate * 100)}%`;
+  resultSub.textContent = `住民税額の基準になる所得割額(概算):¥${Math.round(r.residentIncomeLevy).toLocaleString('ja-JP')} / 適用された所得税率:${Math.round(r.rate * 100)}%`;
 
   let notices = [];
   if (r.needsFinalReturn) {
