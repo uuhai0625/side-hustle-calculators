@@ -510,6 +510,11 @@ a { color: var(--navy); }
   margin-top: 14px;
 }
 .share-row.show { display: flex; }
+/* 共有URL(?salary=等のクエリ付き)経由の訪問時、自動計算による表示切替がCLSに計上されるのを防ぐ。
+   headの先頭でhtmlに"qshow"クラスを同期的に付与し、初期スタイル計算の時点で表示済み状態にする(2026-08-31)。 */
+html.qshow .result-card { display: block; }
+html.qshow .aff-card { display: flex; }
+html.qshow .share-row { display: flex; }
 .share-btn {
   flex: 1;
   padding: 13px 10px;
