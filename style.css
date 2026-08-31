@@ -894,6 +894,8 @@ html.qshow .share-row { display: flex; }
   background: #eceee9;
   border: 1px solid var(--line);
   box-shadow: inset 0 0 14px rgba(10, 13, 12, 0.10);
+  /* 楽天バナーの原色が結果カードと視線を奪い合わないよう、彩度・明度をわずかに落として馴染ませる(2026-08-31、5ペルソナレビューD6相当対応)。 */
+  filter: saturate(0.85) brightness(0.97);
 }
 .product-card .product-name {
   font-size: 0.76rem;

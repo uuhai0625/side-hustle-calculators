@@ -48,7 +48,7 @@ async function showFurusatoProducts(category, maxPrice) {
     if (requestId !== productRequestId) return;
     const items = (data.Items || []).map((entry) => entry.Item || entry);
     if (!items.length) return;
-    grid.innerHTML = `<div class="product-band"><div class="product-band-grid">${items.map(cardHtml).join('')}</div></div>`;
+    grid.innerHTML = `<div class="product-band"><div class="product-band-grid">${items.map((item) => cardHtml(item, category)).join('')}</div></div>`;
     grid.classList.add('show');
     if (label) { label.textContent = 'あなたの上限額で選べる人気の返礼品'; label.style.display = ''; }
   } catch (e) {
@@ -65,7 +65,17 @@ function upscaleImage(url) {
   return url.replace(/_ex=\d+x\d+/, '_ex=300x300');
 }
 
-function cardHtml(item) {
+// href/src属性への埋め込み用エスケープ(データ源は楽天公式APIのみで実害リスクは低いが、多層防御として追加)。
+function escapeAttr(value) {
+  return String(value || '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+function cardHtml(item, category) {
   const imgRaw = item.mediumImageUrls && item.mediumImageUrls[0];
   const img = upscaleImage(typeof imgRaw === 'string' ? imgRaw : (imgRaw && imgRaw.imageUrl) || '');
   const price = Number(item.itemPrice).toLocaleString('ja-JP');
@@ -75,9 +85,9 @@ function cardHtml(item) {
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;');
   return `
-    <a class="product-card" href="${item.itemUrl}" target="_blank" rel="noopener sponsored">
+    <a class="product-card" href="${escapeAttr(item.itemUrl)}" target="_blank" rel="noopener sponsored" data-category="${escapeAttr(category)}" data-price="${escapeAttr(item.itemPrice)}">
       <span class="pr-badge">PR</span>
-      <img src="${img}" alt="${name}" loading="lazy" width="300" height="300">
+      <img src="${escapeAttr(img)}" alt="${name}" loading="lazy" width="300" height="300">
       <p class="product-name">${name}</p>
       <p class="product-price">¥${price}</p>
     </a>`;

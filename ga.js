@@ -21,11 +21,15 @@ if (GA_MEASUREMENT_ID && !isLocalDev) {
   document.addEventListener('click', (e) => {
     const link = e.target.closest('.aff-card, .product-card');
     if (!link) return;
+    // category/price: furusato-nozeiの返礼品カードのみdata-category/data-price属性を持つ(2026-08-31追加)。
+    // 他ページのproduct-cardには存在しないため、そのままundefinedになりイベント自体には影響しない。
     gtag('event', 'affiliate_click', {
       link_type: link.classList.contains('product-card') ? 'product_card' : 'aff_card',
       link_id: link.id || '',
       link_url: link.href || '',
       page_path: location.pathname,
+      category: link.dataset.category || undefined,
+      price: link.dataset.price || undefined,
     });
   });
 }
