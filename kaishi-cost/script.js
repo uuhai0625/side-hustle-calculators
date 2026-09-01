@@ -119,6 +119,7 @@ const affCard = document.getElementById('aff-card');
 const shareRow = document.getElementById('share-row');
 const btnCopyLink = document.getElementById('btn-copy-link');
 const btnShareX = document.getElementById('btn-share-x');
+const btnSaveImage = document.getElementById('btn-save-image');
 let lastTotalLow = 0;
 let lastTotalHigh = 0;
 
@@ -174,6 +175,16 @@ function updateShareUrl() {
   history.replaceState(null, '', `${location.pathname}?${params.toString()}`);
 }
 
+// 共有・保存経路の流入計測用(2026-09-02追加)。ブラウザのアドレスバー(history.replaceState)には
+// 反映せず、コピー・X投稿の宛先URLにだけutmパラメータを付与する。
+function shareUrl(medium) {
+  const params = paramsFromState();
+  params.set('utm_source', 'share');
+  params.set('utm_medium', medium);
+  params.set('utm_campaign', 'result_share');
+  return `${location.origin}${location.pathname}?${params.toString()}`;
+}
+
 function shareText(low, high) {
   return `AI副業を始める初期費用を試算しました。\n最初の3ヶ月の目安:¥${low.toLocaleString('ja-JP')}〜¥${high.toLocaleString('ja-JP')}\n`;
 }
@@ -200,18 +211,83 @@ btnCopyLink.addEventListener('click', async () => {
     btnCopyLink.textContent = 'コピーしました ✓';
     setTimeout(() => { btnCopyLink.textContent = original; }, 2000);
   };
+  const url = shareUrl('copy_link');
   try {
     const timeout = new Promise((_, reject) => setTimeout(() => reject(new Error('clipboard-timeout')), 1500));
-    await Promise.race([navigator.clipboard.writeText(location.href), timeout]);
+    await Promise.race([navigator.clipboard.writeText(url), timeout]);
     showCopied();
   } catch (e) {
-    if (legacyCopyFallback(location.href)) showCopied();
+    if (legacyCopyFallback(url)) showCopied();
   }
 });
 btnShareX.addEventListener('click', () => {
   const text = shareText(lastTotalLow, lastTotalHigh);
-  const intentUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(location.href)}`;
+  const intentUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(shareUrl('x'))}&hashtags=${encodeURIComponent('AI副業そろばん')}`;
   window.open(intentUrl, '_blank', 'noopener');
+});
+
+// 結果を画像カードとして保存(2026-09-02追加、furusato-nozeiと同じ仕組み)。
+// このページは金額が範囲表示(下限〜上限)で他ページより長いため、fitFontSizeでの縮小がより重要。
+function fitFontSize(ctx, text, maxWidth, baseSize, family) {
+  let size = baseSize;
+  while (size > 32) {
+    ctx.font = `700 ${size}px ${family}`;
+    if (ctx.measureText(text).width <= maxWidth) break;
+    size -= 4;
+  }
+  return size;
+}
+
+function drawResultImage(amountDisplay) {
+  const W = 900, H = 500;
+  const canvas = document.createElement('canvas');
+  canvas.width = W;
+  canvas.height = H;
+  const ctx = canvas.getContext('2d');
+
+  ctx.fillStyle = '#0a0d0c';
+  ctx.fillRect(0, 0, W, H);
+  ctx.strokeStyle = '#35f2b0';
+  ctx.lineWidth = 3;
+  ctx.strokeRect(6, 6, W - 12, H - 12);
+
+  ctx.textAlign = 'center';
+  ctx.fillStyle = '#ffb454';
+  ctx.font = '700 26px "Zen Kaku Gothic New", "Noto Sans JP", sans-serif';
+  ctx.fillText('AI副業そろばん', W / 2, 74);
+
+  ctx.fillStyle = '#e8ece9';
+  ctx.font = '400 24px "Noto Sans JP", sans-serif';
+  ctx.fillText('AI副業を始める初期費用の目安(最初の3ヶ月)', W / 2, 150);
+
+  ctx.fillStyle = '#35f2b0';
+  const size = fitFontSize(ctx, amountDisplay, W - 80, 60, '"JetBrains Mono", monospace');
+  ctx.font = `700 ${size}px "JetBrains Mono", monospace`;
+  ctx.fillText(amountDisplay, W / 2, 280);
+
+  ctx.fillStyle = '#8a938e';
+  ctx.font = '400 18px "Noto Sans JP", sans-serif';
+  ctx.fillText('AI副業 初期費用シミュレーター', W / 2, 400);
+  ctx.fillText('uuhai0625.github.io/side-hustle-calculators/kaishi-cost/', W / 2, 428);
+
+  return canvas;
+}
+
+btnSaveImage.addEventListener('click', async () => {
+  if (!lastTotalHigh) return;
+  try { await document.fonts.ready; } catch (e) { /* フォント読み込み待機に失敗してもデフォルトフォントで描画を続行 */ }
+  const canvas = drawResultImage(`¥${lastTotalLow.toLocaleString('ja-JP')}〜¥${lastTotalHigh.toLocaleString('ja-JP')}`);
+  canvas.toBlob((blob) => {
+    if (!blob) return;
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `kaishi-cost-${lastTotalLow}-${lastTotalHigh}.png`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }, 'image/png');
 });
 
 function initFromQuery() {

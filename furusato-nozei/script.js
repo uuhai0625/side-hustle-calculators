@@ -270,6 +270,16 @@ function updateShareUrl(input) {
   history.replaceState(null, '', `${location.pathname}?${params.toString()}`);
 }
 
+// 共有・保存経路の流入計測用(2026-09-02追加)。ブラウザのアドレスバー(history.replaceState)には
+// 反映せず、コピー・X投稿の宛先URLにだけutmパラメータを付与する。
+function shareUrl(medium) {
+  const params = paramsFromState(readInput());
+  params.set('utm_source', 'share');
+  params.set('utm_medium', medium);
+  params.set('utm_campaign', 'result_share');
+  return `${location.origin}${location.pathname}?${params.toString()}`;
+}
+
 function shareText(limit) {
   return `ふるさと納税の控除上限額(副業ありパターン)を計算しました。\n上限目安:¥${limit.toLocaleString('ja-JP')}\n`;
 }
@@ -296,17 +306,18 @@ btnCopyLink.addEventListener('click', async () => {
     btnCopyLink.textContent = 'コピーしました ✓';
     setTimeout(() => { btnCopyLink.textContent = original; }, 2000);
   };
+  const url = shareUrl('copy_link');
   try {
     const timeout = new Promise((_, reject) => setTimeout(() => reject(new Error('clipboard-timeout')), 1500));
-    await Promise.race([navigator.clipboard.writeText(location.href), timeout]);
+    await Promise.race([navigator.clipboard.writeText(url), timeout]);
     showCopied();
   } catch (e) {
-    if (legacyCopyFallback(location.href)) showCopied();
+    if (legacyCopyFallback(url)) showCopied();
   }
 });
 btnShareX.addEventListener('click', () => {
   const text = shareText(lastLimit);
-  const intentUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(location.href)}`;
+  const intentUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(shareUrl('x'))}&hashtags=${encodeURIComponent('AI副業そろばん')}`;
   window.open(intentUrl, '_blank', 'noopener');
 });
 
