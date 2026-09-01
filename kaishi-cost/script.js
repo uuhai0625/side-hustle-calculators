@@ -292,6 +292,16 @@ btnSaveImage.addEventListener('click', async () => {
 
 function initFromQuery() {
   const params = new URLSearchParams(location.search);
+  // シェア経由の流入を明示イベントで記録(2026-09-02追加、denki-daiと同じ理由)。
+  const utmSource = params.get('utm_source');
+  if (utmSource && typeof gtag === 'function') {
+    gtag('event', 'share_visit', {
+      utm_source: utmSource,
+      utm_medium: params.get('utm_medium') || '',
+      utm_campaign: params.get('utm_campaign') || '',
+      page_path: location.pathname,
+    });
+  }
   const genre = params.get('genre');
   const pc = params.get('pc');
   let matched = false;

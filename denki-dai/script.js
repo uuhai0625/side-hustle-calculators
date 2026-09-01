@@ -297,6 +297,19 @@ btnSaveImage.addEventListener('click', async () => {
 
 function initFromQuery() {
   const params = new URLSearchParams(location.search);
+  // シェア経由の流入を明示イベントで記録(2026-09-02追加)。initFromQuery()内でこの後すぐに
+  // history.replaceState(updateShareUrl経由)が走りアドレスバーからutm_*が消えるため、
+  // GA4の自動page_view(非同期で読み込むgtag.jsのタイミング次第で取りこぼす恐れがある)に頼らず、
+  // 読み取れた時点の値をそのままイベントパラメータとして送る。
+  const utmSource = params.get('utm_source');
+  if (utmSource && typeof gtag === 'function') {
+    gtag('event', 'share_visit', {
+      utm_source: utmSource,
+      utm_medium: params.get('utm_medium') || '',
+      utm_campaign: params.get('utm_campaign') || '',
+      page_path: location.pathname,
+    });
+  }
   const device = params.get('device');
   if (!device || !DEVICES[device]) return;
   selectDevice.value = device;
