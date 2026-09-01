@@ -179,6 +179,8 @@ const resultSub = document.getElementById('result-sub');
 const resultAdvice = document.getElementById('result-advice');
 const resultClampNotice = document.getElementById('result-clamp-notice');
 const affCard = document.getElementById('aff-card');
+const followCta = document.getElementById('follow-cta');
+const otherAspLinks = document.querySelector('.other-asp-links');
 const shareRow = document.getElementById('share-row');
 const btnCopyLink = document.getElementById('btn-copy-link');
 const btnShareX = document.getElementById('btn-share-x');
@@ -229,6 +231,8 @@ function calc() {
   resultAdvice.textContent = 'これは概算です。社会保険料控除は給与収入の15%、住民税の調整控除は考慮せずに計算しています。正確な金額は前年の住民税課税決定通知書等でご確認のうえ、実際の寄附は上限額よりやや少なめにするのが安全です(税務上の最終判断は税理士・税務署にご確認ください)。';
 
   resultCard.classList.add('show');
+  followCta.classList.add('show');
+  if (otherAspLinks) otherAspLinks.classList.add('show');
   lastLimit = r.limit;
   updateShareUrl(input);
   shareRow.classList.add('show');

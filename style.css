@@ -532,6 +532,8 @@ a { color: var(--navy); }
 /* 共有URL(?salary=等のクエリ付き)経由の訪問時、自動計算による表示切替がCLSに計上されるのを防ぐ。
    headの先頭でhtmlに"qshow"クラスを同期的に付与し、初期スタイル計算の時点で表示済み状態にする(2026-08-31)。 */
 html.qshow .result-card { display: block; }
+html.qshow .follow-cta { display: flex; }
+html.qshow .other-asp-links { display: block; }
 html.qshow .aff-card { display: flex; }
 html.qshow .share-row { display: flex; }
 .share-btn {
@@ -671,11 +673,13 @@ html.qshow .share-row { display: flex; }
 }
 /* 非提携の参考リンク(furusato-nozei限定)。PRバッジは付けない(アフィリエイトではないため)。 */
 .other-asp-links {
+  display: none;
   margin: 8px 0 0;
   font-size: 0.74rem;
   color: var(--ink-sub);
   text-align: center;
 }
+.other-asp-links.show { display: block; }
 .other-asp-links a {
   color: var(--ink-sub);
   text-decoration: underline;
@@ -1005,7 +1009,7 @@ html.qshow .share-row { display: flex; }
 
 /* ---- 運営者プロフィール+フォロー導線(2026-09-01追加、furusato-nozei限定) ---- */
 .follow-cta {
-  display: flex;
+  display: none;
   flex-direction: column;
   gap: 6px;
   margin: 0 0 20px;
@@ -1032,6 +1036,7 @@ html.qshow .share-row { display: flex; }
   text-decoration: none;
   border-bottom: 1px solid var(--navy);
 }
+.follow-cta.show { display: flex; }
 
 /* ---- note連携導線 ---- */
 .note-cta {
