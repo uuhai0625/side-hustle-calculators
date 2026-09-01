@@ -126,6 +126,25 @@ a { color: var(--navy); }
   text-decoration: none;
   border-bottom: 1px solid var(--navy);
 }
+.update-date {
+  margin: 6px 0 0;
+  font-size: 0.7rem;
+  color: var(--ink-sub);
+  opacity: 0.75;
+}
+/* 12〜1月の駆け込み需要期のみJSでshowクラスを付与する季節性リマインド(2026-09-01追加、furusato-nozei限定)。 */
+.seasonal-reminder {
+  display: none;
+  margin: 12px 0 0;
+  padding: 10px 14px;
+  background: rgba(255, 180, 84, 0.12);
+  border: 1px solid rgba(255, 180, 84, 0.35);
+  border-radius: var(--radius);
+  font-size: 0.82rem;
+  color: var(--ink-sub);
+  text-align: center;
+}
+.seasonal-reminder.show { display: block; }
 
 /* ---- ツール一覧(ポータル) ---- */
 .tool-list {
@@ -650,6 +669,17 @@ html.qshow .share-row { display: flex; }
   align-self: flex-start;
   font-weight: 700;
 }
+/* 非提携の参考リンク(furusato-nozei限定)。PRバッジは付けない(アフィリエイトではないため)。 */
+.other-asp-links {
+  margin: 8px 0 0;
+  font-size: 0.74rem;
+  color: var(--ink-sub);
+  text-align: center;
+}
+.other-asp-links a {
+  color: var(--ink-sub);
+  text-decoration: underline;
+}
 
 /* ---- 早見表 ---- */
 .rate-table-box {
@@ -967,6 +997,36 @@ html.qshow .share-row { display: flex; }
   color: var(--ink-sub);
 }
 .follow-x a {
+  color: var(--navy);
+  font-weight: 700;
+  text-decoration: none;
+  border-bottom: 1px solid var(--navy);
+}
+
+/* ---- 運営者プロフィール+フォロー導線(2026-09-01追加、furusato-nozei限定) ---- */
+.follow-cta {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0 0 20px;
+  padding: 16px 18px;
+  background: rgba(53, 242, 176, 0.08);
+  border: 1px solid rgba(53, 242, 176, 0.3);
+  border-radius: var(--radius);
+  text-align: center;
+}
+.follow-cta-title {
+  margin: 0;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+.follow-cta p:not(.follow-cta-title) {
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--ink-sub);
+  line-height: 1.6;
+}
+.follow-cta a {
   color: var(--navy);
   font-weight: 700;
   text-decoration: none;

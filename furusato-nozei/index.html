@@ -33,7 +33,7 @@
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "datePublished": "2026-08-28",
-  "dateModified": "2026-08-30",
+  "dateModified": "2026-09-01",
   "mainEntity": [
     { "@type": "Question", "name": "副業がある場合、ふるさと納税の上限額はどう変わりますか?", "acceptedAnswer": { "@type": "Answer", "text": "給与所得に副業の所得(収入から必要経費を差し引いた利益、事業所得の場合はさらに青色申告特別控除を差し引いた後の金額)を合算して住民税所得割額を再計算するため、副業の利益が多いほど上限額は上がる傾向があります。給与収入だけで判断する簡易シミュレーターでは正確な目安が出ません。" } },
     { "@type": "Question", "name": "副業の所得は売上と経費、どちらで計算しますか?", "acceptedAnswer": { "@type": "Answer", "text": "売上(収入)そのものではなく、そこから必要経費を差し引いた「利益」で計算します。売上を丸ごと合算するのは誤りです。" } },
@@ -59,7 +59,7 @@
     "priceCurrency": "JPY"
   },
   "datePublished": "2026-08-28",
-  "dateModified": "2026-08-30"
+  "dateModified": "2026-09-01"
 }
 </script>
 </head>
@@ -75,6 +75,8 @@
 <main class="wrap">
   <a class="back-link" href="../">← ツール一覧にもどる</a>
   <p class="stage-note">会社員で副業(雑所得・事業所得)がある方向けの、ふるさと納税 控除上限額(2026年・令和8年分)の概算シミュレーターです。給与所得と副業所得を合算して計算します。</p>
+  <p class="update-date">最終更新: 2026年9月1日(税制・計算式の内容を都度見直しています)</p>
+  <p class="seasonal-reminder" id="seasonal-reminder">🍂 ふるさと納税は12月31日までの寄附が当年分の対象です。年末は返礼品の品切れ・発送遅延が増えるため、お早めのご検討がおすすめです。</p>
 
   <div class="calc-card">
     <div class="field">
@@ -125,7 +127,13 @@
     <div class="share-row" id="share-row">
       <button class="share-btn" id="btn-copy-link" type="button">結果のURLをコピー</button>
       <button class="share-btn" id="btn-share-x" type="button">𝕏で共有</button>
+      <button class="share-btn" id="btn-save-image" type="button">結果を画像で保存</button>
     </div>
+  </div>
+
+  <div class="follow-cta" id="follow-cta">
+    <p class="follow-cta-title">この計算機を作っているのは</p>
+    <p>uuhai0625(ウーハイ)。LINEスタンプ・電子書籍・note記事など、生成AIを使った複数の創作活動を実際に行っています。制作の裏側や新しいツールの告知は<a href="https://x.com/uuhai0625" target="_blank" rel="noopener">𝕏 @uuhai0625</a>で発信中、よければフォローしてください。</p>
   </div>
 
   <a class="aff-card" id="aff-card" href="#" target="_blank" rel="noopener sponsored">
@@ -136,6 +144,7 @@
     </div>
     <span class="aff-pr">PR</span>
   </a>
+  <p class="other-asp-links">他のサイトも見てみる: <a href="https://www.furunavi.jp/" target="_blank" rel="noopener">ふるなび</a>・<a href="https://www.satofull.jp/" target="_blank" rel="noopener">さとふる</a>(このサイトは提携していない参考リンクです。返礼品の表示は楽天のみ連携しています)</p>
 
   <div id="product-section">
     <div class="field" id="product-category-field" style="display:none; max-width: 320px; margin: 24px auto 0;">
@@ -203,8 +212,6 @@
     <p class="rate-source">楽天ふるさと納税は取扱自治体数・レビュー数の実績が豊富なため、本ページでは楽天市場の商品データを基準に紹介しています。2026年8月時点の楽天市場レビュー数をもとに、ジャンルごとに上位1点を機械的に抽出したものです(編集部が実際に取り寄せて試した内容ではありません)。価格・在庫状況は変動するため、最新情報はリンク先でご確認ください。</p>
   </div>
 
-  <p class="follow-x">制作の裏側や新しいツールの告知は <a href="https://x.com/uuhai0625" target="_blank" rel="noopener">@uuhai0625</a> で発信しています</p>
-
   <div class="manner-box show">
     <h2>この計算機について</h2>
     <ul>
@@ -213,6 +220,7 @@
       <li>正確な金額は、前年の住民税課税決定通知書に記載の「所得割額」等でご確認ください。</li>
       <li>税務上の最終判断は税理士・お住まいの自治体・税務署にご確認ください。</li>
       <li>入力した収入・経費等の情報はお使いのブラウザ内でのみ計算に使われ、外部に送信されることはありません。</li>
+      <li>1自治体あたりの返礼品は寄附額の3割程度が目安のため、上限額が大きい場合は複数の自治体に分けて寄附すると、選べる返礼品の幅が広がる場合があります。</li>
     </ul>
   </div>
 

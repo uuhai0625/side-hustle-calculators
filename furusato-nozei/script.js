@@ -306,6 +306,68 @@ btnShareX.addEventListener('click', () => {
   window.open(intentUrl, '_blank', 'noopener');
 });
 
+// 結果を画像カードとして保存(2026-09-01追加)。X/Instagram等での画像投稿に使ってもらう想定。
+function drawResultImage(limit) {
+  const W = 900, H = 500;
+  const canvas = document.createElement('canvas');
+  canvas.width = W;
+  canvas.height = H;
+  const ctx = canvas.getContext('2d');
+
+  ctx.fillStyle = '#0a0d0c';
+  ctx.fillRect(0, 0, W, H);
+  ctx.strokeStyle = '#35f2b0';
+  ctx.lineWidth = 3;
+  ctx.strokeRect(6, 6, W - 12, H - 12);
+
+  ctx.textAlign = 'center';
+  ctx.fillStyle = '#ffb454';
+  ctx.font = '700 26px "Zen Kaku Gothic New", "Noto Sans JP", sans-serif';
+  ctx.fillText('AI副業そろばん', W / 2, 74);
+
+  ctx.fillStyle = '#e8ece9';
+  ctx.font = '400 24px "Noto Sans JP", sans-serif';
+  ctx.fillText('ふるさと納税 控除上限額の目安(概算)', W / 2, 150);
+
+  ctx.fillStyle = '#35f2b0';
+  ctx.font = '700 88px "JetBrains Mono", monospace';
+  ctx.fillText('¥' + limit.toLocaleString('ja-JP'), W / 2, 280);
+
+  ctx.fillStyle = '#8a938e';
+  ctx.font = '400 18px "Noto Sans JP", sans-serif';
+  ctx.fillText('副業のふるさと納税 控除上限額シミュレーター', W / 2, 400);
+  ctx.fillText('uuhai0625.github.io/side-hustle-calculators/furusato-nozei/', W / 2, 428);
+
+  return canvas;
+}
+
+const btnSaveImage = document.getElementById('btn-save-image');
+btnSaveImage.addEventListener('click', async () => {
+  if (!lastLimit) return;
+  try { await document.fonts.ready; } catch (e) { /* フォント読み込み待機に失敗してもデフォルトフォントで描画を続行 */ }
+  const canvas = drawResultImage(lastLimit);
+  canvas.toBlob((blob) => {
+    if (!blob) return;
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `furusato-nozei-${lastLimit}.png`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }, 'image/png');
+});
+
+// 12〜1月の駆け込み需要期(12月31日が寄附期限)のみ季節性リマインドを表示。
+function initSeasonalReminder() {
+  const banner = document.getElementById('seasonal-reminder');
+  if (!banner) return;
+  const month = new Date().getMonth() + 1;
+  if (month >= 10 && month <= 12) banner.classList.add('show');
+}
+initSeasonalReminder();
+
 function initFromQuery() {
   const params = new URLSearchParams(location.search);
   const salary = params.get('salary');
