@@ -93,10 +93,11 @@ function cardHtml(item, category) {
     </a>`;
 }
 
-// --- 給与所得控除(2020年分以降の速算表) ---
+// --- 給与所得控除(令和7年度税制改正後の速算表、令和7年分以後恒久適用) ---
+// 190万円以下の最低保証額が55万円→65万円に引き上げ(国税庁 令和7年5月30日Q&A)。
+// 190万円ちょうどで新旧の式が650,000円に一致するため、190万円超のブラケットは変更不要。
 function salaryDeduction(income) {
-  if (income <= 1625000) return 550000;
-  if (income <= 1800000) return income * 0.4 - 100000;
+  if (income <= 1900000) return 650000;
   if (income <= 3600000) return income * 0.3 + 80000;
   if (income <= 6600000) return income * 0.2 + 440000;
   if (income <= 8500000) return income * 0.1 + 1100000;
