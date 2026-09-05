@@ -83,6 +83,21 @@ function clampNonNegative(value) {
   return Math.max(0, Math.round(Number(value) || 0));
 }
 
+// 内訳を横棒グラフで表示(No.35、douga-ryokinのrenderBreakdownBarsと同じCSS・見せ方を流用。
+// 金額の大きい順に並べ替え、バー幅は最大額の項目を100%とした相対比較)。
+function renderBreakdownBars(items, total) {
+  const sorted = [...items].sort((a, b) => b.amount - a.amount);
+  const maxAmount = Math.max(...sorted.map((item) => item.amount), 1);
+  const rows = sorted.map((item) => {
+    const widthPct = Math.max(2, Math.round((item.amount / maxAmount) * 100));
+    return `<div class="breakdown-bar-row">
+      <div class="breakdown-bar-head"><span class="breakdown-bar-name">${item.label}</span><span class="breakdown-bar-value">¥${yen(item.amount)}</span></div>
+      <div class="breakdown-bar-track"><div class="breakdown-bar-fill" style="width:${widthPct}%"></div></div>
+    </div>`;
+  }).join('');
+  return rows + `<div class="breakdown-bar-total"><span>合計</span><span>¥${yen(total)}</span></div>`;
+}
+
 function calc() {
   const chat = CHAT_OPTIONS[selectChat.value] || CHAT_OPTIONS.none;
   const coding = CODING_OPTIONS[selectCoding.value] || CODING_OPTIONS.none;
@@ -112,10 +127,12 @@ function calc() {
   resultAdvice.textContent = advice;
 
   const nonZeroItems = items.filter((item) => item.amount > 0);
-  if (nonZeroItems.length > 0) {
-    resultBreakdown.innerHTML = nonZeroItems
-      .map((item) => `<div class="breakdown-plain-row"><span>${item.label}</span><span>¥${yen(item.amount)}</span></div>`)
-      .join('') + `<div class="breakdown-plain-row"><span>合計</span><span>¥${yen(total)}</span></div>`;
+  if (nonZeroItems.length >= 2) {
+    resultBreakdown.innerHTML = renderBreakdownBars(nonZeroItems, total);
+    resultBreakdown.classList.add('show');
+  } else if (nonZeroItems.length === 1) {
+    resultBreakdown.innerHTML = `<div class="breakdown-plain-row"><span>${nonZeroItems[0].label}</span><span>¥${yen(nonZeroItems[0].amount)}</span></div>`
+      + `<div class="breakdown-plain-row"><span>合計</span><span>¥${yen(total)}</span></div>`;
     resultBreakdown.classList.add('show');
   } else {
     resultBreakdown.innerHTML = '';

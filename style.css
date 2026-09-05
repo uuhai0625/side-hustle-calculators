@@ -780,6 +780,11 @@ html.qshow .share-row { display: flex; }
   text-align: left;
   color: var(--ink-sub);
   font-weight: 700;
+  /* モバイルの横スクロール中も層ラベル列を見失わないようにsticky化(No.42、2026-09-05) */
+  position: sticky;
+  left: 0;
+  background: var(--bg-card);
+  z-index: 1;
 }
 .rate-table-matrix td:last-child, .rate-table-matrix th:last-child {
   text-align: center;

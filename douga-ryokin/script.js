@@ -316,6 +316,7 @@ const btnCopyLink = document.getElementById('btn-copy-link');
 const btnShareX = document.getElementById('btn-share-x');
 const btnSaveImage = document.getElementById('btn-save-image');
 let lastTotalJpy = 0;
+let lastParts = null;
 
 function calcSingle() {
   // HTMLのmin/max属性は直接入力・クエリパラメータ経由の値を弾かないため、
@@ -353,6 +354,7 @@ function calcSingle() {
 
   resultCard.classList.add('show');
   lastTotalJpy = result.totalJpy;
+  lastParts = null;
   shareRow.classList.add('show');
 
   affCard.href = affiliateUrl('外付けSSD');
@@ -447,6 +449,7 @@ function calcCombo() {
 
   resultCard.classList.add('show');
   lastTotalJpy = totalJpy;
+  lastParts = parts;
   shareRow.classList.add('show');
 
   affCard.href = affiliateUrl('外付けSSD');
@@ -597,7 +600,9 @@ function fitFontSize(ctx, text, maxWidth, baseSize, family) {
   return size;
 }
 
-function drawResultImage(amountDisplay) {
+// parts省略時(単体モード)は従来通りの大きい金額表示。併用モードは上位4件までの内訳バーを描画する
+// (No.42、2026-09-05。7ツール全部だと画像内に収まらないため上位4件+その他件数の表記に丸める)。
+function drawResultImage(amountDisplay, parts) {
   const W = 900, H = 500;
   const canvas = document.createElement('canvas');
   canvas.width = W;
@@ -613,21 +618,57 @@ function drawResultImage(amountDisplay) {
   ctx.textAlign = 'center';
   ctx.fillStyle = '#ffb454';
   ctx.font = '700 26px "Zen Kaku Gothic New", "Noto Sans JP", sans-serif';
-  ctx.fillText('AI副業そろばん', W / 2, 74);
+  ctx.fillText('AI副業そろばん', W / 2, 68);
 
   ctx.fillStyle = '#e8ece9';
-  ctx.font = '400 24px "Noto Sans JP", sans-serif';
-  ctx.fillText('動画作成AIツールの月額料金の目安', W / 2, 150);
+  ctx.font = '400 22px "Noto Sans JP", sans-serif';
+  ctx.fillText('動画作成AIツールの月額料金の目安', W / 2, 120);
 
+  const hasBreakdown = Array.isArray(parts) && parts.length > 1;
+  const amountY = hasBreakdown ? 190 : 280;
+  const maxAmountFont = hasBreakdown ? 56 : 88;
   ctx.fillStyle = '#35f2b0';
-  const size = fitFontSize(ctx, amountDisplay, W - 80, 88, '"JetBrains Mono", monospace');
+  const size = fitFontSize(ctx, amountDisplay, W - 80, maxAmountFont, '"JetBrains Mono", monospace');
   ctx.font = `700 ${size}px "JetBrains Mono", monospace`;
-  ctx.fillText(amountDisplay, W / 2, 280);
+  ctx.fillText(amountDisplay, W / 2, amountY);
+
+  if (hasBreakdown) {
+    const sorted = [...parts].sort((a, b) => b.totalJpy - a.totalJpy);
+    const shown = sorted.slice(0, 4);
+    const maxJpy = Math.max(...shown.map((p) => p.totalJpy), 1);
+    const barLeft = 80, barRight = W - 80, barWidth = barRight - barLeft;
+    let y = 225;
+    ctx.textAlign = 'left';
+    shown.forEach((p) => {
+      ctx.fillStyle = '#e8ece9';
+      ctx.font = '400 16px "Noto Sans JP", sans-serif';
+      ctx.fillText(p.name, barLeft, y);
+      ctx.textAlign = 'right';
+      ctx.fillStyle = '#8a938e';
+      ctx.font = '600 16px "JetBrains Mono", monospace';
+      ctx.fillText('¥' + p.totalJpy.toLocaleString('ja-JP'), barRight, y);
+      ctx.textAlign = 'left';
+      const trackY = y + 8;
+      ctx.fillStyle = 'rgba(255,255,255,0.12)';
+      ctx.fillRect(barLeft, trackY, barWidth, 8);
+      ctx.fillStyle = '#35f2b0';
+      const w = Math.max(6, Math.round((p.totalJpy / maxJpy) * barWidth));
+      ctx.fillRect(barLeft, trackY, w, 8);
+      y += 40;
+    });
+    if (sorted.length > shown.length) {
+      ctx.textAlign = 'center';
+      ctx.fillStyle = '#8a938e';
+      ctx.font = '400 14px "Noto Sans JP", sans-serif';
+      ctx.fillText(`他${sorted.length - shown.length}ツールも併用`, W / 2, y + 4);
+    }
+    ctx.textAlign = 'center';
+  }
 
   ctx.fillStyle = '#8a938e';
   ctx.font = '400 18px "Noto Sans JP", sans-serif';
-  ctx.fillText('動画作成AIツール料金シミュレーター', W / 2, 400);
-  ctx.fillText('uuhai0625.github.io/side-hustle-calculators/douga-ryokin/', W / 2, 428);
+  ctx.fillText('動画作成AIツール料金シミュレーター', W / 2, 452);
+  ctx.fillText('uuhai0625.github.io/side-hustle-calculators/douga-ryokin/', W / 2, 478);
 
   return canvas;
 }
@@ -635,7 +676,7 @@ function drawResultImage(amountDisplay) {
 btnSaveImage.addEventListener('click', async () => {
   if (!lastTotalJpy) return;
   try { await document.fonts.ready; } catch (e) { /* フォント読み込み待機に失敗してもデフォルトフォントで描画を続行 */ }
-  const canvas = drawResultImage('¥' + lastTotalJpy.toLocaleString('ja-JP'));
+  const canvas = drawResultImage('¥' + lastTotalJpy.toLocaleString('ja-JP'), lastParts);
   canvas.toBlob((blob) => {
     if (!blob) return;
     const url = URL.createObjectURL(blob);
