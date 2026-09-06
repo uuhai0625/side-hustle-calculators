@@ -401,12 +401,21 @@ a { color: var(--navy); }
   color: var(--ink-sub);
   margin-bottom: 5px;
 }
-.breakdown-bar-name { text-align: left; }
+.breakdown-bar-name {
+  text-align: left;
+  /* No.48(2026-09-06): 長いツール名(例:「OpenAI Codex(ChatGPT Go)」)がモバイル幅で
+     金額と衝突しないよう、名前側を省略表示にして金額側の幅を確保する。 */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+}
 .breakdown-bar-value {
   color: var(--ink);
   font-family: "JetBrains Mono", monospace;
   font-weight: 600;
   white-space: nowrap;
+  flex-shrink: 0;
 }
 .breakdown-bar-track {
   height: 9px;
@@ -444,6 +453,9 @@ a { color: var(--navy); }
   transition: box-shadow 0.15s ease, transform 0.15s ease, background 0.15s ease;
 }
 .btn-calc:hover { background: #4bffc4; box-shadow: var(--glow); transform: translateY(-1px); }
+/* No.45(2026-09-06): クリック時の押下感を出すためのactiveスタイル。hoverの浮き上がりを打ち消して
+   わずかに沈み込ませ、box-shadowも弱めることで「押した」手応えを作る。 */
+.btn-calc:active { transform: translateY(1px); box-shadow: none; }
 
 /* ---- 結果 ---- */
 .result-card {
@@ -550,6 +562,7 @@ html.qshow .share-row { display: flex; }
   transition: border-color 0.15s ease, color 0.15s ease;
 }
 .share-btn:hover { border-color: var(--navy); color: var(--navy); }
+.share-btn:active { background: rgba(53, 242, 176, 0.12); transform: translateY(1px); }
 
 /* ---- 見出しのアクセントバー(絵文字の代わりの統一装飾) ---- */
 .manner-box h2,
@@ -733,6 +746,20 @@ html.qshow .share-row { display: flex; }
 .rate-table-wrap {
   overflow-x: auto;
   margin-bottom: 16px;
+  position: relative;
+}
+/* マトリクス表はsticky列(層ラベル)の分だけ「全部見えている」錯覚を起こしやすいため、
+   右端に常時フェードを重ねて横スクロールできることを示唆する(No.46、2026-09-06)。
+   ラッパー基準の絶対配置なので、スクロール位置に関わらず右端に固定表示される。 */
+.rate-table-wrap:has(.rate-table-matrix)::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 20px;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, var(--bg-card));
+  pointer-events: none;
 }
 .rate-table {
   width: 100%;
@@ -785,6 +812,8 @@ html.qshow .share-row { display: flex; }
   left: 0;
   background: var(--bg-card);
   z-index: 1;
+  /* sticky列と横スクロールする他列の境目が分かるように右側に境界線を追加(No.43、2026-09-06) */
+  box-shadow: 1px 0 0 var(--line);
 }
 .rate-table-matrix td:last-child, .rate-table-matrix th:last-child {
   text-align: center;
@@ -1232,5 +1261,13 @@ html.qshow .share-row { display: flex; }
      selectを次の行に折り返してチェックボックス+ラベルとは別行にする */
   .combo-tool-row { flex-wrap: wrap; }
   .combo-tool-row .combo-tool-name { min-width: 0; flex: 1 1 auto; }
-  .combo-tool-row select { flex: 1 1 100%; margin: 8px 0 0 28px; width: calc(100% - 28px); }
+  .combo-tool-row select {
+    flex: 1 1 100%;
+    margin: 8px 0 0 28px;
+    width: calc(100% - 28px);
+    /* No.44(2026-09-06): 折り返し後は横幅に余裕があるため、iOS Safariのタップ時自動ズームを
+       防ぐfont-size 1rem・タップ領域を確保するpaddingに拡大(通常フォームの.field selectと同等)。 */
+    font-size: 1rem;
+    padding: 12px 14px;
+  }
 }

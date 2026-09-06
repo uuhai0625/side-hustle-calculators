@@ -277,6 +277,10 @@ btnSaveImage.addEventListener('click', async () => {
     a.click();
     document.body.removeChild(a);
     setTimeout(() => URL.revokeObjectURL(url), 1000);
+    // No.47(2026-09-06): コピー完了表示と同じパターンで、画像保存にも完了フィードバックを統一。
+    const savedLabel = btnSaveImage.textContent;
+    btnSaveImage.textContent = '保存しました ✓';
+    setTimeout(() => { btnSaveImage.textContent = savedLabel; }, 2000);
   }, 'image/png');
 });
 
