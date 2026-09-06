@@ -206,6 +206,10 @@ function buildOptionsHtml(plans, selectedKey) {
   }).join('');
 }
 
+// No.58(2026-09-06): 競合調査(ReeX Japan)で「クレジット制ツールの料金を月◯本相当に
+// 換算する」表現が実際に使われていることを確認、うちのsubにも追加した。
+// プラン付与分の範囲内(追加費用なし)で作れる本数の目安。
+
 // credit5s系ツール共通の計算(1本あたりの秒数 → 5秒単位のクレジット消費に換算)。
 function calcCredit5s(toolKey, plan, videos, seconds, rate) {
   const tool = CREDIT5S_TOOLS[toolKey];
@@ -222,10 +226,14 @@ function calcCredit5s(toolKey, plan, videos, seconds, rate) {
   } else {
     advice = `選んだプランのクレジットの範囲内に収まる見込みです。`;
   }
+  const creditsPerVideo = tool.creditsPer5Sec * (seconds / 5);
+  const capacityText = plan.relaxedUnlimited
+    ? '低速モードなら本数無制限'
+    : `月あたり約${Math.max(0, Math.floor(plan.credits / creditsPerVideo)).toLocaleString('ja-JP')}本相当`;
   return {
     totalUsd, totalJpy,
     note: `${tool.name} ${plan.label}、動画${videos}本×${seconds}秒で試算`,
-    sub: `クレジットの目安:必要${neededCredits.toLocaleString('ja-JP')} / プラン付与${plan.credits.toLocaleString('ja-JP')}・為替${rate}円/ドル`,
+    sub: `クレジットの目安:必要${neededCredits.toLocaleString('ja-JP')} / プラン付与${plan.credits.toLocaleString('ja-JP')}(${capacityText})・為替${rate}円/ドル`,
     advice,
   };
 }
@@ -239,10 +247,12 @@ function calcMj(plan, videos, candidates, rate) {
   const advice = overMin > 0
     ? `プランのFast時間だけでは約${Math.ceil(overMin / 6) / 10}時間分足りない見込みです。追加購入(1時間$4)は割高になりやすいため、必要な追加時間が大きい場合は上位プランへの切り替えも検討してください。`
     : `選んだプランのFast時間の範囲内に収まる見込みです。Fast時間は使い切っても翌月に繰り越されません。`;
+  const minPerVideo = candidates * MJ_STILL_MIN + MJ_ANIMATE_MIN;
+  const capacity = Math.max(0, Math.floor(plan.fastMin / minPerVideo));
   return {
     totalUsd, totalJpy,
     note: `Midjourney ${plan.label}、動画${videos}本(候補${candidates}枚+Animate)で試算`,
-    sub: `Fast時間の目安:必要${neededMin}分 / プラン付与${plan.fastMin}分・為替${rate}円/ドル`,
+    sub: `Fast時間の目安:必要${neededMin}分 / プラン付与${plan.fastMin}分(月あたり約${capacity.toLocaleString('ja-JP')}本相当)・為替${rate}円/ドル`,
     advice,
   };
 }
@@ -256,10 +266,12 @@ function calcRunway(plan, model, videos, seconds, rate) {
   const advice = overCredits > 0
     ? `プランのクレジットだけでは約${overCredits.toLocaleString('ja-JP')}クレジット足りない見込みです。追加クレジットの単価は公開されているAPI従量課金($0.01/credit)を参考値にしています、実際のサブスク追加購入パックの単価はRunwayのアカウント画面でご確認ください。`
     : `選んだプランのクレジットの範囲内に収まる見込みです。モデルを変えると秒あたりの消費クレジットが大きく変わります。`;
+  const creditsPerVideo = model.creditsPerSec * seconds;
+  const capacity = Math.max(0, Math.floor(plan.credits / creditsPerVideo));
   return {
     totalUsd, totalJpy,
     note: `Runway ${plan.label}、${model.label}で動画${videos}本×${seconds}秒で試算`,
-    sub: `クレジットの目安:必要${neededCredits.toLocaleString('ja-JP')} / プラン付与${plan.credits.toLocaleString('ja-JP')}・為替${rate}円/ドル`,
+    sub: `クレジットの目安:必要${neededCredits.toLocaleString('ja-JP')} / プラン付与${plan.credits.toLocaleString('ja-JP')}(月あたり約${capacity.toLocaleString('ja-JP')}本相当)・為替${rate}円/ドル`,
     advice,
   };
 }
