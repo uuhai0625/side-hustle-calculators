@@ -83,13 +83,18 @@ const GENRES = {
   },
   note: {
     label: 'note記事執筆', toolLow: 0, toolHigh: 3000,
-    note: '文章の下書き・壁打ちは無料プランのAIチャットで足りることが多く、4ジャンルの中で最も始めやすい費用感です。',
+    note: '文章の下書き・壁打ちは無料プランのAIチャットで足りることが多く、最も始めやすい費用感です。',
     link: { href: '../hajimekata/', label: 'AI副業の始め方' },
   },
   webapp: {
     label: 'Webアプリ制作', toolLow: 0, toolHigh: 3000,
     note: 'AIにコードを書かせるツールは無料枠から始められることが多く、このサイト自体もこの方法で作られています。',
     link: { href: '../hajimekata/', label: 'AI副業の始め方' },
+  },
+  'ai-writing': {
+    label: 'AIライティング代行', toolLow: 0, toolHigh: 3180,
+    note: '記事の下書き・構成案づくりは無料プランのAIチャットでも試せますが、クライアントワークとして文字数・納期に応える段階になると、有料プラン(ChatGPT Plus/Claude Pro、目安¥3,000〜3,180/月)への切り替えが現実的になりやすいジャンルです。',
+    link: { href: '../ai-chat-tools/', label: '生成AIチャットツール料金比較' },
   },
 };
 
