@@ -100,6 +100,39 @@ function applyHighlight(pairs) {
   matrixBox.open = true;
 }
 
+// No.61(2026-09-06): マトリクス表の該当セルの内容をそのままカード化して即座に目立たせる
+// (競合調査「ReeX Japan」の推奨プランカード実例に倣った、データはマトリクス表のHTMLを
+// 単一の情報源として流用し二重管理しない)。
+const recoCardsEl = document.getElementById('reco-cards');
+const TOOL_LABELS = { claude: 'Claude Code', codex: 'OpenAI Codex', cursor: 'Cursor', copilot: 'GitHub Copilot' };
+
+function renderRecoCards(pairs) {
+  if (!recoCardsEl) return;
+  if (!matrixBox || !pairs || !pairs.length) {
+    recoCardsEl.innerHTML = '';
+    recoCardsEl.classList.remove('show');
+    return;
+  }
+  const cards = pairs.map(([tool, tier]) => {
+    const cell = matrixBox.querySelector(`td[data-tool="${tool}"][data-tier="${tier}"]`);
+    if (!cell) return '';
+    const planNameEl = cell.querySelector('.plan-name');
+    const priceEl = cell.querySelector('.price');
+    const priceJpyEl = cell.querySelector('.price-jpy');
+    const planName = planNameEl ? planNameEl.textContent : '';
+    const price = priceEl ? priceEl.textContent : '';
+    const priceJpy = priceJpyEl ? priceJpyEl.textContent : '';
+    return `<div class="reco-card">
+      <span class="reco-badge">おすすめ</span>
+      <p class="reco-tool">${TOOL_LABELS[tool] || tool}</p>
+      <p class="reco-plan">${planName}</p>
+      <p class="reco-price">${price}${priceJpy ? `(${priceJpy})` : ''}</p>
+    </div>`;
+  }).join('');
+  recoCardsEl.innerHTML = cards;
+  recoCardsEl.classList.add('show');
+}
+
 const selectTask = document.getElementById('select-task');
 const selectFreq = document.getElementById('select-freq');
 const resultCard = document.getElementById('result-card');
@@ -128,6 +161,7 @@ function computeAndRender() {
   lastHeadline = rec.headline;
   updateShareUrl();
   applyHighlight(rec.highlight);
+  renderRecoCards(rec.highlight);
 }
 
 function calc() {

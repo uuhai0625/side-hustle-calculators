@@ -534,6 +534,53 @@ a { color: var(--navy); }
   color: var(--ink);
 }
 
+/* No.61(2026-09-06): 診断結果の推奨プランをマトリクス表とは別に、カード+バッジで即座に
+   目立たせる(競合調査「ReeX Japan」の推奨プランカードの実例に倣った)。goldは既存のPR/アフィリエイト
+   専用ルールと混同しないよう、ここではブランドの主アクセント色(navy)をバッジに使う。 */
+.reco-cards {
+  display: none;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 10px;
+  margin-top: 16px;
+  text-align: left;
+}
+.reco-cards.show { display: grid; }
+.reco-card {
+  position: relative;
+  background: var(--bg-card);
+  border: 1.5px solid var(--navy);
+  border-radius: 10px;
+  padding: 12px 14px;
+  box-shadow: 0 0 0 1px rgba(53, 242, 176, 0.12);
+}
+.reco-card .reco-badge {
+  display: inline-block;
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: #06231a;
+  background: var(--navy);
+  padding: 1px 7px;
+  border-radius: 999px;
+  letter-spacing: 0.02em;
+  margin-bottom: 6px;
+}
+.reco-card .reco-tool {
+  font-size: 0.78rem;
+  color: var(--ink-sub);
+  margin: 0 0 2px;
+}
+.reco-card .reco-plan {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 0 0 2px;
+}
+.reco-card .reco-price {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.82rem;
+  color: var(--navy);
+}
+
 /* ---- 結果の共有 ---- */
 .share-row {
   display: none;
