@@ -128,7 +128,9 @@ const btnSaveImage = document.getElementById('btn-save-image');
 let lastTotalLow = 0;
 let lastTotalHigh = 0;
 
-function calc() {
+// No.54(2026-09-06): 数値計算とテキスト更新だけを担う部分を独立させ、
+// 初回計算後の「選択を変えるたびに自動再計算」でも使い回せるようにする。
+function computeAndRender() {
   const genreKey = selectGenre.value;
   const pcKey = selectPc.value;
   const genre = GENRES[genreKey];
@@ -148,11 +150,9 @@ function calc() {
   const linkHtml = genre.link ? ` くわしくは<a href="${genre.link.href}">${genre.link.label}</a>もあわせてご覧ください。` : '';
   resultAdvice.innerHTML = `${genre.note} ${pc.note}${linkHtml}`;
 
-  resultCard.classList.add('show');
   lastTotalLow = totalLow;
   lastTotalHigh = totalHigh;
   updateShareUrl();
-  shareRow.classList.add('show');
 
   if (pcKey === 'already') {
     affCard.classList.remove('show');
@@ -162,11 +162,26 @@ function calc() {
     affCard.classList.add('show');
     showProducts('ノートパソコン', 'これから買うなら人気のノートPC');
   }
+}
 
+function calc() {
+  computeAndRender();
+  resultCard.classList.add('show');
+  shareRow.classList.add('show');
   resultCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 document.getElementById('btn-calc').addEventListener('click', calc);
+
+// No.54(2026-09-06): 初回計算より後は、選択を変えるたびに再度ボタンを押さなくても
+// 結果が自動更新されるようにする(選択肢は2つのみで頻繁な連打は想定しにくいため、
+// showProductsの再取得も許容する=PC選択の変化を確実に商品カードへ反映するため)。
+function liveRecalcNow() {
+  if (!resultCard.classList.contains('show')) return;
+  computeAndRender();
+}
+selectGenre.addEventListener('change', liveRecalcNow);
+selectPc.addEventListener('change', liveRecalcNow);
 
 function paramsFromState() {
   const params = new URLSearchParams();

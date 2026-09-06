@@ -112,7 +112,9 @@ const btnCopyLink = document.getElementById('btn-copy-link');
 const btnShareX = document.getElementById('btn-share-x');
 let lastHeadline = '';
 
-function calc() {
+// No.54(2026-09-06): 数値計算とテキスト更新だけを担う部分を独立させ、
+// 初回計算後の「選択を変えるたびに自動再計算」でも使い回せるようにする。
+function computeAndRender() {
   const task = selectTask.value;
   const freq = selectFreq.value;
   const rec = (RECOMMENDATIONS[task] && RECOMMENDATIONS[task][freq]) || RECOMMENDATIONS.agent.daily;
@@ -122,17 +124,29 @@ function calc() {
   resultSub.textContent = 'この診断はルールベースの簡易的な目安です。実際に必要なプランは、上限に当たる頻度を見ながら判断してください。';
   resultAdvice.textContent = rec.advice;
 
-  resultCard.classList.add('show');
   if (affCard) affCard.classList.add('show');
   lastHeadline = rec.headline;
   updateShareUrl();
-  shareRow.classList.add('show');
   applyHighlight(rec.highlight);
+}
 
+function calc() {
+  computeAndRender();
+  resultCard.classList.add('show');
+  shareRow.classList.add('show');
   resultCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 document.getElementById('btn-calc').addEventListener('click', calc);
+
+// No.54(2026-09-06): 初回計算より後は、選択を変えるたびに再度ボタンを押さなくても
+// 結果が自動更新されるようにする。
+function liveRecalcNow() {
+  if (!resultCard.classList.contains('show')) return;
+  computeAndRender();
+}
+selectTask.addEventListener('change', liveRecalcNow);
+selectFreq.addEventListener('change', liveRecalcNow);
 
 function paramsFromState() {
   const params = new URLSearchParams();

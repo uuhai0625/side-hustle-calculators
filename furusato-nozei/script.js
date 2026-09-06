@@ -200,13 +200,14 @@ function readInput() {
   };
 }
 
-function calc() {
+// No.54(2026-09-06): 数値計算とテキスト更新だけを担う部分を独立させ、
+// 初回計算後の「入力するたびに自動再計算」でも使い回せるようにする。
+// このページは返礼品の価格帯検索(showFurusatoProducts)自体が上限額に依存するため、
+// 他ページと異なり再計算のたびに再取得する(scheduleLiveRecalcの300msデバウンスで
+// キー入力ごとの連打は防いでいる)。
+function computeAndRender() {
   const input = readInput();
   const r = calcResult(input);
-  // 計算実行率を見るためのGA4イベント(2026-08-31追加)。ローカル環境ではga.jsがgtagを定義しないため存在チェック必須。
-  if (typeof gtag === 'function') {
-    gtag('event', 'calc_click', { page_path: location.pathname });
-  }
 
   resultAmount.textContent = r.limit.toLocaleString('ja-JP');
   resultNote.textContent = `給与所得¥${Math.round(r.salaryIncome).toLocaleString('ja-JP')} + 副業所得¥${Math.round(r.sideTaxableIncome).toLocaleString('ja-JP')}(${SIDE_TYPE_LABEL[input.sideType]}) = 総所得金額¥${Math.round(r.totalIncome).toLocaleString('ja-JP')}`;
@@ -231,19 +232,26 @@ function calc() {
 
   resultAdvice.textContent = 'これは概算です。社会保険料控除は給与収入の15%、住民税の調整控除は考慮せずに計算しています。正確な金額は前年の住民税課税決定通知書等でご確認のうえ、実際の寄附は上限額よりやや少なめにするのが安全です(税務上の最終判断は税理士・税務署にご確認ください)。';
 
-  resultCard.classList.add('show');
-  followCta.classList.add('show');
-  if (otherAspLinks) otherAspLinks.classList.add('show');
   lastLimit = r.limit;
   updateShareUrl(input);
-  shareRow.classList.add('show');
 
   productCategoryField.style.display = '';
   const category = selectProductCategory.value;
   affCard.href = affiliateUrl(furusatoSearchUrl(category, r.limit));
   affCard.classList.add('show');
   showFurusatoProducts(category, r.limit || 3000);
+}
 
+function calc() {
+  // 計算実行率を見るためのGA4イベント(2026-08-31追加)。ローカル環境ではga.jsがgtagを定義しないため存在チェック必須。
+  if (typeof gtag === 'function') {
+    gtag('event', 'calc_click', { page_path: location.pathname });
+  }
+  computeAndRender();
+  resultCard.classList.add('show');
+  followCta.classList.add('show');
+  if (otherAspLinks) otherAspLinks.classList.add('show');
+  shareRow.classList.add('show');
   resultCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
@@ -254,6 +262,22 @@ selectProductCategory.addEventListener('change', () => {
   affCard.href = affiliateUrl(furusatoSearchUrl(category, lastLimit));
   showFurusatoProducts(category, lastLimit || 3000);
 });
+
+// No.54(2026-09-06): 初回計算より後は、他の入力を変えるたびに再度ボタンを押さなくても
+// 結果が自動更新されるようにする。自動スクロールは初回計算の副作用のみに留める。
+let liveRecalcTimer = null;
+function scheduleLiveRecalc() {
+  if (!resultCard.classList.contains('show')) return;
+  clearTimeout(liveRecalcTimer);
+  liveRecalcTimer = setTimeout(computeAndRender, 300);
+}
+function liveRecalcNow() {
+  if (!resultCard.classList.contains('show')) return;
+  computeAndRender();
+}
+selectSpouse.addEventListener('change', liveRecalcNow);
+selectSideType.addEventListener('change', liveRecalcNow);
+[inputSalary, inputDependents, inputSideIncome, inputSideExpense].forEach((el) => el.addEventListener('input', scheduleLiveRecalc));
 
 function paramsFromState(input) {
   const params = new URLSearchParams();

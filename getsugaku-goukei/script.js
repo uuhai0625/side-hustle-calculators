@@ -98,7 +98,9 @@ function renderBreakdownBars(items, total) {
   return rows + `<div class="breakdown-bar-total"><span>合計</span><span>¥${yen(total)}</span></div>`;
 }
 
-function calc() {
+// No.54(2026-09-06): 数値計算とテキスト更新だけを担う部分を独立させ、
+// 初回計算後の「入力するたびに自動再計算」でも使い回せるようにする。
+function computeAndRender() {
   const chat = CHAT_OPTIONS[selectChat.value] || CHAT_OPTIONS.none;
   const coding = CODING_OPTIONS[selectCoding.value] || CODING_OPTIONS.none;
   const video = clampNonNegative(inputVideo.value);
@@ -139,16 +141,35 @@ function calc() {
     resultBreakdown.classList.remove('show');
   }
 
-  resultCard.classList.add('show');
   if (affCard) affCard.classList.add('show');
   lastTotal = total;
   updateShareUrl();
-  shareRow.classList.add('show');
+}
 
+function calc() {
+  computeAndRender();
+  resultCard.classList.add('show');
+  shareRow.classList.add('show');
   resultCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 document.getElementById('btn-calc').addEventListener('click', calc);
+
+// No.54(2026-09-06): 初回計算より後は、入力を変えるたびに再度ボタンを押さなくても
+// 結果が自動更新されるようにする。
+let liveRecalcTimer = null;
+function scheduleLiveRecalc() {
+  if (!resultCard.classList.contains('show')) return;
+  clearTimeout(liveRecalcTimer);
+  liveRecalcTimer = setTimeout(computeAndRender, 300);
+}
+function liveRecalcNow() {
+  if (!resultCard.classList.contains('show')) return;
+  computeAndRender();
+}
+selectChat.addEventListener('change', liveRecalcNow);
+selectCoding.addEventListener('change', liveRecalcNow);
+[inputVideo, inputElec, inputDepreciation, inputOther].forEach((el) => el.addEventListener('input', scheduleLiveRecalc));
 
 function paramsFromState() {
   const params = new URLSearchParams();

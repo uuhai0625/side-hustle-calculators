@@ -172,10 +172,6 @@ function updateMethodOptions() {
   fieldMethod.style.display = '';
 }
 
-selectMethod.addEventListener('change', () => {
-  if (base) renderForMethod(selectMethod.value);
-});
-
 function computeNormalSchedule(amount, years, ay, am) {
   const rate = 1 / years;
   const annual = Math.max(1, Math.floor(amount * rate));
@@ -216,7 +212,9 @@ function defaultAcquiredYM() {
   return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
 }
 
-function calc() {
+// No.54(2026-09-06): 数値計算とテキスト更新だけを担う部分を独立させ、
+// 初回計算後の「入力するたびに自動再計算」でも使い回せるようにする。
+function computeAndRender() {
   const amount = Math.max(0, Math.round(Number(inputAmount.value) || 0));
   const acquiredYM = inputAcquired.value || defaultAcquiredYM();
   const years = currentYears();
@@ -227,7 +225,6 @@ function calc() {
 
   if (tier === 'under10') {
     base = null;
-    resultCard.classList.add('show');
     resultAmount.textContent = yen(amount);
     resultNote.textContent = '10万円未満のため、購入した年に全額を消耗品費として経費計上できます。';
     resultSub.textContent = '減価償却は不要です(この計算機の対象外)。';
@@ -235,12 +232,7 @@ function calc() {
     resultBreakdown.innerHTML = '';
     resultBreakdown.classList.remove('show');
     scheduleBox.classList.remove('show');
-    shareRow.classList.add('show');
-    affCard.href = affiliateUrl('資産管理 ラベルライター');
-    affCard.classList.add('show');
-    showProducts('ラベルライター 家庭用', '固定資産の管理に人気のアイテム');
     updateShareUrl();
-    resultCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
     return;
   }
 
@@ -251,13 +243,20 @@ function calc() {
   }
 
   base = { amount, acquiredYM, years, blueReturn, category, methods, threshold };
-  renderForMethod(selectMethod.value);
+  renderMethodContent(selectMethod.value);
+}
+
+function calc() {
+  computeAndRender();
+  resultCard.classList.add('show');
+  shareRow.classList.add('show');
   affCard.href = affiliateUrl('資産管理 ラベルライター');
   affCard.classList.add('show');
   showProducts('ラベルライター 家庭用', '固定資産の管理に人気のアイテム');
+  resultCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
-function renderForMethod(methodKey) {
+function renderMethodContent(methodKey) {
   if (!base) return;
   const { amount, acquiredYM, years, methods, threshold } = base;
   const [ayStr, amStr] = acquiredYM.split('-');
@@ -272,7 +271,6 @@ function renderForMethod(methodKey) {
   const firstYear = rows[0];
   const methodObj = methods.find((m) => m.key === methodKey) || methods[0];
 
-  resultCard.classList.add('show');
   resultAmount.textContent = yen(firstYear.amount);
   resultNote.textContent = `${base.category.label} 取得価額¥${yen(amount)} / ${methodObj.label}`;
 
@@ -313,11 +311,31 @@ function renderForMethod(methodKey) {
 
   lastResultText = `${base.category.label}(取得価額¥${yen(amount)})の減価償却を試算しました。\n${methodObj.label}:初年度¥${yen(firstYear.amount)}\n`;
   updateShareUrl();
-  shareRow.classList.add('show');
-  resultCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 document.getElementById('btn-calc').addEventListener('click', calc);
+
+// No.54(2026-09-06): 方式切り替えは以前からボタン不要で即時反映だったが、再スクロールは
+// 初回計算時のみのreveal演出とし、方式変更のたびには行わないよう分離した。
+selectMethod.addEventListener('change', () => {
+  if (base) renderMethodContent(selectMethod.value);
+});
+
+// 初回計算より後は、他の入力を変えるたびに再度ボタンを押さなくても結果が自動更新されるように
+// する。楽天API呼び出し・自動スクロールは初回計算の副作用のみに留める。
+let liveRecalcTimer = null;
+function scheduleLiveRecalc() {
+  if (!resultCard.classList.contains('show')) return;
+  clearTimeout(liveRecalcTimer);
+  liveRecalcTimer = setTimeout(computeAndRender, 300);
+}
+function liveRecalcNow() {
+  if (!resultCard.classList.contains('show')) return;
+  computeAndRender();
+}
+selectCategory.addEventListener('change', liveRecalcNow);
+filingRadios.forEach((r) => r.addEventListener('change', liveRecalcNow));
+[inputCustomYears, inputAmount, inputAcquired].forEach((el) => el.addEventListener('input', scheduleLiveRecalc));
 
 function paramsFromState() {
   const params = new URLSearchParams();

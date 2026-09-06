@@ -318,7 +318,9 @@ const btnSaveImage = document.getElementById('btn-save-image');
 let lastTotalJpy = 0;
 let lastParts = null;
 
-function calcSingle() {
+// No.54(2026-09-06): 数値計算とテキスト更新だけを担う部分を独立させ、
+// 初回計算後の「入力するたびに自動再計算」でも使い回せるようにする。
+function computeAndRenderSingle() {
   // HTMLのmin/max属性は直接入力・クエリパラメータ経由の値を弾かないため、
   // 計算時に必ずここでも同じ範囲にクランプする(denki-daiの実装と同じ方針)。
   const rate = clampNoted(Number(inputRate.value) || 159, 100, 300, '為替レート');
@@ -352,20 +354,45 @@ function calcSingle() {
   resultBreakdown.innerHTML = '';
   flushClampNotice();
 
-  resultCard.classList.add('show');
   lastTotalJpy = result.totalJpy;
   lastParts = null;
+  updateShareUrl();
+}
+
+function calcSingle() {
+  computeAndRenderSingle();
+  resultCard.classList.add('show');
   shareRow.classList.add('show');
 
   affCard.href = affiliateUrl('外付けSSD');
   affCard.classList.add('show');
   showProducts('外付けSSD', '動画ファイルの保存に人気のアイテム');
 
-  updateShareUrl();
   resultCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 document.getElementById('btn-calc').addEventListener('click', calcSingle);
+
+// No.54(2026-09-06): 初回計算より後は、入力を変えるたびに再度ボタンを押さなくても
+// 結果が自動更新されるようにする(単体モード)。楽天API呼び出し・自動スクロールは
+// 初回計算の副作用のみに留める。
+let liveRecalcSingleTimer = null;
+function scheduleLiveRecalcSingle() {
+  if (!resultCard.classList.contains('show') || topMode !== 'single') return;
+  clearTimeout(liveRecalcSingleTimer);
+  liveRecalcSingleTimer = setTimeout(computeAndRenderSingle, 300);
+}
+function liveRecalcSingleNow() {
+  if (!resultCard.classList.contains('show') || topMode !== 'single') return;
+  computeAndRenderSingle();
+}
+selectTool.addEventListener('change', liveRecalcSingleNow);
+selectMjPlan.addEventListener('change', liveRecalcSingleNow);
+selectRwPlan.addEventListener('change', liveRecalcSingleNow);
+selectRwModel.addEventListener('change', liveRecalcSingleNow);
+selectCredit5sPlan.addEventListener('change', liveRecalcSingleNow);
+[inputMjVideos, inputMjCandidates, inputRwVideos, inputRwSeconds, inputC5sVideos, inputC5sSeconds, inputRate]
+  .forEach((el) => el.addEventListener('input', scheduleLiveRecalcSingle));
 
 // ---- 併用(合計)モード ----
 
@@ -395,7 +422,9 @@ const inputComboSeconds = document.getElementById('input-combo-seconds');
 const inputComboCandidates = document.getElementById('input-combo-candidates');
 const inputComboRate = document.getElementById('input-combo-rate');
 
-function calcCombo() {
+// No.54(2026-09-06): 数値計算とテキスト更新だけを担う部分を独立させ、
+// 初回計算後の「入力するたびに自動再計算」でも使い回せるようにする。
+function computeAndRenderCombo() {
   const rate = clampNoted(Number(inputComboRate.value) || 159, 100, 300, '為替レート');
   const videos = clampNoted(Math.round(Number(inputComboVideos.value) || 0), 1, 60, '動画本数');
   const seconds = clampNoted(Math.round(Number(inputComboSeconds.value) || 0), 1, 30, '秒数');
@@ -409,13 +438,14 @@ function calcCombo() {
     resultAdvice.textContent = '併用したいツールにチェックを入れてから試算してください。';
     resultBreakdown.classList.remove('show');
     resultBreakdown.innerHTML = '';
-    resultCard.classList.add('show');
     shareRow.classList.remove('show');
     affCard.classList.remove('show');
     document.getElementById('product-grid').classList.remove('show');
     clampNotes = [];
     resultClampNotice.classList.remove('show');
-    resultCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    lastTotalJpy = 0;
+    lastParts = null;
+    updateShareUrl();
     return;
   }
 
@@ -447,16 +477,22 @@ function calcCombo() {
   resultBreakdown.classList.add('show');
   flushClampNotice();
 
-  resultCard.classList.add('show');
   lastTotalJpy = totalJpy;
   lastParts = parts;
   shareRow.classList.add('show');
-
   affCard.href = affiliateUrl('外付けSSD');
   affCard.classList.add('show');
-  showProducts('外付けSSD', '動画ファイルの保存に人気のアイテム');
 
   updateShareUrl();
+}
+
+function calcCombo() {
+  computeAndRenderCombo();
+  resultCard.classList.add('show');
+  const anyChecked = comboRows.some((row) => document.getElementById(row.checkboxId).checked);
+  if (anyChecked) {
+    showProducts('外付けSSD', '動画ファイルの保存に人気のアイテム');
+  }
   resultCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
@@ -477,6 +513,25 @@ comboRows.forEach((row) => {
     checkbox.checked = !checkbox.checked;
     checkbox.dispatchEvent(new Event('change'));
   });
+});
+
+// No.54(2026-09-06): 初回計算より後は、入力・チェック・プランを変えるたびに再度ボタンを
+// 押さなくても結果が自動更新されるようにする(併用モード)。
+let liveRecalcComboTimer = null;
+function scheduleLiveRecalcCombo() {
+  if (!resultCard.classList.contains('show') || topMode !== 'combo') return;
+  clearTimeout(liveRecalcComboTimer);
+  liveRecalcComboTimer = setTimeout(computeAndRenderCombo, 300);
+}
+function liveRecalcComboNow() {
+  if (!resultCard.classList.contains('show') || topMode !== 'combo') return;
+  computeAndRenderCombo();
+}
+[inputComboVideos, inputComboSeconds, inputComboCandidates, inputComboRate]
+  .forEach((el) => el.addEventListener('input', scheduleLiveRecalcCombo));
+comboRows.forEach((row) => {
+  document.getElementById(row.checkboxId).addEventListener('change', liveRecalcComboNow);
+  document.getElementById(row.selectId).addEventListener('change', liveRecalcComboNow);
 });
 
 // ---- 上位モード切り替え(単体 / 併用) ----

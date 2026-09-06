@@ -101,6 +101,8 @@ tabButtons.forEach((btn) => {
     });
     fieldsTime.style.display = mode === 'time' ? '' : 'none';
     fieldsArea.style.display = mode === 'area' ? '' : 'none';
+    // No.54(2026-09-06): モード切替も再計算のトリガーに含める(初回計算後のみ)。
+    liveRecalcNow();
   });
 });
 
@@ -138,7 +140,9 @@ function calcRatio() {
   return workArea / totalArea;
 }
 
-function calc() {
+// No.54(2026-09-06): 数値計算とテキスト更新だけを担う部分を独立させ、
+// 初回計算後の「入力するたびに自動再計算」でも使い回せるようにする。
+function computeAndRender() {
   const expense = EXPENSES[selectExpense.value];
   const amount = Math.max(0, Number(inputAmount.value) || 0);
   const rawRatio = calcRatio();
@@ -167,10 +171,14 @@ function calc() {
   advice += taxLineNote(yearlyCost);
   resultAdvice.textContent = advice;
 
-  resultCard.classList.add('show');
   lastMonthly = monthlyCost;
   lastRatioPct = ratioPct;
   updateShareUrl();
+}
+
+function calc() {
+  computeAndRender();
+  resultCard.classList.add('show');
   shareRow.classList.add('show');
 
   affCard.href = affiliateUrl('領収書 ファイル 整理');
@@ -181,6 +189,21 @@ function calc() {
 }
 
 document.getElementById('btn-calc').addEventListener('click', calc);
+
+// No.54(2026-09-06): 初回計算より後は、入力を変えるたびに再度ボタンを押さなくても
+// 結果が自動更新されるようにする。楽天API呼び出し・自動スクロールは初回計算の副作用のみに留める。
+let liveRecalcTimer = null;
+function scheduleLiveRecalc() {
+  if (!resultCard.classList.contains('show')) return;
+  clearTimeout(liveRecalcTimer);
+  liveRecalcTimer = setTimeout(computeAndRender, 300);
+}
+function liveRecalcNow() {
+  if (!resultCard.classList.contains('show')) return;
+  computeAndRender();
+}
+selectExpense.addEventListener('change', liveRecalcNow);
+[inputAmount, inputHours, inputWorkdays, inputWorkArea, inputTotalArea].forEach((el) => el.addEventListener('input', scheduleLiveRecalc));
 
 function paramsFromState() {
   const params = new URLSearchParams();

@@ -107,7 +107,10 @@ const btnShareX = document.getElementById('btn-share-x');
 const btnSaveImage = document.getElementById('btn-save-image');
 let lastMonthly = 0;
 
-function calc() {
+// No.54(2026-09-06): 数値計算とテキスト更新だけを担う部分を独立させ、
+// 初回計算後の「入力するたびに自動再計算」でも使い回せるようにする
+// (楽天API呼び出し・自動スクロール等の副作用はcalc()側のみに残す)。
+function computeAndRender() {
   const device = DEVICES[selectDevice.value];
   const monitors = Number(selectMonitors.value);
   // HTMLのmin/max属性はフォーム送信を介さない直接入力・クエリパラメータ経由の値を弾かないため、
@@ -151,9 +154,13 @@ function calc() {
   advice += bookEquivalentNote(monthlyCost);
   resultAdvice.textContent = advice;
 
-  resultCard.classList.add('show');
   lastMonthly = monthlyCost;
   updateShareUrl();
+}
+
+function calc() {
+  computeAndRender();
+  resultCard.classList.add('show');
   shareRow.classList.add('show');
 
   affCard.href = affiliateUrl('ワットチェッカー');
@@ -164,6 +171,24 @@ function calc() {
 }
 
 document.getElementById('btn-calc').addEventListener('click', calc);
+
+// No.54(2026-09-06): 初回計算(上のbtn-calcクリック)より後は、入力を変えるたびに
+// 再度ボタンを押さなくても結果が自動更新されるようにする(検索上位サイトの実地調査・
+// UXベストプラクティス複数ソースで「結果はリアルタイム更新すべき」と一致していたため)。
+// 楽天APIの呼び出し・自動スクロールは初回計算時の副作用のみに留め、再計算のたびには走らせない。
+let liveRecalcTimer = null;
+function scheduleLiveRecalc() {
+  if (!resultCard.classList.contains('show')) return;
+  clearTimeout(liveRecalcTimer);
+  liveRecalcTimer = setTimeout(computeAndRender, 300);
+}
+function liveRecalcNow() {
+  if (!resultCard.classList.contains('show')) return;
+  computeAndRender();
+}
+selectDevice.addEventListener('change', liveRecalcNow);
+selectMonitors.addEventListener('change', liveRecalcNow);
+[inputHours, inputDays, inputPrice].forEach((el) => el.addEventListener('input', scheduleLiveRecalc));
 
 function paramsFromState() {
   const params = new URLSearchParams();
