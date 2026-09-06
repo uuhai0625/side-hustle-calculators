@@ -90,6 +90,13 @@ let mode = 'time';
 const tabButtons = document.querySelectorAll('.scene-tab');
 const fieldsTime = document.getElementById('fields-time');
 const fieldsArea = document.getElementById('fields-area');
+const fieldsRatio = document.getElementById('fields-ratio');
+
+function showFieldsForMode() {
+  fieldsTime.style.display = mode === 'time' ? '' : 'none';
+  fieldsArea.style.display = mode === 'area' ? '' : 'none';
+  fieldsRatio.style.display = mode === 'ratio' ? '' : 'none';
+}
 
 tabButtons.forEach((btn) => {
   btn.addEventListener('click', () => {
@@ -99,8 +106,7 @@ tabButtons.forEach((btn) => {
       b.classList.toggle('active', selected);
       b.setAttribute('aria-pressed', selected);
     });
-    fieldsTime.style.display = mode === 'time' ? '' : 'none';
-    fieldsArea.style.display = mode === 'area' ? '' : 'none';
+    showFieldsForMode();
     // No.54(2026-09-06): モード切替も再計算のトリガーに含める(初回計算後のみ)。
     liveRecalcNow();
   });
@@ -112,6 +118,7 @@ const inputHours = document.getElementById('input-hours');
 const inputWorkdays = document.getElementById('input-workdays');
 const inputWorkArea = document.getElementById('input-work-area');
 const inputTotalArea = document.getElementById('input-total-area');
+const inputRatioPct = document.getElementById('input-ratio-pct');
 const resultCard = document.getElementById('result-card');
 const resultAmount = document.getElementById('result-amount');
 const resultNote = document.getElementById('result-note');
@@ -126,7 +133,7 @@ const btnSaveImage = document.getElementById('btn-save-image');
 let lastMonthly = 0;
 let lastRatioPct = 0;
 
-// 個々の入力欄には上限を設けず、按分率(週の使用時間÷168時間、または面積比)そのものを
+// 個々の入力欄には上限を設けず、按分率(週の使用時間÷168時間、面積比、または直接入力%)そのものを
 // calc()側で100%に一括クランプする(D6: 極端な入力値でも算出根拠を隠さず通知するため)。
 function calcRatio() {
   if (mode === 'time') {
@@ -134,6 +141,12 @@ function calcRatio() {
     const workdays = Math.max(0, Number(inputWorkdays.value) || 0);
     const weeklyHours = hours * workdays;
     return weeklyHours / (24 * 7);
+  }
+  if (mode === 'ratio') {
+    // No.56(2026-09-06): 既に割合を把握している人向けの直接入力モード
+    // (「業務計算ポータル」等の家事按分ツールが面積/時間/割合直接入力の3方式を
+    // 提供している実例に倣って追加)。
+    return Math.max(0, Number(inputRatioPct.value) || 0) / 100;
   }
   const workArea = Math.max(0, Number(inputWorkArea.value) || 0);
   const totalArea = Math.max(0.1, Number(inputTotalArea.value) || 0.1);
@@ -158,11 +171,15 @@ function computeAndRender() {
   const monthlyCost = Math.round(amount * ratio);
   const yearlyCost = monthlyCost * 12;
 
+  const modeLabel = mode === 'time' ? '時間按分' : mode === 'ratio' ? '割合直接入力' : '面積按分';
   resultAmount.textContent = monthlyCost.toLocaleString('ja-JP');
   resultNote.textContent = `${expense.label} 月額¥${amount.toLocaleString('ja-JP')} × 按分率${ratioPct}%`;
-  resultSub.textContent = `年間換算:約¥${yearlyCost.toLocaleString('ja-JP')}(${mode === 'time' ? '時間按分' : '面積按分'})`;
+  resultSub.textContent = `年間換算:約¥${yearlyCost.toLocaleString('ja-JP')}(${modeLabel})`;
 
-  let advice = `按分率${ratioPct}%は、${mode === 'time' ? '週あたりの使用時間 ÷ 168時間' : '作業スペースの面積 ÷ 延床面積'}で算出した目安です。`;
+  const ratioBasis = mode === 'time' ? '週あたりの使用時間 ÷ 168時間'
+    : mode === 'ratio' ? '入力いただいた割合をそのまま使用'
+    : '作業スペースの面積 ÷ 延床面積';
+  let advice = `按分率${ratioPct}%は、${ratioBasis}で算出した目安です。`;
   if (ratioPct < 50) {
     advice += ' 白色申告の場合、業務利用が50%未満だと「明確に区分できる」ことを説明できるようにしておく必要があるとされています。青色申告なら50%未満でも合理的な基準として計上できるとされています(いずれも税務上の最終判断は税理士・税務署にご確認ください)。';
   } else {
@@ -203,7 +220,7 @@ function liveRecalcNow() {
   computeAndRender();
 }
 selectExpense.addEventListener('change', liveRecalcNow);
-[inputAmount, inputHours, inputWorkdays, inputWorkArea, inputTotalArea].forEach((el) => el.addEventListener('input', scheduleLiveRecalc));
+[inputAmount, inputHours, inputWorkdays, inputWorkArea, inputTotalArea, inputRatioPct].forEach((el) => el.addEventListener('input', scheduleLiveRecalc));
 
 function paramsFromState() {
   const params = new URLSearchParams();
@@ -213,6 +230,8 @@ function paramsFromState() {
   if (mode === 'time') {
     params.set('hours', inputHours.value);
     params.set('workdays', inputWorkdays.value);
+  } else if (mode === 'ratio') {
+    params.set('ratiopct', inputRatioPct.value);
   } else {
     params.set('workarea', inputWorkArea.value);
     params.set('totalarea', inputTotalArea.value);
@@ -356,15 +375,14 @@ function initFromQuery() {
     });
   }
   const qMode = params.get('mode');
-  if (!qMode || (qMode !== 'time' && qMode !== 'area')) return;
+  if (!qMode || (qMode !== 'time' && qMode !== 'area' && qMode !== 'ratio')) return;
   mode = qMode;
   tabButtons.forEach((b) => {
     const selected = b.dataset.mode === mode;
     b.classList.toggle('active', selected);
     b.setAttribute('aria-pressed', selected);
   });
-  fieldsTime.style.display = mode === 'time' ? '' : 'none';
-  fieldsArea.style.display = mode === 'area' ? '' : 'none';
+  showFieldsForMode();
 
   const expense = params.get('expense');
   if (expense && EXPENSES[expense]) selectExpense.value = expense;
@@ -375,6 +393,9 @@ function initFromQuery() {
     if (hours) inputHours.value = hours;
     const workdays = params.get('workdays');
     if (workdays) inputWorkdays.value = workdays;
+  } else if (mode === 'ratio') {
+    const ratioPct = params.get('ratiopct');
+    if (ratioPct) inputRatioPct.value = ratioPct;
   } else {
     const workarea = params.get('workarea');
     if (workarea) inputWorkArea.value = workarea;
