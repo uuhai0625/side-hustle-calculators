@@ -100,6 +100,9 @@ const resultBreakdown = document.getElementById('result-breakdown');
 const scheduleBox = document.getElementById('schedule-box');
 const scheduleNote = document.getElementById('schedule-note');
 const scheduleTable = document.getElementById('schedule-table');
+const scheduleChart = document.getElementById('schedule-chart');
+const btnDownloadCsv = document.getElementById('btn-download-csv');
+let lastScheduleRows = [];
 const affCard = document.getElementById('aff-card');
 const shareRow = document.getElementById('share-row');
 const btnCopyLink = document.getElementById('btn-copy-link');
@@ -112,6 +115,50 @@ let lastResultText = '';
 function yen(n) {
   return Math.round(n).toLocaleString('ja-JP');
 }
+
+// No.57(2026-09-06): 年ごとの経費計上額を簡易な折れ線グラフで可視化する
+// (ライブラリ不使用、SVGをJSで動的生成。競合調査「ツールレンジャー」の実例に倣った)。
+function renderScheduleChart(rows) {
+  if (!scheduleChart) return;
+  if (!rows.length) {
+    scheduleChart.innerHTML = '';
+    return;
+  }
+  const W = 600, H = 220, padL = 16, padR = 16, padT = 24, padB = 30;
+  const innerW = W - padL - padR;
+  const innerH = H - padT - padB;
+  const maxAmount = Math.max(...rows.map((r) => r.amount), 1);
+  const n = rows.length;
+  const stepX = n > 1 ? innerW / (n - 1) : 0;
+  const points = rows.map((r, i) => {
+    const x = padL + (n > 1 ? i * stepX : innerW / 2);
+    const y = padT + innerH - (r.amount / maxAmount) * innerH;
+    return { x, y, r };
+  });
+  const pathD = points.map((p, i) => `${i === 0 ? 'M' : 'L'}${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(' ');
+  const circles = points.map((p) => `<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="4" fill="#35f2b0"></circle>`).join('');
+  const valueLabels = points.map((p) => `<text x="${p.x.toFixed(1)}" y="${Math.max(12, p.y - 10).toFixed(1)}" text-anchor="middle" font-size="12" fill="#e8ece9">¥${yen(p.r.amount)}</text>`).join('');
+  const yearLabels = points.map((p) => `<text x="${p.x.toFixed(1)}" y="${H - 8}" text-anchor="middle" font-size="12" fill="#8a938e">${p.r.year}</text>`).join('');
+  const axisLine = `<line x1="${padL}" y1="${padT + innerH}" x2="${padL + innerW}" y2="${padT + innerH}" stroke="#2b332a" stroke-width="1"></line>`;
+  scheduleChart.innerHTML = `${axisLine}<path d="${pathD}" fill="none" stroke="#35f2b0" stroke-width="2"></path>${circles}${valueLabels}${yearLabels}`;
+}
+
+// No.57(2026-09-06): 年別スケジュールをCSVでダウンロード(Excel文字化け対策でUTF-8 BOM付き)。
+btnDownloadCsv.addEventListener('click', () => {
+  if (!lastScheduleRows.length) return;
+  const header = '年,経費計上額(円),備考\n';
+  const body = lastScheduleRows.map((r) => `${r.year},${Math.round(r.amount)},${(r.note || '').replace(/,/g, '、')}`).join('\n');
+  const csv = '﻿' + header + body;
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'genka-shokyaku-schedule.csv';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+});
 
 function currentYears() {
   const cat = CATEGORIES[selectCategory.value];
@@ -232,6 +279,8 @@ function computeAndRender() {
     resultBreakdown.innerHTML = '';
     resultBreakdown.classList.remove('show');
     scheduleBox.classList.remove('show');
+    lastScheduleRows = [];
+    scheduleChart.innerHTML = '';
     updateShareUrl();
     return;
   }
@@ -308,6 +357,8 @@ function renderMethodContent(methodKey) {
     '<tr><th>年</th><th>経費計上額</th></tr>' +
     rows.map((r) => `<tr><td>${r.year}年${r.note ? `(${r.note})` : ''}</td><td>¥${yen(r.amount)}</td></tr>`).join('');
   scheduleBox.classList.add('show');
+  lastScheduleRows = rows;
+  renderScheduleChart(rows);
 
   lastResultText = `${base.category.label}(取得価額¥${yen(amount)})の減価償却を試算しました。\n${methodObj.label}:初年度¥${yen(firstYear.amount)}\n`;
   updateShareUrl();
