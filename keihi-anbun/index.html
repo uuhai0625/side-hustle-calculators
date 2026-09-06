@@ -93,17 +93,17 @@
     </div>
     <div class="field">
       <label for="input-amount">月額の支払額(円)</label>
-      <input type="number" id="input-amount" min="0" step="100" value="8000">
+      <input type="number" id="input-amount" inputmode="numeric" min="0" step="100" value="8000">
     </div>
 
     <div id="fields-time">
       <div class="field">
         <label for="input-hours">1日の副業使用時間(時間)</label>
-        <input type="number" id="input-hours" min="0" max="24" step="0.5" value="6">
+        <input type="number" id="input-hours" inputmode="decimal" min="0" max="24" step="0.5" value="6">
       </div>
       <div class="field">
         <label for="input-workdays">週の稼働日数(日)</label>
-        <input type="number" id="input-workdays" min="1" max="7" step="1" value="5">
+        <input type="number" id="input-workdays" inputmode="numeric" min="1" max="7" step="1" value="5">
         <span class="field-hint">按分率は「週あたりの使用時間 ÷ 168時間(24時間×7日)」で計算します。</span>
       </div>
     </div>
@@ -111,11 +111,11 @@
     <div id="fields-area" style="display:none;">
       <div class="field">
         <label for="input-work-area">作業スペースの面積(㎡)</label>
-        <input type="number" id="input-work-area" min="0" step="0.5" value="6">
+        <input type="number" id="input-work-area" inputmode="decimal" min="0" step="0.5" value="6">
       </div>
       <div class="field">
         <label for="input-total-area">自宅の延床面積(㎡)</label>
-        <input type="number" id="input-total-area" min="1" step="0.5" value="50">
+        <input type="number" id="input-total-area" inputmode="decimal" min="1" step="0.5" value="50">
       </div>
     </div>
 

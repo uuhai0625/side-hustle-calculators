@@ -123,25 +123,25 @@
 
     <div class="field">
       <label for="input-video">動画生成AIツール(月額目安、円)</label>
-      <input type="number" id="input-video" min="0" step="100" value="0">
+      <input type="number" id="input-video" inputmode="numeric" min="0" step="100" value="0">
       <span class="field-hint"><a href="../douga-ryokin/">動画作成AIツールの月額料金シミュレーター</a>で試算した金額を入れてください</span>
     </div>
 
     <div class="field">
       <label for="input-elec">パソコン電気代(月額目安、円)</label>
-      <input type="number" id="input-elec" min="0" step="10" value="0">
+      <input type="number" id="input-elec" inputmode="numeric" min="0" step="10" value="0">
       <span class="field-hint"><a href="../denki-dai/">在宅ワークのパソコン電気代計算機</a>で試算した金額を入れてください</span>
     </div>
 
     <div class="field">
       <label for="input-depreciation">減価償却費・月割り(月額目安、円)</label>
-      <input type="number" id="input-depreciation" min="0" step="100" value="0">
+      <input type="number" id="input-depreciation" inputmode="numeric" min="0" step="100" value="0">
       <span class="field-hint"><a href="../genka-shokyaku/">減価償却費計算機</a>の年別スケジュールを12で割った金額を入れてください</span>
     </div>
 
     <div class="field">
       <label for="input-other">その他(ストレージ・素材サイト・併用ツール等、円)</label>
-      <input type="number" id="input-other" min="0" step="100" value="0">
+      <input type="number" id="input-other" inputmode="numeric" min="0" step="100" value="0">
     </div>
 
     <button class="btn-calc" id="btn-calc" type="button">月間コストを合計する</button>

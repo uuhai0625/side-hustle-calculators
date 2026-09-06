@@ -108,11 +108,11 @@
         </div>
         <div class="field">
           <label for="input-mj-videos">月に作りたい動画の本数</label>
-          <input type="number" id="input-mj-videos" min="1" max="60" step="1" value="8">
+          <input type="number" id="input-mj-videos" inputmode="numeric" min="1" max="60" step="1" value="8">
         </div>
         <div class="field">
           <label for="input-mj-candidates">1本あたりに試す静止画の候補数</label>
-          <input type="number" id="input-mj-candidates" min="1" max="20" step="1" value="4">
+          <input type="number" id="input-mj-candidates" inputmode="numeric" min="1" max="20" step="1" value="4">
           <span class="field-hint">動画化する1枚を選ぶまでに生成する静止画の枚数の目安です。動画化(Animate)自体は静止画1枚の約26倍のFast時間を消費します。</span>
         </div>
       </div>
@@ -136,11 +136,11 @@
         </div>
         <div class="field">
           <label for="input-rw-videos">月に作りたい動画の本数</label>
-          <input type="number" id="input-rw-videos" min="1" max="60" step="1" value="8">
+          <input type="number" id="input-rw-videos" inputmode="numeric" min="1" max="60" step="1" value="8">
         </div>
         <div class="field">
           <label for="input-rw-seconds">1本あたりの秒数</label>
-          <input type="number" id="input-rw-seconds" min="1" max="30" step="1" value="5">
+          <input type="number" id="input-rw-seconds" inputmode="numeric" min="1" max="30" step="1" value="5">
         </div>
       </div>
 
@@ -151,17 +151,17 @@
         </div>
         <div class="field">
           <label for="input-c5s-videos">月に作りたい動画の本数</label>
-          <input type="number" id="input-c5s-videos" min="1" max="60" step="1" value="8">
+          <input type="number" id="input-c5s-videos" inputmode="numeric" min="1" max="60" step="1" value="8">
         </div>
         <div class="field">
           <label for="input-c5s-seconds">1本あたりの秒数</label>
-          <input type="number" id="input-c5s-seconds" min="1" max="30" step="1" value="5">
+          <input type="number" id="input-c5s-seconds" inputmode="numeric" min="1" max="30" step="1" value="5">
         </div>
       </div>
 
       <div class="field">
         <label for="input-fx-rate">為替レート(円/ドル)</label>
-        <input type="number" id="input-fx-rate" min="100" max="300" step="0.1" value="159">
+        <input type="number" id="input-fx-rate" inputmode="decimal" min="100" max="300" step="0.1" value="159">
         <span class="field-hint">2026年8月時点の実勢レートを初期値にしています。カード会社の実際の請求レートとは異なる場合があります。</span>
       </div>
 
@@ -173,19 +173,19 @@
     <div class="calc-card">
       <div class="field">
         <label for="input-combo-videos">月に作りたい動画の本数(共通)</label>
-        <input type="number" id="input-combo-videos" min="1" max="60" step="1" value="8">
+        <input type="number" id="input-combo-videos" inputmode="numeric" min="1" max="60" step="1" value="8">
       </div>
       <div class="field">
         <label for="input-combo-seconds">1本あたりの秒数(Midjourney以外に適用)</label>
-        <input type="number" id="input-combo-seconds" min="1" max="30" step="1" value="5">
+        <input type="number" id="input-combo-seconds" inputmode="numeric" min="1" max="30" step="1" value="5">
       </div>
       <div class="field">
         <label for="input-combo-candidates">Midjourney使用時の候補生成数</label>
-        <input type="number" id="input-combo-candidates" min="1" max="20" step="1" value="4">
+        <input type="number" id="input-combo-candidates" inputmode="numeric" min="1" max="20" step="1" value="4">
       </div>
       <div class="field">
         <label for="input-combo-rate">為替レート(円/ドル)</label>
-        <input type="number" id="input-combo-rate" min="100" max="300" step="0.1" value="159">
+        <input type="number" id="input-combo-rate" inputmode="decimal" min="100" max="300" step="0.1" value="159">
       </div>
 
       <div class="field">
