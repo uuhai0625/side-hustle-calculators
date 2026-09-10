@@ -185,6 +185,8 @@ const otherAspLinks = document.querySelector('.other-asp-links');
 const shareRow = document.getElementById('share-row');
 const btnCopyLink = document.getElementById('btn-copy-link');
 const btnShareX = document.getElementById('btn-share-x');
+const citationNote = document.getElementById('citation-note');
+const btnCopyCitation = document.getElementById('btn-copy-citation');
 const productCategoryField = document.getElementById('product-category-field');
 const selectProductCategory = document.getElementById('select-product-category');
 let lastLimit = 0;
@@ -252,6 +254,7 @@ function calc() {
   followCta.classList.add('show');
   if (otherAspLinks) otherAspLinks.classList.add('show');
   shareRow.classList.add('show');
+  if (citationNote) citationNote.classList.add('show');
   resultCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
@@ -345,6 +348,51 @@ btnShareX.addEventListener('click', () => {
   const intentUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(shareUrl('x'))}&hashtags=${encodeURIComponent('AI副業そろばん')}`;
   window.open(intentUrl, '_blank', 'noopener');
 });
+
+// サイテーション施策(2026-09-10追加): 記事・SNSでこの計算結果を紹介する人が、出典を
+// 正確にコピペできるようにする。URLは常に正規URL(furusato-nozei/トップ)を指す
+// — シェアURLのようなutm/状態パラメータは、第三者記事に貼られる文言としては不要なため含めない。
+function citationText() {
+  return `ふるさと納税の控除上限額(副業ありパターン)は「AI副業そろばん」の控除上限額シミュレーターで試算:https://uuhai0625.github.io/side-hustle-calculators/furusato-nozei/`;
+}
+// 埋め込みウィジェットのコードコピー(2026-09-10追加)。
+const btnCopyEmbed = document.getElementById('btn-copy-embed');
+const embedCodeField = document.getElementById('embed-code');
+if (btnCopyEmbed && embedCodeField) {
+  btnCopyEmbed.addEventListener('click', async () => {
+    const original = btnCopyEmbed.textContent;
+    const showCopied = () => {
+      btnCopyEmbed.textContent = 'コピーしました ✓';
+      setTimeout(() => { btnCopyEmbed.textContent = original; }, 2000);
+    };
+    const text = embedCodeField.value;
+    try {
+      const timeout = new Promise((_, reject) => setTimeout(() => reject(new Error('clipboard-timeout')), 1500));
+      await Promise.race([navigator.clipboard.writeText(text), timeout]);
+      showCopied();
+    } catch (e) {
+      if (legacyCopyFallback(text)) showCopied();
+    }
+  });
+}
+
+if (btnCopyCitation) {
+  btnCopyCitation.addEventListener('click', async () => {
+    const original = btnCopyCitation.textContent;
+    const showCopied = () => {
+      btnCopyCitation.textContent = 'コピーしました ✓';
+      setTimeout(() => { btnCopyCitation.textContent = original; }, 2000);
+    };
+    const text = citationText();
+    try {
+      const timeout = new Promise((_, reject) => setTimeout(() => reject(new Error('clipboard-timeout')), 1500));
+      await Promise.race([navigator.clipboard.writeText(text), timeout]);
+      showCopied();
+    } catch (e) {
+      if (legacyCopyFallback(text)) showCopied();
+    }
+  });
+}
 
 // 結果を画像カードとして保存(2026-09-01追加)。X/Instagram等での画像投稿に使ってもらう想定。
 function drawResultImage(limit) {

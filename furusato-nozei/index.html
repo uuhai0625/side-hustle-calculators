@@ -77,7 +77,7 @@
 <main class="wrap">
   <a class="back-link" href="../">← ツール一覧にもどる</a>
   <p class="stage-note">会社員で副業(雑所得・事業所得)がある方向けの、ふるさと納税 控除上限額(2026年・令和8年分)の概算シミュレーターです。給与所得と副業所得を合算して計算します。</p>
-  <p class="update-date">最終更新: 2026年9月1日(税制・計算式の内容を都度見直しています)</p>
+  <p class="update-date">最終更新: 2026年9月5日(税制・計算式の内容を都度見直しています)</p>
   <p class="seasonal-reminder" id="seasonal-reminder">🍂 ふるさと納税は12月31日までの寄附が当年分の対象です。年末は返礼品の品切れ・発送遅延が増えるため、お早めのご検討がおすすめです。</p>
 
   <div class="calc-card">
@@ -131,6 +131,7 @@
       <button class="share-btn" id="btn-share-x" type="button">𝕏で共有</button>
       <button class="share-btn" id="btn-save-image" type="button">結果を画像で保存</button>
     </div>
+    <p class="citation-note" id="citation-note">ブログ等で結果を紹介する場合は<button class="citation-copy-btn" id="btn-copy-citation" type="button">出典文をコピー</button></p>
   </div>
 
   <div class="follow-cta" id="follow-cta">
@@ -237,7 +238,7 @@
       <tr><td>事業所得(青色申告・65万円控除)</td><td>利益から65万円を差し引いた額(0円が下限)</td></tr>
     </table>
     <p class="rate-table-note">※ 青色申告特別控除65万円の適用には、e-Taxによる申告または優良な電子帳簿保存の要件があります。要件を満たさない場合は55万円控除にとどまり、上限額も変わります。</p>
-    <p class="rate-source">参考: <a href="https://www.soumu.go.jp/main_sosiki/jichi_zeisei/czaisei/czaisei_seido/furusato/mechanism/deduction.html" target="_blank" rel="noopener">総務省「ふるさと納税のしくみ」</a>、<a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/2072.htm" target="_blank" rel="noopener">国税庁 No.2072 青色申告特別控除</a>(2026年8月確認)</p>
+    <p class="rate-source">参考: <a href="https://www.soumu.go.jp/main_sosiki/jichi_zeisei/czaisei/czaisei_seido/furusato/mechanism/deduction.html" target="_blank" rel="noopener">総務省「ふるさと納税のしくみ」</a>、<a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/2072.htm" target="_blank" rel="noopener">国税庁 No.2072 青色申告特別控除</a>、<a href="https://www.nta.go.jp/publication/pamph/gensen/0025005-051.pdf" target="_blank" rel="noopener">国税庁「令和7年度税制改正(基礎控除の見直し等関係)Q&A」</a>(給与所得控除の最低保証額引き上げの根拠、2026年9月確認)</p>
   </div>
 
   <div class="rate-table-box show">
@@ -319,6 +320,13 @@
 
     <h3>ワンストップ特例と確定申告</h3>
     <p>ワンストップ特例は「寄附先が年間5自治体以内」かつ「確定申告・住民税申告が不要な人」が対象です。副業所得(雑所得・事業所得)が年間20万円を超える場合は原則として確定申告が必要になり、ワンストップ特例は使えません。</p>
+  </div>
+
+  <div class="embed-section">
+    <h2>このツールをブログ・noteに埋め込む</h2>
+    <p class="rate-table-note">返礼品の紹介や広告は含まない、計算機能だけの軽量版です。下記のコードをコピーしてご自身のページに貼り付けてください(無料・登録不要)。</p>
+    <textarea class="embed-code" id="embed-code" readonly rows="2">&lt;iframe src="https://uuhai0625.github.io/side-hustle-calculators/furusato-nozei/embed.html" width="100%" height="640" style="max-width:420px;border:none;" title="ふるさと納税 控除上限額シミュレーター"&gt;&lt;/iframe&gt;</textarea>
+    <button class="share-btn" id="btn-copy-embed" type="button">埋め込みコードをコピー</button>
   </div>
 
   <div class="related-tools">

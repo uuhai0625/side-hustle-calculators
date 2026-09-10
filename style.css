@@ -611,6 +611,28 @@ html.qshow .share-row { display: flex; }
 .share-btn:hover { border-color: var(--navy); color: var(--navy); }
 .share-btn:active { background: rgba(53, 242, 176, 0.12); transform: translateY(1px); }
 
+/* サイテーション施策(2026-09-10追加): ブログ等で結果を紹介する人向けの出典コピー導線。
+   share-btnより目立たせず、あくまで補助的なリンク風の扱いにする。 */
+.citation-note {
+  display: none;
+  margin-top: 10px;
+  font-size: 0.78rem;
+  color: var(--ink-sub);
+  text-align: center;
+}
+.citation-note.show { display: block; }
+.citation-copy-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  margin-left: 4px;
+  color: var(--navy);
+  font-size: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.citation-copy-btn:hover { color: var(--gold); }
+
 /* ---- 見出しのアクセントバー(絵文字の代わりの統一装飾) ---- */
 .manner-box h2,
 .rate-table-box h2,
@@ -1264,6 +1286,30 @@ html.qshow .share-row { display: flex; }
 .about-list a { color: var(--navy); }
 
 /* ---- 関連ツール ---- */
+/* 埋め込みウィジェット配布セクション(2026-09-10追加、furusato-nozeiのみ)。
+   detail-sectionと同じ落ち着いたトーン、目立たせすぎない。 */
+.embed-section {
+  margin-bottom: 24px;
+}
+.embed-section h2 {
+  font-size: 1.05rem;
+  color: var(--ink);
+  margin: 0 0 8px;
+}
+.embed-code {
+  width: 100%;
+  box-sizing: border-box;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--ink-sub);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.78rem;
+  padding: 10px 12px;
+  margin: 8px 0 10px;
+  resize: vertical;
+}
+
 .related-tools {
   margin-bottom: 24px;
 }
