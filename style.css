@@ -283,7 +283,8 @@ a { color: var(--navy); }
   border-color: var(--navy);
   box-shadow: var(--glow-soft);
 }
-.field input[type="number"] {
+.field input[type="number"],
+.field input[type="month"] {
   width: 100%;
   padding: 12px 14px;
   border: 1.5px solid var(--line);
@@ -293,6 +294,9 @@ a { color: var(--navy); }
   color: var(--ink);
   background-color: #0e1210;
 }
+/* type="month"はブラウザ既定のカレンダーピッカーアイコンがダーク背景で見えなくなるため、
+   color-schemeでアイコン自体をダーク基調用に切り替える(No.71、2026-09-12)。 */
+.field input[type="month"] { color-scheme: dark; }
 .radio-group {
   display: flex;
   gap: 10px;
@@ -1334,12 +1338,15 @@ html.qshow .share-row { display: flex; }
   padding: 12px 16px;
   text-decoration: none;
   color: var(--ink);
-  font-size: 0.88rem;
-  font-weight: 700;
   transition: border-color 0.15s ease;
 }
 .related-tool-link:hover { border-color: rgba(53, 242, 176, 0.4); }
-.related-tool-link .icon-svg { width: 19px; height: 19px; color: var(--navy); }
+.related-tool-link .icon-svg { width: 19px; height: 19px; color: var(--navy); flex-shrink: 0; }
+/* No.11(2026-09-12、UXレビュー内部回遊レンズ対応): アイコン+ツール名のみの機械的羅列だった
+   一覧に一言文脈を追加、なぜこのページの読者にこのツールを勧めるのかを示す */
+.related-tool-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.related-tool-title { font-size: 0.88rem; font-weight: 700; color: var(--ink); }
+.related-tool-comment { font-size: 0.76rem; font-weight: 400; color: var(--ink-sub); }
 
 /* ---- フッター ---- */
 .site-footer {
