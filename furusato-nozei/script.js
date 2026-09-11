@@ -191,13 +191,17 @@ const productCategoryField = document.getElementById('product-category-field');
 const selectProductCategory = document.getElementById('select-product-category');
 let lastLimit = 0;
 
+// 給与・副業収入は現実的な上限(1億円)でクランプする。無クランプだと桁違いの入力で
+// 「¥38,588,128,387,000」のような非現実的な結果がそのまま通常表示され、ツールの信頼性を損なう(2026-09-12修正)。
+const MAX_INCOME_INPUT = 100000000;
+
 function readInput() {
   return {
-    salary: Math.max(0, Number(inputSalary.value) || 0),
+    salary: Math.min(MAX_INCOME_INPUT, Math.max(0, Number(inputSalary.value) || 0)),
     hasSpouse: selectSpouse.value === '1',
     dependents: Math.min(10, Math.max(0, Number(inputDependents.value) || 0)),
-    sideIncome: Math.max(0, Number(inputSideIncome.value) || 0),
-    sideExpense: Math.max(0, Number(inputSideExpense.value) || 0),
+    sideIncome: Math.min(MAX_INCOME_INPUT, Math.max(0, Number(inputSideIncome.value) || 0)),
+    sideExpense: Math.min(MAX_INCOME_INPUT, Math.max(0, Number(inputSideExpense.value) || 0)),
     sideType: selectSideType.value,
   };
 }
@@ -370,8 +374,12 @@ if (btnCopyEmbed && embedCodeField) {
       const timeout = new Promise((_, reject) => setTimeout(() => reject(new Error('clipboard-timeout')), 1500));
       await Promise.race([navigator.clipboard.writeText(text), timeout]);
       showCopied();
+      if (typeof gtag === 'function') gtag('event', 'embed_code_copy', { page_path: location.pathname });
     } catch (e) {
-      if (legacyCopyFallback(text)) showCopied();
+      if (legacyCopyFallback(text)) {
+        showCopied();
+        if (typeof gtag === 'function') gtag('event', 'embed_code_copy', { page_path: location.pathname });
+      }
     }
   });
 }
@@ -388,8 +396,12 @@ if (btnCopyCitation) {
       const timeout = new Promise((_, reject) => setTimeout(() => reject(new Error('clipboard-timeout')), 1500));
       await Promise.race([navigator.clipboard.writeText(text), timeout]);
       showCopied();
+      if (typeof gtag === 'function') gtag('event', 'citation_copy', { page_path: location.pathname });
     } catch (e) {
-      if (legacyCopyFallback(text)) showCopied();
+      if (legacyCopyFallback(text)) {
+        showCopied();
+        if (typeof gtag === 'function') gtag('event', 'citation_copy', { page_path: location.pathname });
+      }
     }
   });
 }

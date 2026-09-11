@@ -89,13 +89,16 @@ const resultAmount = document.getElementById('result-amount');
 const resultNote = document.getElementById('result-note');
 const resultClampNotice = document.getElementById('result-clamp-notice');
 
+// script.js側と同じ上限クランプ(2026-09-12追加、同期維持ルール[[project_furusato_calc_site]]No.10参照)。
+const MAX_INCOME_INPUT = 100000000;
+
 function readInput() {
   return {
-    salary: Math.max(0, Number(inputSalary.value) || 0),
+    salary: Math.min(MAX_INCOME_INPUT, Math.max(0, Number(inputSalary.value) || 0)),
     hasSpouse: selectSpouse.value === '1',
     dependents: Math.min(10, Math.max(0, Number(inputDependents.value) || 0)),
-    sideIncome: Math.max(0, Number(inputSideIncome.value) || 0),
-    sideExpense: Math.max(0, Number(inputSideExpense.value) || 0),
+    sideIncome: Math.min(MAX_INCOME_INPUT, Math.max(0, Number(inputSideIncome.value) || 0)),
+    sideExpense: Math.min(MAX_INCOME_INPUT, Math.max(0, Number(inputSideExpense.value) || 0)),
     sideType: selectSideType.value,
   };
 }
