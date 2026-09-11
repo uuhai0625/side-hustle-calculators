@@ -337,7 +337,12 @@ function renderMethodContent(methodKey) {
   } else if (methodKey === 'lump3') {
     advice += ' 一括償却資産は取得月に関わらず月割り計算が不要で、青色・白色どちらの申告でも選べます。';
   }
-  resultAdvice.textContent = advice;
+  // No.77(2026-09-12): 月間コスト合計シミュレーターのdepreciation欄へ、表示中の年額(初年度分)を
+  // 12で割った月割り目安をそのまま引き継げるようにする。adviceは数値のみを埋め込む固定文言のため
+  // innerHTMLへの変更もXSSリスクはない。
+  const monthlyDepreciation = Math.round(firstYear.amount / 12);
+  advice += ` <a href="../getsugaku-goukei/?depreciation=${monthlyDepreciation}">月間コスト合計シミュレーターに反映する(月割り¥${yen(monthlyDepreciation)})</a>`;
+  resultAdvice.innerHTML = advice;
 
   if (methods.length > 1) {
     resultBreakdown.innerHTML = methods

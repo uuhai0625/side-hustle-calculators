@@ -361,7 +361,11 @@ function computeAndRenderSingle() {
   resultAmount.textContent = result.totalJpy.toLocaleString('ja-JP');
   resultNote.textContent = result.note;
   resultSub.textContent = `${result.sub}(月額目安 $${result.totalUsd.toFixed(2)})`;
-  resultAdvice.textContent = result.advice + bookEquivalentNote(result.totalJpy);
+  // No.77(2026-09-12): 月間コスト合計シミュレーターのvideo欄へ試算結果を引き継ぐリンクを追加。
+  // result.advice/bookEquivalentNoteはいずれも固定文言+数値のみで構成され利用者入力を含まないため、
+  // textContentからinnerHTMLへ変更してもXSSリスクはない。
+  resultAdvice.innerHTML = result.advice + bookEquivalentNote(result.totalJpy)
+    + ` <a href="../getsugaku-goukei/?video=${result.totalJpy}">月間コスト合計シミュレーターに反映する</a>`;
   resultBreakdown.classList.remove('show');
   resultBreakdown.innerHTML = '';
   flushClampNotice();
@@ -483,7 +487,9 @@ function computeAndRenderCombo() {
   resultAmount.textContent = totalJpy.toLocaleString('ja-JP');
   resultNote.textContent = `${parts.map((p) => p.name).join(' + ')} を併用した場合の合計`;
   resultSub.textContent = `動画${videos}本×${seconds}秒(Midjourneyのみ候補${candidates}枚+Animate)・為替${rate}円/ドル(合計 $${totalUsd.toFixed(2)})`;
-  resultAdvice.textContent = 'それぞれのツールの詳しい前提は下の内訳をご確認ください。同じ動画を複数ツールで作る想定のほか、工程を分担する場合(静止画はA、仕上げはBなど)の合計目安としてもご利用いただけます。' + bookEquivalentNote(totalJpy);
+  // No.77(2026-09-12): 単体モードと同様、月間コスト合計シミュレーターへの反映リンクを追加。
+  resultAdvice.innerHTML = 'それぞれのツールの詳しい前提は下の内訳をご確認ください。同じ動画を複数ツールで作る想定のほか、工程を分担する場合(静止画はA、仕上げはBなど)の合計目安としてもご利用いただけます。' + bookEquivalentNote(totalJpy)
+    + ` <a href="../getsugaku-goukei/?video=${totalJpy}">月間コスト合計シミュレーターに反映する</a>`;
 
   resultBreakdown.innerHTML = renderBreakdownBars(parts, totalJpy);
   resultBreakdown.classList.add('show');

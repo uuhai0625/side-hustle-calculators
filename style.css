@@ -118,7 +118,8 @@ a { color: var(--navy); }
 /* ---- 段階を意識した導線コピー(まだ始めていない読者への案内) ---- */
 .stage-note {
   margin: 8px 0 0;
-  font-size: 0.8rem;
+  /* No.75(2026-09-12): デジタル庁基準(本文最小14px)に合わせて0.8rem(12.8px)から引き上げ */
+  font-size: 0.875rem;
   color: var(--ink-sub);
   line-height: 1.7;
 }
@@ -259,7 +260,8 @@ a { color: var(--navy); }
 }
 .field-hint {
   display: block;
-  font-size: 0.74rem;
+  /* No.75(2026-09-12): 0.74rem(11.84px)は補助テキストとして小さすぎるため引き上げ */
+  font-size: 0.8125rem;
   font-weight: 400;
   color: var(--ink-sub);
   margin-top: 4px;
@@ -515,7 +517,8 @@ a { color: var(--navy); }
   margin: 0;
 }
 .result-sub {
-  font-size: 0.82rem;
+  /* No.75(2026-09-12): 0.82rem(13.12px)から14px基準へ引き上げ */
+  font-size: 0.875rem;
   color: var(--ink-sub);
   margin: 10px 0 0;
   padding-top: 10px;
@@ -524,7 +527,9 @@ a { color: var(--navy); }
 .clamp-notice {
   display: none;
   font-size: 0.8rem;
-  color: var(--gold);
+  /* No.74(2026-09-12): goldはPR/アフィリエイト・比較表の強調・診断結果ボックスと共用しており、
+     入力値の上限到達という「注意喚起」の意味とは異なるため、未使用だったvermilionに分離する。 */
+  color: var(--vermilion);
   margin: 6px 0 0;
 }
 .clamp-notice.show { display: block; }
@@ -629,8 +634,9 @@ html.qshow .share-row { display: flex; }
 .citation-copy-btn {
   background: none;
   border: none;
-  padding: 0;
-  margin-left: 4px;
+  /* No.76(2026-09-12): 87×18px相当でタップ領域が最小推奨44×44pxを大きく下回るため拡大 */
+  padding: 8px 4px;
+  margin: -8px 0 -8px 0;
   color: var(--navy);
   font-size: inherit;
   text-decoration: underline;
@@ -943,7 +949,8 @@ html.qshow .share-row { display: flex; }
 .rate-table-matrix td.highlighted .price { color: var(--gold); }
 .rate-source {
   margin: 10px 0 0;
-  font-size: 0.75rem;
+  /* No.75(2026-09-12): 0.75rem(12px)から14px基準へ引き上げ */
+  font-size: 0.875rem;
   color: var(--ink-sub);
 }
 .rate-source a { color: var(--ink-sub); }

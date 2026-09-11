@@ -150,9 +150,15 @@ function computeAndRender() {
   if (device.watt >= 400) {
     advice += ' 高性能デスクトップは負荷の高い作業で瞬間的に消費電力が上がるため、実際の電気代はこれより高くなることがあります。';
   }
-  advice += ' 在宅ワーク分を経費計上したい場合は、下の「副業の経費按分計算機」で按分額の目安を確認できます。';
+  advice += ' 在宅ワーク分を経費計上したい場合は、<a href="../keihi-anbun/">副業の経費按分計算機</a>で按分額の目安を確認できます。';
   advice += bookEquivalentNote(monthlyCost);
-  resultAdvice.textContent = advice;
+  // No.77(2026-09-12): 「AI副業 月間コスト合計シミュレーター」側の電気代欄へこの試算結果をそのまま
+  // 引き継げるよう、クエリパラメータ付きリンクを追加(getsugaku-goukei/script.jsのinitFromQueryが
+  // elecパラメータを読み取って自動入力・自動計算する仕組みは実装済みだったが、逆方向の導線がなかった)。
+  advice += ` <a href="../getsugaku-goukei/?elec=${monthlyCost}">月間コスト合計シミュレーターに反映する</a>`;
+  // No.72(2026-09-12): 上の一文にaタグを含むため、他ページ同様のtextContentではなくinnerHTMLで設定する
+  // (adviceは全て固定の日本語文字列のみで構成され外部・利用者入力を含まないため、XSSリスクはない)。
+  resultAdvice.innerHTML = advice;
 
   lastMonthly = monthlyCost;
   updateShareUrl();
