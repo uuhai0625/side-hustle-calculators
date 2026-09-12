@@ -32,8 +32,9 @@
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "datePublished": "2026-09-12",
-  "dateModified": "2026-09-12",
+  "dateModified": "2026-09-13",
   "mainEntity": [
+    { "@type": "Question", "name": "文章生成AIの「集約プラットフォーム」とは何ですか?", "acceptedAnswer": { "@type": "Answer", "text": "GPT・Claude・Geminiなど他社の複数モデルを1つのアカウント・1つの画面でまとめて使えるサービスです。代表例はPoe(Quora運営)・OpenRouter(開発者向けAPI集約)・Perplexity(検索特化ながら複数モデルを選択可能)です。1社が開発した1つのモデルだけを使う「単体モデル系」(ChatGPT・Claude・Gemini)とは仕組みが異なり、複数モデルを比較・使い分けしたい人に向いています。" } },
     { "@type": "Question", "name": "結局、どれを使えばいいですか?", "acceptedAnswer": { "@type": "Answer", "text": "1つに決めきれない場合は、まずChatGPT無料版(2026年8月からテキストチャット無制限)から試すのが手堅い選択です。長文の一貫性が気になる場合はClaude、Googleドキュメント・スプレッドシートで作業が完結する場合はGeminiを試してみてください。多くのユーザーは2〜3ツールを併用しています。" } },
     { "@type": "Question", "name": "3社のモデルは頻繁に変わりますか?", "acceptedAnswer": { "@type": "Answer", "text": "はい。2026年だけでもOpenAIはGPT-5.6ファミリー、AnthropicはClaude Sonnet 5→Opus 5→Fable 5.1、GoogleはGemini 3系のマイナーアップデートを繰り返し公開しています。この記事の内容は2026年9月時点のものです。" } },
     { "@type": "Question", "name": "料金はどこで比較できますか?", "acceptedAnswer": { "@type": "Answer", "text": "この記事は機能・特徴の解説に特化しています。月額料金・プラン別の詳しい比較は「生成AIチャットツール料金比較」ページで、用途・頻度から診断する簡易ツールも使えます。" } }
@@ -74,6 +75,27 @@
     <p>運営者はこのサイトの記事執筆・アイデア出し・壁打ちに実際に生成AIチャットツールを使っています。ただし3社を全て同じ深さで使い込んでいるわけではなく、特にGeminiのWorkspace連携機能は実務での使用経験が薄いため、その部分は公式発表・複数の独立した報道の内容をもとにした解説であることをお断りしておきます。掲載しているモデル名・発表日は、各社公式発表と複数の独立した大手メディアが一致した内容のみを確定情報として扱い、単一の情報源にしか出てこない数値は「未確認」と明記しています。</p>
   </details>
 
+  <div class="detail-section" style="margin-top: 20px;">
+    <h2 style="margin-top:0;">文章生成AIには「単体モデル系」と「集約プラットフォーム系」がある</h2>
+    <p>動画生成AIと同じく、文章生成AIにも「①1社が自社開発した1つのモデルを、そのサービス自身のUIで提供する単体モデル系」と「②他社の複数モデルを1つのアカウント・1つの画面にまとめて使える集約プラットフォーム系」があります。以下でメインに解説するChatGPT・Claude・Geminiはいずれも①にあたります。②の代表例はPoe(Quora運営)・OpenRouter(開発者向けAPI集約)・Perplexity(検索特化だが複数モデルを選択可能)です。モデルの個性をじっくり使い込みたいなら①、いろいろなモデルを1か所で比較・使い分けしたいなら②、というのが選び方の目安です。</p>
+  </div>
+
+  <details class="rate-table-box show">
+    <summary><h2>文章生成AIの分類マップ</h2></summary>
+    <p class="rate-table-note">各社公式サイトをもとにした2026年9月時点の分類です。</p>
+    <div class="rate-table-wrap">
+    <table class="rate-table">
+      <tr><th>サービス</th><th>タイプ</th><th>特徴</th></tr>
+      <tr><td><img class="rt-logo" src="../images/logos/chatgpt.png" alt="">ChatGPT</td><td>単体モデル</td><td>OpenAI自社GPT-5.6ファミリー</td></tr>
+      <tr><td><img class="rt-logo" src="../images/logos/claude.png" alt="">Claude</td><td>単体モデル</td><td>Anthropic自社モデル、長文の一貫性</td></tr>
+      <tr><td><img class="rt-logo" src="../images/logos/gemini.png" alt="">Gemini</td><td>単体モデル</td><td>Google自社モデル、Workspace統合</td></tr>
+      <tr><td><img class="rt-logo" src="../images/logos/poe.png" alt="">Poe</td><td>集約プラットフォーム</td><td>Quora運営、GPT/Claude/Gemini等を1つのチャットUIで</td></tr>
+      <tr><td><img class="rt-logo" src="../images/logos/openrouter.png" alt="">OpenRouter</td><td>集約プラットフォーム(開発者向けAPI)</td><td>500以上のモデル・80以上のプロバイダーを統一APIで</td></tr>
+      <tr><td><img class="rt-logo" src="../images/logos/perplexity.png" alt="">Perplexity</td><td>集約プラットフォーム寄り</td><td>検索特化、Pro/Max以上で複数モデルを選択可能</td></tr>
+    </table>
+    </div>
+  </details>
+
   <details class="rate-table-box show">
     <summary><h2>3ツール機能マトリクス</h2></summary>
     <p class="rate-table-note">各社公式発表・複数の独立した大手メディアの報道をもとにした、2026年9月時点の比較です。「未確認」は公式一次情報での確定ができなかった項目です。</p>
@@ -111,6 +133,31 @@
     <p class="official-link"><a href="https://gemini.google.com/" target="_blank" rel="noopener">→ Gemini公式サイトを見る</a></p>
   </div>
 
+  <div class="detail-section" style="margin-top: 20px;">
+    <h2 style="margin-top:0;">集約プラットフォーム3社を解説</h2>
+    <p>ここからは、他社の複数モデルを1つの画面にまとめて使える「集約プラットフォーム系」の代表3サービスを解説します。</p>
+  </div>
+
+  <div class="logo-strip">
+    <a class="logo-chip" href="https://poe.com/" target="_blank" rel="noopener"><img src="../images/logos/poe.png" alt="Poe" loading="lazy">Poe</a>
+    <a class="logo-chip" href="https://openrouter.ai/" target="_blank" rel="noopener"><img src="../images/logos/openrouter.png" alt="OpenRouter" loading="lazy">OpenRouter</a>
+    <a class="logo-chip" href="https://www.perplexity.ai/" target="_blank" rel="noopener"><img src="../images/logos/perplexity.png" alt="Perplexity" loading="lazy">Perplexity</a>
+  </div>
+
+  <div class="detail-section">
+    <h2 class="tool-heading"><img src="../images/logos/poe.png" alt="Poe">Poe(Quora運営)</h2>
+    <p>Quora社が2023年から運営する、複数社のAIモデルに1つのチャットUIからアクセスできるサービスです。GPT-5/5.5(OpenAI)・Claude-Sonnet-4.5/Opus-4.7(Anthropic)・Gemini-3.5-Flash(Google)・DeepSeek-R1に加え、Sora 2・Veo 3.1・Nano Banana Proなど画像・動画モデルも同じ画面から呼び出せます。無料プランがあり(モデルは制限あり)、最安の有料プラン(年払い)は月額換算$4.17〜4.99程度、標準プランは$19.99/月です。公式サイト・ヘルプセンターを確認しましたが、一般ユーザー向けの紹介(アフィリエイト)プログラムは見当たりませんでした。</p>
+    <p class="official-link"><a href="https://poe.com/" target="_blank" rel="noopener">→ Poe公式サイトを見る</a></p>
+
+    <h2 class="tool-heading" style="margin-top: 28px;"><img src="../images/logos/openrouter.png" alt="OpenRouter">OpenRouter</h2>
+    <p>2023年創業(2026年8月にStripeが70億ドル超で買収合意と報道)の、開発者・企業向けLLM統一APIゲートウェイです。公式説明では500以上のモデル・80以上のプロバイダーに対応しており、OpenAI・Anthropic・Google・Meta・DeepSeek・xAI系のモデルを横断的に呼び出せます。消費者向けの定額サブスクではなく、無料モデル(25以上、1日50リクエストまで)+従量課金(プラットフォーム手数料5.5%、ビジネス8%)という構成です。公式の紹介(アフィリエイト)プログラムは見当たらず、第三者サイトの紹介制度の記載も公式ドメインでは確認できませんでした。</p>
+    <p class="official-link"><a href="https://openrouter.ai/" target="_blank" rel="noopener">→ OpenRouter公式サイトを見る</a></p>
+
+    <h2 class="tool-heading" style="margin-top: 28px;"><img src="../images/logos/perplexity.png" alt="Perplexity">Perplexity</h2>
+    <p>AI検索エンジンとして始まったサービスで、回答生成時にGPT-5・Claude Opus 4.6など複数のトップモデルを選択できる機能を持っています。無料プランは1日約5回のPro Search、有料はPro($20/月)・Max($200/月)です。公式には「友達紹介で双方に1ヶ月分無料」になる紹介制度があります(Refer-a-Friend、公式ヘルプセンターで確認)。ただし、当サイトのような外部メディア向けの成果報酬型アフィリエイトプログラムについては、マーケター向け制度の存在自体は公式ページ上で示唆されているものの、報酬額等の詳細を一次情報で確認することはできませんでした。</p>
+    <p class="official-link"><a href="https://www.perplexity.ai/" target="_blank" rel="noopener">→ Perplexity公式サイトを見る</a></p>
+  </div>
+
   <div class="detail-section">
     <h2>用途別のおすすめ(レビュー記事の傾向、実測ではなく評判ベース)</h2>
     <ul class="orientation-list">
@@ -125,6 +172,10 @@
 
   <div class="faq-section">
     <h2>よくある質問</h2>
+    <details class="faq-item">
+      <summary>文章生成AIの「集約プラットフォーム」とは何ですか?</summary>
+      <p>GPT・Claude・Geminiなど他社の複数モデルを1つのアカウント・1つの画面でまとめて使えるサービスです。代表例はPoe(Quora運営)・OpenRouter(開発者向けAPI集約)・Perplexity(検索特化ながら複数モデルを選択可能)です。1社が開発した1つのモデルだけを使う「単体モデル系」(ChatGPT・Claude・Gemini)とは仕組みが異なり、複数モデルを比較・使い分けしたい人に向いています。</p>
+    </details>
     <details class="faq-item">
       <summary>結局、どれを使えばいいですか?</summary>
       <p>1つに決めきれない場合は、まずChatGPT無料版(2026年8月からテキストチャット無制限)から試すのが手堅い選択です。長文の一貫性が気になる場合はClaude、Googleドキュメント・スプレッドシートで作業が完結する場合はGeminiを試してみてください。多くのユーザーは2〜3ツールを併用しています。</p>

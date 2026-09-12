@@ -32,8 +32,9 @@
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "datePublished": "2026-09-12",
-  "dateModified": "2026-09-12",
+  "dateModified": "2026-09-13",
   "mainEntity": [
+    { "@type": "Question", "name": "コーディング支援AIには何種類のタイプがありますか?", "acceptedAnswer": { "@type": "Answer", "text": "大きく3タイプに分かれます。①単体ベンダー固定型(Claude Code・OpenAI Codex、1社のモデルのみ使用)、②モデル選択型IDE(Cursor・GitHub Copilot、自社製品を持ちながら他社の複数モデルにも切り替えられる)、③集約・マルチモデル特化型(Cline・Aider・OpenRouter、特定のベンダーに縛られず複数モデルを横断的に使うこと自体が目的のOSS/APIツール)です。" } },
     { "@type": "Question", "name": "プログラミング未経験でも本当に使えますか?", "acceptedAnswer": { "@type": "Answer", "text": "Claude Codeについては、非エンジニアが数時間の試行錯誤で実用的なアプリを作れたという独立ブログの体験談が複数見つかっています。このサイト自体もClaude Codeで作られています。CLIツール(Claude Code・Codex)は会話形式で指示を出す点では敷居は低い一方、エディタ操作に慣れていないと最初は戸惑う場面もあります。GUI完結型のCursor・Copilotは画面操作の分かりやすさで優位という見方もありますが、非エンジニア限定の比較データは確認できていません。" } },
     { "@type": "Question", "name": "4つのうち1つだけ選ぶならどれですか?", "acceptedAnswer": { "@type": "Answer", "text": "既にClaude・ChatGPTのチャットプランに入っているなら、追加費用なしで使えるClaude Code・Codexから試すのが手堅い選択です。エディタごと乗り換えたい場合はCursor、使い慣れたVS Code等をそのまま使いたい場合はCopilotが候補になります。" } },
     { "@type": "Question", "name": "料金はどこで比較できますか?", "acceptedAnswer": { "@type": "Answer", "text": "この記事は機能・仕組みの解説に特化しています。月額料金・プラン別の詳しい比較は「AIコーディングツール料金比較」ページで、利用強度から診断する簡易ツールも使えます。" } }
@@ -63,9 +64,9 @@
   <div class="manner-box show">
     <h2>結論</h2>
     <ul>
-      <li><strong>Claude Code・OpenAI Codex:</strong> CLI(コマンドライン)中心のエージェント型。単独プランはなく、既存のチャットサブスクに含まれる。</li>
-      <li><strong>Cursor:</strong> AI特化のコードエディタ(IDE)そのもの。複数のAIモデルを裏側で使い分けられる。</li>
-      <li><strong>GitHub Copilot:</strong> 元はコード補完から拡張。VS Code等幅広いエディタに対応するマルチベンダー型。</li>
+      <li><strong>①単体ベンダー固定型:</strong> Claude Code・OpenAI Codex。CLI(コマンドライン)中心のエージェント型で、単独プランはなく既存のチャットサブスクに含まれる。</li>
+      <li><strong>②モデル選択型IDE:</strong> Cursor・GitHub Copilot。自社エディタ・自社モデルを持ちながら、他社の複数モデルにも切り替えられるハイブリッド型。</li>
+      <li><strong>③集約・マルチモデル特化型:</strong> Cline・Aider・OpenRouter。特定ベンダーに縛られず複数モデルを横断すること自体が目的のOSS/APIツール(後述)。</li>
       <li><strong>プログラミング未経験でも:</strong> 会話形式で指示を出せるため、非エンジニアの活用事例も報告されています。</li>
     </ul>
   </div>
@@ -73,6 +74,32 @@
   <details class="trust-box">
     <summary><h2>正直な前置き</h2></summary>
     <p>運営者は実際にClaude Codeを使ってこのサイトを含むWebアプリ・診断ツールを制作しています。そのため4ツールの中でClaude Codeについては実体験に基づく部分がありますが、OpenAI Codex・Cursor・GitHub Copilotは実際に使い込んで比較したものではなく、公式ドキュメント・複数の独立した情報源をもとにした解説である点をお断りしておきます。数値や仕様は公式ドキュメントを優先し、確認できなかった点は「未確認」と明記しています。</p>
+  </details>
+
+  <div class="detail-section" style="margin-top: 20px;">
+    <h2 style="margin-top:0;">コーディング支援AIには3つのタイプがある</h2>
+    <p>動画・文章生成AIと同じ「単体モデル系 vs 集約プラットフォーム系」の2分類をそのまま当てはめようとすると、コーディング支援AI領域ではうまくいきません。調査の結果、Cursor・GitHub Copilotは元々「1社のモデルのみ」ではなく、公式ドキュメント上で複数ベンダーのモデルを切り替えられると明記されているマルチベンダー型でした。そこでこの記事では3タイプに分けて整理します。</p>
+    <p><strong>①単体ベンダー固定型:</strong> Claude Code(Anthropic専用)・OpenAI Codex(OpenAI専用)。1社のモデルのみを使うCLIエージェントです。</p>
+    <p><strong>②モデル選択型IDE:</strong> Cursor・GitHub Copilot。自社のエディタ・自社モデル(Cursorの「Composer」、Copilotの「MAI-Code」等)を持ちながら、Anthropic・OpenAI・Google・xAI等複数ベンダーのモデルにも切り替えられるハイブリッド型です。①と②の中間に位置します。</p>
+    <p><strong>③集約・マルチモデル特化型:</strong> Cline・Aider・OpenRouter。特定のエディタ・ベンダーに縛られず、複数ベンダーのモデルを横断的に使うこと自体が存在意義のOSS/APIツールです(詳しくは後述)。</p>
+    <p>境界はここでも溶けつつあります。②のCursorは2026年6月、③に近い立ち位置だったOSSツール「Continue.dev」を買収し、Continue.devは有料サブスクを終了しました(公式アナウンスで確認)。モデル選択型IDEが集約系ツールを取り込む動きの実例です。</p>
+  </div>
+
+  <details class="rate-table-box show">
+    <summary><h2>コーディング支援AIの分類マップ</h2></summary>
+    <p class="rate-table-note">各社公式サイト・公式ドキュメントをもとにした2026年9月時点の分類です。</p>
+    <div class="rate-table-wrap">
+    <table class="rate-table">
+      <tr><th>サービス</th><th>タイプ</th><th>特徴</th></tr>
+      <tr><td><img class="rt-logo" src="../images/logos/claude-code.png" alt="">Claude Code</td><td>①単体ベンダー固定</td><td>Anthropic専用、Claude Pro/Max同梱</td></tr>
+      <tr><td><img class="rt-logo" src="../images/logos/codex.png" alt="">OpenAI Codex</td><td>①単体ベンダー固定</td><td>OpenAI専用、ChatGPT Plus/Pro同梱</td></tr>
+      <tr><td><img class="rt-logo" src="../images/logos/cursor.png" alt="">Cursor</td><td>②モデル選択型IDE</td><td>自社Composer+Anthropic/OpenAI/Google/xAI等</td></tr>
+      <tr><td><img class="rt-logo" src="../images/logos/copilot.png" alt="">GitHub Copilot</td><td>②モデル選択型IDE</td><td>自社MAI-Code+Anthropic/OpenAI/Google/xAI等</td></tr>
+      <tr><td><img class="rt-logo" src="../images/logos/cline.png" alt="">Cline</td><td>③集約・マルチモデル特化</td><td>VS Code拡張、OSS無料、BYOKで多数のモデルに接続</td></tr>
+      <tr><td><img class="rt-logo" src="../images/logos/aider.png" alt="">Aider</td><td>③集約・マルチモデル特化</td><td>ターミナル動作のOSS、多数のモデルに対応</td></tr>
+      <tr><td><img class="rt-logo" src="../images/logos/openrouter.png" alt="">OpenRouter</td><td>③集約・マルチモデル特化(開発者向けAPI)</td><td>500以上のモデル・80以上のプロバイダーを統一APIで</td></tr>
+    </table>
+    </div>
   </details>
 
   <details class="rate-table-box show">
@@ -116,10 +143,39 @@
     <p class="official-link"><a href="https://github.com/features/copilot" target="_blank" rel="noopener">→ GitHub Copilot公式サイトを見る</a></p>
   </div>
 
+  <div class="detail-section" style="margin-top: 20px;">
+    <h2 style="margin-top:0;">集約・マルチモデル特化型3つを解説</h2>
+    <p>ここからは、特定のエディタ・ベンダーに縛られず複数モデルを横断すること自体が目的の3ツールを解説します。いずれもOSS(オープンソース)または開発者向けで、無料または従量課金が中心です。</p>
+  </div>
+
+  <div class="logo-strip">
+    <a class="logo-chip" href="https://cline.bot/" target="_blank" rel="noopener"><img src="../images/logos/cline.png" alt="Cline" loading="lazy">Cline</a>
+    <a class="logo-chip" href="https://aider.chat/" target="_blank" rel="noopener"><img src="../images/logos/aider.png" alt="Aider" loading="lazy">Aider</a>
+    <a class="logo-chip" href="https://openrouter.ai/" target="_blank" rel="noopener"><img src="../images/logos/openrouter.png" alt="OpenRouter" loading="lazy">OpenRouter</a>
+  </div>
+
+  <div class="detail-section">
+    <h2 class="tool-heading"><img src="../images/logos/cline.png" alt="Cline">Cline</h2>
+    <p>VS Code拡張機能として動作するOSS(Apache 2.0)のコーディングエージェントです。公式ページでは「Anthropic, Gemini, OpenAI, OpenRouter, AWS Bedrock, GCP Vertex, Groq, Cerebras, Vercel AI Gateway, DeepSeek, and many more」と、対応モデル・プロバイダーの多さを明記しています。拡張機能自体は無料で、BYOK(Bring Your Own Key、自分のAPIキーを持ち込む方式)のためAPI利用料は別途モデル提供元に直接発生します。企業向けEnterpriseプランは別途用意されています。公式ページ上に一般ユーザー向けのアフィリエイトプログラムは見当たりませんでした。</p>
+    <p class="official-link"><a href="https://cline.bot/" target="_blank" rel="noopener">→ Cline公式サイトを見る</a></p>
+
+    <h2 class="tool-heading" style="margin-top: 28px;"><img src="../images/logos/aider.png" alt="Aider">Aider</h2>
+    <p>ターミナル(コマンドライン)上で動くOSS(Apache 2.0)のペアプログラミングツールです。公式ドキュメントでOpenAI・Anthropic・Google Gemini・DeepSeek・GROQ・Ollama・OpenRouter・xAI・Azure・Bedrockなど多数のモデル・プロバイダーへの対応が明記されています。ツール自体は完全無料で、利用料は接続先のAPI従量課金のみです。公式のアフィリエイトプログラムは確認できませんでした。</p>
+    <p class="official-link"><a href="https://aider.chat/" target="_blank" rel="noopener">→ Aider公式サイトを見る</a></p>
+
+    <h2 class="tool-heading" style="margin-top: 28px;"><img src="../images/logos/openrouter.png" alt="OpenRouter">OpenRouter</h2>
+    <p>2023年創業(2026年8月にStripeが70億ドル超で買収合意と報道)の、開発者向けLLM統一APIゲートウェイです。コーディング用途に限定したツールではありませんが、Cline・Aider等のバックエンドとしてもよく使われます。公式説明では500以上のモデル・80以上のプロバイダーに対応。無料モデル(25以上、1日50リクエストまで)に加え、従量課金(プラットフォーム手数料5.5%、ビジネス8%)で利用できます。公式の紹介(アフィリエイト)プログラムは見当たりませんでした。</p>
+    <p class="official-link"><a href="https://openrouter.ai/" target="_blank" rel="noopener">→ OpenRouter公式サイトを見る</a></p>
+  </div>
+
   <p class="follow-x">制作の裏側や新しいツールの告知は <a href="https://x.com/uuhai0625" target="_blank" rel="noopener">@uuhai0625</a> で発信しています</p>
 
   <div class="faq-section">
     <h2>よくある質問</h2>
+    <details class="faq-item">
+      <summary>コーディング支援AIには何種類のタイプがありますか?</summary>
+      <p>大きく3タイプに分かれます。①単体ベンダー固定型(Claude Code・OpenAI Codex、1社のモデルのみ使用)、②モデル選択型IDE(Cursor・GitHub Copilot、自社製品を持ちながら他社の複数モデルにも切り替えられる)、③集約・マルチモデル特化型(Cline・Aider・OpenRouter、特定のベンダーに縛られず複数モデルを横断的に使うこと自体が目的のOSS/APIツール)です。</p>
+    </details>
     <details class="faq-item">
       <summary>プログラミング未経験でも本当に使えますか?</summary>
       <p>Claude Codeについては、非エンジニアが数時間の試行錯誤で実用的なアプリを作れたという独立ブログの体験談が複数見つかっています。このサイト自体もClaude Codeで作られています。CLIツール(Claude Code・Codex)は会話形式で指示を出す点では敷居は低い一方、エディタ操作に慣れていないと最初は戸惑う場面もあります。GUI完結型のCursor・Copilotは画面操作の分かりやすさで優位という見方もありますが、非エンジニア限定の比較データは確認できていません。</p>

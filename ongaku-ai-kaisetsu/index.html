@@ -32,8 +32,9 @@
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "datePublished": "2026-09-12",
-  "dateModified": "2026-09-12",
+  "dateModified": "2026-09-13",
   "mainEntity": [
+    { "@type": "Question", "name": "音楽生成AIにも「集約プラットフォーム」はありますか?", "acceptedAnswer": { "@type": "Answer", "text": "動画生成AIほど充実していません。Suno・Udio・Soundrawはいずれも1社が自社開発したモデルのみを提供する「単体モデル系」です。集約プラットフォーム(複数社のモデルを1つのUIでまとめて使えるサービス)は、開発者向けAPIとしてはFAL.AIが8モデル以上の音楽生成AIを集約していることを公式に確認していますが、一般消費者向けの完成されたUIとしての集約プラットフォームはまだ少数派です。" } },
     { "@type": "Question", "name": "Sunoは著作権的に安全に使えますか?", "acceptedAnswer": { "@type": "Answer", "text": "完全には言い切れません。Warner Musicとは2025年11月に和解・ライセンス提携していますが、Universal Music Group(UMG)・Sony Musicとは2026年9月時点でも係争が続いています。さらに2026年7月31日、ドイツ・ミュンヘン地方裁判所がGEMA(著作権管理団体)の訴えを認め、Sunoの学習・出力を著作権侵害と認定し差止・損害賠償を命じました(欧州初の司法判断)。有料プラン加入中に作った楽曲への商用利用権はSuno自身が付与するものですが、これは大手レーベルとの訴訟が既存の生成物の適法性を遡って保証するものではない点に注意してください。" } },
     { "@type": "Question", "name": "Udioは今も使えますか?", "acceptedAnswer": { "@type": "Answer", "text": "楽曲の生成自体は無料・有料プランとも可能です。しかし2025年10月29日のUniversal Music Groupとの提携以降、音声・動画・ステムのダウンロードが全プラン(有料プランも含む)で停止されており、2026年9月時点でも復旧していません(Udio公式ヘルプセンターで確認)。加えてSony Musicは2026年7月20日、旧訴訟とは別に約3万曲・最大45億ドル規模の新規訴訟を提起しており、係争は拡大しています。作った楽曲を実際に書き出して使いたい場合は、現時点では他のツールを検討することをおすすめします。" } },
     { "@type": "Question", "name": "Soundrawはなぜ著作権面の懸念が小さいとされているのですか?", "acceptedAnswer": { "@type": "Answer", "text": "Soundrawは、第三者の楽曲を一切使わず自社スタジオミュージシャンが制作した音源のみでAIを学習させていると公式に明言しています。この「学習データが全て自社保有」という点が、既存楽曲を無断学習したとして提訴されているSuno・Udioとの決定的な違いです。ただし第三者から著作権侵害の主張があった場合の具体的な補償(indemnification)条項は公式ページ上に明記されておらず、この点は未確認です。" } },
@@ -92,6 +93,12 @@
     <p class="official-link"><a href="https://soundraw.io/" target="_blank" rel="noopener">→ Soundraw公式サイトを見る</a></p>
   </div>
 
+  <div class="detail-section">
+    <h2 style="margin-top:0;">音楽生成AIは動画AIと違い、集約プラットフォームがまだ少ない</h2>
+    <p><a href="../douga-ai-kaisetsu/">動画生成AI</a>では、Magnific(旧Freepik)・Higgsfield・MyEditのように複数社のモデルを1つのUIでまとめて使える「集約プラットフォーム」が既に定着しています。一方、音楽生成AIではこの動きがまだ薄いというのが調査の結論です。Suno・Udio・Soundrawはいずれも自社開発モデルのみを提供する単体モデル系で、他社モデルを取り込んだ動きは確認できませんでした。</p>
+    <p>唯一明確に確認できた集約の例は、開発者向けAPI基盤の<strong>FAL.AI</strong>です。公式ブログで「10種類の音楽生成モデルを個別に契約・統合する代わりに、falなら1つのアカウント・1つの統合で済む」と明言しており、Google Lyria・MiniMax Music・ElevenLabs Eleven Music・Stability AI Stable Audioなど8モデル以上を実際に集約しています(動画生成AIの解説記事で既に紹介したのと同じサービスです)。ただし個人クリエイター向けの完成されたUIではなく、開発者・アプリ制作者向けの位置づけです。消費者向けの集約UIとしては「Musci.io」というサービス(Suno・Udio・Mureka等を統合)も見つかりましたが、公式サイトへの直接アクセスが技術的にブロックされており検索結果経由の間接確認にとどまるため、当サイトでは参考情報にとどめます。</p>
+  </div>
+
   <details class="rate-table-box show">
     <summary><h2>3ツール機能マトリクス</h2></summary>
     <p class="rate-table-note">各社公式ヘルプセンターをもとにした2026年9月時点の比較です。</p>
@@ -137,6 +144,10 @@
 
   <div class="faq-section">
     <h2>よくある質問</h2>
+    <details class="faq-item">
+      <summary>音楽生成AIにも「集約プラットフォーム」はありますか?</summary>
+      <p>動画生成AIほど充実していません。Suno・Udio・Soundrawはいずれも1社が自社開発したモデルのみを提供する「単体モデル系」です。集約プラットフォーム(複数社のモデルを1つのUIでまとめて使えるサービス)は、開発者向けAPIとしてはFAL.AIが8モデル以上の音楽生成AIを集約していることを公式に確認していますが、一般消費者向けの完成されたUIとしての集約プラットフォームはまだ少数派です。</p>
+    </details>
     <details class="faq-item">
       <summary>Sunoは著作権的に安全に使えますか?</summary>
       <p>完全には言い切れません。Warner Musicとは2025年11月に和解・ライセンス提携していますが、Universal Music Group(UMG)・Sony Musicとは2026年9月時点でも係争が続いています。さらに2026年7月31日、ドイツ・ミュンヘン地方裁判所がGEMA(著作権管理団体)の訴えを認め、Sunoの学習・出力を著作権侵害と認定し差止・損害賠償を命じました(欧州初の司法判断)。有料プラン加入中に作った楽曲への商用利用権はSuno自身が付与するものですが、これは大手レーベルとの訴訟が既存の生成物の適法性を遡って保証するものではない点に注意してください。</p>
