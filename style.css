@@ -1448,6 +1448,28 @@ html.qshow .share-row { display: flex; }
   margin-top: 4px;
   font-size: 0.82rem;
 }
+.rate-table-compare th, .rate-table-compare td {
+  text-align: center;
+  vertical-align: top;
+}
+.rate-table-compare th:first-child, .rate-table-compare td:first-child {
+  text-align: left;
+  color: var(--ink-sub);
+  font-weight: 700;
+  position: sticky;
+  left: 0;
+  background: var(--bg-card);
+  z-index: 1;
+  box-shadow: 1px 0 0 var(--line);
+  white-space: nowrap;
+}
+.rate-table-compare th img.rt-logo {
+  display: block;
+  margin: 0 auto 4px;
+}
+.rate-table-wrap .rate-table-compare {
+  min-width: 560px;
+}
 .rate-table img.rt-logo {
   width: 20px;
   height: 20px;
