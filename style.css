@@ -271,7 +271,7 @@ a { color: var(--navy); }
      結果が表示された瞬間だけ左カラム(380px)へ戻して2カラム化する。 */
   .calc-layout .calc-card {
     grid-column: 1 / -1;
-    max-width: 500px;
+    max-width: 620px;
     margin-left: auto;
     margin-right: auto;
   }
@@ -289,6 +289,27 @@ a { color: var(--navy); }
     flex-direction: column;
     justify-content: center;
   }
+  /* デスクトップ幅では本文相当のテキストがモバイルと同サイズのままで、大画面だと
+     相対的に小さく見づらいとの指摘(2026-09-12)。furusato-nozei限定で本文・補助
+     テキストを1〜2px相当ずつ引き上げる(見出し・数値表示・ボタンは対象外)。 */
+  .furusato-main .field label { font-size: 0.92rem; }
+  .furusato-main .stage-note { font-size: 0.95rem; }
+  .furusato-main .field-hint { font-size: 0.88rem; }
+  .furusato-main .result-label { font-size: 0.85rem; }
+  .furusato-main .result-note { font-size: 0.92rem; }
+  .furusato-main .citation-note { font-size: 0.85rem; }
+  .furusato-main .other-asp-links { font-size: 0.82rem; }
+  .furusato-main .aff-card .aff-sub { font-size: 0.85rem; }
+  .furusato-main .follow-cta p:not(.follow-cta-title) { font-size: 0.9rem; }
+  .furusato-main .manner-box ul { font-size: 0.94rem; }
+  .furusato-main .rate-table { font-size: 0.94rem; }
+  .furusato-main .rate-table th { font-size: 0.85rem; }
+  .furusato-main .rate-table-note { font-size: 0.86rem; }
+  .furusato-main .faq-item summary { font-size: 1rem; }
+  .furusato-main .faq-item p { font-size: 0.94rem; }
+  .furusato-main .detail-section p { font-size: 0.94rem; }
+  .furusato-main .pick-comment { font-size: 0.8rem; }
+  .furusato-main .related-tool-comment { font-size: 0.83rem; }
 }
 .field { margin-bottom: 18px; }
 .field label {
