@@ -258,8 +258,10 @@ a { color: var(--navy); }
 @media (min-width: 900px) {
   /* furusato-nozei限定だった横幅拡張を、`.calc-layout`を持つ全ページに一般化(2026-09-12、
      ユーザー指摘「PC版がサイド空きすぎ」への対応)。720px→960pxにすることで、
-     2カラム化後の結果側(1fr)によりゆとりを持たせる。 */
-  main.wrap:has(.calc-layout) { max-width: 960px; }
+     2カラム化後の結果側(1fr)によりゆとりを持たせる。ポータル(`.tool-list`)も
+     同じ960pxへ拡張し、下記の2カラムグリッド化で使う横幅を確保する(2026-09-12、
+     「トップページが見づらい」指摘への対応)。 */
+  main.wrap:has(.calc-layout), main.wrap:has(.tool-list) { max-width: 960px; }
   .calc-layout {
     display: grid;
     grid-template-columns: minmax(0, 380px) 1fr;
@@ -315,6 +317,17 @@ a { color: var(--navy); }
   .furusato-main .detail-section p { font-size: 0.94rem; }
   .furusato-main .pick-comment { font-size: 0.8rem; }
   .furusato-main .related-tool-comment { font-size: 0.83rem; }
+
+  /* ポータルのツール一覧を2カラム化(2026-09-12、「トップページが見づらい」指摘への
+     対応)。13枚のtool-cardが縦一列に並び続けてスクロールが長く単調に見えていたため、
+     960px幅を活かして2カラムグリッドに変更。件数が奇数のグループ(道具ガイド3枚等)は
+     最後の1枚だけ1カラム分の余白ができるが、崩れではなく想定内の見た目。モバイルは
+     このメディアクエリの対象外で従来通り1カラム縦積みのまま。 */
+  .tool-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: stretch;
+  }
 }
 
 /* ふるさと納税ページのUX拡張(2026-09-12、レイアウト・デザイン5名パネル対応、
