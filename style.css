@@ -1457,19 +1457,11 @@ html.qshow .share-row { display: flex; }
   white-space: pre-wrap;
 }
 
-/* ポータル: 「まず知っておきたい基礎知識」セクション(2026-09-12、
-   このサイトをAI副業を考える人のガイドブックにしたいという方針で追加)。
-   生成AIツール・パソコンの種類を、各計算機ページへのリンク付きで先に整理する。
-   960px幅を活かして900px以上で2カラムに。 */
+/* hajimekata: 「まず知っておきたい基礎知識」セクション(2026-09-12、
+   このサイトをAI副業を考える人のガイドブックにしたいという方針で追加、
+   トップページから移設)。生成AIツール・パソコンの種類を、各比較ページへの
+   リンク付きで先に整理する。 */
 .orientation-section { margin: 32px 0; }
-.orientation-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 24px;
-}
-@media (min-width: 900px) {
-  .orientation-grid { grid-template-columns: 1fr 1fr; }
-}
 .orientation-list {
   margin: 0;
   padding-left: 1.2em;

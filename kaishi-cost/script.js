@@ -101,6 +101,11 @@ const GENRES = {
     note: 'Midjourney・Runway・Kling AIなどの動画生成AIを使います。他ジャンルと違い実用的な無料プランがなく、最初から有料プラン(目安$10〜$30/月)が前提になりやすいジャンルです。',
     link: { href: '../douga-ryokin/', label: '動画作成AIツールの月額料金シミュレーター' },
   },
+  'ai-music': {
+    label: 'AI音楽制作', toolLow: 0, toolHigh: 4900,
+    note: 'Suno・Udio・Soundrawなどの音楽生成AIを使います。歌ものはUdio無料版でも試作できますが、商用利用したい場合や動画のBGM用途で使う場合は有料プランが前提になりやすいジャンルです。',
+    link: { href: '../ongaku-ryokin/', label: '音楽生成AIツール料金比較' },
+  },
 };
 
 const PC_OPTIONS = {
