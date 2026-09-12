@@ -54,6 +54,12 @@
 <main class="wrap">
   <a class="back-link" href="../">← ツール一覧にもどる</a>
 
+  <div class="logo-strip">
+    <a class="logo-chip" href="https://suno.com/" target="_blank" rel="noopener"><img src="../images/logos/suno.png" alt="Suno" loading="lazy">Suno</a>
+    <a class="logo-chip" href="https://www.udio.com/" target="_blank" rel="noopener"><img src="../images/logos/udio.png" alt="Udio" loading="lazy">Udio</a>
+    <a class="logo-chip" href="https://soundraw.io/" target="_blank" rel="noopener"><img src="../images/logos/soundraw.png" alt="Soundraw" loading="lazy">Soundraw</a>
+  </div>
+
   <div class="manner-box show">
     <h2>結論</h2>
     <ul>
@@ -70,18 +76,32 @@
   </details>
 
   <div class="detail-section" style="margin-top: 20px;">
-    <h2>Suno</h2>
+    <h2 class="tool-heading"><img src="../images/logos/suno.png" alt="Suno">Suno</h2>
     <p>テキストから歌詞付きの楽曲をワンストップで生成できるツールで、日本語歌詞にも対応しています。現行モデルはv4.5/v5/v5.5系で、1回の生成で最大8分程度まで生成可能、2026年7月20日のv5.5でDuration Slider(尺を事前指定できる機能)が追加されました。Extend機能で曲を継続的に延長できますが、延長を重ねると音質が劣化するという報告もあります。2026年6月のアップデートでステム分離機能(Auto Split・Split from Mix・Advanced Split)も追加されました。</p>
     <p><strong>著作権面の状況(2026年9月時点):</strong> Universal Music Group・Sony Music・Warner Musicが2024年6月に共同提訴した裁判のうち、Warnerは2025年11月25日に和解しライセンス提携に移行しました。一方UMG・Sonyとは係争が継続しており、Sunoは2026年3月にフェアユースを主張する申立てを提出しています。さらに2026年7月31日、ドイツ・ミュンヘン地方裁判所が著作権管理団体GEMAの訴えを認め、Sunoの学習・出力を著作権侵害と認定、6楽曲について差止・収益開示・損害賠償を命じました(欧州で初めての司法判断)。無料プランは2026年9月3日以降、生涯7曲までダウンロード可・商用利用権なしに変更されています(既存の生成物にも遡及)。</p>
+    <p class="official-link"><a href="https://suno.com/" target="_blank" rel="noopener">→ Suno公式サイトを見る</a></p>
 
-    <h2 style="margin-top: 28px;">Udio</h2>
+    <h2 class="tool-heading" style="margin-top: 28px;"><img src="../images/logos/udio.png" alt="Udio">Udio</h2>
     <p>Sunoと同系統で、テキストから歌詞付きの楽曲を生成できます。v4でインペインティング(部分区間の再生成)とステム抽出に対応し、Voice Control(ボーカルの声質の抽出・保存・複数ブレンド)がStandard/Pro加入者限定で使えます。無料プランでもフル尺(2分10秒)の楽曲を1日3曲まで生成できる仕様自体は維持されています。</p>
     <p><strong>重要な注意点:</strong> Udioは2025年10月29日にUniversal Music Groupと和解・提携し、この条件として全ユーザー(有料プランも含む)の音声・動画・ステムのダウンロードが即座に無効化されました。同年11月3〜5日の約48時間だけ既存曲の救出用にダウンロードが再開されましたが、その後再び停止しています。Udio公式ヘルプセンターには現在も「downloading of audio, video, and stems has been disabled」と明記されており、2026年9月時点で復旧時期は未発表です。Warnerとも2025年11月に和解済みですが、Sony Musicとは2026年7月20日、旧訴訟とは別に約3万117曲・最大45億ドル規模の新規訴訟が提起されており、係争は縮小するどころか拡大しています。<strong>つまり現時点のUdioは「生成はできるが、作った楽曲を書き出して実際に使うことができない」状態です。</strong></p>
+    <p class="official-link"><a href="https://www.udio.com/" target="_blank" rel="noopener">→ Udio公式サイトを見る</a></p>
 
-    <h2 style="margin-top: 28px;">Soundraw</h2>
+    <h2 class="tool-heading" style="margin-top: 28px;"><img src="../images/logos/soundraw.png" alt="Soundraw">Soundraw</h2>
     <p>自社スタジオミュージシャンが制作した音源のみでAIを学習させている点が最大の特徴で、公式に「サードパーティ作品は不使用」と明言しています。歌詞・ボーカルなしのBGM特化が基本ですが、ステム(個別トラック)ダウンロードやブラウザ内ミキサーでのテンポ・キー・楽器レイヤー調整に対応しています。</p>
     <p>公式は「Soundraw APIで生成された楽曲は第三者請求フリー」と明言しており、有料プラン契約時は個人・商用問わず利用可能、Artist Planでは改変前提でのストリーミング配信(Spotify等)も許可されています。解約後もライセンスは永続します。ただし第三者から著作権侵害の請求があった場合の具体的な補償(indemnification)条項は公式ページ上に明記がなく、この点は未確認です。継続利用できる無料プランはなく、最初から有料プランが前提です。</p>
+    <p class="official-link"><a href="https://soundraw.io/" target="_blank" rel="noopener">→ Soundraw公式サイトを見る</a></p>
   </div>
+
+  <details class="rate-table-box show">
+    <summary><h2>提携プログラムのあるツール</h2></summary>
+    <p class="rate-table-note">Soundrawは公式のアフィリエイト(紹介)プログラムを提供していることを確認しています(2026年9月確認、公式ASP経由で直接確認済み)。当サイトは現時点で未提携のため、下記は通常の公式サイトへのリンクです。Suno・Udioに個人向けの公式アフィリエイトプログラムは確認できませんでした。</p>
+    <div class="rate-table-wrap">
+    <table class="rate-table rate-table-feature">
+      <tr><th>ツール</th><th>提携プログラムの概要</th></tr>
+      <tr><td><img class="rt-logo" src="../images/logos/soundraw.png" alt="">Soundraw</td><td>GoAffPro経由(discover.soundraw.io/affiliate)。成約ごと最大$25、NET30払い、最低$100到達で振込</td></tr>
+    </table>
+    </div>
+  </details>
 
   <details class="rate-table-box show">
     <summary><h2>3ツールの著作権・法的リスク比較</h2></summary>
@@ -89,9 +109,9 @@
     <div class="rate-table-wrap">
     <table class="rate-table rate-table-feature">
       <tr><th>ツール</th><th>著作権・法的リスクの状況(2026年9月時点)</th></tr>
-      <tr><td>Suno</td><td>UMG・Sonyと係争中。独ミュンヘン地裁で敗訴(2026年7月31日、著作権侵害認定)。Warnerとは和解済み。有料プランならダウンロード・商用利用は可能</td></tr>
-      <tr><td>Udio</td><td>UMG・Warnerとは和解済みだが、その条件として全プランでダウンロード停止中(2025年10月〜、復旧時期未定)。Sonyとは新規訴訟(最大45億ドル規模)が拡大中</td></tr>
-      <tr><td>Soundraw</td><td>自社音源のみで学習、第三者楽曲を学習データに含まない。訴訟リスクの報道は今回確認できず</td></tr>
+      <tr><td><img class="rt-logo" src="../images/logos/suno.png" alt="">Suno</td><td>UMG・Sonyと係争中。独ミュンヘン地裁で敗訴(2026年7月31日、著作権侵害認定)。Warnerとは和解済み。有料プランならダウンロード・商用利用は可能</td></tr>
+      <tr><td><img class="rt-logo" src="../images/logos/udio.png" alt="">Udio</td><td>UMG・Warnerとは和解済みだが、その条件として全プランでダウンロード停止中(2025年10月〜、復旧時期未定)。Sonyとは新規訴訟(最大45億ドル規模)が拡大中</td></tr>
+      <tr><td><img class="rt-logo" src="../images/logos/soundraw.png" alt="">Soundraw</td><td>自社音源のみで学習、第三者楽曲を学習データに含まない。訴訟リスクの報道は今回確認できず</td></tr>
     </table>
     </div>
     <p class="rate-source">参考: <a href="https://www.hollywoodreporter.com/music/music-industry-news/musicians-union-lawsuit-ai-song-generator-settlement-1236614835/" target="_blank" rel="noopener">Hollywood Reporter</a>、<a href="https://www.twobirds.com/en/insights/2026/germany/munich-district-court-rules-on-ai-generated-music-gema-v-suno" target="_blank" rel="noopener">Bird & Bird(独ミュンヘン地裁判決の解説)</a>、<a href="https://www.musicbusinessworldwide.com/sony-music-files-new-lawsuit-against-ai-platform-udio-asserting-over-30000-sound-recordings-a-judge-barred-it-from-adding-to-its-original-case/" target="_blank" rel="noopener">Music Business Worldwide</a>、<a href="https://help.udio.com/en/articles/12683565-changes-associated-with-the-universal-music-group-umg-partnership" target="_blank" rel="noopener">Udio公式ヘルプセンター</a>、<a href="https://soundraw.io/license" target="_blank" rel="noopener">SOUNDRAW公式ライセンスページ</a>(2026年9月確認)</p>

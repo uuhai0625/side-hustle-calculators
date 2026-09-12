@@ -53,6 +53,13 @@
 <main class="wrap">
   <a class="back-link" href="../">← ツール一覧にもどる</a>
 
+  <div class="logo-strip">
+    <a class="logo-chip" href="https://claude.com/product/claude-code" target="_blank" rel="noopener"><img src="../images/logos/claude-code.png" alt="Claude Code" loading="lazy">Claude Code</a>
+    <a class="logo-chip" href="https://openai.com/codex/" target="_blank" rel="noopener"><img src="../images/logos/codex.png" alt="OpenAI Codex" loading="lazy">OpenAI Codex</a>
+    <a class="logo-chip" href="https://cursor.com/" target="_blank" rel="noopener"><img src="../images/logos/cursor.png" alt="Cursor" loading="lazy">Cursor</a>
+    <a class="logo-chip" href="https://github.com/features/copilot" target="_blank" rel="noopener"><img src="../images/logos/copilot.png" alt="GitHub Copilot" loading="lazy">GitHub Copilot</a>
+  </div>
+
   <div class="manner-box show">
     <h2>結論</h2>
     <ul>
@@ -69,21 +76,25 @@
   </details>
 
   <div class="detail-section" style="margin-top: 20px;">
-    <h2>Claude Code(Anthropic)</h2>
+    <h2 class="tool-heading"><img src="../images/logos/claude-code.png" alt="Claude Code">Claude Code(Anthropic)</h2>
     <p>ターミナル(CLI)から会話形式でコードを書かせるエージェント型ツールです。サブエージェント(独立した文脈で動く専門エージェントを`.claude/agents/`にMarkdownで定義)、hooks(ツール実行の前後で決定論的なスクリプトを起動)、スキル(必要な時だけ読み込む専門知識パック)、MCP(外部ツール・データベース・Issue管理等との接続)といった拡張機能を持ちます。VS Code・JetBrains(IntelliJ・PyCharm等)向けの公式拡張もあり、インラインでの差分表示や診断情報の連携ができます。</p>
     <p>単独のプランはなく、Claude Pro(月額$20)・Max(月額$100〜)に同梱される形で使います。チャットとClaude Codeの利用量は共有プールで、5時間ごとのローリング制限に加えて有料プランは週次の上限も設けられています(具体的な時間数・リクエスト数は公式に明記されていません)。非エンジニアが「会話ができれば使える」形でWebアプリ・データ集計・記事整理等を実現した事例が、複数の独立した個人ブログで報告されています。</p>
+    <p class="official-link"><a href="https://claude.com/product/claude-code" target="_blank" rel="noopener">→ Claude Code公式サイトを見る</a></p>
 
-    <h2 style="margin-top: 28px;">OpenAI Codex</h2>
+    <h2 class="tool-heading" style="margin-top: 28px;"><img src="../images/logos/codex.png" alt="OpenAI Codex">OpenAI Codex</h2>
     <p>Claude Codeと同じくCLI中心のエージェント型ツールですが、技術的な作り方が異なります。サンドボックス(AIが実行するコマンドを隔離する仕組み)が「read-only」「workspace-write(既定、プロジェクト内のみ書き込み可)」「danger-full-access」の3段階に分かれており、Codex本体のプロセス自体は隔離されず、AIが実行する個別のシェルコマンドだけが隔離される点が特徴です。プロジェクトの指示ファイルは`AGENTS.md`(Claude Codeの`CLAUDE.md`に相当)、MCPサーバー接続にも対応し、クラウド上へのタスク移行機能も持ちます。</p>
     <p>単独プランはなく、ChatGPT Plus($20/月)・Proに同梱されます。Claude Maxと同様、上位プランほど利用量が増える構造(5倍・20倍相当)を持つとされていますが、正確な数値はOpenAI公式価格ページで直接確認できませんでした。</p>
+    <p class="official-link"><a href="https://openai.com/codex/" target="_blank" rel="noopener">→ OpenAI Codex公式サイトを見る</a></p>
 
-    <h2 style="margin-top: 28px;">Cursor</h2>
+    <h2 class="tool-heading" style="margin-top: 28px;"><img src="../images/logos/cursor.png" alt="Cursor">Cursor</h2>
     <p>CLIツールではなく、AI機能を組み込んだコードエディタ(IDE)そのものです。専用の軽量モデルによる低遅延の入力補完「Tab」、自然言語の指示からリポジトリ横断で複数ファイルを編集する「Composer」、Composer内で自律実行に切り替えられる「Agent」モードを備えます。Anthropic・OpenAI・Google・xAI系など複数のAIモデルを切り替えて使えるのも特徴です。</p>
     <p>料金はHobby(無料、Agentリクエストに制限あり)・Pro($20/月)・Pro+($60/月、Proの3倍相当)・Ultra($200/月、Proの20倍相当)の段階制です。エディタごとAI特化設計のため、CLI操作が不要な分、画面操作としては直感的という見方もあります。</p>
+    <p class="official-link"><a href="https://cursor.com/" target="_blank" rel="noopener">→ Cursor公式サイトを見る</a></p>
 
-    <h2 style="margin-top: 28px;">GitHub Copilot</h2>
+    <h2 class="tool-heading" style="margin-top: 28px;"><img src="../images/logos/copilot.png" alt="GitHub Copilot">GitHub Copilot</h2>
     <p>元々はエディタ上のコード補完(オートコンプリート)機能として始まり、現在はチャット・エージェントモード・コードレビュー・PR自動作成まで拡張しています。VS Code・Visual Studio・JetBrains・Xcodeなど幅広いエディタに対応。Anthropic(Claude系)・OpenAI(GPT系)・Google(Gemini系)・xAI(Grok系)のモデルを選べるマルチベンダー型で、Claude CodeやCodexそのものを内部から呼び出せる点も他にない特徴です。</p>
     <p>2026年6月からトークン使用量に基づく「AIクレジット」課金制に移行しており、コード補完自体は全プランで無料、Chat・エージェント・コードレビューがクレジット消費の対象になりました。プランはFree(無料、補完のみ上限あり)・Pro($10/月)・Pro+($39/月)・Business($19/ユーザー/月)・Enterprise($39/ユーザー/月)です。使い慣れたエディタにそのまま統合され、無料プランから始められる点で導入の敷居は最も低いと考えられます。</p>
+    <p class="official-link"><a href="https://github.com/features/copilot" target="_blank" rel="noopener">→ GitHub Copilot公式サイトを見る</a></p>
   </div>
 
   <details class="rate-table-box show">
@@ -92,10 +103,10 @@
     <div class="rate-table-wrap">
     <table class="rate-table rate-table-feature">
       <tr><th>ツール</th><th>形態</th><th>特徴的な機能</th></tr>
-      <tr><td>Claude Code</td><td>CLI(エージェント型)</td><td>サブエージェント・hooks・スキル・MCP対応、VS Code/JetBrains拡張あり</td></tr>
-      <tr><td>OpenAI Codex</td><td>CLI(エージェント型)</td><td>3段階のサンドボックス、AGENTS.md、クラウドへのタスク移行</td></tr>
-      <tr><td>Cursor</td><td>独立したIDE</td><td>Tab補完・Composer・Agentモード、複数ベンダーのモデルを選択可</td></tr>
-      <tr><td>GitHub Copilot</td><td>既存エディタへの拡張機能</td><td>4ベンダーのモデルを選択可、コードレビュー・PR自動作成にも対応</td></tr>
+      <tr><td><img class="rt-logo" src="../images/logos/claude-code.png" alt="">Claude Code</td><td>CLI(エージェント型)</td><td>サブエージェント・hooks・スキル・MCP対応、VS Code/JetBrains拡張あり</td></tr>
+      <tr><td><img class="rt-logo" src="../images/logos/codex.png" alt="">OpenAI Codex</td><td>CLI(エージェント型)</td><td>3段階のサンドボックス、AGENTS.md、クラウドへのタスク移行</td></tr>
+      <tr><td><img class="rt-logo" src="../images/logos/cursor.png" alt="">Cursor</td><td>独立したIDE</td><td>Tab補完・Composer・Agentモード、複数ベンダーのモデルを選択可</td></tr>
+      <tr><td><img class="rt-logo" src="../images/logos/copilot.png" alt="">GitHub Copilot</td><td>既存エディタへの拡張機能</td><td>4ベンダーのモデルを選択可、コードレビュー・PR自動作成にも対応</td></tr>
     </table>
     </div>
     <p class="rate-source">参考: <a href="https://support.claude.com/en/articles/11145838-using-claude-code-with-your-pro-or-max-plan" target="_blank" rel="noopener">Claude Code公式サポート</a>、<a href="https://developers.openai.com/codex/concepts/sandboxing" target="_blank" rel="noopener">OpenAI Codex公式ドキュメント</a>、<a href="https://cursor.com/pricing" target="_blank" rel="noopener">Cursor公式料金ページ</a>、<a href="https://docs.github.com/en/copilot/reference/ai-models/supported-models" target="_blank" rel="noopener">GitHub Copilot公式ドキュメント</a>(2026年9月確認)</p>
