@@ -28,8 +28,9 @@ async function showFurusatoProducts(category, maxPrice) {
   if (!grid) return;
   const requestId = ++productRequestId;
   grid.setAttribute('aria-busy', 'true');
-  grid.innerHTML = '';
-  grid.classList.remove('show');
+  // fetch中は無音で空白化せず、スケルトンを表示して「固まった」との誤解を防ぐ(2026-09-12追加、No.15)。
+  grid.innerHTML = `<div class="product-band"><div class="product-band-grid">${Array(4).fill('<div class="product-skeleton" aria-hidden="true"></div>').join('')}</div></div>`;
+  grid.classList.add('show');
   if (label) label.style.display = 'none';
   const url = new URL('https://openapi.rakuten.co.jp/ichibams/api/IchibaItem/Search/20260701');
   url.searchParams.set('applicationId', RAKUTEN_APP_ID);
@@ -43,16 +44,18 @@ async function showFurusatoProducts(category, maxPrice) {
   try {
     const res = await fetch(url.toString());
     if (requestId !== productRequestId) return;
-    if (!res.ok) return;
+    if (!res.ok) { grid.classList.remove('show'); grid.innerHTML = ''; return; }
     const data = await res.json();
     if (requestId !== productRequestId) return;
     const items = (data.Items || []).map((entry) => entry.Item || entry);
-    if (!items.length) return;
+    if (!items.length) { grid.classList.remove('show'); grid.innerHTML = ''; return; }
     grid.innerHTML = `<div class="product-band"><div class="product-band-grid">${items.map((item) => cardHtml(item, category)).join('')}</div></div>`;
     grid.classList.add('show');
     if (label) { label.textContent = 'あなたの上限額で選べる人気の返礼品'; label.style.display = ''; }
   } catch (e) {
-    // 失敗時は既存の検索リンクCTA(aff-card)に静かにフォールバック
+    // 失敗時は既存の検索リンクCTA(aff-card)に静かにフォールバック、スケルトンも消す
+    grid.classList.remove('show');
+    grid.innerHTML = '';
   } finally {
     // 新しいリクエストに追い越されている場合はそちらがaria-busyを管理するので触らない
     if (requestId === productRequestId) grid.setAttribute('aria-busy', 'false');
@@ -195,15 +198,99 @@ let lastLimit = 0;
 // 「¥38,588,128,387,000」のような非現実的な結果がそのまま通常表示され、ツールの信頼性を損なう(2026-09-12修正)。
 const MAX_INCOME_INPUT = 100000000;
 
+// 桁区切りカンマ表示(2026-09-12追加、No.21)に対応するため、Number変換前にカンマを除去する。
+function parseMoneyInput(el) {
+  return Number(String(el.value).replace(/,/g, '')) || 0;
+}
+
 function readInput() {
   return {
-    salary: Math.min(MAX_INCOME_INPUT, Math.max(0, Number(inputSalary.value) || 0)),
+    salary: Math.min(MAX_INCOME_INPUT, Math.max(0, parseMoneyInput(inputSalary))),
     hasSpouse: selectSpouse.value === '1',
     dependents: Math.min(10, Math.max(0, Number(inputDependents.value) || 0)),
-    sideIncome: Math.min(MAX_INCOME_INPUT, Math.max(0, Number(inputSideIncome.value) || 0)),
-    sideExpense: Math.min(MAX_INCOME_INPUT, Math.max(0, Number(inputSideExpense.value) || 0)),
+    sideIncome: Math.min(MAX_INCOME_INPUT, Math.max(0, parseMoneyInput(inputSideIncome))),
+    sideExpense: Math.min(MAX_INCOME_INPUT, Math.max(0, parseMoneyInput(inputSideExpense))),
     sideType: selectSideType.value,
   };
+}
+
+// 金額入力欄への桁区切りカンマ自動整形(2026-09-12追加、No.21)。type="text"化した
+// 3フィールド(給与収入・副業収入・副業経費)共通。カーソル位置は末尾固定の簡易実装とする
+// (短い数値フィールドのため、途中編集時の使用感より表示の分かりやすさを優先)。
+function formatMoneyInput(el) {
+  const digits = el.value.replace(/[^0-9]/g, '');
+  el.value = digits ? Number(digits).toLocaleString('ja-JP') : '';
+}
+[inputSalary, inputSideIncome, inputSideExpense].forEach((el) => {
+  formatMoneyInput(el);
+  el.addEventListener('input', () => formatMoneyInput(el));
+});
+
+// 結果金額の短いカウントアップ演出(2026-09-12追加、No.22)。prefers-reduced-motionでは
+// 演出をスキップして直接表示する。誠実さ方針との整合のため200〜300ms・イージングのみに
+// 限定し、派手な演出(色変化・音等)は加えない。
+function animateResultAmount(from, to) {
+  if (
+    (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) ||
+    document.hidden
+  ) {
+    // バックグラウンドタブではrequestAnimationFrameが停止し表示が更新されないままになるため、
+    // reduced-motion時と同様にアニメーションをスキップして直接確定値を表示する(2026-09-12、
+    // 実機検証で発見)。
+    resultAmount.textContent = to.toLocaleString('ja-JP');
+    return;
+  }
+  const duration = 260;
+  const start = performance.now();
+  // rAFがタブの可視状態変化等で停止しても最終値は必ず反映されるよう、setTimeoutで保険をかける
+  // (タブが非表示になった場合はここで確定値に揃う)。
+  const fallback = setTimeout(() => { resultAmount.textContent = to.toLocaleString('ja-JP'); }, duration + 100);
+  function step(now) {
+    const progress = Math.min((now - start) / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    const current = Math.round(from + (to - from) * eased);
+    resultAmount.textContent = current.toLocaleString('ja-JP');
+    if (progress < 1) {
+      requestAnimationFrame(step);
+    } else {
+      clearTimeout(fallback);
+    }
+  }
+  requestAnimationFrame(step);
+}
+
+const incomeBarSalary = document.getElementById('income-bar-salary');
+const incomeBarSide = document.getElementById('income-bar-side');
+// 給与所得/副業所得の内訳比率バー(2026-09-12追加、No.19)。実測値の比率をそのまま
+// 表示するのみで、新しい主張・誇張した視覚化は行わない。
+function updateIncomeBar(r) {
+  if (!incomeBarSalary || !incomeBarSide || r.totalIncome <= 0) return;
+  const salaryPct = Math.round((r.salaryIncome / r.totalIncome) * 1000) / 10;
+  incomeBarSalary.style.width = salaryPct + '%';
+  incomeBarSide.style.width = (100 - salaryPct) + '%';
+}
+
+// 早見表(年収×家族構成)で入力値に最も近い行・該当する家族構成の列をハイライト
+// (2026-09-12追加、No.20)。`.rate-table-matrix td.highlighted`は既存の強調パターンを流用。
+function highlightRateTableRow(salary, hasSpouse, dependents) {
+  const table = document.querySelector('.rate-table-matrix');
+  if (!table) return;
+  table.querySelectorAll('td.highlighted').forEach((td) => td.classList.remove('highlighted'));
+  const rows = Array.from(table.querySelectorAll('tr')).slice(1);
+  if (!rows.length || salary <= 0) return;
+  let closestRow = null;
+  let closestDiff = Infinity;
+  rows.forEach((row) => {
+    const match = row.cells[0].textContent.match(/(\d+)万円/);
+    if (!match) return;
+    const rowIncome = Number(match[1]) * 10000;
+    const diff = Math.abs(rowIncome - salary);
+    if (diff < closestDiff) { closestDiff = diff; closestRow = row; }
+  });
+  if (!closestRow) return;
+  const colIndex = !hasSpouse ? 1 : (dependents > 0 ? 3 : 2);
+  const cell = closestRow.cells[colIndex];
+  if (cell) cell.classList.add('highlighted');
 }
 
 // No.54(2026-09-06): 数値計算とテキスト更新だけを担う部分を独立させ、
@@ -215,9 +302,11 @@ function computeAndRender() {
   const input = readInput();
   const r = calcResult(input);
 
-  resultAmount.textContent = r.limit.toLocaleString('ja-JP');
+  animateResultAmount(lastLimit, r.limit);
   resultNote.textContent = `給与所得¥${Math.round(r.salaryIncome).toLocaleString('ja-JP')} + 副業所得¥${Math.round(r.sideTaxableIncome).toLocaleString('ja-JP')}(${SIDE_TYPE_LABEL[input.sideType]}) = 総所得金額¥${Math.round(r.totalIncome).toLocaleString('ja-JP')}`;
   resultSub.textContent = `住民税額の基準になる所得割額(概算):¥${Math.round(r.residentIncomeLevy).toLocaleString('ja-JP')} / 適用された所得税率:${Math.round(r.rate * 100)}%`;
+  updateIncomeBar(r);
+  highlightRateTableRow(input.salary, input.hasSpouse, input.dependents);
 
   let notices = [];
   if (r.needsFinalReturn) {
@@ -255,6 +344,14 @@ function calc() {
   }
   computeAndRender();
   resultCard.classList.add('show');
+  // 結果表示のフェードイン(2026-09-12追加、No.18)。display切替の直後だとブラウザが
+  // トランジションを認識しないため、2回のrequestAnimationFrameで初期状態の描画を待ってから
+  // revealedクラスを付与する。再計算(scheduleLiveRecalc等)はcalc()を経由しないため、
+  // 初回表示時のみフェードインし、以降の更新では再アニメーションしない。
+  requestAnimationFrame(() => requestAnimationFrame(() => resultCard.classList.add('revealed')));
+  // バックグラウンドタブではrequestAnimationFrameが停止しrevealedが付かず結果が見えないままに
+  // なりうるため、setTimeoutで保険をかける(2026-09-12、実機検証で発見)。
+  setTimeout(() => resultCard.classList.add('revealed'), 400);
   followCta.classList.add('show');
   if (otherAspLinks) otherAspLinks.classList.add('show');
   shareRow.classList.add('show');
@@ -336,7 +433,8 @@ btnCopyLink.addEventListener('click', async () => {
   const original = btnCopyLink.textContent;
   const showCopied = () => {
     btnCopyLink.textContent = 'コピーしました ✓';
-    setTimeout(() => { btnCopyLink.textContent = original; }, 2000);
+    btnCopyLink.classList.add('copied');
+    setTimeout(() => { btnCopyLink.textContent = original; btnCopyLink.classList.remove('copied'); }, 2000);
   };
   const url = shareUrl('copy_link');
   try {
@@ -367,7 +465,8 @@ if (btnCopyEmbed && embedCodeField) {
     const original = btnCopyEmbed.textContent;
     const showCopied = () => {
       btnCopyEmbed.textContent = 'コピーしました ✓';
-      setTimeout(() => { btnCopyEmbed.textContent = original; }, 2000);
+      btnCopyEmbed.classList.add('copied');
+      setTimeout(() => { btnCopyEmbed.textContent = original; btnCopyEmbed.classList.remove('copied'); }, 2000);
     };
     const text = embedCodeField.value;
     try {
@@ -389,7 +488,8 @@ if (btnCopyCitation) {
     const original = btnCopyCitation.textContent;
     const showCopied = () => {
       btnCopyCitation.textContent = 'コピーしました ✓';
-      setTimeout(() => { btnCopyCitation.textContent = original; }, 2000);
+      btnCopyCitation.classList.add('copied');
+      setTimeout(() => { btnCopyCitation.textContent = original; btnCopyCitation.classList.remove('copied'); }, 2000);
     };
     const text = citationText();
     try {
@@ -459,7 +559,8 @@ btnSaveImage.addEventListener('click', async () => {
     // No.47(2026-09-06): コピー完了表示と同じパターンで、画像保存にも完了フィードバックを統一。
     const savedLabel = btnSaveImage.textContent;
     btnSaveImage.textContent = '保存しました ✓';
-    setTimeout(() => { btnSaveImage.textContent = savedLabel; }, 2000);
+    btnSaveImage.classList.add('copied');
+    setTimeout(() => { btnSaveImage.textContent = savedLabel; btnSaveImage.classList.remove('copied'); }, 2000);
   }, 'image/png');
 });
 
@@ -487,14 +588,15 @@ function initFromQuery() {
   const salary = params.get('salary');
   if (!salary) return;
   inputSalary.value = salary;
+  formatMoneyInput(inputSalary);
   const spouse = params.get('spouse');
   if (spouse === '0' || spouse === '1') selectSpouse.value = spouse;
   const dependents = params.get('dependents');
   if (dependents) inputDependents.value = dependents;
   const sideIncome = params.get('sideincome');
-  if (sideIncome) inputSideIncome.value = sideIncome;
+  if (sideIncome) { inputSideIncome.value = sideIncome; formatMoneyInput(inputSideIncome); }
   const sideExpense = params.get('sideexpense');
-  if (sideExpense) inputSideExpense.value = sideExpense;
+  if (sideExpense) { inputSideExpense.value = sideExpense; formatMoneyInput(inputSideExpense); }
   const sideType = params.get('sidetype');
   if (sideType && SIDE_TYPE_LABEL[sideType]) selectSideType.value = sideType;
   calc();

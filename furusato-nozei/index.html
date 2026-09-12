@@ -85,7 +85,7 @@
   <div class="calc-card">
     <div class="field">
       <label for="input-salary">給与収入(額面年収、円)</label>
-      <input type="number" id="input-salary" inputmode="numeric" min="0" step="10000" placeholder="例: 5000000">
+      <input type="text" id="input-salary" inputmode="numeric" pattern="[0-9,]*" placeholder="例: 5,000,000">
     </div>
     <div class="field">
       <label for="select-spouse">配偶者控除</label>
@@ -100,11 +100,11 @@
     </div>
     <div class="field">
       <label for="input-side-income">副業の年間収入(円)</label>
-      <input type="number" id="input-side-income" inputmode="numeric" min="0" step="10000" value="500000">
+      <input type="text" id="input-side-income" inputmode="numeric" pattern="[0-9,]*" value="500000">
     </div>
     <div class="field">
       <label for="input-side-expense">副業の年間必要経費(円)</label>
-      <input type="number" id="input-side-expense" inputmode="numeric" min="0" step="10000" value="100000">
+      <input type="text" id="input-side-expense" inputmode="numeric" pattern="[0-9,]*" value="100000">
       <span class="field-hint">「利益(収入−経費)」を給与所得に合算します。売上そのものではありません。</span>
     </div>
     <div class="field">
@@ -125,6 +125,8 @@
     <p class="result-label">ふるさと納税 控除上限額の目安(年間)</p>
     <p class="result-amount"><span class="yen">¥</span><span id="result-amount">--</span></p>
     <p class="result-note" id="result-note"></p>
+    <p class="income-bar-legend" id="income-bar-legend"><span class="legend-dot legend-salary"></span>給与所得<span class="legend-dot legend-side"></span>副業所得</p>
+    <div class="income-bar" id="income-bar" aria-hidden="true"><span class="income-bar-salary" id="income-bar-salary"></span><span class="income-bar-side" id="income-bar-side"></span></div>
     <p class="clamp-notice" id="result-clamp-notice"></p>
     <p class="result-sub" id="result-sub"></p>
     <div class="result-advice" id="result-advice"></div>

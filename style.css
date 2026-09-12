@@ -316,6 +316,98 @@ a { color: var(--navy); }
   .furusato-main .pick-comment { font-size: 0.8rem; }
   .furusato-main .related-tool-comment { font-size: 0.83rem; }
 }
+
+/* ふるさと納税ページのUX拡張(2026-09-12、レイアウト・デザイン5名パネル対応、
+   furusato-nozei限定)。PC/モバイル共通のためメディアクエリなし。 */
+
+/* No.15: 返礼品ローディング中のスケルトン表示(fetch中の無音空白化を防ぐ) */
+.product-skeleton {
+  aspect-ratio: 1 / 1.3;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  animation: furusato-skeleton-pulse 1.3s ease-in-out infinite;
+}
+@keyframes furusato-skeleton-pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 0.9; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .product-skeleton { animation: none; opacity: 0.7; }
+}
+
+/* No.16: FAQ開閉アイコン(.faq-itemはサイト共通クラスのため.furusato-mainでスコープ) */
+.furusato-main .faq-item summary {
+  position: relative;
+  padding-right: 26px;
+}
+.furusato-main .faq-item summary::after {
+  content: "";
+  position: absolute;
+  right: 2px;
+  top: 50%;
+  width: 7px;
+  height: 7px;
+  border-right: 2px solid var(--ink-sub);
+  border-bottom: 2px solid var(--ink-sub);
+  transform: translateY(-65%) rotate(45deg);
+  transition: transform 0.2s ease;
+}
+.furusato-main .faq-item[open] summary::after {
+  transform: translateY(-35%) rotate(-135deg);
+}
+
+/* No.17: コピー完了時の背景色明示(.share-btnはサイト共通クラスのためスコープ) */
+.furusato-main .share-btn.copied {
+  background: rgba(53, 242, 176, 0.16);
+  border-color: var(--navy);
+  color: var(--navy);
+}
+.furusato-main .citation-copy-btn.copied { color: var(--navy); }
+
+/* No.18: 結果カード表示のフェードイン(reduced-motion時は即時表示のまま) */
+@media (prefers-reduced-motion: no-preference) {
+  .result-card.show {
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+  }
+  .result-card.show.revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* No.19: 給与所得/副業所得の内訳比率バー(実測値のみ、誇張表現なし) */
+.income-bar {
+  display: flex;
+  height: 8px;
+  border-radius: 999px;
+  overflow: hidden;
+  margin: 8px 0 6px;
+  background: var(--line);
+}
+.income-bar-salary { background: var(--navy); }
+.income-bar-side { background: var(--gold); }
+.income-bar-legend {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 0.76rem;
+  color: var(--ink-sub);
+  margin: 8px 0 0;
+}
+.legend-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 4px;
+  vertical-align: middle;
+}
+.legend-salary { background: var(--navy); }
+.legend-side { background: var(--gold); }
+
 .field { margin-bottom: 18px; }
 .field label {
   display: block;
