@@ -74,13 +74,14 @@
   </div>
 </header>
 
-<main class="wrap">
+<main class="wrap furusato-main">
   <a class="back-link" href="../">← ツール一覧にもどる</a>
   <p class="stage-note">会社員で副業(雑所得・事業所得)がある方向けの、ふるさと納税 控除上限額(2026年・令和8年分)の概算シミュレーターです。給与所得と副業所得を合算して計算します。</p>
   <p class="stage-note">運営者は実際に生成AIで副業をしながらこのサイトを運営しています。詳しくは<a href="../#about">このサイトについて</a>をご覧ください。</p>
   <p class="update-date">最終更新: 2026年9月5日(税制・計算式の内容を都度見直しています)</p>
   <p class="seasonal-reminder" id="seasonal-reminder">🍂 ふるさと納税は12月31日までの寄附が当年分の対象です。年末は返礼品の品切れ・発送遅延が増えるため、お早めのご検討がおすすめです。</p>
 
+  <div class="calc-layout">
   <div class="calc-card">
     <div class="field">
       <label for="input-salary">給与収入(額面年収、円)</label>
@@ -120,6 +121,22 @@
     <button class="btn-calc" id="btn-calc" type="button">控除上限額を計算する</button>
   </div>
 
+  <div class="result-card" id="result-card" role="status" aria-live="polite">
+    <p class="result-label">ふるさと納税 控除上限額の目安(年間)</p>
+    <p class="result-amount"><span class="yen">¥</span><span id="result-amount">--</span></p>
+    <p class="result-note" id="result-note"></p>
+    <p class="clamp-notice" id="result-clamp-notice"></p>
+    <p class="result-sub" id="result-sub"></p>
+    <div class="result-advice" id="result-advice"></div>
+    <div class="share-row" id="share-row">
+      <button class="share-btn" id="btn-copy-link" type="button">結果のURLをコピー</button>
+      <button class="share-btn" id="btn-share-x" type="button">𝕏で共有</button>
+      <button class="share-btn" id="btn-save-image" type="button">結果を画像で保存</button>
+    </div>
+    <p class="citation-note" id="citation-note">ブログ等で結果を紹介する場合は<button class="citation-copy-btn" id="btn-copy-citation" type="button">出典文をコピー</button></p>
+  </div>
+  </div>
+
   <div class="rate-table-box show">
     <h2>【給与のみの場合】年収×家族構成の早見表</h2>
     <p class="rate-table-note">副業がない(または副業所得0円扱いの)場合の控除上限額の目安です。競合サイトで一般的な「年収×家族構成」形式の早見表として、まずはこちらでご自身に近い条件を確認できます。副業の利益がある場合の金額は、下の早見表または上の入力フォームでご確認ください。</p>
@@ -150,21 +167,6 @@
       <tr><td>給与800万円・独身・副業の利益55万円(事業所得・青色65万円控除後)</td><td>¥146,000</td></tr>
     </table>
     <p class="rate-table-note">「副業の利益」は収入から必要経費(・青色申告特別控除)を差し引いた後の金額です。社会保険料控除は給与収入の15%概算、住民税の調整控除は考慮していません。</p>
-  </div>
-
-  <div class="result-card" id="result-card" role="status" aria-live="polite">
-    <p class="result-label">ふるさと納税 控除上限額の目安(年間)</p>
-    <p class="result-amount"><span class="yen">¥</span><span id="result-amount">--</span></p>
-    <p class="result-note" id="result-note"></p>
-    <p class="clamp-notice" id="result-clamp-notice"></p>
-    <p class="result-sub" id="result-sub"></p>
-    <div class="result-advice" id="result-advice"></div>
-    <div class="share-row" id="share-row">
-      <button class="share-btn" id="btn-copy-link" type="button">結果のURLをコピー</button>
-      <button class="share-btn" id="btn-share-x" type="button">𝕏で共有</button>
-      <button class="share-btn" id="btn-save-image" type="button">結果を画像で保存</button>
-    </div>
-    <p class="citation-note" id="citation-note">ブログ等で結果を紹介する場合は<button class="citation-copy-btn" id="btn-copy-citation" type="button">出典文をコピー</button></p>
   </div>
 
   <div class="follow-cta" id="follow-cta">

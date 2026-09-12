@@ -250,6 +250,21 @@ a { color: var(--navy); }
   box-shadow: var(--shadow-soft);
   margin-bottom: 20px;
 }
+/* PC/スマホでレイアウトを分ける対応(furusato-nozei限定、2026-09-12)。
+   デスクトップ幅ではフォーム+結果を左右2カラムにし、コンテナも少し広げて
+   大画面での余白の無駄を減らす。モバイルはこのメディアクエリの対象外で
+   従来通り1カラム縦積みのまま。 */
+@media (min-width: 900px) {
+  .furusato-main { max-width: 960px; }
+  .calc-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 380px) 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+  .calc-layout .calc-card,
+  .calc-layout .result-card { margin-bottom: 0; }
+}
 .field { margin-bottom: 18px; }
 .field label {
   display: block;
