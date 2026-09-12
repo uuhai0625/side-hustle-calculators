@@ -102,8 +102,8 @@ const GENRES = {
     link: { href: '../douga-ryokin/', label: '動画作成AIツールの月額料金シミュレーター' },
   },
   'ai-music': {
-    label: 'AI音楽制作', toolLow: 0, toolHigh: 4900,
-    note: 'Suno・Udio・Soundrawなどの音楽生成AIを使います。歌ものはUdio無料版でも試作できますが、商用利用したい場合や動画のBGM用途で使う場合は有料プランが前提になりやすいジャンルです。',
+    label: 'AI音楽制作', toolLow: 1500, toolHigh: 4900,
+    note: 'Suno・Udio・Soundrawなどの音楽生成AIを使います。Sunoは2026年9月から、Udioは2025年10月から無料プランでの書き出し(ダウンロード)ができなくなっており、AI動画制作と同様に実用的な無料プランがないジャンルです。楽曲を保存して使いたい場合はSuno Pro等の有料プランが前提になります。',
     link: { href: '../ongaku-ryokin/', label: '音楽生成AIツール料金比較' },
   },
 };
