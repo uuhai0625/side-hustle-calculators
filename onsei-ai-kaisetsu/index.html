@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>音声合成・音声クローンAI(ElevenLabs他)を解説|AI副業そろばん</title>
+<meta name="description" content="ElevenLabs・Play.ht・Murf.aiという3つの音声合成・音声クローンAIの技術仕様・日本語対応・商用利用条件を詳しく解説します。ナレーション代行・ポッドキャスト制作を検討している方向けの記事です。">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="音声合成・音声クローンAI(ElevenLabs他)を解説">
+<meta property="og:description" content="3つの音声合成・音声クローンAIの技術仕様・日本語対応・商用利用条件を詳しく解説します。">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:url" content="https://uuhai0625.github.io/side-hustle-calculators/onsei-ai-kaisetsu/">
+<meta property="og:image" content="https://uuhai0625.github.io/side-hustle-calculators/images/og-image.jpg">
+<meta property="og:image:width" content="1520">
+<meta property="og:image:height" content="800">
+<link rel="canonical" href="https://uuhai0625.github.io/side-hustle-calculators/onsei-ai-kaisetsu/">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="音声合成・音声クローンAI(ElevenLabs他)を解説">
+<meta name="twitter:description" content="3つの音声合成・音声クローンAIの技術仕様・日本語対応・商用利用条件を詳しく解説します。">
+<meta name="twitter:image" content="https://uuhai0625.github.io/side-hustle-calculators/images/og-image.jpg">
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧮</text></svg>">
+<meta name="theme-color" content="#0a0d0c">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "datePublished": "2026-09-13",
+  "dateModified": "2026-09-13",
+  "mainEntity": [
+    { "@type": "Question", "name": "なぜChatGPTやGoogleの音声合成ではなく、この3社が候補なのですか?", "acceptedAnswer": { "@type": "Answer", "text": "OpenAIのTTS機能はプリセット音声のみで、自分の声や第三者の声をクローンする機能がありません。GoogleのCloud TTSは2026年にクローン機能を追加しましたが、1万文字あたり60ドルと高額でエンタープライズ向けの申込導線が中心です。ElevenLabs・Play.ht・Murf.aiは、いずれも音声クローンを個人が申し込みやすい料金体系で提供している点が異なります。" } },
+    { "@type": "Question", "name": "自分の声や他人の声を勝手にクローンしても大丈夫ですか?", "acceptedAnswer": { "@type": "Answer", "text": "3社とも規約上「本人の同意なき音声クローン・なりすまし」を禁止しています。特にElevenLabsは、クローン登録時に指定テキストを読み上げる録音検証(本人確認)を必須にしており、著名人・政治家等のハイリスクな音声のクローンは一律ブロックされます。Murfは音声クローン自体がEnterprise(法人)プラン限定の営業対応制で、事前に用途確認が入ります。副業でナレーション・音声クローン代行サービスを提供する場合は、依頼者本人の声であることの確認を徹底してください。" } },
+    { "@type": "Question", "name": "日本語のナレーションにも対応していますか?", "acceptedAnswer": { "@type": "Answer", "text": "3社とも日本語に対応しています。ElevenLabsはMultilingual v2で29言語(日本語含む)、Play.htは日本語専用ページがあり8種のアクセントに対応、Murf.aiは35以上の言語に日本語を含むと公式に明記しています。" } }
+  ]
+}
+</script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="site-logo heading-font" href="../">AI副業<span class="accent">そろばん</span></a>
+    <h1 class="site-tagline">音声合成・音声クローンAIを解説</h1>
+  </div>
+</header>
+
+<main class="wrap">
+  <a class="back-link" href="../">← ツール一覧にもどる</a>
+
+  <div class="logo-strip">
+    <a class="logo-chip" href="https://elevenlabs.io/" target="_blank" rel="noopener"><img src="../images/logos/elevenlabs.png" alt="ElevenLabs" loading="lazy">ElevenLabs</a>
+    <a class="logo-chip" href="https://play.ht/" target="_blank" rel="noopener">Play.ht</a>
+    <a class="logo-chip" href="https://murf.ai/" target="_blank" rel="noopener"><img src="../images/logos/murf.png" alt="Murf.ai" loading="lazy">Murf.ai</a>
+  </div>
+
+  <div class="manner-box show">
+    <h2>結論</h2>
+    <ul>
+      <li><strong>音声クローンの精度・安全対策の手厚さ重視:</strong> ElevenLabs(録音検証+著名人クローン一律ブロック)。</li>
+      <li><strong>とにかく早くクローンを試したい:</strong> Play.ht(Instant Cloneは30秒の音声から作成可)。</li>
+      <li><strong>企業向けの信頼性・営業サポート重視:</strong> Murf.ai(音声クローンはEnterprise限定の営業対応制)。</li>
+      <li><strong>いずれも:</strong> 日本語対応・公式アフィリエイトプログラムあり。</li>
+    </ul>
+  </div>
+
+  <details class="trust-box">
+    <summary><h2>正直な前置き</h2></summary>
+    <p>運営者はこの「uuhai0625」名義では音声合成・音声クローンAIをまだ実践していません。この記事は各社公式ドキュメント・ヘルプセンターをもとにした一般調査ベースの解説です。特にPlay.htは、調査時点で公式サイトへの直接アクセスが技術的にできず、検索エンジン経由での間接確認にとどまった項目が他の2社より多い点をお断りしておきます(該当箇所は本文に明記)。ロゴ画像についても、Play.htは公式サイトが直接確認できずロゴを正しく取得できなかったため、テキスト表記のみとしています。</p>
+  </details>
+
+  <div class="detail-section" style="margin-top: 20px;">
+    <h2 class="tool-heading"><img src="../images/logos/elevenlabs.png" alt="ElevenLabs">ElevenLabs</h2>
+    <p>2022年4月創業(共同創業者Piotr Dąbkowski・Mati Staniszewski)、2026年2月時点で評価額110億ドルのシリーズD調達を発表しています。Multilingual v2モデルで29言語(日本語含む)に対応し、音声クローンはStarter/Creatorプラン向けの「Instant Voice Cloning」とPro以上向けの「Professional Voice Cloning」の2段階です。クローン登録時には指定テキストを読み上げる録音による本人確認(verification)が必須で、著名人・政治家等のハイリスクな音声クローンは一律ブロックされます。無料プランは月10,000クレジット、最安の有料プランStarterは月額6ドル(月30,000クレジット)から利用できます。Starterプラン以上には商用ライセンスが付帯します。公式アフィリエイトプログラム(PartnerStack運営)では、新規有料契約者の支払いから12ヶ月間、最大22%の継続コミッションが得られます。</p>
+    <p class="official-link"><a href="https://elevenlabs.io/" target="_blank" rel="noopener">→ ElevenLabs公式サイトを見る</a></p>
+
+    <h2 class="tool-heading" style="margin-top: 28px;">Play.ht(PlayAI)</h2>
+    <p>2021年創業(Y Combinator出身)、米パロアルト拠点で、当初はChrome拡張機能として始まりTTS・音声クローン・音声エージェント基盤へ発展しました。日本語専用ページがあり8種のアクセントに対応しています。音声クローンは30秒程度から作成できる「Instant Clone」と、最低10分(理想2〜3時間)の録音を使う高精度な「High-Fidelity Clone」の2段階です。無料プランがありますが月間の文字数上限は情報源により表記が割れており未確認、有料プランは最安のCreatorプランが月額31ドル前後(年払い等の条件により変動)です。<strong>この記事の執筆時点で公式サイト(play.ht)への直接アクセスができておらず、料金・アフィリエイト条件の数値は検索結果経由の間接確認にとどまっています。</strong>公式のアフィリエイトプログラム自体は存在が確認できており(25%の継続コミッションという情報)、正確な条件は利用前に公式サイトで直接ご確認ください。無料プランは商用利用不可・要クレジット表記で、Creator以上のプランで商用利用権が付帯します。</p>
+    <p class="official-link"><a href="https://play.ht/" target="_blank" rel="noopener">→ Play.ht公式サイトを見る</a></p>
+
+    <h2 class="tool-heading" style="margin-top: 28px;"><img src="../images/logos/murf.png" alt="Murf.ai">Murf.ai</h2>
+    <p>2020年10月創業(Murf Inc.、米ソルトレイクシティ拠点)。35以上の言語に対応し、日本語専用ページも公式に用意されています。単位が他の2社と異なり、文字数ではなく「生成時間(分・時間)」で課金される点が特徴です。<strong>音声クローンは公式ヘルプセンターで「現時点ではEnterprise(法人)プラン限定」と明記されており、個人向けの有料プランでは利用できません。</strong>(第三者記事に「Businessプランで可能」とする誤情報も見られますが、公式ヘルプの記載を優先しています。)無料プランはクレジットカード登録不要で音声生成10分・プロジェクト2件まで、最安の有料Creatorプランは年間契約で月額19ドル(月次契約は29ドル)です。無料プランは商用利用不可・ダウンロード不可で、Creator以上で商用利用権が付帯します。公式アフィリエイトプログラム(PartnerStack運営)は、有料契約後24ヶ月間20%の継続コミッションです。</p>
+    <p class="official-link"><a href="https://murf.ai/" target="_blank" rel="noopener">→ Murf.ai公式サイトを見る</a></p>
+  </div>
+
+  <details class="rate-table-box show">
+    <summary><h2>3ツール機能マトリクス</h2></summary>
+    <p class="rate-table-note">各社公式サイトをもとにした2026年9月時点の比較です。Play.htの項目は検索結果経由の間接確認を含みます。</p>
+    <div class="rate-table-wrap">
+    <table class="rate-table rate-table-compare">
+      <tr><th>項目</th><th><img class="rt-logo" src="../images/logos/elevenlabs.png" alt="">ElevenLabs</th><th>Play.ht</th><th><img class="rt-logo" src="../images/logos/murf.png" alt="">Murf.ai</th></tr>
+      <tr><td>課金単位</td><td>文字数(クレジット)</td><td>文字数</td><td>生成時間(分・時間)</td></tr>
+      <tr><td>音声クローン</td><td>個人向けプランで対応(要録音検証)</td><td>個人向けプランで対応(Instant/High-Fidelity)</td><td>Enterprise限定・営業対応制</td></tr>
+      <tr><td>無料プラン</td><td>あり(月10,000クレジット)</td><td>あり(上限は未確認)</td><td>あり(生成10分・カード登録不要)</td></tr>
+      <tr><td>最安有料プラン</td><td>$6/月〜</td><td>$31前後/月〜(未確認)</td><td>$19/月〜(年払い)</td></tr>
+      <tr><td>アフィリエイト</td><td>最大22%・12ヶ月</td><td>25%(未確認)</td><td>20%・24ヶ月</td></tr>
+    </table>
+    </div>
+  </details>
+
+  <details class="rate-table-box show">
+    <summary><h2>提携プログラムのあるツール</h2></summary>
+    <p class="rate-table-note">3社とも公式のアフィリエイト(紹介)プログラムを提供していることを確認しています(2026年9月確認)。Play.htのみ公式サイトへの直接アクセスができず、条件の詳細は検索結果経由の間接確認にとどまります。当サイトは現時点で未提携のため、下記は通常の公式サイトへのリンクです。</p>
+    <div class="rate-table-wrap">
+    <table class="rate-table rate-table-feature">
+      <tr><th>ツール</th><th>提携プログラムの概要</th></tr>
+      <tr><td><img class="rt-logo" src="../images/logos/elevenlabs.png" alt="">ElevenLabs</td><td>PartnerStack経由(elevenlabs.io/affiliates)。最大22%の継続コミッション、12ヶ月</td></tr>
+      <tr><td>Play.ht</td><td>公式ページ(play.ht/affiliates)の存在は確認、25%継続・Cookie60日という情報あり(未確認)</td></tr>
+      <tr><td><img class="rt-logo" src="../images/logos/murf.png" alt="">Murf.ai</td><td>PartnerStack経由(murf.ai/partner-with-us/affiliate)。20%継続コミッション、24ヶ月、Cookie90日</td></tr>
+    </table>
+    </div>
+  </details>
+
+  <p class="follow-x">制作の裏側や新しいツールの告知は <a href="https://x.com/uuhai0625" target="_blank" rel="noopener">@uuhai0625</a> で発信しています</p>
+
+  <div class="faq-section">
+    <h2>よくある質問</h2>
+    <details class="faq-item">
+      <summary>なぜChatGPTやGoogleの音声合成ではなく、この3社が候補なのですか?</summary>
+      <p>OpenAIのTTS機能はプリセット音声のみで、自分の声や第三者の声をクローンする機能がありません。GoogleのCloud TTSは2026年にクローン機能を追加しましたが、1万文字あたり60ドルと高額でエンタープライズ向けの申込導線が中心です。ElevenLabs・Play.ht・Murf.aiは、いずれも音声クローンを個人が申し込みやすい料金体系で提供している点が異なります。</p>
+    </details>
+    <details class="faq-item">
+      <summary>自分の声や他人の声を勝手にクローンしても大丈夫ですか?</summary>
+      <p>3社とも規約上「本人の同意なき音声クローン・なりすまし」を禁止しています。特にElevenLabsは、クローン登録時に指定テキストを読み上げる録音検証(本人確認)を必須にしており、著名人・政治家等のハイリスクな音声のクローンは一律ブロックされます。Murfは音声クローン自体がEnterprise(法人)プラン限定の営業対応制で、事前に用途確認が入ります。副業でナレーション・音声クローン代行サービスを提供する場合は、依頼者本人の声であることの確認を徹底してください。</p>
+    </details>
+    <details class="faq-item">
+      <summary>日本語のナレーションにも対応していますか?</summary>
+      <p>3社とも日本語に対応しています。ElevenLabsはMultilingual v2で29言語(日本語含む)、Play.htは日本語専用ページがあり8種のアクセントに対応、Murf.aiは35以上の言語に日本語を含むと公式に明記しています。</p>
+    </details>
+  </div>
+
+  <div class="related-tools">
+    <h2>こんなページもあります</h2>
+    <div class="related-tools-list">
+      <a class="related-tool-link" href="../douga-ai-kaisetsu/"><span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="13" height="12" rx="1.5"/><path d="M16 10.5 21 7v10l-5-3.5z"/></svg></span>動画生成AIを解説</a>
+      <a class="related-tool-link" href="../ongaku-ai-kaisetsu/"><span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></span>音楽生成AIを解説</a>
+      <a class="related-tool-link" href="../hajimekata/"><span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m14.5 9.5-2 5-5 2 2-5z"/></svg></span>AI副業の始め方</a>
+      <a class="related-tool-link" href="../kaishi-cost/"><span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c3 2 5 6 5 10 0 2-1 4-2 5l-3-1-3 1c-1-1-2-3-2-5 0-4 2-8 5-10z"/><circle cx="12" cy="10" r="1.5"/><path d="M9 17l-2 4M15 17l2 4"/></svg></span>AI副業を始める初期費用シミュレーター</a>
+    </div>
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <p>掲載している技術仕様・料金・商用利用条件は、各社公式サイト・公式ヘルプセンターをもとにした2026年9月時点の情報です。一次情報に到達できなかった項目は本文・表内に「未確認」と明記しています。AI音声ツールの機能・料金体系は頻繁に更新されるため、最新情報は各社公式サイトでご確認ください。</p>
+  <p>商品リンクにはアフィリエイト(広告)リンクを含みます。リンク経由の購入により、当サイトが紹介料を得ることがあります。</p>
+  <p><a href="../#about">運営者情報・プライバシーポリシー・お問い合わせ</a></p>
+</footer>
+
+<script src="../ga.js"></script>
+</body>
+</html>

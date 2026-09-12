@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>画像生成AI(Midjourney・Stable Diffusion他)を解説|AI副業そろばん</title>
+<meta name="description" content="Midjourney・Stable Diffusion・Adobe Firefly・Ideogram・FLUXという5つの画像生成AIの技術仕様・得意分野・商用利用条件を詳しく解説します。料金比較ではなく「何がどう違うのか」を掘り下げた記事です。">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="画像生成AI(Midjourney・Stable Diffusion他)を解説">
+<meta property="og:description" content="5つの画像生成AIの技術仕様・得意分野・商用利用条件を詳しく解説します。">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:url" content="https://uuhai0625.github.io/side-hustle-calculators/gazou-ai-kaisetsu/">
+<meta property="og:image" content="https://uuhai0625.github.io/side-hustle-calculators/images/og-image.jpg">
+<meta property="og:image:width" content="1520">
+<meta property="og:image:height" content="800">
+<link rel="canonical" href="https://uuhai0625.github.io/side-hustle-calculators/gazou-ai-kaisetsu/">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="画像生成AI(Midjourney・Stable Diffusion他)を解説">
+<meta name="twitter:description" content="5つの画像生成AIの技術仕様・得意分野・商用利用条件を詳しく解説します。">
+<meta name="twitter:image" content="https://uuhai0625.github.io/side-hustle-calculators/images/og-image.jpg">
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧮</text></svg>">
+<meta name="theme-color" content="#0a0d0c">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "datePublished": "2026-09-13",
+  "dateModified": "2026-09-13",
+  "mainEntity": [
+    { "@type": "Question", "name": "「サービス型」と「オープンウェイトモデル型」は何が違いますか?", "acceptedAnswer": { "@type": "Answer", "text": "Midjourney・Adobe Firefly・Ideogramは、1社が自社サービスとして完結提供する「サービス型」です。一方Stable Diffusion(Stability AI)・FLUX(Black Forest Labs)は、モデル自体が公開されている「オープンウェイトモデル型」で、開発元だけでなく多数のサードパーティがホスティングサービスを提供し、ローカル環境での実行も可能です。同じモデルでも使う場所によって料金・使い勝手が変わる点に注意してください。" } },
+    { "@type": "Question", "name": "LINEスタンプやストック画像販売に使えますか?", "acceptedAnswer": { "@type": "Answer", "text": "多くのツールで、有料プラン加入時に商用利用が認められています。運営者自身もLINEスタンプ制作でMidjourneyを実際に使っています。ただしAdobe Stock等の審査には別途技術要件(最低解像度等)があり、Stable Diffusionの出力は要件を満たすためアップスケールが必要になる場合があります。各社の商用利用条件は本文で個別に解説しています。" } },
+    { "@type": "Question", "name": "結局、どれを使えばいいですか?", "acceptedAnswer": { "@type": "Answer", "text": "イラスト・アート系の表現力重視ならMidjourney、文字入りのロゴ・バナーを作りたいならテキストレンダリングに強いIdeogram、写実的な人物・広告向けならAdobe Firefly、無料でとにかく試したい・ローカルで動かしたいならStable DiffusionやFLUXのオープンウェイト版、というのが選び方の目安です。" } }
+  ]
+}
+</script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="site-logo heading-font" href="../">AI副業<span class="accent">そろばん</span></a>
+    <h1 class="site-tagline">画像生成AIを解説</h1>
+  </div>
+</header>
+
+<main class="wrap">
+  <a class="back-link" href="../">← ツール一覧にもどる</a>
+
+  <div class="logo-strip">
+    <a class="logo-chip" href="https://www.midjourney.com/" target="_blank" rel="noopener"><img src="../images/logos/midjourney.png" alt="Midjourney" loading="lazy">Midjourney</a>
+    <a class="logo-chip" href="https://stability.ai/" target="_blank" rel="noopener"><img src="../images/logos/stability.png" alt="Stable Diffusion" loading="lazy">Stable Diffusion</a>
+    <a class="logo-chip" href="https://firefly.adobe.com/" target="_blank" rel="noopener"><img src="../images/logos/firefly.png" alt="Adobe Firefly" loading="lazy">Adobe Firefly</a>
+    <a class="logo-chip" href="https://ideogram.ai/" target="_blank" rel="noopener"><img src="../images/logos/ideogram.png" alt="Ideogram" loading="lazy">Ideogram</a>
+    <a class="logo-chip" href="https://bfl.ai/" target="_blank" rel="noopener"><img src="../images/logos/flux.png" alt="FLUX" loading="lazy">FLUX</a>
+  </div>
+
+  <div class="manner-box show">
+    <h2>結論</h2>
+    <ul>
+      <li><strong>イラスト・アート表現の完成度重視:</strong> Midjourney(有料プランのみ、無料トライアルなし)。</li>
+      <li><strong>ロゴ・バナー等、文字を正確に入れたい:</strong> Ideogram(テキストレンダリングが最大の強み)。</li>
+      <li><strong>写実的な人物・広告向け、商用利用の安心感重視:</strong> Adobe Firefly(学習データが全てライセンス済み・商用利用セーフを公式明言)。</li>
+      <li><strong>無料で試したい・ローカル環境で動かしたい:</strong> Stable Diffusion・FLUXのオープンウェイト版。</li>
+      <li><strong>開発者向けAPIで大量生成したい:</strong> FLUX(Black Forest Labs)の従量課金API。</li>
+    </ul>
+  </div>
+
+  <details class="trust-box">
+    <summary><h2>正直な前置き</h2></summary>
+    <p>運営者はLINEスタンプ制作で実際にMidjourneyを使っています。一方、Stable Diffusion・Adobe Firefly・Ideogram・FLUXは実際に使い込んで比較したものではなく、公式ドキュメント・複数の独立した情報源をもとにした解説である点をお断りしておきます。特にIdeogramの料金ページとMidjourneyの利用規約ページは、調査時点で直接アクセスできず検索エンジン経由の間接確認にとどまった項目があり、該当箇所は「未確認」と明記しています。</p>
+  </details>
+
+  <div class="detail-section" style="margin-top: 20px;">
+    <h2 style="margin-top:0;">画像生成AIには「サービス型」と「オープンウェイトモデル型」がある</h2>
+    <p>動画・文章生成AIの「単体モデル系/集約プラットフォーム系」とは少し違う軸ですが、画像生成AIにも構造の違いがあります。<strong>①サービス型:</strong> Midjourney・Adobe Firefly・Ideogramは、1社が自社モデル・自社UIをセットで提供する完結型サービスです。<strong>②オープンウェイトモデル型:</strong> Stable Diffusion(Stability AI)・FLUX(Black Forest Labs)は、モデルの重み(ウェイト)自体が公開されており、開発元の公式ホスティングに加え、多数のサードパーティがAPIやWebUIとして同じモデルを提供しています。ローカル環境(自分のPC)で実行することも可能で、その場合は追加のサブスク費用がかかりません。なお、動画生成AI解説記事で紹介した集約プラットフォーム「Magnific(旧Freepik)」は、画像生成でもKling・Stable Diffusion系列など複数モデルを統合しています。</p>
+  </div>
+
+  <details class="rate-table-box show">
+    <summary><h2>5ツールの分類マップ</h2></summary>
+    <p class="rate-table-note">各社公式サイトをもとにした2026年9月時点の分類です。</p>
+    <div class="rate-table-wrap">
+    <table class="rate-table">
+      <tr><th>ツール</th><th>タイプ</th><th>特徴</th></tr>
+      <tr><td><img class="rt-logo" src="../images/logos/midjourney.png" alt="">Midjourney</td><td>①サービス型</td><td>イラスト・アート表現、無料トライアルなし</td></tr>
+      <tr><td><img class="rt-logo" src="../images/logos/stability.png" alt="">Stable Diffusion</td><td>②オープンウェイトモデル型</td><td>Stability AI+多数のサードパーティがホスティング</td></tr>
+      <tr><td><img class="rt-logo" src="../images/logos/firefly.png" alt="">Adobe Firefly</td><td>①サービス型</td><td>商用利用セーフを公式明言、写実表現に強み</td></tr>
+      <tr><td><img class="rt-logo" src="../images/logos/ideogram.png" alt="">Ideogram</td><td>①サービス型</td><td>文字入り画像のテキストレンダリングに特化</td></tr>
+      <tr><td><img class="rt-logo" src="../images/logos/flux.png" alt="">FLUX</td><td>②オープンウェイトモデル型</td><td>Black Forest Labs開発、完全従量課金API</td></tr>
+    </table>
+    </div>
+  </details>
+
+  <div class="detail-section" style="margin-top: 20px;">
+    <h2 class="tool-heading"><img src="../images/logos/midjourney.png" alt="Midjourney">Midjourney</h2>
+    <p>Midjourney, Inc.が2022年7月に一般公開した、イラスト・アート寄りの表現力に定評のあるサービスです。現行の主力モデルはV7で、4Kアップスケール時は最大4096×4096pxまで出力できます(V8はアルファ版として提供中)。無料プラン・無料トライアルは無く、最安のBasicプランが月額10ドル(年払いなら実質8ドル/月)から必要です。有料プラン加入者には商用利用権が付与されますが、年間売上100万ドルを超える企業とその従業員はPro・Megaプランの契約が必須という規約になっています(個人副業の規模では通常関係ありません)。運営者自身もLINEスタンプ制作で実際に活用しています。</p>
+    <p class="official-link"><a href="https://www.midjourney.com/" target="_blank" rel="noopener">→ Midjourney公式サイトを見る</a></p>
+
+    <h2 class="tool-heading" style="margin-top: 28px;"><img src="../images/logos/stability.png" alt="Stable Diffusion">Stable Diffusion(Stability AI)</h2>
+    <p>Stability AIが2022年8月に初版を公開したオープンウェイトモデルです。写実からイラストまで幅広い画風に対応し、ローカル実行・API双方で利用できます。最新のStable Diffusion 3.5世代は「Stability AI Community License」のもとで、年間売上100万ドル未満なら商用利用が無償(要登録)、100万ドル超はEnterprise契約が必要です。公式ホスティングサービスでは、無料トライアル(最初の1000クレジット)のあと、最安のCreatorプランが月額19ドル(月2000クレジット)から利用できます。モデル自体はオープンウェイトのため、ローカル実行であれば追加費用は発生しません。Adobe Stockでの画像販売に実際に使われている事例が複数確認できますが、Adobe Stock側の技術要件(最低4メガピクセル)を満たすためアップスケールが必要になる場合があります。</p>
+    <p class="official-link"><a href="https://stability.ai/" target="_blank" rel="noopener">→ Stability AI公式サイトを見る</a></p>
+
+    <h2 class="tool-heading" style="margin-top: 28px;"><img src="../images/logos/firefly.png" alt="Adobe Firefly">Adobe Firefly</h2>
+    <p>Adobeが2023年3月にベータ公開、同年9月に商用版を正式リリースしたサービスです。学習データを全てライセンス済み素材・パブリックドメインのみに限定しており、公式に「Fireflyの出力は商用利用に安全」と明言している点が最大の特徴です。最新のFirefly Image Model 5はネイティブ4MP解像度に対応し、写実表現(照明・質感・人物のリアリズム)に強みがあります。プラン未加入でも毎日無料の生成枠があり、最安の有料プランFirefly Standardは月額9.99ドル(月2,000クレジット)です。Adobe全体の公式アフィリエイトプログラム(Partnerize経由)は既にありますが、Firefly専用のアフィリエイトページは2026年9月時点で「近日公開」のウェイトリスト段階にとどまっています。Adobe Stockのコントリビューターとしての活用事例が最も豊富です。</p>
+    <p class="official-link"><a href="https://firefly.adobe.com/" target="_blank" rel="noopener">→ Adobe Firefly公式サイトを見る</a></p>
+
+    <h2 class="tool-heading" style="margin-top: 28px;"><img src="../images/logos/ideogram.png" alt="Ideogram">Ideogram</h2>
+    <p>2022年にトロントで設立されたIdeogram AI, Inc.(創業者はGoogle Brainの「Imagen」元研究者ら)が開発するサービスです。最大の特徴は、ロゴ・ポスター・看板など文字入り画像のテキストレンダリング精度で、日本語・英語ともに定評があります。無料プランがあり(週10クレジット、生成画像は公開扱い)、有料プランは月額7〜8ドル程度からです(料金ページへの直接アクセスができず、この数字は検索結果経由の間接確認にとどまるため未確認扱いとします)。公式利用規約(ToS)にアフィリエイトプログラムの条項があり、18歳以上のクリエイターが応募制で参加、承認後に紹介リンクが発行されます(報酬額は非公開・都度変動)。</p>
+    <p class="official-link"><a href="https://ideogram.ai/" target="_blank" rel="noopener">→ Ideogram公式サイトを見る</a></p>
+
+    <h2 class="tool-heading" style="margin-top: 28px;"><img src="../images/logos/flux.png" alt="FLUX">FLUX(Black Forest Labs)</h2>
+    <p>Stable Diffusion開発の中心メンバーがStability AIから独立して2024年8月に設立したBlack Forest Labs(ドイツ)が開発するオープンウェイトモデル群です。FLUX.1(Dev/Schnell/Pro)・FLUX.2(klein/pro/max/flex)などのバリエーションがあり、最新のFLUX.2は最大4MPクラスの解像度・最大10枚のマルチリファレンス生成に対応します。サブスクリプションはなく完全従量課金で、API料金はモデル別(FLUX.2 [klein]が1画像0.014ドル〜、[pro]が0.03ドル〜)です。オープンウェイト版はローカル実行も可能ですが、商用利用ライセンスの詳細条件はモデルにより異なり、今回の調査では全文確認まで至っていません(未確認)。Adobe・Canva等との提携が中心で、現状は開発者・エンタープライズ利用が主な使われ方です。</p>
+    <p class="official-link"><a href="https://bfl.ai/" target="_blank" rel="noopener">→ Black Forest Labs公式サイトを見る</a></p>
+  </div>
+
+  <details class="rate-table-box show">
+    <summary><h2>提携プログラムのあるツール</h2></summary>
+    <p class="rate-table-note">Ideogramは公式利用規約(ToS)にアフィリエイト条項があることを確認しています(2026年9月確認)。Adobeは全社共通のアフィリエイトプログラム(Creative Cloud等が対象)を運営していますが、Firefly専用のプログラムは2026年9月時点で「近日公開」のウェイトリスト段階のため、現時点では対象外として扱います。Midjourney・Stability AI・FLUX(Black Forest Labs)に公式のアフィリエイトプログラムは確認できませんでした。当サイトは現時点で未提携のため、下記は通常の公式サイトへのリンクです。</p>
+    <div class="rate-table-wrap">
+    <table class="rate-table rate-table-feature">
+      <tr><th>ツール</th><th>提携プログラムの概要</th></tr>
+      <tr><td><img class="rt-logo" src="../images/logos/ideogram.png" alt="">Ideogram</td><td>公式ToSに規定。18歳以上・応募制、承認後に紹介リンク発行、報酬額は非公開</td></tr>
+    </table>
+    </div>
+  </details>
+
+  <p class="follow-x">制作の裏側や新しいツールの告知は <a href="https://x.com/uuhai0625" target="_blank" rel="noopener">@uuhai0625</a> で発信しています</p>
+
+  <div class="faq-section">
+    <h2>よくある質問</h2>
+    <details class="faq-item">
+      <summary>「サービス型」と「オープンウェイトモデル型」は何が違いますか?</summary>
+      <p>Midjourney・Adobe Firefly・Ideogramは、1社が自社サービスとして完結提供する「サービス型」です。一方Stable Diffusion(Stability AI)・FLUX(Black Forest Labs)は、モデル自体が公開されている「オープンウェイトモデル型」で、開発元だけでなく多数のサードパーティがホスティングサービスを提供し、ローカル環境での実行も可能です。同じモデルでも使う場所によって料金・使い勝手が変わる点に注意してください。</p>
+    </details>
+    <details class="faq-item">
+      <summary>LINEスタンプやストック画像販売に使えますか?</summary>
+      <p>多くのツールで、有料プラン加入時に商用利用が認められています。運営者自身もLINEスタンプ制作でMidjourneyを実際に使っています。ただしAdobe Stock等の審査には別途技術要件(最低解像度等)があり、Stable Diffusionの出力は要件を満たすためアップスケールが必要になる場合があります。各社の商用利用条件は本文で個別に解説しています。</p>
+    </details>
+    <details class="faq-item">
+      <summary>結局、どれを使えばいいですか?</summary>
+      <p>イラスト・アート系の表現力重視ならMidjourney、文字入りのロゴ・バナーを作りたいならテキストレンダリングに強いIdeogram、写実的な人物・広告向けならAdobe Firefly、無料でとにかく試したい・ローカルで動かしたいならStable DiffusionやFLUXのオープンウェイト版、というのが選び方の目安です。</p>
+    </details>
+  </div>
+
+  <div class="related-tools">
+    <h2>こんなページもあります</h2>
+    <div class="related-tools-list">
+      <a class="related-tool-link" href="../douga-ai-kaisetsu/"><span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="13" height="12" rx="1.5"/><path d="M16 10.5 21 7v10l-5-3.5z"/></svg></span>動画生成AIを解説</a>
+      <a class="related-tool-link" href="../line-stamp-kankyo/"><span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="1.5"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 16.5 15.5 11 5 20"/></svg></span>LINEスタンプ制作の確認環境</a>
+      <a class="related-tool-link" href="../hajimekata/"><span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m14.5 9.5-2 5-5 2 2-5z"/></svg></span>AI副業の始め方</a>
+      <a class="related-tool-link" href="../kaishi-cost/"><span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c3 2 5 6 5 10 0 2-1 4-2 5l-3-1-3 1c-1-1-2-3-2-5 0-4 2-8 5-10z"/><circle cx="12" cy="10" r="1.5"/><path d="M9 17l-2 4M15 17l2 4"/></svg></span>AI副業を始める初期費用シミュレーター</a>
+    </div>
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <p>掲載している技術仕様・料金・商用利用条件は、各社公式サイトをもとにした2026年9月時点の情報です。一次情報に到達できなかった項目は本文・表内に「未確認」と明記しています。生成AIツールの仕様・規約は頻繁に更新されるため、実際の利用前には必ず各社公式サイトでご確認ください。</p>
+  <p>商品リンクにはアフィリエイト(広告)リンクを含みます。リンク経由の購入により、当サイトが紹介料を得ることがあります。</p>
+  <p><a href="../#about">運営者情報・プライバシーポリシー・お問い合わせ</a></p>
+</footer>
+
+<script src="../ga.js"></script>
+</body>
+</html>

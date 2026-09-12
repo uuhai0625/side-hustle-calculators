@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIエージェント・業務自動化ツール(Zapier他)を解説|AI副業そろばん</title>
+<meta name="description" content="Zapier Agents・Manus・Genspark・n8nという4つのAIエージェント・業務自動化ツールの機能・料金・コーディング支援AIとの違いを詳しく解説します。受注管理・顧客対応・リサーチを自動化したい副業者向けの記事です。">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="AIエージェント・業務自動化ツール(Zapier他)を解説">
+<meta property="og:description" content="4つのAIエージェント・業務自動化ツールの機能・料金の違いを詳しく解説します。">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:url" content="https://uuhai0625.github.io/side-hustle-calculators/gyomu-jidoka-ai-kaisetsu/">
+<meta property="og:image" content="https://uuhai0625.github.io/side-hustle-calculators/images/og-image.jpg">
+<meta property="og:image:width" content="1520">
+<meta property="og:image:height" content="800">
+<link rel="canonical" href="https://uuhai0625.github.io/side-hustle-calculators/gyomu-jidoka-ai-kaisetsu/">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AIエージェント・業務自動化ツール(Zapier他)を解説">
+<meta name="twitter:description" content="4つのAIエージェント・業務自動化ツールの機能・料金の違いを詳しく解説します。">
+<meta name="twitter:image" content="https://uuhai0625.github.io/side-hustle-calculators/images/og-image.jpg">
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧮</text></svg>">
+<meta name="theme-color" content="#0a0d0c">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "datePublished": "2026-09-13",
+  "dateModified": "2026-09-13",
+  "mainEntity": [
+    { "@type": "Question", "name": "コーディング支援AI(Claude Code等)と何が違いますか?", "acceptedAnswer": { "@type": "Answer", "text": "コーディング支援AIはソースコードの編集・生成が目的のツールです。一方このページで扱うAIエージェント・業務自動化ツールは、コードを書くのではなく「受注処理・顧客対応・リサーチ・資料作成」といった業務タスクを自然言語の指示だけで自律実行させることが目的です。似た自律型ソフトウェアエンジニアリングエージェント「Devin」はコーディング寄りのためこの記事では扱わず、コーディング支援AI解説記事側の守備範囲としています。" } },
+    { "@type": "Question", "name": "プログラミング知識がなくても使えますか?", "acceptedAnswer": { "@type": "Answer", "text": "Zapier Agents・Manus・Gensparkは自然言語の指示だけで使えるノーコードツールです。n8nもノーコードでの利用が基本ですが、ノード(処理の部品)を組み合わせる仕組みの理解が必要な分、他の3つよりやや学習コストが高めです。" } },
+    { "@type": "Question", "name": "料金はどこで比較できますか?", "acceptedAnswer": { "@type": "Answer", "text": "この記事は機能・仕組みの解説に特化しています。4ツールとも本文中に無料プラン・最安有料プランの金額を記載していますので、そちらをご参照ください。" } }
+  ]
+}
+</script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="site-logo heading-font" href="../">AI副業<span class="accent">そろばん</span></a>
+    <h1 class="site-tagline">AIエージェント・業務自動化を解説</h1>
+  </div>
+</header>
+
+<main class="wrap">
+  <a class="back-link" href="../">← ツール一覧にもどる</a>
+
+  <div class="logo-strip">
+    <a class="logo-chip" href="https://zapier.com/agents" target="_blank" rel="noopener"><img src="../images/logos/zapier.png" alt="Zapier" loading="lazy">Zapier Agents</a>
+    <a class="logo-chip" href="https://manus.im/" target="_blank" rel="noopener"><img src="../images/logos/manus.png" alt="Manus" loading="lazy">Manus</a>
+    <a class="logo-chip" href="https://www.genspark.ai/" target="_blank" rel="noopener"><img src="../images/logos/genspark.png" alt="Genspark" loading="lazy">Genspark</a>
+    <a class="logo-chip" href="https://n8n.io/" target="_blank" rel="noopener"><img src="../images/logos/n8n.png" alt="n8n" loading="lazy">n8n</a>
+  </div>
+
+  <div class="manner-box show">
+    <h2>結論</h2>
+    <ul>
+      <li><strong>既存の業務アプリ(メール・スプレッドシート等)との連携重視:</strong> Zapier Agents(9,000以上のアプリに対応)。</li>
+      <li><strong>目標を伝えるだけで一気通貫にやってほしい:</strong> Manus(ワークフロー構築不要、チャットで指示するだけ)。</li>
+      <li><strong>調査・資料作成・画像/動画/音声まで幅広く任せたい:</strong> Genspark(9つのLLM・80以上のツールを横断)。</li>
+      <li><strong>細かく制御したい・セルフホストしたい:</strong> n8n(オープンソース、ノード接続で柔軟にカスタマイズ)。</li>
+      <li><strong>コーディング作業そのものを自動化したい場合は:</strong> このページではなく<a href="../coding-ai-kaisetsu/">コーディング支援AI解説</a>をご覧ください。</li>
+    </ul>
+  </div>
+
+  <details class="trust-box">
+    <summary><h2>正直な前置き</h2></summary>
+    <p>運営者はこの「uuhai0625」名義ではAIエージェント・業務自動化ツールをまだ実践していません。この記事は各社公式サイト・公式ヘルプセンターをもとにした一般調査ベースの解説です。特にManusの正確な有料プラン月額・Gensparkのアフィリエイト詳細条件は、公式ページへの直接アクセスが一部できず、検索結果経由の間接確認にとどまった項目がある点をお断りしておきます(該当箇所は本文に明記)。</p>
+  </details>
+
+  <div class="detail-section" style="margin-top: 20px;">
+    <h2 style="margin-top:0;">「コーディング支援AI」とは何が違うのか</h2>
+    <p>このサイトには既に<a href="../coding-ai-kaisetsu/">コーディング支援AI</a>(Claude Code・OpenAI Codex・Cursor・GitHub Copilot)の解説記事があります。あちらはソフトウェア開発(コードの編集・生成)が目的のツールです。このページで扱う4ツールは、コードを書くことではなく、受注処理・顧客対応・リサーチ・資料作成といった<strong>業務タスクそのもの</strong>を自然言語の指示だけで自律実行させることが目的です。類似の自律型エージェント「Devin」(Cognition)はコーディング特化のため、この記事では扱わずコーディング支援AI側の守備範囲としています。</p>
+  </div>
+
+  <div class="detail-section" style="margin-top: 20px;">
+    <h2 class="tool-heading"><img src="../images/logos/zapier.png" alt="Zapier">Zapier(Zapier Agents)</h2>
+    <p>2011年創業のノーコード連携サービス老舗Zapier Inc.が提供するAIエージェント機能です(2026年9月時点、公式ページには"Get early access"表記があり拡大中の新機能という位置づけ)。9,000以上のアプリを横断し、トリガー(新規リード発生等)を検知して自律的に判断・実行、24時間稼働します。リード調査・エンリッチメント、営業メール作成、カスタマーサポート、会議準備、経費分類などに使え、Zapier Copilotの支援で自然言語からエージェントを作成できる完全ノーコードです。無料プランは月100タスク・2ステップZapまで、最安の有料プランProfessionalは年間契約で月額19.99ドル(月払いは29.99ドル)です。一般公開の個人向けアフィリエイトはなく、審査制のパートナープログラム(Solution Partner/Integration Partner向け)のみが用意されています。</p>
+    <p class="official-link"><a href="https://zapier.com/agents" target="_blank" rel="noopener">→ Zapier公式サイトを見る</a></p>
+
+    <h2 class="tool-heading" style="margin-top: 28px;"><img src="../images/logos/manus.png" alt="Manus">Manus</h2>
+    <p>中国系スタートアップButterfly Effect(Monica.im)が2025年3月に一般公開した汎用自律エージェントです。特定のワークフローを組む必要がなく、高レベルの目標をチャットで伝えるだけで、自分で計画を立てて調査・資料作成・ブラウザ操作・簡易的なWeb/アプリ構築まで複数ツールを使い分けてタスクを完遂します。メール・Slack統合、最大20並列タスクの実行に対応。無料プランは1日300クレジット(制限あり)ですが、有料プランの正確な月額は公式ドキュメントでの明記が薄く、複数の独立した第三者記事ではStandard/Pro相当が月額20ドル(4,000クレジット)とされています(この価格は未確認情報として扱ってください)。公式アフィリエイトプログラムの存在自体は確認できましたが、詳細ページへの直接アクセスができず条件(手数料率・Cookie期間等)は未確認です。</p>
+    <p class="official-link"><a href="https://manus.im/" target="_blank" rel="noopener">→ Manus公式サイトを見る</a></p>
+
+    <h2 class="tool-heading" style="margin-top: 28px;"><img src="../images/logos/genspark.png" alt="Genspark">Genspark(Super Agent)</h2>
+    <p>米国拠点のMainFunc Inc.が運営し、もとはAI検索エンジンとして立ち上げ2025年4月にエージェント型へピボットしました。9つのLLMと80以上のツールを組み合わせ、調査・コンテンツ作成・分析・デザイン・簡易コーディングまで横断するマルチモーダル型エージェントです。リクエストを分解して適切なツールを自律的に選び実行し、よく使うワークフローは「スキル」として再利用できます。Gmail・Googleドライブ連携、並列タスク実行、サンドボックス実行環境にも対応。無料プランは1日約100〜200クレジット、最安の有料プランPlusは年間契約で月額19.99ドル(月払いは24.99ドル、10,000クレジット/月)です。公式アフィリエイトプログラム(genspark.ai/affiliate)は存在を確認していますが、詳細ページは直接アクセスできず、20%手数料・上限なしという情報は未確認として扱ってください。</p>
+    <p class="official-link"><a href="https://www.genspark.ai/" target="_blank" rel="noopener">→ Genspark公式サイトを見る</a></p>
+
+    <h2 class="tool-heading" style="margin-top: 28px;"><img src="../images/logos/n8n.png" alt="n8n">n8n</h2>
+    <p>ドイツのn8n GmbHが開発するオープンソースのワークフロー自動化基盤です。AIエージェント機能は「AI Agentノード」として提供され、メモリ・ツール・ガードレールを持ち、APIクエリ・CRM更新・メール送信・複数エージェント協調によるリサーチ/執筆/QA等、自律的に複数ステップの処理を実行できます。400以上の事前構築ノードで幅広いアプリと連携し、ドラッグ&ドロップのノーコード構築が基本ですが、必要なら独自コードノードも追加できる柔軟性があります。他の3ツールより一段技術寄りで、ノード接続やJSON構造の理解が役立つ場面がある点は正直にお伝えしておきます。無料利用はセルフホストのCommunity Editionのみで、クラウド版に恒久無料枠はなく14日間トライアルです。クラウド版の最安プランStarterは月額20ドル(年間契約、月2,500回実行)。公式アフィリエイトプログラムは、クラウド契約の紹介につき12ヶ月間30%の手数料が得られます(PayPal払い出し、有料広告での宣伝は禁止)。</p>
+    <p class="official-link"><a href="https://n8n.io/" target="_blank" rel="noopener">→ n8n公式サイトを見る</a></p>
+  </div>
+
+  <details class="rate-table-box show">
+    <summary><h2>4ツール機能マトリクス</h2></summary>
+    <p class="rate-table-note">各社公式サイトをもとにした2026年9月時点の比較です。Manus・Gensparkの一部項目は検索結果経由の間接確認を含みます。</p>
+    <div class="rate-table-wrap">
+    <table class="rate-table rate-table-compare">
+      <tr><th>項目</th><th><img class="rt-logo" src="../images/logos/zapier.png" alt="">Zapier Agents</th><th><img class="rt-logo" src="../images/logos/manus.png" alt="">Manus</th><th><img class="rt-logo" src="../images/logos/genspark.png" alt="">Genspark</th><th><img class="rt-logo" src="../images/logos/n8n.png" alt="">n8n</th></tr>
+      <tr><td>操作方式</td><td>トリガー起点の自律実行</td><td>チャットで目標を伝えるのみ</td><td>チャットで目標を伝えるのみ</td><td>ノード接続(ノーコード〜ローコード)</td></tr>
+      <tr><td>ノーコード度</td><td>完全ノーコード</td><td>完全ノーコード</td><td>完全ノーコード</td><td>ノーコード基本、コードノード追加可</td></tr>
+      <tr><td>連携範囲</td><td>9,000以上のアプリ</td><td>メール・Slack・ブラウザ操作</td><td>9LLM・80以上のツール横断</td><td>400以上の事前構築ノード</td></tr>
+      <tr><td>無料プラン</td><td>月100タスクまで</td><td>1日300クレジット</td><td>1日100〜200クレジット</td><td>セルフホストのみ恒久無料</td></tr>
+      <tr><td>最安有料プラン</td><td>$19.99/月(年払い)</td><td>$20/月前後(未確認)</td><td>$19.99/月(年払い)</td><td>$20/月(クラウド版)</td></tr>
+      <tr><td>アフィリエイト</td><td>審査制パートナーのみ</td><td>あり(詳細未確認)</td><td>あり(詳細未確認)</td><td>30%・12ヶ月</td></tr>
+    </table>
+    </div>
+  </details>
+
+  <details class="rate-table-box show">
+    <summary><h2>提携プログラムのあるツール</h2></summary>
+    <p class="rate-table-note">n8nは公式アフィリエイトプログラムの条件を直接確認できました(2026年9月確認)。Manus・Gensparkはプログラムの存在は公式ドメインで確認できましたが、詳細ページへのアクセスができず条件は未確認です。Zapierに一般公開の個人向けアフィリエイトはなく、審査制のパートナープログラムのみです。当サイトは現時点で未提携のため、下記は通常の公式サイトへのリンクです。</p>
+    <div class="rate-table-wrap">
+    <table class="rate-table rate-table-feature">
+      <tr><th>ツール</th><th>提携プログラムの概要</th></tr>
+      <tr><td><img class="rt-logo" src="../images/logos/n8n.png" alt="">n8n</td><td>公式運営(n8n.io/affiliates)。クラウド契約紹介につき12ヶ月間30%、PayPal払い出し(月1回・100ユーロ以上)、有料広告での宣伝は禁止</td></tr>
+      <tr><td><img class="rt-logo" src="../images/logos/manus.png" alt="">Manus</td><td>公式ページの存在は確認(manus.im/affiliate/terms)、直接アクセス不可のため条件(10%・365日等)は未確認</td></tr>
+      <tr><td><img class="rt-logo" src="../images/logos/genspark.png" alt="">Genspark</td><td>公式ページの存在は確認(genspark.ai/affiliate)、直接アクセス不可のため条件(20%・上限なし等)は未確認</td></tr>
+      <tr><td><img class="rt-logo" src="../images/logos/zapier.png" alt="">Zapier</td><td>個人向け一般アフィリエイトはなし。審査制のパートナープログラム(Solution/Integration Partner向け)のみ</td></tr>
+    </table>
+    </div>
+  </details>
+
+  <p class="follow-x">制作の裏側や新しいツールの告知は <a href="https://x.com/uuhai0625" target="_blank" rel="noopener">@uuhai0625</a> で発信しています</p>
+
+  <div class="faq-section">
+    <h2>よくある質問</h2>
+    <details class="faq-item">
+      <summary>コーディング支援AI(Claude Code等)と何が違いますか?</summary>
+      <p>コーディング支援AIはソースコードの編集・生成が目的のツールです。一方このページで扱うAIエージェント・業務自動化ツールは、コードを書くのではなく「受注処理・顧客対応・リサーチ・資料作成」といった業務タスクを自然言語の指示だけで自律実行させることが目的です。似た自律型ソフトウェアエンジニアリングエージェント「Devin」はコーディング寄りのためこの記事では扱わず、コーディング支援AI解説記事側の守備範囲としています。</p>
+    </details>
+    <details class="faq-item">
+      <summary>プログラミング知識がなくても使えますか?</summary>
+      <p>Zapier Agents・Manus・Gensparkは自然言語の指示だけで使えるノーコードツールです。n8nもノーコードでの利用が基本ですが、ノード(処理の部品)を組み合わせる仕組みの理解が必要な分、他の3つよりやや学習コストが高めです。</p>
+    </details>
+    <details class="faq-item">
+      <summary>料金はどこで比較できますか?</summary>
+      <p>この記事は機能・仕組みの解説に特化しています。4ツールとも本文中に無料プラン・最安有料プランの金額を記載していますので、そちらをご参照ください。</p>
+    </details>
+  </div>
+
+  <div class="related-tools">
+    <h2>こんなページもあります</h2>
+    <div class="related-tools-list">
+      <a class="related-tool-link" href="../coding-ai-kaisetsu/"><span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="8 9 4 12 8 15"/><polyline points="16 9 20 12 16 15"/><line x1="13" y1="6" x2="11" y2="18"/></svg></span>コーディング支援AIを解説</a>
+      <a class="related-tool-link" href="../bunsho-ai-kaisetsu/"><span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v12H8l-4 4V4z"/><line x1="8" y1="9" x2="16" y2="9"/><line x1="8" y1="13" x2="13" y2="13"/></svg></span>文章生成AIを解説</a>
+      <a class="related-tool-link" href="../hajimekata/"><span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m14.5 9.5-2 5-5 2 2-5z"/></svg></span>AI副業の始め方</a>
+      <a class="related-tool-link" href="../kaishi-cost/"><span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c3 2 5 6 5 10 0 2-1 4-2 5l-3-1-3 1c-1-1-2-3-2-5 0-4 2-8 5-10z"/><circle cx="12" cy="10" r="1.5"/><path d="M9 17l-2 4M15 17l2 4"/></svg></span>AI副業を始める初期費用シミュレーター</a>
+    </div>
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <p>掲載している機能・料金は、各社公式サイト・公式ヘルプセンターをもとにした2026年9月時点の情報です。一次情報に到達できなかった項目は本文・表内に「未確認」と明記しています。AIエージェントツールの機能・料金体系は頻繁に更新されるため、最新情報は各社公式サイトでご確認ください。</p>
+  <p>商品リンクにはアフィリエイト(広告)リンクを含みます。リンク経由の購入により、当サイトが紹介料を得ることがあります。</p>
+  <p><a href="../#about">運営者情報・プライバシーポリシー・お問い合わせ</a></p>
+</footer>
+
+<script src="../ga.js"></script>
+</body>
+</html>
