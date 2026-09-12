@@ -260,10 +260,18 @@ a { color: var(--navy); }
     display: grid;
     grid-template-columns: minmax(0, 380px) 1fr;
     gap: 24px;
-    align-items: start;
+    align-items: stretch;
   }
   .calc-layout .calc-card,
   .calc-layout .result-card { margin-bottom: 0; }
+  /* フォーム(可変高)と結果カードの高さが揃うようstretchにした上で、結果側は
+     縦方向に中央寄せして「短い内容が上に張り付き下だけ大きく余る」見た目を防ぐ
+     (2026-09-12、ユーザー指摘「PC表示が変」への対応)。 */
+  .calc-layout .result-card.show {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 }
 .field { margin-bottom: 18px; }
 .field label {
