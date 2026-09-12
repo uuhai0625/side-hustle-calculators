@@ -96,6 +96,11 @@ const GENRES = {
     note: '記事の下書き・構成案づくりは無料プランのAIチャットでも試せますが、クライアントワークとして文字数・納期に応える段階になると、有料プラン(ChatGPT Plus/Claude Pro、目安¥3,000〜3,180/月)への切り替えが現実的になりやすいジャンルです。',
     link: { href: '../ai-chat-tools/', label: '生成AIチャットツール料金比較' },
   },
+  'ai-video': {
+    label: 'AI動画制作', toolLow: 1590, toolHigh: 4770,
+    note: 'Midjourney・Runway・Kling AIなどの動画生成AIを使います。他ジャンルと違い実用的な無料プランがなく、最初から有料プラン(目安$10〜$30/月)が前提になりやすいジャンルです。',
+    link: { href: '../douga-ryokin/', label: '動画作成AIツールの月額料金シミュレーター' },
+  },
 };
 
 const PC_OPTIONS = {
