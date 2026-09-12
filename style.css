@@ -264,6 +264,12 @@ a { color: var(--navy); }
   }
   .calc-layout .calc-card,
   .calc-layout .result-card { margin-bottom: 0; }
+  /* 計算前(結果カードがdisplay:noneでまだ無い)は2カラム目が丸ごと空白になり、
+     フォームだけが左に寄って不自然に細く見えるため、既定ではフォームを全幅表示に
+     しておく。結果が表示された時だけ左カラムへ戻して2カラムにする
+     (2026-09-12、ユーザー指摘「まだ違和感ある」への追加対応)。 */
+  .calc-layout .calc-card { grid-column: 1 / -1; }
+  .calc-layout:has(.result-card.show) .calc-card { grid-column: 1; }
   /* フォーム(可変高)と結果カードの高さが揃うようstretchにした上で、結果側は
      縦方向に中央寄せして「短い内容が上に張り付き下だけ大きく余る」見た目を防ぐ
      (2026-09-12、ユーザー指摘「PC表示が変」への対応)。 */
