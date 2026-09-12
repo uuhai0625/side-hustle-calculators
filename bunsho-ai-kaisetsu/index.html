@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>文章生成AI(ChatGPT・Claude・Gemini)の機能と違いを解説|AI副業そろばん</title>
+<meta name="description" content="ChatGPT・Claude・Geminiという3大チャットAIの最新モデル・主要機能・得意分野を詳しく解説します。料金比較ではなく「何がどう違うのか」を掘り下げた記事です。">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="文章生成AI(ChatGPT・Claude・Gemini)の機能と違いを解説">
+<meta property="og:description" content="ChatGPT・Claude・Geminiの最新モデル・主要機能・得意分野を詳しく解説します。">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:url" content="https://uuhai0625.github.io/side-hustle-calculators/bunsho-ai-kaisetsu/">
+<meta property="og:image" content="https://uuhai0625.github.io/side-hustle-calculators/images/og-image.jpg">
+<meta property="og:image:width" content="1520">
+<meta property="og:image:height" content="800">
+<link rel="canonical" href="https://uuhai0625.github.io/side-hustle-calculators/bunsho-ai-kaisetsu/">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="文章生成AI(ChatGPT・Claude・Gemini)の機能と違いを解説">
+<meta name="twitter:description" content="3大チャットAIの最新モデル・主要機能・得意分野を詳しく解説します。">
+<meta name="twitter:image" content="https://uuhai0625.github.io/side-hustle-calculators/images/og-image.jpg">
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧮</text></svg>">
+<meta name="theme-color" content="#0a0d0c">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "datePublished": "2026-09-12",
+  "dateModified": "2026-09-12",
+  "mainEntity": [
+    { "@type": "Question", "name": "結局、どれを使えばいいですか?", "acceptedAnswer": { "@type": "Answer", "text": "1つに決めきれない場合は、まずChatGPT無料版(2026年8月からテキストチャット無制限)から試すのが手堅い選択です。長文の一貫性が気になる場合はClaude、Googleドキュメント・スプレッドシートで作業が完結する場合はGeminiを試してみてください。多くのユーザーは2〜3ツールを併用しています。" } },
+    { "@type": "Question", "name": "3社のモデルは頻繁に変わりますか?", "acceptedAnswer": { "@type": "Answer", "text": "はい。2026年だけでもOpenAIはGPT-5.6ファミリー、AnthropicはClaude Sonnet 5→Opus 5→Fable 5.1、GoogleはGemini 3系のマイナーアップデートを繰り返し公開しています。この記事の内容は2026年9月時点のものです。" } },
+    { "@type": "Question", "name": "料金はどこで比較できますか?", "acceptedAnswer": { "@type": "Answer", "text": "この記事は機能・特徴の解説に特化しています。月額料金・プラン別の詳しい比較は「生成AIチャットツール料金比較」ページで、用途・頻度から診断する簡易ツールも使えます。" } }
+  ]
+}
+</script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="site-logo heading-font" href="../">AI副業<span class="accent">そろばん</span></a>
+    <h1 class="site-tagline">文章生成AI(チャットAI)を解説</h1>
+  </div>
+</header>
+
+<main class="wrap">
+  <a class="back-link" href="../">← ツール一覧にもどる</a>
+
+  <div class="manner-box show">
+    <h2>結論</h2>
+    <ul>
+      <li><strong>ChatGPT:</strong> 最も幅広い機能。2026年8月からテキストチャット無制限化、Agent・Deep Research・Canvasが強み。</li>
+      <li><strong>Claude:</strong> 長文の一貫性・自然なトーンに定評。Proプラン以上はClaude Codeも使え、コーディング支援AIと兼用しやすい。</li>
+      <li><strong>Gemini:</strong> Gmail・Googleドキュメント・スプレッドシートとの統合が最大の強み。</li>
+      <li><strong>迷ったら:</strong> 1つに絞らず、用途によって2〜3ツールを併用する使い方が一般的です。</li>
+    </ul>
+  </div>
+
+  <details class="trust-box">
+    <summary><h2>正直な前置き</h2></summary>
+    <p>運営者はこのサイトの記事執筆・アイデア出し・壁打ちに実際に生成AIチャットツールを使っています。ただし3社を全て同じ深さで使い込んでいるわけではなく、特にGeminiのWorkspace連携機能は実務での使用経験が薄いため、その部分は公式発表・複数の独立した報道の内容をもとにした解説であることをお断りしておきます。掲載しているモデル名・発表日は、各社公式発表と複数の独立した大手メディアが一致した内容のみを確定情報として扱い、単一の情報源にしか出てこない数値は「未確認」と明記しています。</p>
+  </details>
+
+  <div class="detail-section" style="margin-top: 20px;">
+    <h2>ChatGPT(OpenAI)</h2>
+    <p>2026年7月9日にリリースされたGPT-5.6ファミリーが現行の中核モデルです。下位から Luna・Terra・Sol の3段階があり、無料・Goプランは主にLunaを使用、Plus・Proは上位のSolを使用します(エフォート調整のスライダー付き)。2026年8月10日の週から、無料・Goプランのテキストチャットが無制限になりました(メッセージ数の上限が撤廃、不正利用防止のガードレールはあり)。画像生成・音声チャット・ファイルアップロード・Deep Researchには引き続き利用回数の上限があります。</p>
+    <p>主要機能としては、自律的にブラウジングやタスク実行を行う「ChatGPT Agent」、5〜30分かけて引用付きの調査レポートを作成する「Deep Research」、コード・文章をサイドパネルで共同編集できる「Canvas」があります。副業での実用面では、アイデア出しや見出し・構成案を素早く発散させる用途で評価されることが多いツールです。</p>
+
+    <h2 style="margin-top: 28px;">Claude(Anthropic)</h2>
+    <p>2026年は3世代のモデルが立て続けに登場しました。6月30日にClaude Sonnet 5(無料・Pro既定、最もエージェント的な性格)、7月24日にClaude Opus 5(Max既定、性能とコストを調整する「エフォートダイヤル」付き)、9月1日にClaude Fable 5.1(最上位、長時間タスク・コーディング・知識労働向け)が公開されています。高速・低コスト用のHaiku 4.5もあわせて提供中です。文脈窓(一度に読み込める文章量)はSonnet 5・Opus 5・Fable 5.1が100万トークンに統一されています。</p>
+    <p>特徴的な機能が「Artifacts」で、コード・HTML・SVG・図表・React等をチャットのサイドパネルに表示し、そのままリンクで公開・共有できます。Proプラン($20/月)以上にはClaude Codeへのアクセスも含まれており(チャットと利用量プールを共有)、このサイト自体もClaude Codeで作られています。副業での実用面では、note記事のような数千字規模の長文でもトーンが崩れにくいという評価が定着しています。</p>
+
+    <h2 style="margin-top: 28px;">Gemini(Google)</h2>
+    <p>2025年11月に登場したGemini 3(Pro/Deep Think/Flash)を基盤に、2026年を通して3.1 Pro→3.5→3.6→3.8 Flash(9月2日)と細かなアップデートが続いています。最上位の「Deep Think」モードは並列推論による高難度タスク向けで、Google AI Ultra限定の機能です。</p>
+    <p>最大の強みはGmail・Googleドキュメント・スプレッドシート・スライド・ドライブ・Meet・Chatに共通する「Geminiサイドパネル」によるGoogle Workspace統合です。Gemini Deep Researchは、Googleドライブ内のファイルやPDFも調査対象に含められます。2026年5月には24時間稼働の自律エージェント「Gemini Spark」も発表されましたが、2026年9月時点では米国限定・Google AI Ultra($100/月)のベータ機能にとどまっています。副業での実用面では、Google Workspace上で作業が完結する場合や、大量の参考資料を読み込ませて執筆する用途で優位という評価が複数の比較記事で一致しています。</p>
+  </div>
+
+  <details class="rate-table-box show">
+    <summary><h2>3ツールの機能比較</h2></summary>
+    <p class="rate-table-note">各社公式発表・複数の独立した大手メディアの報道をもとにした、2026年9月時点の比較です。</p>
+    <div class="rate-table-wrap">
+    <table class="rate-table rate-table-feature">
+      <tr><th>ツール</th><th>強み・特徴的な機能</th></tr>
+      <tr><td>ChatGPT</td><td>幅広い機能。Agent(自律実行)・Deep Research・Canvas。無料版のテキストチャットが無制限(2026年8月〜)</td></tr>
+      <tr><td>Claude</td><td>長文の一貫性・自然なトーン。Artifacts(コード等の共同編集・共有)。Claude Codeとの兼用がしやすい</td></tr>
+      <tr><td>Gemini</td><td>Google Workspace(Gmail・ドキュメント・スプレッドシート等)との統合。Deep ResearchはDrive内資料も調査対象</td></tr>
+    </table>
+    </div>
+    <p class="rate-source">参考: OpenAI公式(openai.com)、Anthropic公式(anthropic.com)、Google公式(blog.google)、TechCrunch・Axios等の複数報道(2026年9月確認)</p>
+  </details>
+
+  <div class="detail-section">
+    <h2>用途別のおすすめ(レビュー記事の傾向、実測ではなく評判ベース)</h2>
+    <ul class="orientation-list">
+      <li><strong>長文のnote記事・一貫したトーンが必要な執筆:</strong> Claudeが優位という評価が複数のレビューで一致しています。</li>
+      <li><strong>アイデア出し・見出しや構成案の発散速度:</strong> ChatGPTが優位という評価が複数のレビューで一致しています。</li>
+      <li><strong>Googleドキュメント・スプレッドシート内で完結する作業、大量資料の要約:</strong> Geminiが優位という評価が複数のレビューで一致しています。</li>
+    </ul>
+    <p style="margin-top: 10px; font-size: 0.86rem; color: var(--ink-sub);">これらはSEO寄りの比較記事同士が横並びで一致している傾向であり、独立した実測ベンチマークによる裏付けではない点にご留意ください。「唯一の正解はなく、用途によって併用するユーザーが多い」という総括も複数の記事で共通しています。</p>
+  </div>
+
+  <p class="follow-x">制作の裏側や新しいツールの告知は <a href="https://x.com/uuhai0625" target="_blank" rel="noopener">@uuhai0625</a> で発信しています</p>
+
+  <div class="faq-section">
+    <h2>よくある質問</h2>
+    <details class="faq-item">
+      <summary>結局、どれを使えばいいですか?</summary>
+      <p>1つに決めきれない場合は、まずChatGPT無料版(2026年8月からテキストチャット無制限)から試すのが手堅い選択です。長文の一貫性が気になる場合はClaude、Googleドキュメント・スプレッドシートで作業が完結する場合はGeminiを試してみてください。多くのユーザーは2〜3ツールを併用しています。</p>
+    </details>
+    <details class="faq-item">
+      <summary>3社のモデルは頻繁に変わりますか?</summary>
+      <p>はい。2026年だけでもOpenAIはGPT-5.6ファミリー、AnthropicはClaude Sonnet 5→Opus 5→Fable 5.1、GoogleはGemini 3系のマイナーアップデートを繰り返し公開しています。この記事の内容は2026年9月時点のものです。</p>
+    </details>
+    <details class="faq-item">
+      <summary>料金はどこで比較できますか?</summary>
+      <p>この記事は機能・特徴の解説に特化しています。月額料金・プラン別の詳しい比較は<a href="../ai-chat-tools/">生成AIチャットツール料金比較</a>ページで、用途・頻度から診断する簡易ツールも使えます。</p>
+    </details>
+  </div>
+
+  <div class="related-tools">
+    <h2>こんなページもあります</h2>
+    <div class="related-tools-list">
+      <a class="related-tool-link" href="../ai-chat-tools/"><span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v12H8l-4 4V4z"/><line x1="8" y1="9" x2="16" y2="9"/><line x1="8" y1="13" x2="13" y2="13"/></svg></span>生成AIチャットツール料金比較</a>
+      <a class="related-tool-link" href="../coding-ai-kaisetsu/"><span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="8 9 4 12 8 15"/><polyline points="16 9 20 12 16 15"/><line x1="13" y1="6" x2="11" y2="18"/></svg></span>コーディング支援AIを解説</a>
+      <a class="related-tool-link" href="../hajimekata/"><span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m14.5 9.5-2 5-5 2 2-5z"/></svg></span>AI副業の始め方</a>
+      <a class="related-tool-link" href="../kaishi-cost/"><span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c3 2 5 6 5 10 0 2-1 4-2 5l-3-1-3 1c-1-1-2-3-2-5 0-4 2-8 5-10z"/><circle cx="12" cy="10" r="1.5"/><path d="M9 17l-2 4M15 17l2 4"/></svg></span>AI副業を始める初期費用シミュレーター</a>
+      <a class="related-tool-link" href="../note-x-kankyo/"><span class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="1.5"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 16.5 15.5 11 5 20"/></svg></span>note・X運用の作業環境</a>
+    </div>
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <p>掲載しているモデル名・機能・発表日は、各社公式発表および複数の独立した大手メディアの報道が一致した内容をもとにした2026年9月時点の情報です。生成AIの機能・仕様は頻繁に更新されるため、最新情報は各社公式サイトでご確認ください。</p>
+  <p>商品リンクにはアフィリエイト(広告)リンクを含みます。リンク経由の購入により、当サイトが紹介料を得ることがあります。</p>
+  <p><a href="../#about">運営者情報・プライバシーポリシー・お問い合わせ</a></p>
+</footer>
+
+<script src="../ga.js"></script>
+</body>
+</html>
