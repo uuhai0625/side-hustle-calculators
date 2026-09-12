@@ -250,10 +250,11 @@ a { color: var(--navy); }
   box-shadow: var(--shadow-soft);
   margin-bottom: 20px;
 }
-/* PC/スマホでレイアウトを分ける対応(furusato-nozei限定、2026-09-12)。
-   デスクトップ幅ではフォーム+結果を左右2カラムにし、コンテナも少し広げて
-   大画面での余白の無駄を減らす。モバイルはこのメディアクエリの対象外で
-   従来通り1カラム縦積みのまま。 */
+/* PC/スマホでレイアウトを分ける汎用対応(No.78、2026-09-12)。furusato-nozei限定だった
+   実装を`.calc-layout`という共通クラスへ一般化し、denki-dai等の残り8計算機ページにも
+   展開した(検索上位の類似サイトを調査した結果、PC幅でも入力/結果を横並びにしている例は
+   少なく、このsticky2カラムは引き続き差別化点になると判断)。モバイルはこのメディア
+   クエリの対象外で従来通り1カラム縦積みのまま。 */
 @media (min-width: 900px) {
   .furusato-main { max-width: 960px; }
   .calc-layout {
@@ -265,25 +266,26 @@ a { color: var(--navy); }
   .calc-layout .calc-card,
   .calc-layout .result-card { margin-bottom: 0; }
   /* 計算前は「中央寄せの通常カード」、計算後は「左にフォーム・右に結果の2カラム」
-     という2状態を切り替える(2026-09-12、ユーザー要望「最初は中央、計算したら
-     横に出る」への対応)。既定(結果まだ無し)ではフォームを1カラム目に収めず
-     全幅トラックにした上でmax-widthとauto marginで中央寄せの通常カードに見せ、
-     結果が表示された瞬間だけ左カラム(380px)へ戻して2カラム化する。 */
-  .calc-layout .calc-card {
+     という2状態を切り替える。既定(結果まだ無し)では、結果カード以外の直接の子要素
+     (`.calc-card`本体、またはdouga-ryokinのようにモード切替パネルで包まれている場合は
+     そのパネル)を全幅トラックに広げてmax-widthとauto marginで中央寄せの通常カードに見せ、
+     結果が表示された瞬間だけ左カラム(380px)へ戻して2カラム化する。`:not(.result-card)`に
+     したのは、モード切替(panel-single/panel-combo)のように直接の子要素が`.calc-card`
+     そのものでないページにも同じルールをそのまま適用するため。 */
+  .calc-layout > *:not(.result-card) {
     grid-column: 1 / -1;
     max-width: 620px;
     margin-left: auto;
     margin-right: auto;
   }
-  .calc-layout:has(.result-card.show) .calc-card {
+  .calc-layout:has(.result-card.show) > *:not(.result-card) {
     grid-column: 1;
     max-width: none;
     margin-left: 0;
     margin-right: 0;
   }
   /* フォーム(可変高)と結果カードの高さが揃うようstretchにした上で、結果側は
-     縦方向に中央寄せして「短い内容が上に張り付き下だけ大きく余る」見た目を防ぐ
-     (2026-09-12、ユーザー指摘「PC表示が変」への対応)。 */
+     縦方向に中央寄せして「短い内容が上に張り付き下だけ大きく余る」見た目を防ぐ。 */
   .calc-layout .result-card.show {
     display: flex;
     flex-direction: column;
