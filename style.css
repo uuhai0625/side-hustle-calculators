@@ -1013,11 +1013,10 @@ html.qshow .share-row { display: flex; }
 /* マトリクス表はsticky列(層ラベル)の分だけ「全部見えている」錯覚を起こしやすいため、
    右端に常時フェードを重ねて横スクロールできることを示唆する(No.46、2026-09-06)。
    ラッパー基準の絶対配置なので、スクロール位置に関わらず右端に固定表示される。
-   2026-09-13、解説記事群の5名レビューでrate-table-compare/rate-table-featureにも
-   同じ横スクロール必須の状態(スクロールヒントなし)が見つかったため対象を拡大。 */
-.rate-table-wrap:has(.rate-table-matrix)::after,
-.rate-table-wrap:has(.rate-table-compare)::after,
-.rate-table-wrap:has(.rate-table-feature)::after {
+   2026-09-13、rate-table-compare/rate-table-featureにも一度拡大したが、これらは
+   table-layout:fixedの狭い固定列(108px前後)のため、常時表示のフェードが列の
+   文字にかぶって「変な影」に見えるとユーザー指摘があり対象をmatrixのみに戻した。 */
+.rate-table-wrap:has(.rate-table-matrix)::after {
   content: "";
   position: absolute;
   top: 0;
