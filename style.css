@@ -991,7 +991,7 @@ html.qshow .share-row { display: flex; }
 }
 .rate-table-box .rate-table-note {
   margin: 0 0 12px;
-  font-size: 0.78rem;
+  font-size: 0.875rem;
   color: var(--ink-sub);
 }
 /* No.57(2026-09-06): 減価償却の年次推移を可視化する簡易折れ線グラフ(ライブラリ不使用、SVGを
@@ -1012,8 +1012,12 @@ html.qshow .share-row { display: flex; }
 }
 /* マトリクス表はsticky列(層ラベル)の分だけ「全部見えている」錯覚を起こしやすいため、
    右端に常時フェードを重ねて横スクロールできることを示唆する(No.46、2026-09-06)。
-   ラッパー基準の絶対配置なので、スクロール位置に関わらず右端に固定表示される。 */
-.rate-table-wrap:has(.rate-table-matrix)::after {
+   ラッパー基準の絶対配置なので、スクロール位置に関わらず右端に固定表示される。
+   2026-09-13、解説記事群の5名レビューでrate-table-compare/rate-table-featureにも
+   同じ横スクロール必須の状態(スクロールヒントなし)が見つかったため対象を拡大。 */
+.rate-table-wrap:has(.rate-table-matrix)::after,
+.rate-table-wrap:has(.rate-table-compare)::after,
+.rate-table-wrap:has(.rate-table-feature)::after {
   content: "";
   position: absolute;
   top: 0;
@@ -1026,7 +1030,7 @@ html.qshow .share-row { display: flex; }
 .rate-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 0.86rem;
+  font-size: 0.875rem;
 }
 .rate-table-wrap .rate-table {
   min-width: 480px;
@@ -1039,7 +1043,7 @@ html.qshow .share-row { display: flex; }
 .rate-table th {
   color: var(--ink-sub);
   font-weight: 700;
-  font-size: 0.78rem;
+  font-size: 0.875rem;
 }
 .rate-table td:last-child, .rate-table th:last-child {
   text-align: right;
@@ -1157,7 +1161,7 @@ html.qshow .share-row { display: flex; }
 }
 .faq-item p {
   margin: 0 0 14px;
-  font-size: 0.86rem;
+  font-size: 0.875rem;
   color: var(--ink-sub);
   line-height: 1.7;
 }
@@ -1521,7 +1525,7 @@ html.qshow .share-row { display: flex; }
 }
 .trust-box p {
   margin: 0;
-  font-size: 0.86rem;
+  font-size: 0.875rem;
   color: var(--ink-sub);
   line-height: 1.8;
 }
@@ -1566,7 +1570,7 @@ html.qshow .share-row { display: flex; }
 .detail-section h3:first-of-type { margin-top: 0; }
 .detail-section p {
   margin: 0;
-  font-size: 0.86rem;
+  font-size: 0.875rem;
   color: var(--ink-sub);
   line-height: 1.8;
 }
