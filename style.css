@@ -264,12 +264,23 @@ a { color: var(--navy); }
   }
   .calc-layout .calc-card,
   .calc-layout .result-card { margin-bottom: 0; }
-  /* 計算前(結果カードがdisplay:noneでまだ無い)は2カラム目が丸ごと空白になり、
-     フォームだけが左に寄って不自然に細く見えるため、既定ではフォームを全幅表示に
-     しておく。結果が表示された時だけ左カラムへ戻して2カラムにする
-     (2026-09-12、ユーザー指摘「まだ違和感ある」への追加対応)。 */
-  .calc-layout .calc-card { grid-column: 1 / -1; }
-  .calc-layout:has(.result-card.show) .calc-card { grid-column: 1; }
+  /* 計算前は「中央寄せの通常カード」、計算後は「左にフォーム・右に結果の2カラム」
+     という2状態を切り替える(2026-09-12、ユーザー要望「最初は中央、計算したら
+     横に出る」への対応)。既定(結果まだ無し)ではフォームを1カラム目に収めず
+     全幅トラックにした上でmax-widthとauto marginで中央寄せの通常カードに見せ、
+     結果が表示された瞬間だけ左カラム(380px)へ戻して2カラム化する。 */
+  .calc-layout .calc-card {
+    grid-column: 1 / -1;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .calc-layout:has(.result-card.show) .calc-card {
+    grid-column: 1;
+    max-width: none;
+    margin-left: 0;
+    margin-right: 0;
+  }
   /* フォーム(可変高)と結果カードの高さが揃うようstretchにした上で、結果側は
      縦方向に中央寄せして「短い内容が上に張り付き下だけ大きく余る」見た目を防ぐ
      (2026-09-12、ユーザー指摘「PC表示が変」への対応)。 */
