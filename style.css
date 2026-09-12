@@ -1448,9 +1448,22 @@ html.qshow .share-row { display: flex; }
   margin-top: 4px;
   font-size: 0.82rem;
 }
+.rate-table-compare {
+  table-layout: fixed;
+}
 .rate-table-compare th, .rate-table-compare td {
   text-align: center;
   vertical-align: top;
+  white-space: normal;
+  width: 108px;
+}
+/* 基底.rate-tableの「最終列=価格」前提の右寄せ・太字・nowrapを、
+   このマトリクスでは全列が同格のツール列なので打ち消す(2026-09-12、列幅がガタつく不具合を修正) */
+.rate-table-compare th:last-child, .rate-table-compare td:last-child {
+  text-align: center;
+  font-weight: 400;
+  color: inherit;
+  white-space: normal;
 }
 .rate-table-compare th:first-child, .rate-table-compare td:first-child {
   text-align: left;
@@ -1461,14 +1474,12 @@ html.qshow .share-row { display: flex; }
   background: var(--bg-card);
   z-index: 1;
   box-shadow: 1px 0 0 var(--line);
-  white-space: nowrap;
+  white-space: normal;
+  width: 132px;
 }
 .rate-table-compare th img.rt-logo {
   display: block;
   margin: 0 auto 4px;
-}
-.rate-table-wrap .rate-table-compare {
-  min-width: 560px;
 }
 .rate-table img.rt-logo {
   width: 20px;
