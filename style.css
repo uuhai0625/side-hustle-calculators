@@ -1425,6 +1425,24 @@ html.qshow .share-row { display: flex; }
   line-height: 1.8;
 }
 .detail-section strong { color: var(--ink); }
+.detail-section p + p { margin-top: 12px; }
+
+/* No.67(2026-09-12): 各計算機の「計算根拠」セクション用。AI Overviews等が
+   計算ツール本体でなく「計算根拠を説明する静的コンテンツ」を引用しうるという
+   リサーチ結果(sacra.com・worldmetrics.orgの実例)に基づき追加。 */
+.calc-formula {
+  margin: 10px 0 14px;
+  padding: 12px 16px;
+  background: var(--slate-soft);
+  border-left: 3px solid var(--navy);
+  border-radius: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  color: var(--ink);
+  line-height: 1.7;
+  overflow-x: auto;
+  white-space: pre-wrap;
+}
 
 /* ---- サイトについて(運営者情報) ---- */
 .about-box {
