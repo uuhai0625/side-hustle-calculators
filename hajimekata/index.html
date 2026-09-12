@@ -56,12 +56,14 @@
   <a class="back-link" href="../">← ツール一覧にもどる</a>
 
   <div class="detail-section" style="margin-top: 20px;">
-    <p>先に結論からお伝えします。この記事でわかるのは次の4点です。</p>
-    <ul>
-      <li>AI副業にはどんな種類があるか(運営者が実際に取り組んでいるものに限定)</li>
-      <li>実際にどれくらいの成果が出ているか(具体的な数字を含む正直な現在地)</li>
-      <li>AI副業のリアルなリスク・大変なところ</li>
-      <li>これから始めるなら、何から手をつければいいか</li>
+    <p>先に結論からお伝えします。この記事でわかるのは次の点です(クリックで該当箇所にジャンプします)。</p>
+    <ul class="orientation-list">
+      <li><a href="#genres">AI副業にはどんな種類があるか</a>(運営者が実際に取り組んでいるものに限定+費用比較)</li>
+      <li><a href="#basics">生成AIツール・パソコンの基礎知識</a></li>
+      <li><a href="#results">実際にどれくらいの成果が出ているか</a>(具体的な数字を含む正直な現在地)</li>
+      <li><a href="#risks">AI副業のリアルなリスク・大変なところ</a></li>
+      <li><a href="#steps">これから始めるなら、何から手をつければいいか</a></li>
+      <li><a href="#faq">よくある質問</a></li>
     </ul>
     <p>なお、この記事には「誰でも稼げる」「月◯万円」といった話は出てきません。運営者自身がまだ収益化の途上にあり、そのように書ける実績がないためです。その代わり、実際にやっているからこそわかる手触りを、数字も含めてそのまま書きます。</p>
   </div>
@@ -71,7 +73,7 @@
     <p>「AI副業」で検索すると、誰でも簡単に稼げるかのような情報が目立ちます。このサイトはその逆の方針をとっています。計算機も記事も、かかるお金だけを扱い、収入や黒字化の見込みは一切書きません。運営者はLINEスタンプ・Kindle絵本・note・Webアプリ制作を実際に並行して手がける実践者ですが、売上はまだ少額で、その数字も良い悪いを問わずそのまま公開しています。書けない成果は書かない。そのかわり、掲載する内容は競合調査や実際の使い勝手の検証を重ねて作り込む。確かめられる事実だけを置くことが、このサイトの信頼性の根拠です。</p>
   </div>
 
-  <div class="detail-section">
+  <div class="detail-section" id="genres">
     <h2>AI副業にはどんな種類があるか</h2>
     <p>世の中にはAI副業の網羅的なリストがいくらでもありますが、ここでは運営者が実際に手を動かしているジャンルだけに絞って紹介します。やったことのないものについて語れることは、正直ほとんどないからです。</p>
 
@@ -86,9 +88,25 @@
 
     <h3>Webアプリ制作</h3>
     <p>AIにコードを書かせて、診断ツールや計算ツールのようなWebアプリを作り、無料ホスティングで公開するモデルです。この「AI副業そろばん」自体もその一つです。プログラミング経験がなくても形にはなりますが、公開後のアクセス解析や改善まで含めると、地道な運用が続きます。仕組みを作って育てるのが好きな人に向いています。</p>
+
+    <h3 style="margin-top: 28px;">ジャンル別の費用比較</h3>
+    <p>上の4ジャンルに加えて、費用面だけで見ると次の選択肢もあります(AIライティング代行・AI動画制作・AI音楽制作は、運営者がこの「uuhai0625」名義ではまだ実践していないジャンルです)。</p>
+    <div class="rate-table-wrap">
+    <table class="rate-table rate-table-feature">
+      <tr><th>ジャンル</th><th>月々のツール費用目安</th><th>特徴</th></tr>
+      <tr><td><a href="../kaishi-cost/?genre=line-stamp">LINEスタンプ制作</a></td><td>¥0〜¥4,800</td><td>画像生成AIでキャラクターの一貫性を保つには有料プランが現実的です</td></tr>
+      <tr><td><a href="../kaishi-cost/?genre=ehon">Kindle出版(絵本)</a></td><td>¥0〜¥4,800</td><td>挿絵用の画像生成AIを使用、費用感はLINEスタンプ制作とほぼ同じ水準です</td></tr>
+      <tr><td><a href="../kaishi-cost/?genre=note">note記事執筆</a></td><td>¥0〜¥3,000</td><td>文章の下書き・壁打ちは無料プランのAIチャットで足りることが多く、最も始めやすい費用感です</td></tr>
+      <tr><td><a href="../kaishi-cost/?genre=webapp">Webアプリ制作</a></td><td>¥0〜¥3,000</td><td>AIにコードを書かせるツールは無料枠から始められることが多く、このサイト自体もこの方法で作られています</td></tr>
+      <tr><td><a href="../kaishi-cost/?genre=ai-writing">AIライティング代行</a></td><td>¥0〜¥3,180</td><td>クライアントワークとして文字数・納期に応える段階になると、有料プランへの切り替えが現実的になりやすいジャンルです</td></tr>
+      <tr><td><a href="../kaishi-cost/?genre=ai-video">AI動画制作</a></td><td>¥1,590〜¥4,770</td><td>他ジャンルと違い実用的な無料プランがなく、最初から有料プランが前提になりやすいジャンルです</td></tr>
+      <tr><td><a href="../kaishi-cost/?genre=ai-music">AI音楽制作</a></td><td>¥0〜¥4,900</td><td>歌ものはUdio無料版でも試せますが、商用利用・BGM専用ツールは有料プランが前提です</td></tr>
+    </table>
+    </div>
+    <p style="margin-top: 10px; font-size: 0.82rem; color: var(--ink-sub);">ジャンル名をクリックすると、初期費用シミュレーターでそのジャンルを選んだ状態の試算結果に直接ジャンプします。</p>
   </div>
 
-  <div class="detail-section orientation-section">
+  <div class="detail-section orientation-section" id="basics">
     <h2>まず知っておきたい基礎知識</h2>
 
     <h3>生成AIツールの主な種類</h3>
@@ -108,25 +126,9 @@
       <li>デスクトップPC(ハイエンドゲーミング) — 最も負荷の高い作業向け</li>
     </ul>
     <p style="margin-top: 10px;"><a href="../denki-dai/">→ 消費電力・電気代の目安を見る</a> ・ <a href="../kaishi-cost/">→ 今のPCで足りるか判定する</a></p>
-
-    <h3 style="margin-top: 28px;">AI副業ジャンルの費用比較</h3>
-    <p>上で紹介した4ジャンルに加えて、費用面だけで見ると次の選択肢もあります(AIライティング代行・AI動画制作・AI音楽制作は、運営者がこの「uuhai0625」名義ではまだ実践していないジャンルです)。</p>
-    <div class="rate-table-wrap">
-    <table class="rate-table rate-table-feature">
-      <tr><th>ジャンル</th><th>月々のツール費用目安</th><th>特徴</th></tr>
-      <tr><td><a href="../kaishi-cost/?genre=line-stamp">LINEスタンプ制作</a></td><td>¥0〜¥4,800</td><td>画像生成AIでキャラクターの一貫性を保つには有料プランが現実的です</td></tr>
-      <tr><td><a href="../kaishi-cost/?genre=ehon">Kindle出版(絵本)</a></td><td>¥0〜¥4,800</td><td>挿絵用の画像生成AIを使用、費用感はLINEスタンプ制作とほぼ同じ水準です</td></tr>
-      <tr><td><a href="../kaishi-cost/?genre=note">note記事執筆</a></td><td>¥0〜¥3,000</td><td>文章の下書き・壁打ちは無料プランのAIチャットで足りることが多く、最も始めやすい費用感です</td></tr>
-      <tr><td><a href="../kaishi-cost/?genre=webapp">Webアプリ制作</a></td><td>¥0〜¥3,000</td><td>AIにコードを書かせるツールは無料枠から始められることが多く、このサイト自体もこの方法で作られています</td></tr>
-      <tr><td><a href="../kaishi-cost/?genre=ai-writing">AIライティング代行</a></td><td>¥0〜¥3,180</td><td>クライアントワークとして文字数・納期に応える段階になると、有料プランへの切り替えが現実的になりやすいジャンルです</td></tr>
-      <tr><td><a href="../kaishi-cost/?genre=ai-video">AI動画制作</a></td><td>¥1,590〜¥4,770</td><td>他ジャンルと違い実用的な無料プランがなく、最初から有料プランが前提になりやすいジャンルです</td></tr>
-      <tr><td><a href="../kaishi-cost/?genre=ai-music">AI音楽制作</a></td><td>¥0〜¥4,900</td><td>歌ものはUdio無料版でも試せますが、商用利用・BGM専用ツールは有料プランが前提です</td></tr>
-    </table>
-    </div>
-    <p style="margin-top: 10px; font-size: 0.82rem; color: var(--ink-sub);">ジャンル名をクリックすると、初期費用シミュレーターでそのジャンルを選んだ状態の試算結果に直接ジャンプします。</p>
   </div>
 
-  <div class="detail-section">
+  <div class="detail-section" id="results">
     <h2>実際どれくらいの成果が出ているか</h2>
     <p>ここが一番正直に書くべきところです。noteは16本の記事を公開してきました。反応の質を示す数字は悪くありません。</p>
     <div class="rate-table-wrap">
@@ -147,7 +149,7 @@
     <p><a href="https://note.com/uuhai0625" target="_blank" rel="noopener">note「ウーハイ@AIをやさしく解説」を見る →</a></p>
   </div>
 
-  <div class="manner-box show">
+  <div class="manner-box show" id="risks">
     <h2>AI副業のリアルなリスク・大変なところ</h2>
     <ul>
       <li>技術的トラブルは日常的に起きます。透過処理が画像の必要な部分まで消してしまうバグ、バッチ処理の保存失敗など、生成後の実務工程でのつまずきが制作時間の多くを占めることがあります。</li>
@@ -157,7 +159,7 @@
     </ul>
   </div>
 
-  <div class="detail-section">
+  <div class="detail-section" id="steps">
     <h2>これから始める人へ</h2>
     <p>何から手をつければいいか。運営者の経験からは、次の順番をおすすめします。</p>
     <h3>1. まず1つのジャンルを選び、1つの成果物を完成させる</h3>
@@ -171,7 +173,7 @@
 
   <p class="follow-x">制作の裏側や新しいツールの告知は <a href="https://x.com/uuhai0625" target="_blank" rel="noopener">@uuhai0625</a> で発信しています</p>
 
-  <div class="faq-section">
+  <div class="faq-section" id="faq">
     <h2>よくある質問</h2>
     <details class="faq-item">
       <summary>AI副業は本当に稼げますか?</summary>
