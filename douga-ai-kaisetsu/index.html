@@ -34,6 +34,7 @@
   "datePublished": "2026-09-12",
   "dateModified": "2026-09-12",
   "mainEntity": [
+    { "@type": "Question", "name": "動画生成AIの「集約プラットフォーム」とは何ですか?", "acceptedAnswer": { "@type": "Answer", "text": "Kling・Google Veo・Runwayなど他社の複数モデルを1つのサブスクリプション・1つの画面でまとめて使えるサービスです。代表例はMagnific(旧Freepik)・Higgsfield・MyEditで、開発者向けAPI版としてFAL.AIもあります。1社が開発した1つのモデルだけを提供する「単体モデル系」(Midjourney・Kling AI・Google Veo等)とは仕組みが異なり、複数モデルを比較・使い分けしたい人に向いています。" } },
     { "@type": "Question", "name": "無料プランで作った動画を商用利用できますか?", "acceptedAnswer": { "@type": "Answer", "text": "ツールによって異なりますが、多くは無料プランに透かし(ウォーターマーク)が入り商用利用は認められていません。Midjourney・Runway・Kling AI・Luma・Pikaはいずれも有料プラン(多くはStandard相当)以上で商用利用権・透かしなし出力が付与されます。PixVerseとGoogle Veoは公式規約上の詳細な条件を一次情報で確認できておらず、利用前に必ず公式ToSを確認することをおすすめします。" } },
     { "@type": "Question", "name": "生成した動画の著作権は誰のものになりますか?", "acceptedAnswer": { "@type": "Answer", "text": "多くのツールで利用者自身が著作権を持つ一方、サービス側への非独占的な利用許諾(学習・広告転用等)が利用規約に含まれていることがあります。特にKling AI・Lumaの無料/下位プランでは、ユーザーがサービス側に比較的広い権利を付与する条項がある点に注意してください。詳細は各社の利用規約(ToS)本文でご確認ください。" } },
     { "@type": "Question", "name": "料金はどこで比較できますか?", "acceptedAnswer": { "@type": "Answer", "text": "この記事は機能・用途の解説に特化しています。月額料金・本数試算の詳しい比較は「動画作成AIツールの月額料金シミュレーター」ページで確認できます。" } }
@@ -81,6 +82,35 @@
   </details>
 
   <div class="detail-section" style="margin-top: 20px;">
+    <h2 style="margin-top:0;">動画生成AIには「単体モデル系」と「集約プラットフォーム系」がある</h2>
+    <p>動画生成AIを調べていると、「Klingというツールが良い」という話と「Magnificというサービスの中でKlingが使える」という話が同時に出てきて混乱しがちです。実際には大きく2種類に分かれています。</p>
+    <p><strong>①単体モデル系:</strong> 1社が自社開発した1つの生成モデルを、そのサービス自身のUIで提供する形態です。以下でメインに解説するMidjourney・Runway・Kling AI・Luma・Pika・PixVerse・Google Veoの7ツールはいずれもこちらにあたります。</p>
+    <p><strong>②集約プラットフォーム系:</strong> 自社ではモデルを開発せず、他社の複数モデル(Kling・Veo・Runway・Seedanceなど)を1つのサブスクリプション・1つの画面にまとめて提供する形態です。同じプロンプトを複数モデルで同時に試して比較できるのが強みです。代表例はMagnific(旧Freepik)・Higgsfield・MyEditで、開発者向けAPI版としてFAL.AIもあります(詳しくは後述)。</p>
+    <p>境界は完全に固定ではなく、単体モデル系のサービスが自社サブスクの中に他社モデルを一部取り込む動きがあるとの指摘も一部のブログ記事にありますが、当サイトで公式情報による確認はできていません。モデルの個性をじっくり使い込みたいなら単体モデル系、いろいろなモデルを1か所で比較・使い分けしたいなら集約プラットフォーム系、というのが選び方の目安です。</p>
+  </div>
+
+  <details class="rate-table-box show">
+    <summary><h2>動画生成AIの分類マップ</h2></summary>
+    <p class="rate-table-note">各社公式サイトをもとにした2026年9月時点の分類です。「未確認」は今回の調査で一次情報に到達できなかった項目です。</p>
+    <div class="rate-table-wrap">
+    <table class="rate-table">
+      <tr><th>サービス</th><th>タイプ</th><th>特徴</th></tr>
+      <tr><td><img class="rt-logo" src="../images/logos/midjourney.png" alt="">Midjourney</td><td>単体モデル</td><td>静止画から動画への変換(Animate機能)に特化</td></tr>
+      <tr><td><img class="rt-logo" src="../images/logos/runway.png" alt="">Runway</td><td>単体モデル</td><td>自社Gen-4.5、クライアントワーク・カメラ制御向け</td></tr>
+      <tr><td><img class="rt-logo" src="../images/logos/kling.png" alt="">Kling AI</td><td>単体モデル</td><td>自社モデル、動きの物理表現が滑らか</td></tr>
+      <tr><td><img class="rt-logo" src="../images/logos/luma.png" alt="">Luma Dream Machine</td><td>単体モデル</td><td>自社Ray3系、フォトリアル・カメラモーション</td></tr>
+      <tr><td><img class="rt-logo" src="../images/logos/pika.png" alt="">Pika</td><td>単体モデル</td><td>自社モデル、物理エフェクト(Pikaffects)</td></tr>
+      <tr><td><img class="rt-logo" src="../images/logos/pixverse.png" alt="">PixVerse</td><td>単体モデル</td><td>自社モデル、アニメ調スタイルの量産向け</td></tr>
+      <tr><td><img class="rt-logo" src="../images/logos/veo.png" alt="">Google Veo</td><td>単体モデル</td><td>自社Veo 3.1、効果音・セリフのネイティブ生成</td></tr>
+      <tr><td><img class="rt-logo" src="../images/logos/magnific.png" alt="">Magnific(旧Freepik)</td><td>集約プラットフォーム</td><td>Kling/Veo/Runway/Seedance等40モデル超を1UIで</td></tr>
+      <tr><td><img class="rt-logo" src="../images/logos/higgsfield.png" alt="">Higgsfield</td><td>集約プラットフォーム</td><td>自社Seedance 2.5中心+Sora 2/Kling 3.0/Veo 3.1</td></tr>
+      <tr><td><img class="rt-logo" src="../images/logos/fal-ai.png" alt="">FAL.AI</td><td>集約プラットフォーム(開発者向けAPI)</td><td>Kling/Veo/Seedance等をAPIで従量課金呼び出し</td></tr>
+      <tr><td><img class="rt-logo" src="../images/logos/myedit.png" alt="">MyEdit</td><td>集約プラットフォーム</td><td>CyberLink運営、Veo/Kling/Seedance等+無料枠あり</td></tr>
+    </table>
+    </div>
+  </details>
+
+  <div class="detail-section" style="margin-top: 20px;">
     <h2 class="tool-heading"><img src="../images/logos/midjourney.png" alt="Midjourney">Midjourney(Animate機能)</h2>
     <p>静止画生成に特化したMidjourneyが提供する、画像から動画への変換機能です(テキストから直接動画を作る機能はありません)。解像度は480p相当、5秒から生成し、Extend機能で最大20〜21秒まで延長できます。カメラワークの専用UIはなく、High motion/Low motionの2段階から選ぶシンプルな操作です。音声生成には対応していません。既存のMidjourney静止画資産をそのままアニメーション化するワークフローに向いており、イラスト系のSNS投稿やムードボード動画化によく使われます。有料プラン(Basic以上)は商用利用権がありますが、無料トライアルでの商用利用はできません。なお年間売上が100万ドルを超える企業はPro・Megaプランの契約が必須という規約になっています(個人副業の規模では通常関係ありません)。</p>
     <p class="official-link"><a href="https://www.midjourney.com/" target="_blank" rel="noopener">→ Midjourney公式サイトを見る</a></p>
@@ -110,6 +140,36 @@
     <p class="official-link"><a href="https://deepmind.google/models/veo/" target="_blank" rel="noopener">→ Google Veo公式サイトを見る</a></p>
   </div>
 
+  <div class="detail-section" style="margin-top: 20px;">
+    <h2 style="margin-top:0;">集約プラットフォーム4社を解説</h2>
+    <p>ここからは、他社の複数モデルを1つの画面にまとめて使える「集約プラットフォーム系」の代表4サービスを解説します。単体モデル系の7ツールとは選び方の基準が異なるので、分けて読んでください。</p>
+  </div>
+
+  <div class="logo-strip">
+    <a class="logo-chip" href="https://magnific.com/" target="_blank" rel="noopener"><img src="../images/logos/magnific.png" alt="Magnific" loading="lazy">Magnific</a>
+    <a class="logo-chip" href="https://higgsfield.ai/" target="_blank" rel="noopener"><img src="../images/logos/higgsfield.png" alt="Higgsfield" loading="lazy">Higgsfield</a>
+    <a class="logo-chip" href="https://fal.ai/" target="_blank" rel="noopener"><img src="../images/logos/fal-ai.png" alt="FAL.AI" loading="lazy">FAL.AI</a>
+    <a class="logo-chip" href="https://myedit.online/" target="_blank" rel="noopener"><img src="../images/logos/myedit.png" alt="MyEdit" loading="lazy">MyEdit</a>
+  </div>
+
+  <div class="detail-section">
+    <h2 class="tool-heading"><img src="../images/logos/magnific.png" alt="Magnific">Magnific(旧Freepik)</h2>
+    <p>2010年から続くストック素材サイト「Freepik」が、2026年4月28日にAI創作プラットフォーム「Magnific」へ全面リブランドしました(旧freepik.comは現在magnific.comへ自動転送されます)。運営元・技術は同じですが、サービス名とドメインが変わっている点に注意してください。Kling 2.5/3.0・Google Veo 3.1・Runway Gen-4.5・Seedance 2.0/2.5・MiniMax Hailuo・PixVerse・Sora 2など40モデル超を1つのUI・1つのクレジットで使い分けられるのが特徴です。料金はクレジット制で、最安のPremiumプランは年払いで月額換算¥1,950(月払いは¥2,900)。動画生成はモデルごとに消費クレジットが異なります(例: Kling 2.5・720p・5秒で140クレジット)。公式アフィリエイトプログラム(magnific.com/affiliates)もあり、サブスク契約で30%、買い切りで20%の継続報酬が用意されています(申込制・審査あり)。</p>
+    <p class="official-link"><a href="https://magnific.com/" target="_blank" rel="noopener">→ Magnific公式サイトを見る</a></p>
+
+    <h2 class="tool-heading" style="margin-top: 28px;"><img src="../images/logos/higgsfield.png" alt="Higgsfield">Higgsfield</h2>
+    <p>2023年創業のAI動画編集スイートです。自社の最上位モデル「Seedance 2.5」に加え、独自のモーション転写機能「Genjutsu」、さらにSora 2・Kling 3.0・Google Veo 3.1にも対応しています。料金は公式ページがJS描画のため本記事では正確な金額を一次情報で確認できておらず、複数の独立したレビュー記事が共通して示す目安として、Starterプラン月額$19前後(270クレジット)からUltraプラン月額$99〜129(3,000クレジット)まで、という水準です(価格改定が頻繁との指摘もあり、利用前に公式ページで要確認)。無料プランの有無も公式ページ上で確認できませんでした。公式アフィリエイトプログラム(higgsfield.ai/affiliate)は、紹介経由の有料契約に対し最大25%を最長12ヶ月間、現金で支払われます。ただしオーガニックな紹介のみが対象で、有料広告やクーポンサイトへの掲載は禁止されています。</p>
+    <p class="official-link"><a href="https://higgsfield.ai/" target="_blank" rel="noopener">→ Higgsfield公式サイトを見る</a></p>
+
+    <h2 class="tool-heading" style="margin-top: 28px;"><img src="../images/logos/fal-ai.png" alt="FAL.AI">FAL.AI</h2>
+    <p>個人クリエイター向けというより、開発者・アプリ制作者向けの生成AI推論API基盤です。Kling Video v3・Seedance 2.0/2.5・MiniMax H3・Wan 3.0・xAI Grok Imagineなど多数の動画生成モデルを単一のAPIから呼び出せます。料金は前払いクレジットによる従量課金で、無料プランの記載は公式ページにありません。動画はモデルごとの秒単位課金(例: Kling 3 Proは1秒あたり$0.224〜0.28程度)、GPU時間貸しの形態(H100で1時間$1.89)もあります。他の3サービスと異なり、公式ドメイン上に一般ユーザー向けのアフィリエイトプログラムは見当たりませんでした(fal.ai/affiliate・fal.ai/partnersはいずれも404)。公式に存在するのはa16z・YCなどVC・アクセラレータ経由の紹介コードクレジット制度で、個人が申し込めるアフィリエイトとは別物です。</p>
+    <p class="official-link"><a href="https://fal.ai/" target="_blank" rel="noopener">→ FAL.AI公式サイトを見る</a></p>
+
+    <h2 class="tool-heading" style="margin-top: 28px;"><img src="../images/logos/myedit.png" alt="MyEdit">MyEdit</h2>
+    <p>動画編集ソフト大手CyberLinkが運営するブラウザ完結型のAI創作プラットフォームで、公式サイトでは全世界1,000万人以上のクリエイターが利用していると謳っています。Google Veo 3.1・Kling O3/3.0・Seedance 2.5・PixVerse V6・Vidu Q3など複数モデルを統合し、独自機能として音声・リップシンクの「Happy Horse」、反復編集用の「Gemini Omni Flash」も備えています。ログインすると毎日無料クレジットが付与され、透かしなしで動画生成できる無料プランがある点が他の3サービスと異なります。有料プランはCyberLink公式ストアで確認できた単体プラン(MyEdit Image、月額$10または年額換算$4)はありますが、動画を含む統合サブスクの正確な最安値は料金ページがJS描画のため本記事では確定できていません。アフィリエイトは、MyEdit単体ではなく運営元CyberLinkの公式プログラム(cyberlink.com/cyberlink-affiliate-program)にMyEdit Image/Audioが対象製品として含まれる形で提供されています(Commission Junction経由、無制限コミッション、Cookie90日)。</p>
+    <p class="official-link"><a href="https://myedit.online/" target="_blank" rel="noopener">→ MyEdit公式サイトを見る</a></p>
+  </div>
+
   <details class="rate-table-box show">
     <summary><h2>商用利用・著作権の条件マトリクス</h2></summary>
     <p class="rate-table-note">各社の利用規約・公式ヘルプをもとにした2026年9月時点の比較です。「未確認」は今回の調査で一次情報に到達できなかった項目です。契約内容は変更されることがあるため、実際の利用前に必ず最新の利用規約をご確認ください。</p>
@@ -124,14 +184,17 @@
   </details>
 
   <details class="rate-table-box show">
-    <summary><h2>提携プログラムのある3ツール</h2></summary>
-    <p class="rate-table-note">Runway・Luma・PixVerseの3ツールは、公式のアフィリエイト(紹介)プログラムを提供していることを確認しています(2026年9月確認、いずれも公式サイト・公式ASP経由で直接確認済み)。当サイトは現時点で未提携のため、下記は通常の公式サイトへのリンクです。</p>
+    <summary><h2>提携プログラムのあるツール</h2></summary>
+    <p class="rate-table-note">Runway・Luma・PixVerse・Magnific(旧Freepik)・Higgsfield・MyEditは、公式のアフィリエイト(紹介)プログラムを提供していることを確認しています(2026年9月確認、いずれも公式サイト・公式ASP経由で直接確認済み)。FAL.AIは公式ドメイン上に一般ユーザー向けのアフィリエイトプログラムを確認できませんでした(VC・アクセラレータ向けの紹介コード制度のみ)。当サイトは現時点で未提携のため、下記は通常の公式サイトへのリンクです。</p>
     <div class="rate-table-wrap">
     <table class="rate-table rate-table-feature">
       <tr><th>ツール</th><th>提携プログラムの概要</th></tr>
       <tr><td><img class="rt-logo" src="../images/logos/runway.png" alt="">Runway</td><td>公式運営(runway.com/affiliate-program)。有料契約1件につき$15、上限なし継続</td></tr>
       <tr><td><img class="rt-logo" src="../images/logos/luma.png" alt="">Luma Dream Machine</td><td>PartnerStack経由(lumalabs.ai/affiliate)。継続コミッション、Cookie90日</td></tr>
       <tr><td><img class="rt-logo" src="../images/logos/pixverse.png" alt="">PixVerse</td><td>Impact.com経由。30%継続報酬(12ヶ月)、Cookie90日、海外対応明記</td></tr>
+      <tr><td><img class="rt-logo" src="../images/logos/magnific.png" alt="">Magnific(旧Freepik)</td><td>公式運営(magnific.com/affiliates)。サブスク30%・買い切り20%継続報酬、申込制・審査あり</td></tr>
+      <tr><td><img class="rt-logo" src="../images/logos/higgsfield.png" alt="">Higgsfield</td><td>公式運営(higgsfield.ai/affiliate)。最大25%を最長12ヶ月・現金支払い、オーガニック紹介限定</td></tr>
+      <tr><td><img class="rt-logo" src="../images/logos/myedit.png" alt="">MyEdit</td><td>運営元CyberLinkの公式プログラム経由(MyEdit Image/Audioが対象)。Commission Junction、無制限コミッション、Cookie90日</td></tr>
     </table>
     </div>
   </details>
@@ -158,6 +221,10 @@
 
   <div class="faq-section">
     <h2>よくある質問</h2>
+    <details class="faq-item">
+      <summary>動画生成AIの「集約プラットフォーム」とは何ですか?</summary>
+      <p>Kling・Google Veo・Runwayなど他社の複数モデルを1つのサブスクリプション・1つの画面でまとめて使えるサービスです。代表例はMagnific(旧Freepik)・Higgsfield・MyEditで、開発者向けAPI版としてFAL.AIもあります。1社が開発した1つのモデルだけを提供する「単体モデル系」(Midjourney・Kling AI・Google Veo等)とは仕組みが異なり、複数モデルを比較・使い分けしたい人に向いています。</p>
+    </details>
     <details class="faq-item">
       <summary>無料プランで作った動画を商用利用できますか?</summary>
       <p>ツールによって異なりますが、多くは無料プランに透かし(ウォーターマーク)が入り商用利用は認められていません。Midjourney・Runway・Kling AI・Luma・Pikaはいずれも有料プラン(多くはStandard相当)以上で商用利用権・透かしなし出力が付与されます。PixVerseとGoogle Veoは公式規約上の詳細な条件を一次情報で確認できておらず、利用前に必ず公式ToSを確認することをおすすめします。</p>
