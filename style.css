@@ -105,17 +105,34 @@ a { color: var(--navy); }
   font-weight: 500;
 }
 
-/* ---- パンくず/戻る ---- */
-.back-link {
-  display: inline-block;
-  margin: 8px 0 0;
-  padding: 11px 4px;
-  font-size: 0.85rem;
-  color: var(--navy);
-  text-decoration: none;
-  opacity: 0.8;
+/* ---- カテゴリナビ・パンくず ---- */
+.site-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px 6px;
+  margin: 18px 0 0;
 }
-.back-link:hover { opacity: 1; }
+.site-nav a {
+  padding: 8px 10px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  color: var(--ink-sub);
+  text-decoration: none;
+}
+.site-nav a:hover { color: var(--ink); }
+.site-nav a[aria-current="true"] { color: var(--navy); background: var(--check-bg); font-weight: 700; }
+.breadcrumb ol {
+  margin: 14px 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.82rem;
+  color: var(--ink-sub);
+}
+.breadcrumb li { display: inline; }
+.breadcrumb li + li::before { content: "›"; content: "›" / ""; margin: 0 8px; color: var(--ink-sub); }
+.breadcrumb a { display: inline-block; padding: 8px 0; color: var(--navy); text-decoration: none; }
+.breadcrumb a:hover { text-decoration: underline; }
 
 /* ---- 段階を意識した導線コピー(まだ始めていない読者への案内) ---- */
 .stage-note {
@@ -1741,6 +1758,8 @@ html.qshow .share-row { display: flex; }
 .related-tool-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
 .related-tool-title { font-size: 0.88rem; font-weight: 700; color: var(--ink); }
 .related-tool-comment { font-size: 0.76rem; font-weight: 400; color: var(--ink-sub); }
+.related-sub { margin: 22px 0 10px; font-size: 0.9rem; font-weight: 700; color: var(--ink-sub); }
+.related-compact .related-tool-link { padding: 10px 14px; }
 
 /* ---- フッター ---- */
 .site-footer {

@@ -1,0 +1,489 @@
+{
+ "base_url": "https://uuhai0625.github.io/side-hustle-calculators/",
+ "categories": [
+  {
+   "id": "hajime",
+   "label": "始める方へ"
+  },
+  {
+   "id": "calc",
+   "label": "計算機"
+  },
+  {
+   "id": "toolguide",
+   "label": "ツール選び"
+  },
+  {
+   "id": "kaisetsu",
+   "label": "深掘り解説"
+  },
+  {
+   "id": "craft",
+   "label": "道具ガイド"
+  }
+ ],
+ "pages": {
+  "hajimekata": {
+   "category": "hajime",
+   "label": "AI副業の始め方",
+   "icon": "<circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"m14.5 9.5-2 5-5 2 2-5z\"/>",
+   "next": [
+    {
+     "slug": "kaishi-cost",
+     "query": "",
+     "reason": "始める前に初期費用を試算"
+    },
+    {
+     "slug": "getsugaku-goukei",
+     "query": "",
+     "reason": "始めた後の毎月のコストを把握"
+    },
+    {
+     "slug": "ai-chat-tools",
+     "query": "",
+     "reason": "ほぼ全ジャンルで使うチャットAIの料金"
+    }
+   ]
+  },
+  "kaishi-cost": {
+   "category": "hajime",
+   "label": "AI副業を始める初期費用シミュレーター",
+   "icon": "<path d=\"M12 2c3 2 5 6 5 10 0 2-1 4-2 5l-3-1-3 1c-1-1-2-3-2-5 0-4 2-8 5-10z\"/><circle cx=\"12\" cy=\"10\" r=\"1.5\"/><path d=\"M9 17l-2 4M15 17l2 4\"/>",
+   "next": [
+    {
+     "slug": "hajimekata",
+     "query": "",
+     "reason": "運営者の実例で始め方の流れを確認"
+    },
+    {
+     "slug": "getsugaku-goukei",
+     "query": "",
+     "reason": "始めた後にかかる毎月のコスト"
+    },
+    {
+     "slug": "ai-chat-tools",
+     "query": "",
+     "reason": "ほぼ全ジャンルで使うチャットAIの料金"
+    }
+   ]
+  },
+  "denki-dai": {
+   "category": "calc",
+   "label": "在宅ワークのパソコン電気代計算機",
+   "icon": "<path d=\"M13 2 4 14h7l-1 8 9-12h-7l1-8z\"/>",
+   "next": [
+    {
+     "slug": "getsugaku-goukei",
+     "query": "",
+     "reason": "電気代を含めた毎月のコストを合計"
+    },
+    {
+     "slug": "keihi-anbun",
+     "query": "",
+     "reason": "電気代のうち経費にできる割合を計算"
+    },
+    {
+     "slug": "gazou-ai-kaisetsu",
+     "query": "",
+     "reason": "ローカル環境でも動かせる画像生成AI"
+    }
+   ]
+  },
+  "keihi-anbun": {
+   "category": "calc",
+   "label": "副業の経費按分計算機",
+   "icon": "<path d=\"M6 2h12v19l-3-2-3 2-3-2-3 2V2z\"/><line x1=\"9\" y1=\"7\" x2=\"15\" y2=\"7\"/><line x1=\"9\" y1=\"11\" x2=\"15\" y2=\"11\"/><line x1=\"9\" y1=\"15\" x2=\"13\" y2=\"15\"/>",
+   "next": [
+    {
+     "slug": "genka-shokyaku",
+     "query": "",
+     "reason": "10万円以上の機材は減価償却で経費に"
+    },
+    {
+     "slug": "furusato-nozei",
+     "query": "",
+     "reason": "経費を引いた所得でふるさと納税の上限を試算"
+    },
+    {
+     "slug": "denki-dai",
+     "query": "",
+     "reason": "按分する電気代そのものを試算"
+    }
+   ]
+  },
+  "douga-ryokin": {
+   "category": "calc",
+   "label": "動画作成AIツールの月額料金シミュレーター",
+   "icon": "<rect x=\"3\" y=\"6\" width=\"13\" height=\"12\" rx=\"1.5\"/><path d=\"M16 10.5 21 7v10l-5-3.5z\"/>",
+   "next": [
+    {
+     "slug": "douga-ai-kaisetsu",
+     "query": "",
+     "reason": "7ツールの機能・商用利用条件の違い"
+    },
+    {
+     "slug": "getsugaku-goukei",
+     "query": "",
+     "reason": "他のAIツールと合わせた月額合計"
+    },
+    {
+     "slug": "keihi-anbun",
+     "query": "",
+     "reason": "私用と兼用なら按分して経費に"
+    }
+   ]
+  },
+  "genka-shokyaku": {
+   "category": "calc",
+   "label": "減価償却費計算機",
+   "icon": "<rect x=\"3\" y=\"4\" width=\"4\" height=\"17\"/><rect x=\"10\" y=\"9\" width=\"4\" height=\"12\"/><rect x=\"17\" y=\"14\" width=\"4\" height=\"7\"/>",
+   "next": [
+    {
+     "slug": "keihi-anbun",
+     "query": "",
+     "reason": "電気代・家賃・通信費の家事按分"
+    },
+    {
+     "slug": "furusato-nozei",
+     "query": "",
+     "reason": "償却費を含めた所得でふるさと納税の上限を試算"
+    },
+    {
+     "slug": "line-stamp-kankyo",
+     "query": "",
+     "reason": "制作用モニター・外付けストレージの選び方"
+    }
+   ]
+  },
+  "getsugaku-goukei": {
+   "category": "calc",
+   "label": "AI副業 月間コスト合計シミュレーター",
+   "icon": "<rect x=\"3\" y=\"3\" width=\"7\" height=\"7\" rx=\"1\"/><rect x=\"14\" y=\"3\" width=\"7\" height=\"7\" rx=\"1\"/><rect x=\"3\" y=\"14\" width=\"7\" height=\"7\" rx=\"1\"/><rect x=\"14\" y=\"14\" width=\"7\" height=\"7\" rx=\"1\"/>",
+   "next": [
+    {
+     "slug": "keihi-anbun",
+     "query": "",
+     "reason": "私用と兼用している費用を按分"
+    },
+    {
+     "slug": "ai-chat-tools",
+     "query": "",
+     "reason": "チャットAIのプランを見直す"
+    },
+    {
+     "slug": "douga-ryokin",
+     "query": "",
+     "reason": "動画AIの月額を詳しく試算"
+    }
+   ]
+  },
+  "furusato-nozei": {
+   "category": "calc",
+   "label": "ふるさと納税 控除上限額シミュレーター(副業対応)",
+   "icon": "<path d=\"M12 2 2 7l10 5 10-5-10-5z\"/><path d=\"M2 17l10 5 10-5\"/><path d=\"M2 12l10 5 10-5\"/>",
+   "next": [
+    {
+     "slug": "keihi-anbun",
+     "query": "",
+     "reason": "副業の必要経費(按分)を計算"
+    },
+    {
+     "slug": "genka-shokyaku",
+     "query": "",
+     "reason": "機材の減価償却費を計算"
+    },
+    {
+     "slug": "getsugaku-goukei",
+     "query": "",
+     "reason": "毎月のAIツール代を合計"
+    }
+   ]
+  },
+  "ai-coding-tools": {
+   "category": "toolguide",
+   "label": "AIコーディングツール料金比較",
+   "icon": "<polyline points=\"8 9 4 12 8 15\"/><polyline points=\"16 9 20 12 16 15\"/><line x1=\"13\" y1=\"6\" x2=\"11\" y2=\"18\"/>",
+   "next": [
+    {
+     "slug": "coding-ai-kaisetsu",
+     "query": "",
+     "reason": "4ツールの機能・仕組みの違い"
+    },
+    {
+     "slug": "ai-chat-tools",
+     "query": "",
+     "reason": "チャット用AIと兼用する場合の料金"
+    },
+    {
+     "slug": "getsugaku-goukei",
+     "query": "",
+     "reason": "他のツールと合わせた月額合計"
+    }
+   ]
+  },
+  "ai-chat-tools": {
+   "category": "toolguide",
+   "label": "生成AIチャットツール料金比較",
+   "icon": "<path d=\"M4 4h16v12H8l-4 4V4z\"/><line x1=\"8\" y1=\"9\" x2=\"16\" y2=\"9\"/><line x1=\"8\" y1=\"13\" x2=\"13\" y2=\"13\"/>",
+   "next": [
+    {
+     "slug": "bunsho-ai-kaisetsu",
+     "query": "",
+     "reason": "3社の機能・得意分野の違い"
+    },
+    {
+     "slug": "ai-coding-tools",
+     "query": "",
+     "reason": "コーディング支援AIの料金"
+    },
+    {
+     "slug": "getsugaku-goukei",
+     "query": "",
+     "reason": "他のツールと合わせた月額合計"
+    }
+   ]
+  },
+  "ongaku-ryokin": {
+   "category": "toolguide",
+   "label": "音楽生成AIツール料金比較",
+   "icon": "<path d=\"M9 18V5l12-2v13\"/><circle cx=\"6\" cy=\"18\" r=\"3\"/><circle cx=\"18\" cy=\"16\" r=\"3\"/>",
+   "next": [
+    {
+     "slug": "ongaku-ai-kaisetsu",
+     "query": "",
+     "reason": "著作権訴訟の最新状況と機能の違い"
+    },
+    {
+     "slug": "douga-ryokin",
+     "query": "",
+     "reason": "動画と組み合わせる場合の料金"
+    },
+    {
+     "slug": "getsugaku-goukei",
+     "query": "",
+     "reason": "他のツールと合わせた月額合計"
+    }
+   ]
+  },
+  "bunsho-ai-kaisetsu": {
+   "category": "kaisetsu",
+   "label": "文章生成AIを解説",
+   "icon": "<path d=\"M4 4h16v12H8l-4 4V4z\"/><line x1=\"8\" y1=\"9\" x2=\"16\" y2=\"9\"/><line x1=\"8\" y1=\"13\" x2=\"13\" y2=\"13\"/>",
+   "next": [
+    {
+     "slug": "ai-chat-tools",
+     "query": "",
+     "reason": "3社の料金プランを比較"
+    },
+    {
+     "slug": "coding-ai-kaisetsu",
+     "query": "",
+     "reason": "コード生成に特化したAI"
+    },
+    {
+     "slug": "note-x-kankyo",
+     "query": "",
+     "reason": "長時間の執筆に向く作業環境(ノートPCスタンド)"
+    }
+   ]
+  },
+  "coding-ai-kaisetsu": {
+   "category": "kaisetsu",
+   "label": "コーディング支援AIを解説",
+   "icon": "<polyline points=\"8 9 4 12 8 15\"/><polyline points=\"16 9 20 12 16 15\"/><line x1=\"13\" y1=\"6\" x2=\"11\" y2=\"18\"/>",
+   "next": [
+    {
+     "slug": "ai-coding-tools",
+     "query": "",
+     "reason": "4ツールの料金を比較"
+    },
+    {
+     "slug": "gyomu-jidoka-ai-kaisetsu",
+     "query": "",
+     "reason": "コードを書かない自動化ツールとの違い"
+    },
+    {
+     "slug": "getsugaku-goukei",
+     "query": "",
+     "reason": "毎月のAIツール代をまとめて合計"
+    }
+   ]
+  },
+  "douga-ai-kaisetsu": {
+   "category": "kaisetsu",
+   "label": "動画生成AIを解説",
+   "icon": "<rect x=\"3\" y=\"6\" width=\"13\" height=\"12\" rx=\"1.5\"/><path d=\"M16 10.5 21 7v10l-5-3.5z\"/>",
+   "next": [
+    {
+     "slug": "douga-ryokin",
+     "query": "",
+     "reason": "7ツールの月額を試算"
+    },
+    {
+     "slug": "gazou-ai-kaisetsu",
+     "query": "",
+     "reason": "動画の素材になる画像生成AI"
+    },
+    {
+     "slug": "ongaku-ai-kaisetsu",
+     "query": "",
+     "reason": "動画に付けるBGMを作る音楽生成AI"
+    }
+   ]
+  },
+  "ongaku-ai-kaisetsu": {
+   "category": "kaisetsu",
+   "label": "音楽生成AIを解説",
+   "icon": "<path d=\"M9 18V5l12-2v13\"/><circle cx=\"6\" cy=\"18\" r=\"3\"/><circle cx=\"18\" cy=\"16\" r=\"3\"/>",
+   "next": [
+    {
+     "slug": "ongaku-ryokin",
+     "query": "",
+     "reason": "3ツールの料金を比較"
+    },
+    {
+     "slug": "douga-ai-kaisetsu",
+     "query": "",
+     "reason": "BGMを付ける動画の生成AI"
+    },
+    {
+     "slug": "onsei-ai-kaisetsu",
+     "query": "",
+     "reason": "ナレーション向けの音声合成AI"
+    }
+   ]
+  },
+  "gazou-ai-kaisetsu": {
+   "category": "kaisetsu",
+   "label": "画像生成AIを解説",
+   "icon": "<path d=\"M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z\"/><path d=\"M19 15l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z\"/>",
+   "next": [
+    {
+     "slug": "line-stamp-kankyo",
+     "query": "",
+     "reason": "LINEスタンプ制作の確認環境"
+    },
+    {
+     "slug": "ehon-shinsei",
+     "query": "",
+     "reason": "絵本(Kindle出版)の申請作業"
+    },
+    {
+     "slug": "denki-dai",
+     "query": "",
+     "reason": "ローカル生成でPCを長時間回す電気代"
+    }
+   ]
+  },
+  "onsei-ai-kaisetsu": {
+   "category": "kaisetsu",
+   "label": "音声合成・音声クローンAIを解説",
+   "icon": "<path d=\"M12 2a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z\"/><path d=\"M19 11a7 7 0 0 1-14 0M12 18v4\"/>",
+   "next": [
+    {
+     "slug": "ongaku-ai-kaisetsu",
+     "query": "",
+     "reason": "BGM向けの音楽生成AI"
+    },
+    {
+     "slug": "douga-ai-kaisetsu",
+     "query": "",
+     "reason": "ナレーションを付ける動画の生成AI"
+    },
+    {
+     "slug": "getsugaku-goukei",
+     "query": "",
+     "reason": "毎月のAIツール代をまとめて合計"
+    }
+   ]
+  },
+  "gyomu-jidoka-ai-kaisetsu": {
+   "category": "kaisetsu",
+   "label": "AIエージェント・業務自動化を解説",
+   "icon": "<circle cx=\"12\" cy=\"12\" r=\"3\"/><path d=\"M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1\"/>",
+   "next": [
+    {
+     "slug": "coding-ai-kaisetsu",
+     "query": "",
+     "reason": "コードを書いて自動化するAI"
+    },
+    {
+     "slug": "bunsho-ai-kaisetsu",
+     "query": "",
+     "reason": "チャット型の文章生成AI"
+    },
+    {
+     "slug": "getsugaku-goukei",
+     "query": "",
+     "reason": "毎月のAIツール代をまとめて合計"
+    }
+   ]
+  },
+  "line-stamp-kankyo": {
+   "category": "craft",
+   "label": "LINEスタンプ制作の確認環境",
+   "icon": "<rect x=\"3\" y=\"4\" width=\"18\" height=\"16\" rx=\"1.5\"/><circle cx=\"8.5\" cy=\"9.5\" r=\"1.5\"/><path d=\"M21 16.5 15.5 11 5 20\"/>",
+   "next": [
+    {
+     "slug": "gazou-ai-kaisetsu",
+     "query": "",
+     "reason": "スタンプ画像を作る画像生成AI"
+    },
+    {
+     "slug": "kaishi-cost",
+     "query": "?genre=line-stamp",
+     "reason": "LINEスタンプを始める初期費用"
+    },
+    {
+     "slug": "genka-shokyaku",
+     "query": "",
+     "reason": "機材の購入費を経費にする考え方"
+    }
+   ]
+  },
+  "ehon-shinsei": {
+   "category": "craft",
+   "label": "絵本(Kindle出版)の申請作業",
+   "icon": "<path d=\"M4 5c3-1.5 6-1.5 8 0v14c-2-1.5-5-1.5-8 0V5z\"/><path d=\"M20 5c-3-1.5-6-1.5-8 0v14c2-1.5 5-1.5 8 0V5z\"/>",
+   "next": [
+    {
+     "slug": "gazou-ai-kaisetsu",
+     "query": "",
+     "reason": "挿絵を作る画像生成AI"
+    },
+    {
+     "slug": "kaishi-cost",
+     "query": "?genre=ehon",
+     "reason": "絵本出版を始める初期費用"
+    },
+    {
+     "slug": "genka-shokyaku",
+     "query": "",
+     "reason": "10万円以上の機材を経費にする"
+    }
+   ]
+  },
+  "note-x-kankyo": {
+   "category": "craft",
+   "label": "note・X運用の作業環境",
+   "icon": "<rect x=\"4\" y=\"14\" width=\"16\" height=\"3\" rx=\"1\"/><path d=\"M7 14V9a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v5\"/><line x1=\"9\" y1=\"17\" x2=\"9\" y2=\"19\"/><line x1=\"15\" y1=\"17\" x2=\"15\" y2=\"19\"/>",
+   "next": [
+    {
+     "slug": "bunsho-ai-kaisetsu",
+     "query": "",
+     "reason": "記事作成に使う文章生成AI"
+    },
+    {
+     "slug": "kaishi-cost",
+     "query": "?genre=note",
+     "reason": "note運用を始める初期費用"
+    },
+    {
+     "slug": "genka-shokyaku",
+     "query": "",
+     "reason": "機材の購入費を経費にする考え方"
+    }
+   ]
+  }
+ }
+}
