@@ -32,7 +32,7 @@
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "datePublished": "2026-09-12",
-  "dateModified": "2026-09-12",
+  "dateModified": "2026-09-30",
   "mainEntity": [
     { "@type": "Question", "name": "動画生成AIの「集約プラットフォーム」とは何ですか?", "acceptedAnswer": { "@type": "Answer", "text": "Kling・Google Veo・Runwayなど他社の複数モデルを1つのサブスクリプション・1つの画面でまとめて使えるサービスです。代表例はMagnific(旧Freepik)・Higgsfield・MyEditで、開発者向けAPI版としてFAL.AIもあります。1社が開発した1つのモデルだけを提供する「単体モデル系」(Midjourney・Kling AI・Google Veo等)とは仕組みが異なり、複数モデルを比較・使い分けしたい人に向いています。" } },
     { "@type": "Question", "name": "無料プランで作った動画を商用利用できますか?", "acceptedAnswer": { "@type": "Answer", "text": "ツールによって異なりますが、多くは無料プランに透かし(ウォーターマーク)が入り商用利用は認められていません。Midjourney・Runway・Kling AI・Luma・Pikaはいずれも有料プラン(多くはStandard相当)以上で商用利用権・透かしなし出力が付与されます。PixVerseとGoogle Veoは公式規約上の詳細な条件を一次情報で確認できておらず、利用前に必ず公式ToSを確認することをおすすめします。" } },
@@ -160,22 +160,21 @@
   <div class="detail-section">
     <h2 class="tool-heading"><img src="../images/logos/magnific.png" alt="Magnific">Magnific(旧Freepik)</h2>
     <p>2010年から続くストック素材サイト「Freepik」が、2026年4月28日にAI創作プラットフォーム「Magnific」へ全面リブランドしました(旧freepik.comは現在magnific.comへ自動転送されます)。運営元・技術は同じですが、サービス名とドメインが変わっている点に注意してください。Kling 2.5/3.0・Google Veo 3.1・Runway Gen-4.5・Seedance 2.0/2.5・MiniMax Hailuo・PixVerse・Sora 2など40モデル超を1つのUI・1つのクレジットで使い分けられるのが特徴です。</p>
-    <p>料金はクレジット制で、最安のPremiumプランは年払いで月額換算¥1,950(月払いは¥2,900)。動画生成はモデルごとに消費クレジットが異なります(例: Kling 2.5・720p・5秒で140クレジット)。公式アフィリエイトプログラム(magnific.com/affiliates)もあり、サブスク契約で30%、買い切りで20%の継続報酬が用意されています(申込制・審査あり)。</p>
+    <p>料金はクレジット制で、最安のPremiumプランは年払いで月額換算¥1,950(月払いは¥2,900)。動画生成はモデルごとに消費クレジットが異なります(例: Kling 2.5・720p・5秒で140クレジット)。</p>
     <p class="official-link"><a href="https://magnific.com/" target="_blank" rel="noopener">→ Magnific公式サイトを見る</a></p>
 
     <h2 class="tool-heading" style="margin-top: 28px;"><img src="../images/logos/higgsfield.png" alt="Higgsfield">Higgsfield</h2>
     <p>2023年創業のAI動画編集スイートです。自社の最上位モデル「Seedance 2.5」に加え、独自のモーション転写機能「Genjutsu」、さらにSora 2・Kling 3.0・Google Veo 3.1にも対応しています。</p>
-    <p>料金は公式ページがJS描画のため本記事では正確な金額を一次情報で確認できておらず、複数の独立したレビュー記事が共通して示す目安として、Starterプラン月額$19前後(270クレジット)からUltraプラン月額$99〜129(3,000クレジット)まで、という水準です(価格改定が頻繁との指摘もあり、利用前に公式ページで要確認)。無料プランの有無も公式ページ上で確認できませんでした。公式アフィリエイトプログラム(higgsfield.ai/affiliate)は、紹介経由の有料契約に対し最大25%を最長12ヶ月間、現金で支払われます。ただしオーガニックな紹介のみが対象で、有料広告やクーポンサイトへの掲載は禁止されています。</p>
-    <p class="official-link"><a href="https://higgsfield.ai/" target="_blank" rel="noopener">→ Higgsfield公式サイトを見る</a></p>
+    <p>料金は公式ページがJS描画のため本記事では正確な金額を一次情報で確認できておらず、複数の独立したレビュー記事が共通して示す目安として、Starterプラン月額$19前後(270クレジット)からUltraプラン月額$99〜129(3,000クレジット)まで、という水準です(価格改定が頻繁との指摘もあり、利用前に公式ページで要確認)。無料プランの有無も公式ページ上で確認できませんでした。</p>
+    <a class="tool-cta" href="https://higgsfield.ai/?fpr=45z8ik" target="_blank" rel="noopener sponsored" data-tool="higgsfield"><img class="tool-cta-logo" src="../images/logos/higgsfield.png" alt="" loading="lazy"><span class="tool-cta-text"><span class="tool-cta-title">Higgsfield公式サイトを見る</span><span class="tool-cta-sub">紹介リンクです。このリンク経由で契約されると当サイトに紹介料が入ります。</span></span><span class="aff-pr">PR</span></a>
 
     <h2 class="tool-heading" style="margin-top: 28px;"><img src="../images/logos/fal-ai.png" alt="FAL.AI">FAL.AI</h2>
     <p>個人クリエイター向けというより、開発者・アプリ制作者向けの生成AI推論API基盤です。Kling Video v3・Seedance 2.0/2.5・MiniMax H3・Wan 3.0・xAI Grok Imagineなど多数の動画生成モデルを単一のAPIから呼び出せます。料金は前払いクレジットによる従量課金で、無料プランの記載は公式ページにありません。動画はモデルごとの秒単位課金(例: Kling 3 Proは1秒あたり$0.224〜0.28程度)、GPU時間貸しの形態(H100で1時間$1.89)もあります。</p>
-    <p>他の3サービスと異なり、公式ドメイン上に一般ユーザー向けのアフィリエイトプログラムは見当たりませんでした(fal.ai/affiliate・fal.ai/partnersはいずれも404)。公式に存在するのはa16z・YCなどVC・アクセラレータ経由の紹介コードクレジット制度で、個人が申し込めるアフィリエイトとは別物です。</p>
     <p class="official-link"><a href="https://fal.ai/" target="_blank" rel="noopener">→ FAL.AI公式サイトを見る</a></p>
 
     <h2 class="tool-heading" style="margin-top: 28px;"><img src="../images/logos/myedit.png" alt="MyEdit">MyEdit</h2>
     <p>動画編集ソフト大手CyberLinkが運営するブラウザ完結型のAI創作プラットフォームで、公式サイトでは全世界1,000万人以上のクリエイターが利用していると謳っています。Google Veo 3.1・Kling O3/3.0・Seedance 2.5・PixVerse V6・Vidu Q3など複数モデルを統合し、独自機能として音声・リップシンクの「Happy Horse」、反復編集用の「Gemini Omni Flash」も備えています。ログインすると毎日無料クレジットが付与され、透かしなしで動画生成できる無料プランがある点が他の3サービスと異なります。</p>
-    <p>有料プランはCyberLink公式ストアで確認できた単体プラン(MyEdit Image、月額$10または年額換算$4)はありますが、動画を含む統合サブスクの正確な最安値は料金ページがJS描画のため本記事では確定できていません。アフィリエイトは、MyEdit単体ではなく運営元CyberLinkの公式プログラム(cyberlink.com/cyberlink-affiliate-program)にMyEdit Image/Audioが対象製品として含まれる形で提供されています(Commission Junction経由、無制限コミッション、Cookie90日)。</p>
+    <p>有料プランはCyberLink公式ストアで確認できた単体プラン(MyEdit Image、月額$10または年額換算$4)はありますが、動画を含む統合サブスクの正確な最安値は料金ページがJS描画のため本記事では確定できていません。</p>
     <p class="official-link"><a href="https://myedit.online/" target="_blank" rel="noopener">→ MyEdit公式サイトを見る</a></p>
   </div>
 
@@ -188,22 +187,6 @@
       <tr><td>最低有料ティアでの商用利用</td><td>可(Basic〜)</td><td>可(Standard〜)</td><td>可(Standard〜)</td><td>可(Plus〜)</td><td>可(Standard〜)</td><td>未確認</td><td>未確認</td></tr>
       <tr><td>AI学習へのデータ利用許諾</td><td>非独占的に許諾</td><td>既定で許諾(Enterprise除く)</td><td>永続的に許諾</td><td>比較的広い許諾(無料/Lite)</td><td>未確認</td><td>未確認</td><td>未確認</td></tr>
       <tr><td>出力の透かし</td><td>無料版のみ</td><td>無料版+全出力にC2PA</td><td>無料版のみ必須</td><td>無料/Liteのみ</td><td>無料版のみ</td><td>未確認</td><td>全出力にSynthID常時</td></tr>
-    </table>
-    </div>
-  </details>
-
-  <details class="rate-table-box show">
-    <summary><h2>提携プログラムのあるツール</h2></summary>
-    <p class="rate-table-note">Runway・Luma・PixVerse・Magnific(旧Freepik)・Higgsfield・MyEditは、公式のアフィリエイト(紹介)プログラムを提供していることを確認しています(2026年9月確認、いずれも公式サイト・公式ASP経由で直接確認済み)。FAL.AIは公式ドメイン上に一般ユーザー向けのアフィリエイトプログラムを確認できませんでした(VC・アクセラレータ向けの紹介コード制度のみ)。当サイトは現時点で未提携のため、下記は通常の公式サイトへのリンクです。</p>
-    <div class="rate-table-wrap">
-    <table class="rate-table rate-table-feature">
-      <tr><th>ツール</th><th>提携プログラムの概要</th></tr>
-      <tr><td><img class="rt-logo" src="../images/logos/runway.png" alt="">Runway</td><td>公式運営(runway.com/affiliate-program)。有料契約1件につき$15、上限なし継続</td></tr>
-      <tr><td><img class="rt-logo" src="../images/logos/luma.png" alt="">Luma Dream Machine</td><td>PartnerStack経由(lumalabs.ai/affiliate)。継続コミッション、Cookie90日</td></tr>
-      <tr><td><img class="rt-logo" src="../images/logos/pixverse.png" alt="">PixVerse</td><td>Impact.com経由。30%継続報酬(12ヶ月)、Cookie90日、海外対応明記</td></tr>
-      <tr><td><img class="rt-logo" src="../images/logos/magnific.png" alt="">Magnific(旧Freepik)</td><td>公式運営(magnific.com/affiliates)。サブスク30%・買い切り20%継続報酬、申込制・審査あり</td></tr>
-      <tr><td><img class="rt-logo" src="../images/logos/higgsfield.png" alt="">Higgsfield</td><td>公式運営(higgsfield.ai/affiliate)。最大25%を最長12ヶ月・現金支払い、オーガニック紹介限定</td></tr>
-      <tr><td><img class="rt-logo" src="../images/logos/myedit.png" alt="">MyEdit</td><td>運営元CyberLinkの公式プログラム経由(MyEdit Image/Audioが対象)。Commission Junction、無制限コミッション、Cookie90日</td></tr>
     </table>
     </div>
   </details>
@@ -265,7 +248,7 @@
 
 <footer class="site-footer">
   <p>掲載している技術仕様・商用利用条件は、各社公式ドキュメント・利用規約をもとにした2026年9月時点の情報です。一次情報に到達できなかった項目は本文・表内に「未確認」と明記しています。生成AIツールの仕様・規約は頻繁に更新されるため、実際の利用前には必ず各社公式サイトでご確認ください。</p>
-  <p>商品リンクにはアフィリエイト(広告)リンクを含みます。リンク経由の購入により、当サイトが紹介料を得ることがあります。</p>
+  <p>この記事の一部のリンクは紹介(アフィリエイト)リンクで、該当箇所に「PR」と表示しています。リンク経由で契約されると当サイトに紹介料が入ることがあります。紹介料の有無は本文の記載内容・比較・評価に影響させていませんが、提携先へのリンクは「PR」表示付きのカード形式で掲載しています。</p>
   <p><a href="../#about">運営者情報・プライバシーポリシー・お問い合わせ</a></p>
 </footer>
 

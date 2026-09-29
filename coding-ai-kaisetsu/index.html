@@ -32,7 +32,7 @@
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "datePublished": "2026-09-12",
-  "dateModified": "2026-09-13",
+  "dateModified": "2026-09-30",
   "mainEntity": [
     { "@type": "Question", "name": "コーディング支援AIには何種類のタイプがありますか?", "acceptedAnswer": { "@type": "Answer", "text": "大きく3タイプに分かれます。①単体ベンダー固定型(Claude Code・OpenAI Codex、1社のモデルのみ使用)、②モデル選択型IDE(Cursor・GitHub Copilot、自社製品を持ちながら他社の複数モデルにも切り替えられる)、③集約・マルチモデル特化型(Cline・Aider・OpenRouter、特定のベンダーに縛られず複数モデルを横断的に使うこと自体が目的のOSS/APIツール)です。" } },
     { "@type": "Question", "name": "プログラミング未経験でも本当に使えますか?", "acceptedAnswer": { "@type": "Answer", "text": "Claude Codeについては、非エンジニアが数時間の試行錯誤で実用的なアプリを作れたという独立ブログの体験談が複数見つかっています。このサイト自体もClaude Codeで作られています。CLIツール(Claude Code・Codex)は会話形式で指示を出す点では敷居は低い一方、エディタ操作に慣れていないと最初は戸惑う場面もあります。GUI完結型のCursor・Copilotは画面操作の分かりやすさで優位という見方もありますが、非エンジニア限定の比較データは確認できていません。" } },
@@ -156,15 +156,15 @@
 
   <div class="detail-section">
     <h2 class="tool-heading"><img src="../images/logos/cline.png" alt="Cline">Cline</h2>
-    <p>VS Code拡張機能として動作するOSS(Apache 2.0)のコーディングエージェントです。公式ページでは「Anthropic, Gemini, OpenAI, OpenRouter, AWS Bedrock, GCP Vertex, Groq, Cerebras, Vercel AI Gateway, DeepSeek, and many more」と、対応モデル・プロバイダーの多さを明記しています。拡張機能自体は無料で、BYOK(Bring Your Own Key、自分のAPIキーを持ち込む方式)のためAPI利用料は別途モデル提供元に直接発生します。企業向けEnterpriseプランは別途用意されています。公式ページ上に一般ユーザー向けのアフィリエイトプログラムは見当たりませんでした。</p>
+    <p>VS Code拡張機能として動作するOSS(Apache 2.0)のコーディングエージェントです。公式ページでは「Anthropic, Gemini, OpenAI, OpenRouter, AWS Bedrock, GCP Vertex, Groq, Cerebras, Vercel AI Gateway, DeepSeek, and many more」と、対応モデル・プロバイダーの多さを明記しています。拡張機能自体は無料で、BYOK(Bring Your Own Key、自分のAPIキーを持ち込む方式)のためAPI利用料は別途モデル提供元に直接発生します。企業向けEnterpriseプランは別途用意されています。</p>
     <p class="official-link"><a href="https://cline.bot/" target="_blank" rel="noopener">→ Cline公式サイトを見る</a></p>
 
     <h2 class="tool-heading" style="margin-top: 28px;"><img src="../images/logos/aider.png" alt="Aider">Aider</h2>
-    <p>ターミナル(コマンドライン)上で動くOSS(Apache 2.0)のペアプログラミングツールです。公式ドキュメントでOpenAI・Anthropic・Google Gemini・DeepSeek・GROQ・Ollama・OpenRouter・xAI・Azure・Bedrockなど多数のモデル・プロバイダーへの対応が明記されています。ツール自体は完全無料で、利用料は接続先のAPI従量課金のみです。公式のアフィリエイトプログラムは確認できませんでした。</p>
+    <p>ターミナル(コマンドライン)上で動くOSS(Apache 2.0)のペアプログラミングツールです。公式ドキュメントでOpenAI・Anthropic・Google Gemini・DeepSeek・GROQ・Ollama・OpenRouter・xAI・Azure・Bedrockなど多数のモデル・プロバイダーへの対応が明記されています。ツール自体は完全無料で、利用料は接続先のAPI従量課金のみです。</p>
     <p class="official-link"><a href="https://aider.chat/" target="_blank" rel="noopener">→ Aider公式サイトを見る</a></p>
 
     <h2 class="tool-heading" style="margin-top: 28px;"><img src="../images/logos/openrouter.png" alt="OpenRouter">OpenRouter</h2>
-    <p>2023年創業(2026年8月にStripeが70億ドル超で買収合意と報道)の、開発者向けLLM統一APIゲートウェイです。コーディング用途に限定したツールではありませんが、Cline・Aider等のバックエンドとしてもよく使われます。公式説明では500以上のモデル・80以上のプロバイダーに対応。無料モデル(25以上、1日50リクエストまで)に加え、従量課金(プラットフォーム手数料5.5%、ビジネス8%)で利用できます。公式の紹介(アフィリエイト)プログラムは見当たりませんでした。</p>
+    <p>2023年創業(2026年8月にStripeが70億ドル超で買収合意と報道)の、開発者向けLLM統一APIゲートウェイです。コーディング用途に限定したツールではありませんが、Cline・Aider等のバックエンドとしてもよく使われます。公式説明では500以上のモデル・80以上のプロバイダーに対応。無料モデル(25以上、1日50リクエストまで)に加え、従量課金(プラットフォーム手数料5.5%、ビジネス8%)で利用できます。</p>
     <p class="official-link"><a href="https://openrouter.ai/" target="_blank" rel="noopener">→ OpenRouter公式サイトを見る</a></p>
   </div>
 
@@ -206,7 +206,7 @@
 
 <footer class="site-footer">
   <p>掲載している機能・料金・仕様は、各社公式ドキュメントをもとにした2026年9月時点の情報です。AIコーディングツールの機能・料金体系は頻繁に更新されるため、最新情報は各社公式サイトでご確認ください。</p>
-  <p>商品リンクにはアフィリエイト(広告)リンクを含みます。リンク経由の購入により、当サイトが紹介料を得ることがあります。</p>
+  <p>紹介(アフィリエイト)リンクを掲載する場合は、該当箇所に「PR」と表示します。紹介料の有無は、本文の記載内容・比較・評価に影響させていません。</p>
   <p><a href="../#about">運営者情報・プライバシーポリシー・お問い合わせ</a></p>
 </footer>
 

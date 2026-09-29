@@ -32,7 +32,7 @@
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "datePublished": "2026-09-13",
-  "dateModified": "2026-09-13",
+  "dateModified": "2026-09-30",
   "mainEntity": [
     { "@type": "Question", "name": "「サービス型」と「オープンウェイトモデル型」は何が違いますか?", "acceptedAnswer": { "@type": "Answer", "text": "Midjourney・Adobe Firefly・Ideogramは、1社が自社サービスとして完結提供する「サービス型」です。一方Stable Diffusion(Stability AI)・FLUX(Black Forest Labs)は、モデル自体が公開されている「オープンウェイトモデル型」で、開発元だけでなく多数のサードパーティがホスティングサービスを提供し、ローカル環境での実行も可能です。同じモデルでも使う場所によって料金・使い勝手が変わる点に注意してください。" } },
     { "@type": "Question", "name": "LINEスタンプやストック画像販売に使えますか?", "acceptedAnswer": { "@type": "Answer", "text": "多くのツールで、有料プラン加入時に商用利用が認められています。運営者自身もLINEスタンプ制作でMidjourneyを実際に使っています。ただしAdobe Stock等の審査には別途技術要件(最低解像度等)があり、Stable Diffusionの出力は要件を満たすためアップスケールが必要になる場合があります。各社の商用利用条件は本文で個別に解説しています。" } },
@@ -111,12 +111,12 @@
 
     <h2 class="tool-heading" style="margin-top: 28px;"><img src="../images/logos/firefly.png" alt="Adobe Firefly">Adobe Firefly</h2>
     <p>Adobeが2023年3月にベータ公開、同年9月に商用版を正式リリースしたサービスです。学習データを全てライセンス済み素材・パブリックドメインのみに限定しており、公式に「Fireflyの出力は商用利用に安全」と明言している点が最大の特徴です。最新のFirefly Image Model 5はネイティブ4MP解像度に対応し、写実表現(照明・質感・人物のリアリズム)に強みがあります。</p>
-    <p>プラン未加入でも毎日無料の生成枠があり、最安の有料プランFirefly Standardは月額9.99ドル(月2,000クレジット)です。Adobe全体の公式アフィリエイトプログラム(Partnerize経由)は既にありますが、Firefly専用のアフィリエイトページは2026年9月時点で「近日公開」のウェイトリスト段階にとどまっています。Adobe Stockのコントリビューターとしての活用事例が最も豊富です。</p>
+    <p>プラン未加入でも毎日無料の生成枠があり、最安の有料プランFirefly Standardは月額9.99ドル(月2,000クレジット)です。Adobe Stockのコントリビューターとしての活用事例が最も豊富です。</p>
     <p class="official-link"><a href="https://firefly.adobe.com/" target="_blank" rel="noopener">→ Adobe Firefly公式サイトを見る</a></p>
 
     <h2 class="tool-heading" style="margin-top: 28px;"><img src="../images/logos/ideogram.png" alt="Ideogram">Ideogram</h2>
     <p>2022年にトロントで設立されたIdeogram AI, Inc.(創業者はGoogle Brainの「Imagen」元研究者ら)が開発するサービスです。最大の特徴は、ロゴ・ポスター・看板など文字入り画像のテキストレンダリング精度で、日本語・英語ともに定評があります。</p>
-    <p>無料プランがあり(週10クレジット、生成画像は公開扱い)、有料プランは月額7〜8ドル程度からです(料金ページへの直接アクセスができず、この数字は検索結果経由の間接確認にとどまるため未確認扱いとします)。公式利用規約(ToS)にアフィリエイトプログラムの条項があり、18歳以上のクリエイターが応募制で参加、承認後に紹介リンクが発行されます(報酬額は非公開・都度変動)。</p>
+    <p>無料プランがあり(週10クレジット、生成画像は公開扱い)、有料プランは月額7〜8ドル程度からです(料金ページへの直接アクセスができず、この数字は検索結果経由の間接確認にとどまるため未確認扱いとします)。</p>
     <p class="official-link"><a href="https://ideogram.ai/" target="_blank" rel="noopener">→ Ideogram公式サイトを見る</a></p>
 
     <h2 class="tool-heading" style="margin-top: 28px;"><img src="../images/logos/flux.png" alt="FLUX">FLUX(Black Forest Labs)</h2>
@@ -124,17 +124,6 @@
     <p>サブスクリプションはなく完全従量課金で、API料金はモデル別(FLUX.2 [klein]が1画像0.014ドル〜、[pro]が0.03ドル〜)です。オープンウェイト版はローカル実行も可能ですが、商用利用ライセンスの詳細条件はモデルにより異なり、今回の調査では全文確認まで至っていません(未確認)。Adobe・Canva等との提携が中心で、現状は開発者・エンタープライズ利用が主な使われ方です。</p>
     <p class="official-link"><a href="https://bfl.ai/" target="_blank" rel="noopener">→ Black Forest Labs公式サイトを見る</a></p>
   </div>
-
-  <details class="rate-table-box show">
-    <summary><h2>提携プログラムのあるツール</h2></summary>
-    <p class="rate-table-note">Ideogramは公式利用規約(ToS)にアフィリエイト条項があることを確認しています(2026年9月確認)。Adobeは全社共通のアフィリエイトプログラム(Creative Cloud等が対象)を運営していますが、Firefly専用のプログラムは2026年9月時点で「近日公開」のウェイトリスト段階のため、現時点では対象外として扱います。Midjourney・Stability AI・FLUX(Black Forest Labs)に公式のアフィリエイトプログラムは確認できませんでした。当サイトは現時点で未提携のため、下記は通常の公式サイトへのリンクです。</p>
-    <div class="rate-table-wrap">
-    <table class="rate-table rate-table-feature">
-      <tr><th>ツール</th><th>提携プログラムの概要</th></tr>
-      <tr><td><img class="rt-logo" src="../images/logos/ideogram.png" alt="">Ideogram</td><td>公式ToSに規定。18歳以上・応募制、承認後に紹介リンク発行、報酬額は非公開</td></tr>
-    </table>
-    </div>
-  </details>
 
   <p class="follow-x">制作の裏側や新しいツールの告知は <a href="https://x.com/uuhai0625" target="_blank" rel="noopener">@uuhai0625</a> で発信しています</p>
 
@@ -170,7 +159,7 @@
 
 <footer class="site-footer">
   <p>掲載している技術仕様・料金・商用利用条件は、各社公式サイトをもとにした2026年9月時点の情報です。一次情報に到達できなかった項目は本文・表内に「未確認」と明記しています。生成AIツールの仕様・規約は頻繁に更新されるため、実際の利用前には必ず各社公式サイトでご確認ください。</p>
-  <p>商品リンクにはアフィリエイト(広告)リンクを含みます。リンク経由の購入により、当サイトが紹介料を得ることがあります。</p>
+  <p>紹介(アフィリエイト)リンクを掲載する場合は、該当箇所に「PR」と表示します。紹介料の有無は、本文の記載内容・比較・評価に影響させていません。</p>
   <p><a href="../#about">運営者情報・プライバシーポリシー・お問い合わせ</a></p>
 </footer>
 
