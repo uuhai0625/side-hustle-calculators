@@ -934,7 +934,8 @@ html.qshow .share-row { display: flex; }
 .aff-card .aff-text { flex: 1; }
 .aff-card .aff-title { font-weight: 700; font-size: 0.92rem; margin: 0 0 2px; }
 .aff-card .aff-sub { font-size: 0.78rem; color: var(--ink-sub); margin: 0; }
-.aff-card .aff-pr {
+.aff-card .aff-pr,
+.tool-cta .aff-pr {
   font-size: 0.68rem;
   color: #1a1206;
   background: var(--gold);
@@ -943,6 +944,36 @@ html.qshow .share-row { display: flex; }
   align-self: flex-start;
   font-weight: 700;
 }
+/* AIツール公式アフィリエイト用CTA。提携したツールだけ、解説記事の.official-link段落をこれに差し替える */
+.tool-cta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 56px;
+  margin: 12px 0 8px;
+  padding: 12px 16px;
+  background: var(--bg-card);
+  border: 1.5px dashed rgba(255, 180, 84, 0.4);
+  border-radius: var(--radius);
+  color: var(--ink);
+  text-decoration: none;
+  transition: box-shadow 0.15s ease, border-color 0.15s ease;
+}
+.tool-cta:hover { border-color: var(--gold); box-shadow: var(--glow-amber); }
+.tool-cta:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+.tool-cta .tool-cta-logo {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+.tool-cta .tool-cta-text { flex: 1; min-width: 0; }
+.tool-cta .tool-cta-title { display: block; font-weight: 700; font-size: 0.95rem; }
+.tool-cta .tool-cta-title::after { content: " →"; color: var(--gold); }
+.tool-cta .tool-cta-sub { display: block; margin-top: 2px; font-size: 0.78rem; color: var(--ink-sub); line-height: 1.5; }
+.tool-cta .aff-pr { align-self: center; }
+
 /* 非提携の参考リンク(furusato-nozei限定)。PRバッジは付けない(アフィリエイトではないため)。 */
 .other-asp-links {
   display: none;
