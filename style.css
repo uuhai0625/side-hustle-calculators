@@ -240,6 +240,11 @@ a { color: var(--navy); }
    .scene-tab共通のfont-size 0.95rem/padding 10pxのままだと「ツール選びガイド」が
    幅720pxのコンテナで折り返してしまうため、この場所だけ詰める(2026-08-22)。 */
 #portal-filter .scene-tab { padding: 12px 6px; font-size: 0.86rem; }
+/* nowrapのままだとスマホ幅でタブ行がはみ出し、ページ全体が横スクロールする */
+@media (max-width: 600px) {
+  .scene-tabs { flex-wrap: wrap; }
+  .scene-tab { flex: 1 1 calc(33.333% - 8px); min-width: 0; white-space: normal; }
+}
 
 /* ---- フォーム ---- */
 .calc-card {
@@ -378,14 +383,16 @@ a { color: var(--navy); }
 }
 .furusato-main .citation-copy-btn.copied { color: var(--navy); }
 
-/* No.18: 結果カード表示のフェードイン(reduced-motion時は即時表示のまま) */
+/* No.18: 結果カード表示のフェードイン(reduced-motion時は即時表示のまま)。
+   revealedを付けるJSはfurusato-nozei/script.jsにしかないため、必ず.furusato-mainに限定する
+   (未限定だった2026-09-12〜09-30、他の計算機9ページとembed.htmlで結果が透明のまま見えなかった) */
 @media (prefers-reduced-motion: no-preference) {
-  .result-card.show {
+  .furusato-main .result-card.show {
     opacity: 0;
     transform: translateY(6px);
     transition: opacity 0.25s ease, transform 0.25s ease;
   }
-  .result-card.show.revealed {
+  .furusato-main .result-card.show.revealed {
     opacity: 1;
     transform: translateY(0);
   }
@@ -457,7 +464,8 @@ a { color: var(--navy); }
   box-shadow: var(--glow-soft);
 }
 .field input[type="number"],
-.field input[type="month"] {
+.field input[type="month"],
+.field input[type="text"] {
   width: 100%;
   padding: 12px 14px;
   border: 1.5px solid var(--line);
