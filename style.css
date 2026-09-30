@@ -133,6 +133,13 @@ a { color: var(--navy); }
 .breadcrumb li + li::before { content: "›"; content: "›" / ""; margin: 0 8px; color: var(--ink-sub); }
 .breadcrumb a { display: inline-block; padding: 8px 0; color: var(--navy); text-decoration: none; }
 .breadcrumb a:hover { text-decoration: underline; }
+/* スマホでは計算フォームを1画面目に近づけるため、ヘッダーを詰めてナビを横スクロール1段にする */
+@media (max-width: 600px) {
+  .site-header { padding: 22px 0 14px; }
+  .site-nav { flex-wrap: nowrap; justify-content: flex-start; overflow-x: auto; margin: 12px -16px 0; padding: 0 16px; scrollbar-width: none; }
+  .site-nav::-webkit-scrollbar { display: none; }
+  .site-nav a { flex: 0 0 auto; }
+}
 
 /* ---- 段階を意識した導線コピー(まだ始めていない読者への案内) ---- */
 .stage-note {
