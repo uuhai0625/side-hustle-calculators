@@ -181,6 +181,7 @@ function computeAndRender() {
     affCard.classList.remove('show');
     document.getElementById('product-grid').classList.remove('show');
   } else {
+    // aff-cardのhrefはHTMLにも同じURLを静的に書いてある(JS失敗時の保険)。キーワードを変える時はHTML側も直す
     affCard.href = affiliateUrl('ノートパソコン 新品 メモリ16GB');
     affCard.classList.add('show');
     showProducts('ノートパソコン 新品 メモリ16GB', 'これから買うなら人気のノートPC', { ng: '中古 整備済 Celeron', minPrice: 60000 });
@@ -358,3 +359,5 @@ function initFromQuery() {
 }
 
 initFromQuery();
+// 計算後の表示はJSのshowクラスに任せる(qshowが残ると、JSが隠したPRカード等も見え続ける)
+document.documentElement.classList.remove('qshow');

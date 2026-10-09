@@ -179,6 +179,7 @@ function calc() {
   resultCard.classList.add('show');
   shareRow.classList.add('show');
 
+  // aff-cardのhrefはHTMLにも同じURLを静的に書いてある(JS失敗時の保険)。キーワードを変える時はHTML側も直す
   affCard.href = affiliateUrl('ワットチェッカー');
   affCard.classList.add('show');
   showProducts('ワットチェッカー', '電気代を正確に知るための人気アイテム');
@@ -370,3 +371,5 @@ function initFromQuery() {
 }
 
 initFromQuery();
+// 計算後の表示はJSのshowクラスに任せる(qshowが残ると、JSが隠したPRカード等も見え続ける)
+document.documentElement.classList.remove('qshow');

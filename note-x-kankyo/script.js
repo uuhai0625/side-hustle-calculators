@@ -76,6 +76,7 @@ async function showProducts(keyword, labelText, opts = {}) {
   }
 }
 
+// aff-cardのhrefはHTMLにも同じURLを静的に書いてある(JS失敗時の保険)。キーワードを変える時はHTML側も直す
 document.getElementById('aff-card').href = affiliateUrl('ノートパソコンスタンド');
 
 showProducts('ノートパソコンスタンド', 'note・X運用の作業環境に人気のアイテム', { ng: 'プロジェクター' });

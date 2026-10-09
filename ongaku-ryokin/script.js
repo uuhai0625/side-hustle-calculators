@@ -12,6 +12,7 @@ function affiliateUrl(keyword) {
 // 同様に楽天商品検索APIによる動的なおすすめ商品グリッドは使わず、aff-cardの静的リンクのみ表示する。
 const affCard = document.getElementById('aff-card');
 if (affCard) {
+  // aff-cardのhrefはHTMLにも同じURLを静的に書いてある(JS失敗時の保険)。キーワードを変える時はHTML側も直す
   affCard.href = affiliateUrl('モニターヘッドホン');
 }
 
@@ -73,7 +74,6 @@ function computeAndRender() {
   resultSub.textContent = 'この診断はルールベースの簡易的な目安です。実際に必要なプランは生成頻度・楽曲の長さを見ながら判断してください。';
   resultAdvice.textContent = rec.advice;
 
-  if (affCard) affCard.classList.add('show');
   lastHeadline = rec.headline;
   updateShareUrl();
 }
@@ -157,3 +157,5 @@ function initFromQuery() {
 }
 
 initFromQuery();
+// 計算後の表示はJSのshowクラスに任せる(qshowが残ると、JSが隠したPRカード等も見え続ける)
+document.documentElement.classList.remove('qshow');

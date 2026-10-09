@@ -603,3 +603,5 @@ function initFromQuery() {
 }
 
 initFromQuery();
+// 計算後の表示はJSのshowクラスに任せる(qshowが残ると、JSが隠したPRカード等も見え続ける)
+document.documentElement.classList.remove('qshow');

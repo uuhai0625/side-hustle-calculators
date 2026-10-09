@@ -300,6 +300,10 @@ a { color: var(--navy); }
   }
   .calc-layout .calc-card,
   .calc-layout .result-card { margin-bottom: 0; }
+  /* 2カラム化で結果カードの下余白が0になるため、直後のPRカードがくっつかないよう間を空ける(2026-10-09) */
+  main .calc-layout + .aff-card { margin-top: 24px; }
+  /* 画像を正方形にした(height:auto)結果、PC幅の2列だと4件で1000px超になるため4列にする */
+  main .product-band-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   /* 計算前は「中央寄せの通常カード」、計算後は「左にフォーム・右に結果の2カラム」
      という2状態を切り替える。既定(結果まだ無し)では、結果カード以外の直接の子要素
      (`.calc-card`本体、またはdouga-ryokinのようにモード切替パネルで包まれている場合は
@@ -1806,3 +1810,7 @@ html.qshow .share-row { display: flex; }
     padding: 12px 14px;
   }
 }
+
+/* 道具ガイドの結論→「選ぶときの基準」へのジャンプ(2026-10-09)。語の途中で折り返さず、飛んだ先の見出しが画面上端に張り付かないようにする */
+.manner-box a[href^="#"] { white-space: nowrap; }
+h2[id] { scroll-margin-top: 16px; }

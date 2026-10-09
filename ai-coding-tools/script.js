@@ -12,6 +12,7 @@ function affiliateUrl(keyword) {
 // 動的なおすすめ商品グリッド(product-grid)は使わず、aff-cardの静的リンクのみ表示する。
 const affCard = document.getElementById('aff-card');
 if (affCard) {
+  // aff-cardのhrefはHTMLにも同じURLを静的に書いてある(JS失敗時の保険)。キーワードを変える時はHTML側も直す
   affCard.href = affiliateUrl('キーボード 疲れにくい');
 }
 
@@ -157,7 +158,6 @@ function computeAndRender() {
   resultSub.textContent = 'この診断はルールベースの簡易的な目安です。実際に必要なプランは、上限に当たる頻度を見ながら判断してください。';
   resultAdvice.textContent = rec.advice;
 
-  if (affCard) affCard.classList.add('show');
   lastHeadline = rec.headline;
   updateShareUrl();
   applyHighlight(rec.highlight);
@@ -245,3 +245,5 @@ function initFromQuery() {
 }
 
 initFromQuery();
+// 計算後の表示はJSのshowクラスに任せる(qshowが残ると、JSが隠したPRカード等も見え続ける)
+document.documentElement.classList.remove('qshow');

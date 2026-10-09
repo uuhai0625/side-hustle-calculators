@@ -208,6 +208,7 @@ function calc() {
   resultCard.classList.add('show');
   shareRow.classList.add('show');
 
+  // aff-cardのhrefはHTMLにも同じURLを静的に書いてある(JS失敗時の保険)。キーワードを変える時はHTML側も直す
   affCard.href = affiliateUrl('領収書 ファイル 整理');
   affCard.classList.add('show');
   showProducts('書類 ファイルボックス', '経費の記録・管理に人気のアイテム');
@@ -416,3 +417,5 @@ function initFromQuery() {
 }
 
 initFromQuery();
+// 計算後の表示はJSのshowクラスに任せる(qshowが残ると、JSが隠したPRカード等も見え続ける)
+document.documentElement.classList.remove('qshow');

@@ -76,6 +76,7 @@ function cardHtml(item) {
     </a>`;
 }
 
+// aff-cardのhrefはHTMLにも同じURLを静的に書いてある(JS失敗時の保険)。キーワードを変える時はHTML側も直す
 document.getElementById('aff-card-monitor').href = affiliateUrl('モニター 27インチ sRGB');
 document.getElementById('aff-card-storage').href = affiliateUrl('ポータブルSSD 1TB');
 
