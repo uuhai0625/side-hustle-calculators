@@ -49,6 +49,16 @@ function upscaleImage(url) {
   return url.replace(/_ex=\d+x\d+/, '_ex=300x300');
 }
 
+// 楽天APIの値をHTML属性に入れる前のエスケープ(furusato-nozeiと同じ)
+function escapeAttr(value) {
+  return String(value || '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 function cardHtml(item) {
   const imgRaw = item.mediumImageUrls && item.mediumImageUrls[0];
   const img = upscaleImage(typeof imgRaw === 'string' ? imgRaw : (imgRaw && imgRaw.imageUrl) || '');
@@ -59,8 +69,8 @@ function cardHtml(item) {
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;');
   return `
-    <a class="product-card" href="${item.itemUrl}" target="_blank" rel="noopener sponsored">
-      <img src="${img}" alt="${name}" loading="lazy" width="300" height="300">
+    <a class="product-card" href="${escapeAttr(item.itemUrl)}" target="_blank" rel="noopener sponsored">
+      <img src="${escapeAttr(img)}" alt="${name}" loading="lazy" width="300" height="300">
       <p class="product-name">${name}</p>
       <p class="product-price">¥${price}</p>
     </a>`;
