@@ -68,5 +68,7 @@ async function showProductsInto(keyword, gridId, labelId, labelText, opts = {}) 
 document.getElementById('aff-card-monitor').href = affiliateUrl('モニター 24インチ IPS');
 document.getElementById('aff-card-notebook').href = affiliateUrl('チェックリスト ノート');
 
-showProductsInto('モニター 24インチ IPS', 'product-grid-monitor', 'product-grid-label-monitor', '並行作業向けの人気アイテム', { ng: 'ゲーミング Hz アーム ベビー 中古 整備済', minPrice: 10000 });
-showProductsInto('チェックリスト ノート', 'product-grid-notebook', 'product-grid-label-notebook', '申請チェックに使えるノートの人気アイテム', { ng: 'お支度 子供 キッズ ボード' });
+// 楽天APIは同時に2回呼ぶと片方が429で弾かれるため、1件目の完了後に間を空けて2件目を呼ぶ
+showProductsInto('モニター 24インチ IPS', 'product-grid-monitor', 'product-grid-label-monitor', '並行作業向けの人気アイテム', { ng: 'ゲーミング Hz アーム ベビー 中古 整備済', minPrice: 10000 })
+  .then(() => new Promise((r) => setTimeout(r, 1100)))
+  .then(() => showProductsInto('チェックリスト ノート', 'product-grid-notebook', 'product-grid-label-notebook', '申請チェックに使えるノートの人気アイテム', { ng: 'お支度 子供 キッズ ボード' }));

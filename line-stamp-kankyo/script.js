@@ -69,5 +69,7 @@ function cardHtml(item) {
 document.getElementById('aff-card-monitor').href = affiliateUrl('モニター 27インチ sRGB');
 document.getElementById('aff-card-storage').href = affiliateUrl('ポータブルSSD 1TB');
 
-showProducts('モニター 27インチ sRGB', 'product-grid-monitor', 'product-grid-label-monitor', '確認用モニターの人気アイテム', { ng: 'ゲーミング Hz' });
-showProducts('ポータブルSSD 1TB', 'product-grid-storage', 'product-grid-label-storage', '外付けストレージの人気アイテム', { ng: 'ケース', minPrice: 5000 });
+// 楽天APIは同時に2回呼ぶと片方が429で弾かれるため、1件目の完了後に間を空けて2件目を呼ぶ
+showProducts('モニター 27インチ sRGB', 'product-grid-monitor', 'product-grid-label-monitor', '確認用モニターの人気アイテム', { ng: 'ゲーミング Hz' })
+  .then(() => new Promise((r) => setTimeout(r, 1100)))
+  .then(() => showProducts('ポータブルSSD 1TB', 'product-grid-storage', 'product-grid-label-storage', '外付けストレージの人気アイテム', { ng: 'ケース', minPrice: 5000 }));
