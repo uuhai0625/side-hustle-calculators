@@ -14,7 +14,7 @@ const RAKUTEN_API_AFFILIATE_ID = '567fd2ff.507b4e2c.567fd300.5261c56d';
 
 let productRequestId = 0;
 
-async function showProducts(keyword, labelText) {
+async function showProducts(keyword, labelText, opts = {}) {
   const grid = document.getElementById('product-grid');
   const label = document.getElementById('product-grid-label');
   if (!grid) return;
@@ -27,6 +27,9 @@ async function showProducts(keyword, labelText) {
   url.searchParams.set('accessKey', RAKUTEN_ACCESS_KEY);
   url.searchParams.set('affiliateId', RAKUTEN_API_AFFILIATE_ID);
   url.searchParams.set('keyword', keyword);
+  // 曖昧な語だとレビュー数順で無関係な商品(ベビーモニター・SSDケース等)が上位に来るため除外語と下限価格で絞る
+  if (opts.ng) url.searchParams.set('NGKeyword', opts.ng);
+  if (opts.minPrice) url.searchParams.set('minPrice', String(opts.minPrice));
   url.searchParams.set('sort', '-reviewCount');
   url.searchParams.set('hits', '4');
   url.searchParams.set('format', 'json');
@@ -168,9 +171,9 @@ function computeAndRender() {
     affCard.classList.remove('show');
     document.getElementById('product-grid').classList.remove('show');
   } else {
-    affCard.href = affiliateUrl('ノートパソコン');
+    affCard.href = affiliateUrl('ノートパソコン 新品 メモリ16GB');
     affCard.classList.add('show');
-    showProducts('ノートパソコン', 'これから買うなら人気のノートPC');
+    showProducts('ノートパソコン 新品 メモリ16GB', 'これから買うなら人気のノートPC', { ng: '中古 整備済 Celeron', minPrice: 60000 });
   }
 }
 

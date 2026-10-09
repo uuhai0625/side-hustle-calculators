@@ -37,7 +37,7 @@ function cardHtml(item) {
 
 // line-stamp-kankyo/ehon-shinseiと同じ「ページ読み込み時に商品カードを取得」パターン。
 // この記事は単一カテゴリ(ノートPCスタンド)のみ扱う。
-async function showProducts(keyword, labelText) {
+async function showProducts(keyword, labelText, opts = {}) {
   const grid = document.getElementById('product-grid');
   const label = document.getElementById('product-grid-label');
   if (!grid) return;
@@ -46,6 +46,9 @@ async function showProducts(keyword, labelText) {
   url.searchParams.set('accessKey', RAKUTEN_ACCESS_KEY);
   url.searchParams.set('affiliateId', RAKUTEN_API_AFFILIATE_ID);
   url.searchParams.set('keyword', keyword);
+  // 曖昧な語だとレビュー数順で無関係な商品(ベビーモニター・SSDケース等)が上位に来るため除外語と下限価格で絞る
+  if (opts.ng) url.searchParams.set('NGKeyword', opts.ng);
+  if (opts.minPrice) url.searchParams.set('minPrice', String(opts.minPrice));
   url.searchParams.set('sort', '-reviewCount');
   url.searchParams.set('hits', '4');
   url.searchParams.set('format', 'json');
@@ -63,6 +66,6 @@ async function showProducts(keyword, labelText) {
   }
 }
 
-document.getElementById('aff-card').href = affiliateUrl('ノートパソコン スタンド');
+document.getElementById('aff-card').href = affiliateUrl('ノートパソコンスタンド');
 
-showProducts('ノートパソコン スタンド', 'note・X運用の作業環境に人気のアイテム');
+showProducts('ノートパソコンスタンド', 'note・X運用の作業環境に人気のアイテム', { ng: 'プロジェクター' });

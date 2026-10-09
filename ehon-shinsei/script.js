@@ -36,7 +36,7 @@ function cardHtml(item) {
 }
 
 // LINEスタンプ制作の確認環境と同じ「ページ読み込み時に2カテゴリを並行取得」パターン。
-async function showProductsInto(keyword, gridId, labelId, labelText) {
+async function showProductsInto(keyword, gridId, labelId, labelText, opts = {}) {
   const grid = document.getElementById(gridId);
   const label = document.getElementById(labelId);
   if (!grid) return;
@@ -45,6 +45,9 @@ async function showProductsInto(keyword, gridId, labelId, labelText) {
   url.searchParams.set('accessKey', RAKUTEN_ACCESS_KEY);
   url.searchParams.set('affiliateId', RAKUTEN_API_AFFILIATE_ID);
   url.searchParams.set('keyword', keyword);
+  // 曖昧な語だとレビュー数順で無関係な商品(ベビーモニター・SSDケース等)が上位に来るため除外語と下限価格で絞る
+  if (opts.ng) url.searchParams.set('NGKeyword', opts.ng);
+  if (opts.minPrice) url.searchParams.set('minPrice', String(opts.minPrice));
   url.searchParams.set('sort', '-reviewCount');
   url.searchParams.set('hits', '4');
   url.searchParams.set('format', 'json');
@@ -62,8 +65,8 @@ async function showProductsInto(keyword, gridId, labelId, labelText) {
   }
 }
 
-document.getElementById('aff-card-monitor').href = affiliateUrl('モニター');
+document.getElementById('aff-card-monitor').href = affiliateUrl('モニター 24インチ IPS');
 document.getElementById('aff-card-notebook').href = affiliateUrl('チェックリスト ノート');
 
-showProductsInto('モニター', 'product-grid-monitor', 'product-grid-label-monitor', '並行作業向けの人気アイテム');
-showProductsInto('チェックリスト ノート', 'product-grid-notebook', 'product-grid-label-notebook', '申請チェックに使えるノートの人気アイテム');
+showProductsInto('モニター 24インチ IPS', 'product-grid-monitor', 'product-grid-label-monitor', '並行作業向けの人気アイテム', { ng: 'ゲーミング Hz アーム ベビー 中古 整備済', minPrice: 10000 });
+showProductsInto('チェックリスト ノート', 'product-grid-notebook', 'product-grid-label-notebook', '申請チェックに使えるノートの人気アイテム', { ng: 'お支度 子供 キッズ ボード' });

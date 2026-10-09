@@ -14,7 +14,7 @@ const RAKUTEN_API_AFFILIATE_ID = '567fd2ff.507b4e2c.567fd300.5261c56d';
 
 let productRequestId = 0;
 
-async function showProducts(keyword, labelText) {
+async function showProducts(keyword, labelText, opts = {}) {
   const grid = document.getElementById('product-grid');
   const label = document.getElementById('product-grid-label');
   if (!grid) return;
@@ -27,6 +27,9 @@ async function showProducts(keyword, labelText) {
   url.searchParams.set('accessKey', RAKUTEN_ACCESS_KEY);
   url.searchParams.set('affiliateId', RAKUTEN_API_AFFILIATE_ID);
   url.searchParams.set('keyword', keyword);
+  // 曖昧な語だとレビュー数順で無関係な商品(ベビーモニター・SSDケース等)が上位に来るため除外語と下限価格で絞る
+  if (opts.ng) url.searchParams.set('NGKeyword', opts.ng);
+  if (opts.minPrice) url.searchParams.set('minPrice', String(opts.minPrice));
   url.searchParams.set('sort', '-reviewCount');
   url.searchParams.set('hits', '4');
   url.searchParams.set('format', 'json');
@@ -380,9 +383,9 @@ function calcSingle() {
   resultCard.classList.add('show');
   shareRow.classList.add('show');
 
-  affCard.href = affiliateUrl('外付けSSD');
+  affCard.href = affiliateUrl('ポータブルSSD 1TB');
   affCard.classList.add('show');
-  showProducts('外付けSSD', '動画ファイルの保存に人気のアイテム');
+  showProducts('ポータブルSSD 1TB', '動画ファイルの保存に人気のアイテム', { ng: 'ケース', minPrice: 5000 });
 
   resultCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
@@ -498,7 +501,7 @@ function computeAndRenderCombo() {
   lastTotalJpy = totalJpy;
   lastParts = parts;
   shareRow.classList.add('show');
-  affCard.href = affiliateUrl('外付けSSD');
+  affCard.href = affiliateUrl('ポータブルSSD 1TB');
   affCard.classList.add('show');
 
   updateShareUrl();
@@ -509,7 +512,7 @@ function calcCombo() {
   resultCard.classList.add('show');
   const anyChecked = comboRows.some((row) => document.getElementById(row.checkboxId).checked);
   if (anyChecked) {
-    showProducts('外付けSSD', '動画ファイルの保存に人気のアイテム');
+    showProducts('ポータブルSSD 1TB', '動画ファイルの保存に人気のアイテム', { ng: 'ケース', minPrice: 5000 });
   }
   resultCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }

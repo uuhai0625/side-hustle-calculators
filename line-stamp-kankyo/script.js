@@ -14,7 +14,7 @@ const RAKUTEN_API_AFFILIATE_ID = '567fd2ff.507b4e2c.567fd300.5261c56d';
 
 // このページは計算結果を持たない解説記事のため、ボタン操作ではなくページ読み込み時に
 // 2カテゴリ(モニター/外付けSSD)の商品カードをそれぞれ独立して取得する。
-async function showProducts(keyword, gridId, labelId, labelText) {
+async function showProducts(keyword, gridId, labelId, labelText, opts = {}) {
   const grid = document.getElementById(gridId);
   const label = document.getElementById(labelId);
   if (!grid) return;
@@ -23,6 +23,9 @@ async function showProducts(keyword, gridId, labelId, labelText) {
   url.searchParams.set('accessKey', RAKUTEN_ACCESS_KEY);
   url.searchParams.set('affiliateId', RAKUTEN_API_AFFILIATE_ID);
   url.searchParams.set('keyword', keyword);
+  // 曖昧な語だとレビュー数順で無関係な商品(ベビーモニター・SSDケース等)が上位に来るため除外語と下限価格で絞る
+  if (opts.ng) url.searchParams.set('NGKeyword', opts.ng);
+  if (opts.minPrice) url.searchParams.set('minPrice', String(opts.minPrice));
   url.searchParams.set('sort', '-reviewCount');
   url.searchParams.set('hits', '4');
   url.searchParams.set('format', 'json');
@@ -63,8 +66,8 @@ function cardHtml(item) {
     </a>`;
 }
 
-document.getElementById('aff-card-monitor').href = affiliateUrl('モニター 27インチ');
-document.getElementById('aff-card-storage').href = affiliateUrl('外付けSSD');
+document.getElementById('aff-card-monitor').href = affiliateUrl('モニター 27インチ sRGB');
+document.getElementById('aff-card-storage').href = affiliateUrl('ポータブルSSD 1TB');
 
-showProducts('モニター 27インチ', 'product-grid-monitor', 'product-grid-label-monitor', '確認用モニターの人気アイテム');
-showProducts('外付けSSD', 'product-grid-storage', 'product-grid-label-storage', '外付けストレージの人気アイテム');
+showProducts('モニター 27インチ sRGB', 'product-grid-monitor', 'product-grid-label-monitor', '確認用モニターの人気アイテム', { ng: 'ゲーミング Hz' });
+showProducts('ポータブルSSD 1TB', 'product-grid-storage', 'product-grid-label-storage', '外付けストレージの人気アイテム', { ng: 'ケース', minPrice: 5000 });
