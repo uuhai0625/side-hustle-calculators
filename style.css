@@ -964,7 +964,8 @@ html.qshow .share-row { display: flex; }
 .aff-card .aff-title { font-weight: 700; font-size: 0.92rem; margin: 0 0 2px; }
 .aff-card .aff-sub { font-size: 0.78rem; color: var(--ink-sub); margin: 0; }
 .aff-card .aff-pr,
-.tool-cta .aff-pr {
+.tool-cta .aff-pr,
+.logo-chip .aff-pr {
   font-size: 0.68rem;
   color: #1a1206;
   background: var(--gold);
@@ -1001,7 +1002,8 @@ html.qshow .share-row { display: flex; }
 .tool-cta .tool-cta-title { display: block; font-weight: 700; font-size: 0.95rem; }
 .tool-cta .tool-cta-title::after { content: " →"; color: var(--gold); }
 .tool-cta .tool-cta-sub { display: block; margin-top: 2px; font-size: 0.78rem; color: var(--ink-sub); line-height: 1.5; }
-.tool-cta .aff-pr { align-self: center; }
+.tool-cta .aff-pr,
+.logo-chip .aff-pr { align-self: center; }
 
 /* 非提携の参考リンク(furusato-nozei限定)。PRバッジは付けない(アフィリエイトではないため)。 */
 .other-asp-links {

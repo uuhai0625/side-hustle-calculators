@@ -19,13 +19,14 @@ if (GA_MEASUREMENT_ID && !isLocalDev) {
   // 「どのページが実際に楽天へのクリックを生んでいるか」を測る手段がなかった)。
   // 全ページ共通のdocumentレベル委譲なので、product-grid内で動的に生成されるproduct-cardも個別配線不要で拾える。
   document.addEventListener('click', (e) => {
-    const link = e.target.closest('.aff-card, .product-card, .tool-cta');
+    const link = e.target.closest('.aff-card, .product-card, .tool-cta, .logo-chip[rel~="sponsored"]');
     if (!link) return;
     // category/price: furusato-nozeiの返礼品カードのみdata-category/data-price属性を持つ(2026-08-31追加)。
     // 他ページのproduct-cardには存在しないため、そのままundefinedになりイベント自体には影響しない。
     gtag('event', 'affiliate_click', {
       link_type: link.classList.contains('product-card') ? 'product_card'
-        : link.classList.contains('tool-cta') ? 'tool_cta' : 'aff_card',
+        : link.classList.contains('tool-cta') ? 'tool_cta'
+        : link.classList.contains('logo-chip') ? 'logo_chip' : 'aff_card',
       link_id: link.id || link.dataset.tool || '',
       link_url: link.href || '',
       page_path: location.pathname,
