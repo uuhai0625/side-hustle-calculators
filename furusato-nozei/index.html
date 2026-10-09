@@ -150,6 +150,32 @@
     <p class="citation-note" id="citation-note">ブログ等で結果を紹介する場合は<button class="citation-copy-btn" id="btn-copy-citation" type="button">出典文をコピー</button></p>
   </div>
   </div>
+  <!-- 返礼品への導線は結果の直後に置く(2026-10-09、以前は早見表2つの下で結果から約1800px離れていた) -->
+  <a class="aff-card" id="aff-card" href="https://hb.afl.rakuten.co.jp/hgc/567f9cc6.631b3687.567f9cc7.3d3a8a85/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fevent%2F%25E8%2582%2589%2F%3Fev%3D40&amp;link_type=text&amp;ut=eyJwYWdlIjoidXJsIiwidHlwZSI6InRleHQiLCJjb2wiOjF9" target="_blank" rel="noopener sponsored">
+    <span class="aff-icon icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></span>
+    <div class="aff-text">
+      <p class="aff-title">上限額の範囲で返礼品を探す</p>
+      <p class="aff-sub">楽天ふるさと納税で見てみる</p>
+    </div>
+    <span class="aff-pr">PR</span>
+  </a>
+  <p class="other-asp-links">他のサイトも見てみる: <a href="https://www.furunavi.jp/" target="_blank" rel="noopener">ふるなび</a>・<a href="https://www.satofull.jp/" target="_blank" rel="noopener">さとふる</a>(このサイトは提携していない参考リンクです。返礼品の表示は楽天のみ連携しています)</p>
+
+  <div id="product-section">
+    <div class="field" id="product-category-field" style="display:none; max-width: 320px; margin: 24px auto 0;">
+      <label for="select-product-category">上限額で選べる返礼品ジャンル</label>
+      <select id="select-product-category">
+        <option value="肉" selected>肉</option>
+        <option value="海鮮">海鮮</option>
+        <option value="米">米</option>
+        <option value="フルーツ">フルーツ</option>
+        <option value="スイーツ">スイーツ</option>
+        <option value="日用品">日用品・家電</option>
+      </select>
+    </div>
+    <p class="product-grid-label" id="product-grid-label" style="display:none;">あなたの上限額で選べる人気の返礼品</p>
+    <div class="product-grid" id="product-grid" aria-live="polite" aria-atomic="true" aria-busy="false"></div>
+  </div>
 
   <div class="rate-table-box show">
     <h2>【給与のみの場合】年収×家族構成の早見表</h2>
@@ -186,32 +212,6 @@
   <div class="follow-cta" id="follow-cta">
     <p class="follow-cta-title">この計算機を作っているのは</p>
     <p>uuhai0625(ウーハイ)。LINEスタンプ・電子書籍・note記事など、生成AIを使った複数の創作活動を実際に行っています。制作の裏側や新しいツールの告知は<a href="https://x.com/uuhai0625" target="_blank" rel="noopener">𝕏 @uuhai0625</a>で発信中、よければフォローしてください。</p>
-  </div>
-
-  <a class="aff-card" id="aff-card" href="https://hb.afl.rakuten.co.jp/hgc/567f9cc6.631b3687.567f9cc7.3d3a8a85/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fevent%2F%25E8%2582%2589%2F%3Fev%3D40&amp;link_type=text&amp;ut=eyJwYWdlIjoidXJsIiwidHlwZSI6InRleHQiLCJjb2wiOjF9" target="_blank" rel="noopener sponsored">
-    <span class="aff-icon icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></span>
-    <div class="aff-text">
-      <p class="aff-title">上限額の範囲で返礼品を探す</p>
-      <p class="aff-sub">楽天ふるさと納税で見てみる</p>
-    </div>
-    <span class="aff-pr">PR</span>
-  </a>
-  <p class="other-asp-links">他のサイトも見てみる: <a href="https://www.furunavi.jp/" target="_blank" rel="noopener">ふるなび</a>・<a href="https://www.satofull.jp/" target="_blank" rel="noopener">さとふる</a>(このサイトは提携していない参考リンクです。返礼品の表示は楽天のみ連携しています)</p>
-
-  <div id="product-section">
-    <div class="field" id="product-category-field" style="display:none; max-width: 320px; margin: 24px auto 0;">
-      <label for="select-product-category">上限額で選べる返礼品ジャンル</label>
-      <select id="select-product-category">
-        <option value="肉" selected>肉</option>
-        <option value="海鮮">海鮮</option>
-        <option value="米">米</option>
-        <option value="フルーツ">フルーツ</option>
-        <option value="スイーツ">スイーツ</option>
-        <option value="日用品">日用品・家電</option>
-      </select>
-    </div>
-    <p class="product-grid-label" id="product-grid-label" style="display:none;">あなたの上限額で選べる人気の返礼品</p>
-    <div class="product-grid" id="product-grid" aria-live="polite" aria-atomic="true" aria-busy="false"></div>
   </div>
 
   <div class="editor-picks">
