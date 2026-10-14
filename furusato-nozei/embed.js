@@ -6,22 +6,24 @@
 // 注意: 以下の計算ロジック(salaryDeduction〜calcResult)はscript.js側の実装を複製したもの。
 // 税制改正等でscript.js側の計算式を直すときは、このファイルも必ず同じ内容に合わせること。
 
-// --- 給与所得控除(令和7年度税制改正後の速算表、令和7年分以後恒久適用) ---
+// --- 給与所得控除(令和8年分。令和8年度税制改正で最低保障額が65万円→74万円) ---
+// 74万円は本則69万円+令和8・9年分の特例5万円(国税庁「源泉所得税の改正のあらまし」令和8年4月)。
+// 住民税も令和9・10年度分(令和8・9年中の給与)は同じ74万円(仙台市・名古屋市の改正案内)。
+// 220万円で「収入×30%+8万円」が74万円に一致するため、220万円超のブラケットは変更なし。
 function salaryDeduction(income) {
-  if (income <= 1900000) return 650000;
+  if (income <= 2200000) return 740000;
   if (income <= 3600000) return income * 0.3 + 80000;
   if (income <= 6600000) return income * 0.2 + 440000;
   if (income <= 8500000) return income * 0.1 + 1100000;
   return 1950000;
 }
 
-// --- 所得税の基礎控除(令和7・8年分、合計所得金額ベース) ---
+// --- 所得税の基礎控除(令和8・9年分、合計所得金額ベース。令和8年度税制改正後) ---
+// 本則62万円に、489万円以下は42万円・655万円以下は5万円を加算(国税庁 同上)。住民税の基礎控除43万円は改正なし。
 function incomeTaxBasicDeduction(totalIncome) {
-  if (totalIncome <= 1320000) return 950000;
-  if (totalIncome <= 3360000) return 880000;
-  if (totalIncome <= 4890000) return 680000;
-  if (totalIncome <= 6550000) return 630000;
-  if (totalIncome <= 23500000) return 580000;
+  if (totalIncome <= 4890000) return 1040000;
+  if (totalIncome <= 6550000) return 670000;
+  if (totalIncome <= 23500000) return 620000;
   return 480000;
 }
 
@@ -61,6 +63,8 @@ function calcResult(input) {
   const residentTaxable = Math.floor(Math.max(0, residentTaxableRaw) / 1000) * 1000;
   const residentIncomeLevy = residentTaxable * 0.10;
 
+  // 特例控除の割合は「住民税の課税総所得−人的控除差−(所得税の基礎控除−48万円)」で判定する(横浜市・川崎市の令和8年度以降の案内)。
+  // 人的控除差は基礎・配偶者・扶養とも5万円なので、所得税の課税所得で判定するのと同じ結果になる。
   const incomeTaxBasic = incomeTaxBasicDeduction(totalIncome);
   const incomeTaxableRaw = totalIncome - socialInsuranceDeduction - spouseDeductionIncomeTax - dependentsDeductionIncomeTax - incomeTaxBasic;
   const incomeTaxable = Math.floor(Math.max(0, incomeTaxableRaw) / 1000) * 1000;
