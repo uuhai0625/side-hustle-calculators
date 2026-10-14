@@ -53,8 +53,10 @@ function calcResult(input) {
 
   const totalIncome = salaryIncome + sideTaxableIncome;
   const socialInsuranceDeduction = input.salary * 0.15;
-  const spouseDeductionResident = input.hasSpouse ? 330000 : 0;
-  const spouseDeductionIncomeTax = input.hasSpouse ? 380000 : 0;
+  // 配偶者控除は本人の合計所得金額で段階的に減る(900万円超で減り、1,000万円超で0円)。
+  const spouseStep = totalIncome <= 9000000 ? 0 : totalIncome <= 9500000 ? 1 : totalIncome <= 10000000 ? 2 : 3;
+  const spouseDeductionResident = input.hasSpouse ? [330000, 220000, 110000, 0][spouseStep] : 0;
+  const spouseDeductionIncomeTax = input.hasSpouse ? [380000, 260000, 130000, 0][spouseStep] : 0;
   const dependentsDeductionResident = input.dependents * 330000;
   const dependentsDeductionIncomeTax = input.dependents * 380000;
 
@@ -64,7 +66,7 @@ function calcResult(input) {
   const residentIncomeLevy = residentTaxable * 0.10;
 
   // 特例控除の割合は「住民税の課税総所得−人的控除差−(所得税の基礎控除−48万円)」で判定する(横浜市・川崎市の令和8年度以降の案内)。
-  // 人的控除差は基礎・配偶者・扶養とも5万円なので、所得税の課税所得で判定するのと同じ結果になる。
+  // 人的控除差は所得税と住民税の控除額の差(基礎・扶養5万円、配偶者5万/4万/2万円)なので、所得税の課税所得で判定するのと同じ結果になる。
   const incomeTaxBasic = incomeTaxBasicDeduction(totalIncome);
   const incomeTaxableRaw = totalIncome - socialInsuranceDeduction - spouseDeductionIncomeTax - dependentsDeductionIncomeTax - incomeTaxBasic;
   const incomeTaxable = Math.floor(Math.max(0, incomeTaxableRaw) / 1000) * 1000;
