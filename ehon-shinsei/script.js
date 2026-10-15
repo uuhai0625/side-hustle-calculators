@@ -39,6 +39,7 @@ function cardHtml(item) {
     .replace(/"/g, '&quot;');
   return `
     <a class="product-card" href="${escapeAttr(item.itemUrl)}" target="_blank" rel="noopener sponsored">
+      <span class="pr-badge">PR</span>
       <img src="${escapeAttr(img)}" alt="${name}" loading="lazy" width="300" height="300">
       <p class="product-name">${name}</p>
       <p class="product-price">¥${price}</p>
@@ -69,7 +70,7 @@ async function showProductsInto(keyword, gridId, labelId, labelText, opts = {}) 
     if (!items.length) return;
     grid.innerHTML = `<div class="product-band"><div class="product-band-grid">${items.map(cardHtml).join('')}</div></div>`;
     grid.classList.add('show');
-    if (label) { label.textContent = labelText; label.style.display = ''; }
+    if (label) { label.textContent = `${labelText}(楽天レビュー件数順)`; label.style.display = ''; }
   } catch (e) {
     // 失敗時は既存の検索リンクCTA(aff-card)に静かにフォールバック
   }

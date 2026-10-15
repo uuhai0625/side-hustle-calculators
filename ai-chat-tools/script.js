@@ -41,8 +41,8 @@ const CODING_REDIRECT = {
 const RECOMMENDATIONS = {
   casual: {
     light: { headline: 'ChatGPTの無料版で十分', advice: '2026年8月からChatGPT無料版のテキストチャットは無制限になったため、雑談や簡単な質問中心なら無料版だけで完結することがほとんどです。' },
-    daily: { headline: 'ChatGPTの無料版で十分(まずは様子見)', advice: '毎日使っても、テキストチャット自体は無料版で無制限です。画像生成や音声チャットなど他の機能を頻繁に使うようになったら、Go(¥1,400/月)への切り替えを検討してください。' },
-    heavy: { headline: 'ChatGPT Go(¥1,400/月)〜', advice: 'テキストチャット自体は無料でも上限に達しませんが、フル活用する中で画像生成・音声・アップロードの上限に頻繁に当たるようなら、それらの利用枠が増えるGoが候補になります。' },
+    daily: { headline: 'ChatGPTの無料版で十分(まずは様子見)', advice: '毎日使っても、テキストチャット自体は無料版で無制限です。画像生成や音声チャットなど他の機能を頻繁に使うようになったら、Go($8/月・約¥1,272)への切り替えを検討してください。' },
+    heavy: { headline: 'ChatGPT Go($8/月・約¥1,272)〜', advice: 'テキストチャット自体は無料でも上限に達しませんが、フル活用する中で画像生成・音声・アップロードの上限に頻繁に当たるようなら、それらの利用枠が増えるGoが候補になります。' },
   },
   writing: {
     light: { headline: 'ChatGPTかClaudeの無料版で十分', advice: 'どちらも無料版で試せます。文章の言い回しや構成の質にこだわりたい場合はClaude、要約・情報整理も併せて使いたい場合はChatGPTが選ばれやすい傾向です。' },
@@ -52,11 +52,11 @@ const RECOMMENDATIONS = {
   research: {
     light: { headline: 'ChatGPTの無料版で十分', advice: 'Deep Research機能は無料版でも利用回数は上限付きながら使えます。たまにの利用なら無料版の上限内に収まることが多いです。' },
     daily: { headline: 'ChatGPT PlusまたはGoogle AI Pro(¥2,900/月)', advice: 'Deep Researchをほぼ毎日使うなら、利用回数が拡張されるChatGPT Plus、またはDeep Researchが拡張されるGoogle AI Proが候補になります。' },
-    heavy: { headline: 'ChatGPT ProまたはGoogle AI Ultra', advice: '調査を仕事レベルで多用するなら、Deep Researchが最大限利用できるChatGPT Pro(¥16,800/月)や、Google AI Ultra(¥14,500/月〜)が候補になります。高額なプランなので、まずはPlus/Proクラスで上限に当たる頻度を確認してからの方が失敗しにくいです。' },
+    heavy: { headline: 'ChatGPT ProまたはGoogle AI Ultra', advice: '調査を仕事レベルで多用するなら、Deep Researchが最大限利用できるChatGPT Pro($100/月〜・約¥15,900〜)や、Google AI Ultra(¥14,500/月〜)が候補になります。高額なプランなので、まずはPlus/Proクラスで上限に当たる頻度を確認してからの方が失敗しにくいです。' },
   },
   image: {
     light: { headline: 'ChatGPTの無料版で十分', advice: '画像生成は無料版でも使えますが、回数と速度に上限があります。たまにの利用なら無料版の範囲で収まることが多いです。' },
-    daily: { headline: 'ChatGPT Go(¥1,400/月)', advice: '画像生成をほぼ毎日使うなら、生成回数が増えるGoが候補です。より高精度な画像生成を求めるならPlus(約¥3,180/月)も検討してください。' },
+    daily: { headline: 'ChatGPT Go($8/月・約¥1,272)', advice: '画像生成をほぼ毎日使うなら、生成回数が増えるGoが候補です。より高精度な画像生成を求めるならPlus(約¥3,180/月)も検討してください。' },
     heavy: { headline: 'ChatGPT Plus〜Pro', advice: '画像生成を仕事レベルで多用するなら、高精度・高速な画像生成が使えるPlus以上、さらに無制限に近い形で使いたいならProが候補です。GeminiのGoogle AIプランも代替候補になります。' },
   },
   workspace: {
@@ -121,7 +121,7 @@ function paramsFromState() {
 
 function updateShareUrl() {
   const params = paramsFromState();
-  history.replaceState(null, '', `${location.pathname}?${params.toString()}`);
+  (window.replaceUrlQuietly || history.replaceState.bind(history))(null, '', `${location.pathname}?${params.toString()}`);
 }
 
 function shareText(headline) {
@@ -167,10 +167,10 @@ btnShareX.addEventListener('click', () => {
 function initFromQuery() {
   const params = new URLSearchParams(location.search);
   const usage = params.get('usage');
-  if (!usage || !USAGE_LABELS[usage]) return;
+  if (!usage || !Object.prototype.hasOwnProperty.call(USAGE_LABELS, usage)) return;
   selectUsage.value = usage;
   const freq = params.get('freq');
-  if (freq && FREQ_LABELS[freq]) selectFreq.value = freq;
+  if (freq && Object.prototype.hasOwnProperty.call(FREQ_LABELS, freq)) selectFreq.value = freq;
   calc();
 }
 

@@ -34,8 +34,15 @@ async function showProducts(keyword, labelText, opts = {}) {
   url.searchParams.set('hits', '4');
   url.searchParams.set('format', 'json');
   try {
-    const res = await fetch(url.toString());
+    let res = await fetch(url.toString());
     if (requestId !== productRequestId) return;
+    // 楽天APIは1秒以内に続けて呼ぶと429になるので、計算ボタンを続けて押したときは1.1秒後に1回だけ再試行する。
+    if (res.status === 429) {
+      await new Promise((resolve) => setTimeout(resolve, 1100));
+      if (requestId !== productRequestId) return;
+      res = await fetch(url.toString());
+      if (requestId !== productRequestId) return;
+    }
     if (!res.ok) return;
     const data = await res.json();
     if (requestId !== productRequestId) return;
@@ -43,7 +50,7 @@ async function showProducts(keyword, labelText, opts = {}) {
     if (!items.length) return;
     grid.innerHTML = `<div class="product-band"><div class="product-band-grid">${items.map(cardHtml).join('')}</div></div>`;
     grid.classList.add('show');
-    if (label) { label.textContent = labelText; label.style.display = ''; }
+    if (label) { label.textContent = `${labelText}(楽天レビュー件数順)`; label.style.display = ''; }
   } catch (e) {
     // 失敗時は既存の検索リンクCTA(aff-card)に静かにフォールバック
   }
@@ -76,6 +83,7 @@ function cardHtml(item) {
     .replace(/"/g, '&quot;');
   return `
     <a class="product-card" href="${escapeAttr(item.itemUrl)}" target="_blank" rel="noopener sponsored">
+      <span class="pr-badge">PR</span>
       <img src="${escapeAttr(img)}" alt="${name}" loading="lazy" width="300" height="300">
       <p class="product-name">${name}</p>
       <p class="product-price">¥${price}</p>
@@ -116,7 +124,7 @@ const GENRES = {
   },
   'ai-music': {
     label: 'AI音楽制作', toolLow: 1500, toolHigh: 4900,
-    note: 'Suno・Udio・Soundrawなどの音楽生成AIを使います。Sunoは2026年9月から、Udioは2025年10月から無料プランでの書き出し(ダウンロード)ができなくなっており、AI動画制作と同様に実用的な無料プランがないジャンルです。楽曲を保存して使いたい場合はSuno Pro等の有料プランが前提になります。',
+    note: 'Suno・Udio・Soundrawなどの音楽生成AIを使います。Sunoは2026年9月から無料プランの毎月のダウンロード枠がなくなり(一度きりの試用分のみ)、Udioは2025年10月から書き出し(ダウンロード)が停止しており、AI動画制作と同様に実用的な無料プランがないジャンルです。楽曲を保存して使いたい場合はSuno Pro等の有料プランが前提になります。',
     link: { href: '../ongaku-ryokin/', label: '音楽生成AIツール料金比較' },
   },
 };
@@ -179,7 +187,11 @@ function computeAndRender() {
 
   if (pcKey === 'already') {
     affCard.classList.remove('show');
+    // 取得途中の結果があとから届いて再表示されないよう、リクエストを無効にしてPRラベルも隠す
+    ++productRequestId;
     document.getElementById('product-grid').classList.remove('show');
+    const productLabel = document.getElementById('product-grid-label');
+    if (productLabel) productLabel.style.display = 'none';
   } else {
     // aff-cardのhrefはHTMLにも同じURLを静的に書いてある(JS失敗時の保険)。キーワードを変える時はHTML側も直す
     affCard.href = affiliateUrl('ノートパソコン 新品 メモリ16GB');
@@ -216,7 +228,7 @@ function paramsFromState() {
 
 function updateShareUrl() {
   const params = paramsFromState();
-  history.replaceState(null, '', `${location.pathname}?${params.toString()}`);
+  (window.replaceUrlQuietly || history.replaceState.bind(history))(null, '', `${location.pathname}?${params.toString()}`);
 }
 
 // 共有・保存経路の流入計測用(2026-09-02追加)。ブラウザのアドレスバー(history.replaceState)には
@@ -353,8 +365,8 @@ function initFromQuery() {
   const genre = params.get('genre');
   const pc = params.get('pc');
   let matched = false;
-  if (genre && GENRES[genre]) { selectGenre.value = genre; matched = true; }
-  if (pc && PC_OPTIONS[pc]) { selectPc.value = pc; matched = true; }
+  if (genre && Object.prototype.hasOwnProperty.call(GENRES, genre)) { selectGenre.value = genre; matched = true; }
+  if (pc && Object.prototype.hasOwnProperty.call(PC_OPTIONS, pc)) { selectPc.value = pc; matched = true; }
   if (matched) calc();
 }
 

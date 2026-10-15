@@ -14,15 +14,17 @@ if (affCard) {
   affCard.href = affiliateUrl('サブスク管理 ノート');
 }
 
-// ai-chat-tools/ai-coding-toolsの各プラン表(2026年8月確認済みの価格)をそのまま流用。
+// ai-chat-tools/ai-coding-toolsの各プラン表の価格をそのまま流用(ChatGPT・Codex・Cursor・Copilotは2026年10月、
+// Claude・Geminiは2026年8月に確認。ドル建ては為替159円/ドルで換算)。
 // 動画AIツール・電気代・減価償却費は使用量依存のため、このページでは金額を再計算せず
 // 各専用計算機の試算結果をそのまま入力してもらう設計にしている。
 const CHAT_OPTIONS = {
   none: { label: '利用しない', price: 0 },
   chatgpt_free: { label: 'ChatGPT 無料版', price: 0 },
-  chatgpt_go: { label: 'ChatGPT Go', price: 1400 },
+  chatgpt_go: { label: 'ChatGPT Go', price: 1272 },
   chatgpt_plus: { label: 'ChatGPT Plus', price: 3180 },
-  chatgpt_pro: { label: 'ChatGPT Pro', price: 16800 },
+  chatgpt_pro: { label: 'ChatGPT Pro $100', price: 15900 },
+  chatgpt_pro200: { label: 'ChatGPT Pro $200', price: 31800 },
   claude_pro: { label: 'Claude Pro', price: 3180 },
   claude_max5: { label: 'Claude Max 5x', price: 15900 },
   claude_max20: { label: 'Claude Max 20x', price: 31800 },
@@ -36,17 +38,22 @@ const CODING_OPTIONS = {
   none: { label: '利用しない', price: 0 },
   copilot_free: { label: 'GitHub Copilot Free', price: 0 },
   copilot_pro: { label: 'GitHub Copilot Pro', price: 1590 },
-  codex_go: { label: 'OpenAI Codex(ChatGPT Go)', price: 1400 },
+  codex_go: { label: 'OpenAI Codex(ChatGPT Go)', price: 1272 },
+  cursor_plus: { label: 'Cursor Plus', price: 1272 },
   claude_pro_code: { label: 'Claude Code Pro', price: 3180 },
-  cursor_pro: { label: 'Cursor Pro', price: 3180 },
-  copilot_proplus: { label: 'GitHub Copilot Pro+', price: 6200 },
   codex_plus: { label: 'OpenAI Codex(ChatGPT Plus)', price: 3180 },
+  cursor_premium: { label: 'Cursor Premium', price: 4770 },
+  copilot_proplus: { label: 'GitHub Copilot Pro+', price: 6200 },
   claude_max5_code: { label: 'Claude Code Max 5x', price: 15900 },
-  cursor_proplus: { label: 'Cursor Pro+', price: 9540 },
   copilot_max: { label: 'GitHub Copilot Max', price: 15900 },
-  codex_pro: { label: 'OpenAI Codex(ChatGPT Pro)', price: 16800 },
+  codex_pro: { label: 'OpenAI Codex(ChatGPT Pro $100)', price: 15900 },
+  cursor_super: { label: 'Cursor Super', price: 15900 },
   claude_max20_code: { label: 'Claude Code Max 20x', price: 31800 },
+  codex_pro200: { label: 'OpenAI Codex(ChatGPT Pro $200)', price: 31800 },
   cursor_ultra: { label: 'Cursor Ultra', price: 31800 },
+  // 2026年10月の改定前のプラン。既存契約者は同じ価格のまま継続できるため残している(共有URLの互換も兼ねる)。
+  cursor_pro: { label: 'Cursor Pro(旧プラン)', price: 3180 },
+  cursor_proplus: { label: 'Cursor Pro+(旧プラン)', price: 9540 },
 };
 
 const selectChat = document.getElementById('select-chat');
@@ -81,7 +88,8 @@ function bookEquivalentNote(monthlyCost) {
 }
 
 function clampNonNegative(value) {
-  return Math.max(0, Math.round(Number(value) || 0));
+  // 極端な値で「∞」と表示されないよう、1つの欄は月1億円までに収める
+  return Math.min(100000000, Math.max(0, Math.round(Number(value) || 0)));
 }
 
 // 内訳を横棒グラフで表示(No.35、douga-ryokinのrenderBreakdownBarsと同じCSS・見せ方を流用。
@@ -122,7 +130,8 @@ function computeAndRender() {
   const yearly = total * 12;
 
   resultAmount.textContent = yen(total);
-  resultNote.textContent = '選択・入力した項目の月額合計です。';
+  const overMax = [inputVideo, inputElec, inputDepreciation, inputOther].some((el) => (Number(el.value) || 0) > 100000000);
+  resultNote.textContent = overMax ? '選択・入力した項目の月額合計です(1項目あたり月1億円までとして計算しています)。' : '選択・入力した項目の月額合計です。';
   resultSub.textContent = `年間換算:約¥${yen(yearly)}`;
 
   let advice = 'これは月額サブスクの合計目安です。動画AIツール・電気代・減価償却費は使用量によって変わるため、各専用計算機での試算結果を入力してください。';
@@ -185,7 +194,7 @@ function paramsFromState() {
 
 function updateShareUrl() {
   const params = paramsFromState();
-  history.replaceState(null, '', `${location.pathname}?${params.toString()}`);
+  (window.replaceUrlQuietly || history.replaceState.bind(history))(null, '', `${location.pathname}?${params.toString()}`);
 }
 
 // 共有・保存経路の流入計測用(2026-09-02追加)。ブラウザのアドレスバー(history.replaceState)には
@@ -319,9 +328,9 @@ function initFromQuery() {
     });
   }
   const chat = params.get('chat');
-  if (chat && CHAT_OPTIONS[chat]) selectChat.value = chat;
+  if (chat && Object.prototype.hasOwnProperty.call(CHAT_OPTIONS, chat)) selectChat.value = chat;
   const coding = params.get('coding');
-  if (coding && CODING_OPTIONS[coding]) selectCoding.value = coding;
+  if (coding && Object.prototype.hasOwnProperty.call(CODING_OPTIONS, coding)) selectCoding.value = coding;
   const video = params.get('video');
   if (video !== null) inputVideo.value = video;
   const elec = params.get('elec');

@@ -43,7 +43,7 @@ const RECOMMENDATIONS = {
   vocal: {
     trial: {
       headline: '無料では「試すだけ」までしかできません',
-      advice: 'Sunoは2026年9月3日から無料プランのダウンロードが廃止、Udioは2025年10月のUMGとの提携以降、有料プランを含む全プランでダウンロード自体が停止中です(Udio公式ヘルプセンターで確認、復旧時期は未定)。無料で生成そのものを試すことはできますが、作った楽曲を保存・書き出して使いたいなら、現時点ではSuno Pro(¥1,500/月〜)への加入が実質必須です。',
+      advice: 'Sunoは2026年9月3日から無料プランの毎月のダウンロード枠がなくなり、保存できるのは一度きりの試用分(9月3日より前の登録者は最大7回分、以降の登録者は不定期に付与。個人利用のみ)だけです。Udioは2025年10月のUMGとの提携以降、有料プランを含む全プランでダウンロード自体が停止中です(Udio公式ヘルプセンターで確認、復旧時期は未定)。無料で生成そのものを試すことはできますが、作った楽曲を継続的に保存したり商用で使ったりしたいなら、現時点ではSunoの有料プラン(Pro ¥1,500/月〜)への加入が前提になります。',
     },
     serious: {
       headline: 'Suno Pro(¥1,500/月〜)またはPremier(¥4,500/月〜)',
@@ -103,7 +103,7 @@ function paramsFromState() {
 
 function updateShareUrl() {
   const params = paramsFromState();
-  history.replaceState(null, '', `${location.pathname}?${params.toString()}`);
+  (window.replaceUrlQuietly || history.replaceState.bind(history))(null, '', `${location.pathname}?${params.toString()}`);
 }
 
 function shareText(headline) {
@@ -149,10 +149,10 @@ btnShareX.addEventListener('click', () => {
 function initFromQuery() {
   const params = new URLSearchParams(location.search);
   const purpose = params.get('purpose');
-  if (!purpose || !PURPOSE_LABELS[purpose]) return;
+  if (!purpose || !Object.prototype.hasOwnProperty.call(PURPOSE_LABELS, purpose)) return;
   selectPurpose.value = purpose;
   const commitment = params.get('commitment');
-  if (commitment && COMMITMENT_LABELS[commitment]) selectCommitment.value = commitment;
+  if (commitment && Object.prototype.hasOwnProperty.call(COMMITMENT_LABELS, commitment)) selectCommitment.value = commitment;
   calc();
 }
 

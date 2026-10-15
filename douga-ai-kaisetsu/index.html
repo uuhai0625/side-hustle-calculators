@@ -32,12 +32,12 @@
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "datePublished": "2026-09-12",
-  "dateModified": "2026-10-01",
+  "dateModified": "2026-10-16",
   "mainEntity": [
     { "@type": "Question", "name": "動画生成AIの「集約プラットフォーム」とは何ですか?", "acceptedAnswer": { "@type": "Answer", "text": "Kling・Google Veo・Runwayなど他社の複数モデルを1つのサブスクリプション・1つの画面でまとめて使えるサービスです。代表例はMagnific(旧Freepik)・Higgsfield・MyEditで、開発者向けAPI版としてFAL.AIもあります。1社が開発した1つのモデルだけを提供する「単体モデル系」(Midjourney・Kling AI・Google Veo等)とは仕組みが異なり、複数モデルを比較・使い分けしたい人に向いています。" } },
-    { "@type": "Question", "name": "無料プランで作った動画を商用利用できますか?", "acceptedAnswer": { "@type": "Answer", "text": "ツールによって異なりますが、多くは無料プランに透かし(ウォーターマーク)が入り商用利用は認められていません。Midjourney・Runway・Kling AI・Luma・Pikaはいずれも有料プラン(多くはStandard相当)以上で商用利用権・透かしなし出力が付与されます。PixVerseとGoogle Veoは公式規約上の詳細な条件を一次情報で確認できておらず、利用前に必ず公式ToSを確認することをおすすめします。" } },
+    { "@type": "Question", "name": "無料プランで作った動画を商用利用できますか?", "acceptedAnswer": { "@type": "Answer", "text": "ツールによって異なりますが、多くは無料プランでは透かし(ウォーターマーク)が入るか、商用利用が認められていません。Midjourney・Runway・Kling AI・Luma・Pikaはいずれも有料プラン以上で商用利用権が付与されます(多くは最安の有料プランから、Pikaは2番目のCreatorプランから)。PixVerseとGoogle Veoは公式規約上の詳細な条件を一次情報で確認できておらず、利用前に必ず公式ToSを確認することをおすすめします。" } },
     { "@type": "Question", "name": "生成した動画の著作権は誰のものになりますか?", "acceptedAnswer": { "@type": "Answer", "text": "多くのツールで利用者自身が著作権を持つ一方、サービス側への非独占的な利用許諾(学習・広告転用等)が利用規約に含まれていることがあります。特にKling AI・Lumaの無料/下位プランでは、ユーザーがサービス側に比較的広い権利を付与する条項がある点に注意してください。詳細は各社の利用規約(ToS)本文でご確認ください。" } },
-    { "@type": "Question", "name": "料金はどこで比較できますか?", "acceptedAnswer": { "@type": "Answer", "text": "この記事は機能・用途の解説に特化しています。月額料金・本数試算の詳しい比較は「動画作成AIツールの月額料金シミュレーター」ページで確認できます。" } }
+    { "@type": "Question", "name": "料金はどこで比較できますか?", "acceptedAnswer": { "@type": "Answer", "text": "この記事は機能・用途の解説に特化しています。月額料金・本数試算の詳しい比較は動画作成AIツールの月額料金シミュレーターページで確認できます。" } }
   ]
 }
 </script>
@@ -68,8 +68,8 @@
 
   <div class="logo-strip">
     <a class="logo-chip" href="https://www.midjourney.com/" target="_blank" rel="noopener"><img src="../images/logos/midjourney.png" alt="Midjourney" loading="lazy">Midjourney</a>
-    <a class="logo-chip" href="https://runwayml.com/" target="_blank" rel="noopener"><img src="../images/logos/runway.png" alt="Runway" loading="lazy">Runway</a>
-    <a class="logo-chip" href="https://klingai.com/" target="_blank" rel="noopener"><img src="../images/logos/kling.png" alt="Kling AI" loading="lazy">Kling AI</a>
+    <a class="logo-chip" href="https://runway.com/" target="_blank" rel="noopener"><img src="../images/logos/runway.png" alt="Runway" loading="lazy">Runway</a>
+    <a class="logo-chip" href="https://kling.ai/" target="_blank" rel="noopener"><img src="../images/logos/kling.png" alt="Kling AI" loading="lazy">Kling AI</a>
     <a class="logo-chip" href="https://lumalabs.ai/" target="_blank" rel="noopener"><img src="../images/logos/luma.png" alt="Luma Dream Machine" loading="lazy">Luma</a>
     <a class="logo-chip" href="https://pika.art/" target="_blank" rel="noopener"><img src="../images/logos/pika.png" alt="Pika" loading="lazy">Pika</a>
     <a class="logo-chip" href="https://pixverse.ai/" target="_blank" rel="noopener"><img src="../images/logos/pixverse.png" alt="PixVerse" loading="lazy">PixVerse</a>
@@ -83,7 +83,7 @@
       <li><strong>クライアントワーク・カメラ制御重視:</strong> Runway</li>
       <li><strong>動きの物理表現(水・煙・布など)重視:</strong> Kling AI</li>
       <li><strong>音声同期・広告向けの総合力:</strong> Google Veo(Veo 3.1)</li>
-      <li><strong>無料でも商用利用しやすくSNS日次投稿向き:</strong> Pika</li>
+      <li><strong>物理エフェクト(Pikaffects)を使ったSNS向けの表現:</strong> Pika</li>
       <li><strong>商用利用が現状できない状態:</strong> なし(全ツール有料プランで商用利用可、ただしPixVerse/Veoは一次情報未確認)</li>
     </ul>
   </div>
@@ -96,26 +96,26 @@
   <div class="detail-section" style="margin-top: 20px;">
     <h2 style="margin-top:0;">動画生成AIには「単体モデル系」と「集約プラットフォーム系」がある</h2>
     <p>動画生成AIを調べていると、「Klingというツールが良い」という話と「Magnificというサービスの中でKlingが使える」という話が同時に出てきて混乱しがちです。実際には大きく2種類に分かれています。</p>
-    <p><strong>①単体モデル系:</strong> 1社が自社開発した1つの生成モデルを、そのサービス自身のUIで提供する形態です。以下でメインに解説するMidjourney・Runway・Kling AI・Luma・Pika・PixVerse・Google Veoの7ツールはいずれもこちらにあたります。</p>
-    <p><strong>②集約プラットフォーム系:</strong> 自社ではモデルを開発せず、他社の複数モデル(Kling・Veo・Runway・Seedanceなど)を1つのサブスクリプション・1つの画面にまとめて提供する形態です。同じプロンプトを複数モデルで同時に試して比較できるのが強みです。代表例はMagnific(旧Freepik)・Higgsfield・MyEditで、開発者向けAPI版としてFAL.AIもあります(詳しくは後述)。</p>
-    <p>境界は完全に固定ではなく、単体モデル系のサービスが自社サブスクの中に他社モデルを一部取り込む動きがあるとの指摘も一部のブログ記事にありますが、当サイトで公式情報による確認はできていません。モデルの個性をじっくり使い込みたいなら単体モデル系、いろいろなモデルを1か所で比較・使い分けしたいなら集約プラットフォーム系、というのが選び方の目安です。</p>
+    <p><strong>①単体モデル系:</strong> 1社が自社開発した生成モデルを、そのサービス自身のUIで提供する形態です。以下でメインに解説するMidjourney・Runway・Kling AI・Luma・Pika・PixVerse・Google Veoの7ツールはいずれも自社モデルを持つため、この記事ではこちらに分類しています。ただしRunway・Luma・Pika・PixVerseは、2026年10月時点の公式サイト・料金ページで、自社モデルに加えてSeedanceなど他社のモデル(ツールによりKling・Google Veo・MiniMax等)も同じプランの中で提供しています。</p>
+    <p><strong>②集約プラットフォーム系:</strong> 主に他社の複数モデル(Kling・Veo・Runway・Seedanceなど)を1つのサブスクリプション・1つの画面にまとめて提供する形態です。同じプロンプトを複数モデルで同時に試して比較できるのが強みです。代表例はMagnific(旧Freepik)・Higgsfield・MyEditで、開発者向けAPI版としてFAL.AIもあります(詳しくは後述)。Higgsfieldは自社の動画モデル(DoP)・画像モデル(Soul)も持っています。</p>
+    <p>境界は完全に固定ではなく、上のとおり単体モデル系のサービスが自社のプランに他社モデルを取り込む動きが、各社の公式情報でも確認できます(2026年10月16日確認)。モデルの個性をじっくり使い込みたいなら単体モデル系、いろいろなモデルを1か所で比較・使い分けしたいなら集約プラットフォーム系、というのが選び方の目安です。</p>
   </div>
 
   <details class="rate-table-box show">
     <summary><h2>動画生成AIの分類マップ</h2></summary>
-    <p class="rate-table-note">各社公式サイトをもとにした2026年9月時点の分類です。「未確認」は今回の調査で一次情報に到達できなかった項目です。</p>
+    <p class="rate-table-note">各社公式サイトをもとにした2026年9月時点の分類です(Higgsfield・Runway・Luma・Pika・PixVerseの行は2026年10月16日に更新)。「未確認」は今回の調査で一次情報に到達できなかった項目です。</p>
     <div class="rate-table-wrap">
     <table class="rate-table">
       <tr><th>サービス</th><th>タイプ</th><th>特徴</th></tr>
       <tr><td><img class="rt-logo" src="../images/logos/midjourney.png" alt="">Midjourney</td><td>単体モデル</td><td>静止画から動画への変換(Animate機能)に特化</td></tr>
-      <tr><td><img class="rt-logo" src="../images/logos/runway.png" alt="">Runway</td><td>単体モデル</td><td>自社Gen-4.5、クライアントワーク・カメラ制御向け</td></tr>
+      <tr><td><img class="rt-logo" src="../images/logos/runway.png" alt="">Runway</td><td>単体モデル(他社モデルも提供)</td><td>自社Gen-4.5+Kling 3.0・Seedance 2.5等、クライアントワーク・カメラ制御向け</td></tr>
       <tr><td><img class="rt-logo" src="../images/logos/kling.png" alt="">Kling AI</td><td>単体モデル</td><td>自社モデル、動きの物理表現が滑らか</td></tr>
-      <tr><td><img class="rt-logo" src="../images/logos/luma.png" alt="">Luma Dream Machine</td><td>単体モデル</td><td>自社Ray3系、フォトリアル・カメラモーション</td></tr>
-      <tr><td><img class="rt-logo" src="../images/logos/pika.png" alt="">Pika</td><td>単体モデル</td><td>自社モデル、物理エフェクト(Pikaffects)</td></tr>
-      <tr><td><img class="rt-logo" src="../images/logos/pixverse.png" alt="">PixVerse</td><td>単体モデル</td><td>自社モデル、アニメ調スタイルの量産向け</td></tr>
+      <tr><td><img class="rt-logo" src="../images/logos/luma.png" alt="">Luma Dream Machine</td><td>単体モデル(他社モデルも提供)</td><td>自社Ray3系+Seedance・Kling 3.0・Veo 3.1等、フォトリアル・カメラモーション</td></tr>
+      <tr><td><img class="rt-logo" src="../images/logos/pika.png" alt="">Pika</td><td>単体モデル(他社モデルも提供)</td><td>自社Pika 2.5+Seedance 2.5・Wan 3.0等、物理エフェクト(Pikaffects)</td></tr>
+      <tr><td><img class="rt-logo" src="../images/logos/pixverse.png" alt="">PixVerse</td><td>単体モデル(他社モデルも提供)</td><td>自社PixVerse V6+Seedance 2.5・MiniMax H3等、アニメ調スタイルの量産向け</td></tr>
       <tr><td><img class="rt-logo" src="../images/logos/veo.png" alt="">Google Veo</td><td>単体モデル</td><td>自社Veo 3.1、効果音・セリフのネイティブ生成</td></tr>
       <tr><td><img class="rt-logo" src="../images/logos/magnific.png" alt="">Magnific(旧Freepik)</td><td>集約プラットフォーム</td><td>Kling/Veo/Runway/Seedance等40モデル超を1UIで</td></tr>
-      <tr><td><img class="rt-logo" src="../images/logos/higgsfield.png" alt="">Higgsfield</td><td>集約プラットフォーム</td><td>自社Seedance 2.5中心+Sora 2/Kling 3.0/Veo 3.1</td></tr>
+      <tr><td><img class="rt-logo" src="../images/logos/higgsfield.png" alt="">Higgsfield</td><td>集約プラットフォーム</td><td>Seedance 2.5(ByteDance)/Kling 3.0/Veo 3.1等の他社モデル+独自のモーション転写機能</td></tr>
       <tr><td><img class="rt-logo" src="../images/logos/fal-ai.png" alt="">FAL.AI</td><td>集約プラットフォーム(開発者向けAPI)</td><td>Kling/Veo/Seedance等をAPIで従量課金呼び出し</td></tr>
       <tr><td><img class="rt-logo" src="../images/logos/myedit.png" alt="">MyEdit</td><td>集約プラットフォーム</td><td>CyberLink運営、Veo/Kling/Seedance等+無料枠あり</td></tr>
     </table>
@@ -124,31 +124,31 @@
 
   <div class="detail-section" style="margin-top: 20px;">
     <h2 class="tool-heading"><img src="../images/logos/midjourney.png" alt="Midjourney">Midjourney(Animate機能)</h2>
-    <p>静止画生成に特化したMidjourneyが提供する、画像から動画への変換機能です(テキストから直接動画を作る機能はありません)。解像度は480p相当、5秒から生成し、Extend機能で最大20〜21秒まで延長できます。カメラワークの専用UIはなく、High motion/Low motionの2段階から選ぶシンプルな操作です。音声生成には対応していません。既存のMidjourney静止画資産をそのままアニメーション化するワークフローに向いており、イラスト系のSNS投稿やムードボード動画化によく使われます。</p>
+    <p>静止画生成に特化したMidjourneyが提供する、画像から動画への変換機能です(テキストから直接動画を作る機能はありません)。解像度は標準で480p(SD)、Standard以上のプランでは720p(HD、Fastモードのみ)も選べます。5秒から生成し、Extend機能で最大20〜21秒まで延長できます。カメラワークの専用UIはなく、High motion/Low motionの2段階から選ぶシンプルな操作です。音声生成には対応していません。既存のMidjourney静止画資産をそのままアニメーション化するワークフローに向いており、イラスト系のSNS投稿やムードボード動画化によく使われます。</p>
     <p>有料プラン(Basic以上)は商用利用権がありますが、無料トライアルでの商用利用はできません。なお年間売上が100万ドルを超える企業はPro・Megaプランの契約が必須という規約になっています(個人副業の規模では通常関係ありません)。Midjourney本来の静止画生成機能や、Stable Diffusion・Adobe Firefly等の他の画像生成AIとの比較は<a href="../gazou-ai-kaisetsu/">画像生成AI解説記事</a>で詳しく扱っています。</p>
     <p class="official-link"><a href="https://www.midjourney.com/" target="_blank" rel="noopener">→ Midjourney公式サイトを見る</a></p>
 
     <h2 class="tool-heading" style="margin-top: 28px;"><img src="../images/logos/runway.png" alt="Runway">Runway(Gen-4.5)</h2>
     <p>テキストから動画・画像から動画の両方に対応し、720p・24fpsで5/8/10秒(2〜10秒の範囲)の動画を生成できます。キーフレーム指定やVideo-to-Video変換など編集機能が豊富です。Coca-Cola案件(コスト65%減と報道)やDolce & Gabbana等のブランド案件で採用された実績が報じられています。</p>
     <p>無料プランは個人利用限定で透かしが入り、Standard以上で商用利用権と透かしなし出力が付与されます。有料プランでも既定ではユーザーの入出力がAI学習に利用される点に注意が必要です(Enterpriseプランのみ除外)。全出力にC2PA来歴情報の透かしが付きます。</p>
-    <p class="official-link"><a href="https://runwayml.com/" target="_blank" rel="noopener">→ Runway公式サイトを見る</a></p>
+    <p class="official-link"><a href="https://runway.com/" target="_blank" rel="noopener">→ Runway公式サイトを見る</a></p>
 
     <h2 class="tool-heading" style="margin-top: 28px;"><img src="../images/logos/kling.png" alt="Kling AI">Kling AI(Motion Control)</h2>
-    <p>動きの滑らかさに定評があり、最大4K解像度(SNS向けには1080pが推奨)に対応します。「Motion Control」は、参照動画の動きを別のキャラクターに転写する機能で、モーション参照動画は3〜30秒、単体の生成動画は最大60秒まで対応します。TikTok広告では9:16・1080×1920、8〜15秒尺が定番フォーマットとされ、Kling 3.0はこの尺をネイティブに生成できます。運営元の快手(Kuaishou)は自社発表で、中国のAIショートドラマ市場向けの採用が3ヶ月で1.5億元(2026年9月のレートで約31億円)の売上に達したと報じられています。</p>
+    <p>動きの滑らかさに定評があり、最大4K解像度(SNS向けには1080pが推奨)に対応します。「Motion Control」は、参照動画の動きを別のキャラクターに転写する機能で、参照する動作動画は3〜30秒で、生成される動画の長さは参照動画に合わせて決まります(公式ガイド)。通常の生成は、Kling 3.0で1回3〜15秒です。TikTok広告では9:16・1080×1920、8〜15秒尺が定番フォーマットとされ、Kling 3.0はこの尺をネイティブに生成できます。2026年2月公開のKling 3.0では、映像と同時にセリフなどの音声を生成するネイティブ音声にも対応しました(公式ガイドによると、セリフは中国語・英語・日本語・韓国語・スペイン語の5言語に対応)。運営元の快手(Kuaishou)は自社発表で、中国のAIショートドラマ市場向けの採用が3ヶ月で1.5億元(2026年9月のレートで約31億円)の売上に達したと報じられています。</p>
     <p>無料プランは商用利用不可・透かし必須で、有料プラン(Standard以上)で商用利用権と透かしなし出力が付与されます。利用者が著作権を持つ一方、Klingへ永続的な無償利用許諾(学習・広告転用含む)を付与する条項がある点には注意してください。</p>
-    <p class="official-link"><a href="https://klingai.com/" target="_blank" rel="noopener">→ Kling AI公式サイトを見る</a></p>
+    <p class="official-link"><a href="https://kling.ai/" target="_blank" rel="noopener">→ Kling AI公式サイトを見る</a></p>
 
     <h2 class="tool-heading" style="margin-top: 28px;"><img src="../images/logos/luma.png" alt="Luma Dream Machine">Luma Dream Machine(Ray3系)</h2>
-    <p>フォトリアルな実写風の映像と、12種類のカメラモーション(ドリー・オービット等)を自然言語で指定できる点が特徴です。2026年1月のRay3.14アップデートでネイティブ1080p化、4Kアップスケールにも対応しました。HDR・16bit EXR形式での出力にも対応しており、Luma自身は「業界初」と主張していますが、この主張自体は他社の独立した検証では確認できておらず未確認情報として扱います。1回の生成は最大10秒、連続生成で約30秒まで延長できます。音声生成には対応していません。</p>
-    <p>フォトリアル系の広告・EC商品動画、映画的なカメラワークが必要な実写風コンテンツに向いています。無料/Liteプランは商用利用不可・透かしありに加え、Lumaへの権利付与も比較的広い内容になっている点に注意してください。Plus以上の有料プランで商用利用が可能になります。</p>
+    <p>フォトリアルな実写風の映像と、12種類のカメラモーション(ドリー・オービット等)を自然言語で指定できる点が特徴です。2026年1月のRay3.14アップデートでネイティブ1080p化、4Kアップスケールにも対応しました。HDR・16bit EXR形式での出力にも対応しており、Luma自身は「業界初」と主張していますが、この主張自体は他社の独立した検証では確認できておらず未確認情報として扱います。1回の生成は最大10秒、連続生成で約30秒まで延長できます。自社モデル(Ray3.2・Ray3.14)は音声生成に対応していませんが、公式料金ページ(2026年10月確認)では、同じプランの中でSeedance 2.0/2.5・Kling 3.0・Veo 3.1など音声付きで生成できる他社モデルも使えます。</p>
+    <p>フォトリアル系の広告・EC商品動画、映画的なカメラワークが必要な実写風コンテンツに向いています。2026年10月時点の公式料金ページでは、個人向けプランはPlus(月$30)・Pro(月$90)・Ultra(月$300)の3つで、Plusから商用利用が含まれます(以前のLiteプランは掲載されていません)。利用規約(2026年5月14日更新)では、商用利用できるのは商用利用を含む有料サブスクリプションの期間中に作った出力のみです。それ以外(無料での利用時など)の出力には、Lumaへ公開・配布を含む広い利用許諾を与える内容になっています。また有料期間中でも、入力・出力をLumaのAI学習に使える許諾を与える条項があり、Lumaは出力に透かしや来歴情報を埋め込む権利を留保しています。</p>
     <p class="official-link"><a href="https://lumalabs.ai/" target="_blank" rel="noopener">→ Luma Dream Machine公式サイトを見る</a></p>
 
     <h2 class="tool-heading" style="margin-top: 28px;"><img src="../images/logos/pika.png" alt="Pika">Pika</h2>
-    <p>物理エフェクト「Pikaffects」(melt/explode/inflate/crush/dissolve等)が代表的な機能で、最大1080p・最大10秒の動画を生成できます。既存映像の編集・エフェクト付与に強く、TikTok・Reels・Shorts向けのバズ狙い表現やミーム系コンテンツによく使われます。Balenciaga・Vogueが起用した事例も報じられています。無料プランは商用利用権・透かしなし出力が付与されない一方、Standard以上(月$8〜)で商用利用権と透かしなし出力が付与されます。</p>
+    <p>物理エフェクト「Pikaffects」(melt/explode/inflate/crush/dissolve等)が代表的な機能で、最大1080p・最大10秒の動画を生成できます。既存映像の編集・エフェクト付与に強く、TikTok・Reels・Shorts向けのバズ狙い表現やミーム系コンテンツによく使われます。Balenciaga・Vogueが起用した事例も報じられています。公式料金ページ(2026年10月確認)では、無料プランとStarterプラン(月$10)も透かしなしで出力できますが商用ライセンスは含まれず、商用利用はCreatorプラン(月$35、年払いなら月$28)以上が対象です。</p>
     <p class="official-link"><a href="https://pika.art/" target="_blank" rel="noopener">→ Pika公式サイトを見る</a></p>
 
     <h2 class="tool-heading" style="margin-top: 28px;"><img src="../images/logos/pixverse.png" alt="PixVerse">PixVerse</h2>
-    <p>Standardプラン(720p)・Proプラン(1080p)があり、1クリップ4〜8秒、Realistic/Anime/Clay/3Dなど複数のスタイルを選べます。アニメ調の2D表現に強く、Klingと同等の品質をRunwayより高速に生成できるという比較評価もあります。複数ショットをまとめて生成する機能や、動画と同時にネイティブ音声を生成する機能も特徴として挙げられていますが、これは単一の情報源のみでの言及にとどまり、他の独立した情報源では確認できていないため未確認情報として扱います。低予算でスタイル動画を量産したいクリエイター向けのツールです。公式の利用規約(商用利用条件の詳細)には今回の調査で一次情報として到達できておらず、利用前に公式サイトで直接確認することをおすすめします。</p>
+    <p>公式サイトのPixVerse V6のページ(2026年10月確認)によると、自社モデルのV6は1回最大15秒・1080pの生成、複数ショットを1回でまとめて作るマルチショット、セリフ・効果音・環境音のネイティブ音声生成に対応しています。Realistic/Anime/Clay/3Dなど複数のスタイルを選べ、アニメ調の2D表現に強く、Klingと同等の品質をRunwayより高速に生成できるという比較評価もあります。公式サイトでは、自社モデルに加えてSeedance 2.5・MiniMax H3など他社のモデルも提供しています。低予算でスタイル動画を量産したいクリエイター向けのツールです。公式の利用規約(商用利用条件の詳細)には今回の調査で一次情報として到達できておらず、利用前に公式サイトで直接確認することをおすすめします。</p>
     <p class="official-link"><a href="https://pixverse.ai/" target="_blank" rel="noopener">→ PixVerse公式サイトを見る</a></p>
 
     <h2 class="tool-heading" style="margin-top: 28px;"><img src="../images/logos/veo.png" alt="Google Veo">Google Veo(3.1)</h2>
@@ -171,12 +171,12 @@
 
   <div class="detail-section">
     <h2 class="tool-heading"><img src="../images/logos/magnific.png" alt="Magnific">Magnific(旧Freepik)</h2>
-    <p>2010年から続くストック素材サイト「Freepik」が、2026年4月28日にAI創作プラットフォーム「Magnific」へ全面リブランドしました(旧freepik.comは現在magnific.comへ自動転送されます)。運営元・技術は同じですが、サービス名とドメインが変わっている点に注意してください。Kling 2.5/3.0・Google Veo 3.1・Runway Gen-4.5・Seedance 2.0/2.5・MiniMax Hailuo・PixVerse・Sora 2など40モデル超を1つのUI・1つのクレジットで使い分けられるのが特徴です。</p>
+    <p>2010年から続くストック素材サイト「Freepik」が、2026年4月28日にAI創作プラットフォーム「Magnific」へ全面リブランドしました(旧freepik.comは現在magnific.comへ自動転送されます)。運営元・技術は同じですが、サービス名とドメインが変わっている点に注意してください。Kling 2.5/3.0・Google Veo 3.1・Runway Gen-4.5・Seedance 2.0/2.5・MiniMax Hailuo・PixVerseなど40モデル超を1つのUI・1つのクレジットで使い分けられるのが特徴です。なお、OpenAIのSora 2は、OpenAIがSoraのアプリを2026年4月26日に、APIを2026年9月24日に終了したため、この記事では対応モデルに含めていません。</p>
     <p>料金はクレジット制で、最安のPremiumプランは年払いで月額換算¥1,950(月払いは¥2,900)。動画生成はモデルごとに消費クレジットが異なります(例: Kling 2.5・720p・5秒で140クレジット)。</p>
     <p class="official-link"><a href="https://magnific.com/" target="_blank" rel="noopener">→ Magnific公式サイトを見る</a></p>
 
     <h2 class="tool-heading" style="margin-top: 28px;"><img src="../images/logos/higgsfield.png" alt="Higgsfield">Higgsfield</h2>
-    <p>2023年創業のAI動画編集スイートです。自社の最上位モデル「Seedance 2.5」に加え、独自のモーション転写機能「Genjutsu」、さらにSora 2・Kling 3.0・Google Veo 3.1にも対応しています。</p>
+    <p>2023年創業のAI動画編集スイートです。ByteDanceの「Seedance 2.5」、Kling 3.0、Google Veo 3.1などの他社モデルを1つの画面で使えるほか、独自のモーション転写機能「Genjutsu」も備えています。</p>
     <p>料金は公式ページがJS描画のため本記事では正確な金額を一次情報で確認できておらず、複数の独立したレビュー記事が共通して示す目安として、Starterプラン月額$19前後(270クレジット)からUltraプラン月額$99〜129(3,000クレジット)まで、という水準です(価格改定が頻繁との指摘もあり、利用前に公式ページで要確認)。無料プランの有無も公式ページ上で確認できませんでした。</p>
     <a class="tool-cta" href="https://higgsfield.ai/?fpr=45z8ik" target="_blank" rel="noopener sponsored" data-tool="higgsfield"><img class="tool-cta-logo" src="../images/logos/higgsfield.png" alt="" loading="lazy"><span class="tool-cta-text"><span class="tool-cta-title">Higgsfield公式サイトを見る</span><span class="tool-cta-sub">紹介リンクです。このリンク経由で契約されると当サイトに紹介料が入ります。</span></span><span class="aff-pr">PR</span></a>
 
@@ -192,33 +192,33 @@
 
   <details class="rate-table-box show">
     <summary><h2>商用利用・著作権の条件マトリクス</h2></summary>
-    <p class="rate-table-note">各社の利用規約・公式ヘルプをもとにした2026年9月時点の比較です。「未確認」は今回の調査で一次情報に到達できなかった項目です。契約内容は変更されることがあるため、実際の利用前に必ず最新の利用規約をご確認ください。</p>
+    <p class="rate-table-note">各社の利用規約・公式ヘルプをもとにした2026年9月時点の比較です(Pikaの列は2026年10月16日に公式料金ページで、Lumaの列は同日に公式の利用規約で再確認)。「未確認」は今回の調査で一次情報に到達できなかった項目です。契約内容は変更されることがあるため、実際の利用前に必ず最新の利用規約をご確認ください。</p>
     <div class="rate-table-wrap">
     <table class="rate-table rate-table-compare">
       <tr><th>項目</th><th><img class="rt-logo" src="../images/logos/midjourney.png" alt="">Midjourney</th><th><img class="rt-logo" src="../images/logos/runway.png" alt="">Runway</th><th><img class="rt-logo" src="../images/logos/kling.png" alt="">Kling AI</th><th><img class="rt-logo" src="../images/logos/luma.png" alt="">Luma</th><th><img class="rt-logo" src="../images/logos/pika.png" alt="">Pika</th><th><img class="rt-logo" src="../images/logos/pixverse.png" alt="">PixVerse</th><th><img class="rt-logo" src="../images/logos/veo.png" alt="">Veo</th></tr>
-      <tr><td>最低有料ティアでの商用利用</td><td>可(Basic〜)</td><td>可(Standard〜)</td><td>可(Standard〜)</td><td>可(Plus〜)</td><td>可(Standard〜)</td><td>未確認</td><td>未確認</td></tr>
-      <tr><td>AI学習へのデータ利用許諾</td><td>非独占的に許諾</td><td>既定で許諾(Enterprise除く)</td><td>永続的に許諾</td><td>比較的広い許諾(無料/Lite)</td><td>未確認</td><td>未確認</td><td>未確認</td></tr>
-      <tr><td>出力の透かし</td><td>無料版のみ</td><td>無料版+全出力にC2PA</td><td>無料版のみ必須</td><td>無料/Liteのみ</td><td>無料版のみ</td><td>未確認</td><td>全出力にSynthID常時</td></tr>
+      <tr><td>最低有料ティアでの商用利用</td><td>可(Basic〜)</td><td>可(Standard〜)</td><td>可(Standard〜)</td><td>可(Plus〜)</td><td>Starterは不可、Creator〜可</td><td>未確認</td><td>未確認</td></tr>
+      <tr><td>AI学習へのデータ利用許諾</td><td>非独占的に許諾</td><td>既定で許諾(Enterprise除く)</td><td>永続的に許諾</td><td>有料でも許諾(無料利用時はさらに広い)</td><td>未確認</td><td>未確認</td><td>未確認</td></tr>
+      <tr><td>出力の透かし</td><td>無料版のみ</td><td>無料版+全出力にC2PA</td><td>無料版のみ必須</td><td>規約上、有料でも透かし・来歴情報を埋め込む権利を留保</td><td>なし(無料版も透かしなし)</td><td>未確認</td><td>全出力にSynthID常時</td></tr>
     </table>
     </div>
   </details>
 
   <details class="rate-table-box show">
     <summary><h2>7ツールの技術仕様比較</h2></summary>
-    <p class="rate-table-note">各社公式ドキュメント・料金ページをもとにした、2026年9月時点の比較です。「未確認」は今回の調査で一次情報に到達できなかった項目です。</p>
+    <p class="rate-table-note">各社公式ドキュメント・料金ページをもとにした、2026年9月時点の比較です(Midjourneyの解像度、Kling AIの最大尺・音声生成、Luma・Pikaの音声生成と無料プラン、PixVerseの行は2026年10月16日に公式情報で再確認)。「未確認」は今回の調査で一次情報に到達できなかった項目です。</p>
     <div class="rate-table-wrap">
     <table class="rate-table">
       <tr><th>ツール</th><th>最大解像度</th><th>最大尺</th><th>音声生成</th><th>無料プランの商用利用</th></tr>
-      <tr><td><img class="rt-logo" src="../images/logos/midjourney.png" alt="">Midjourney</td><td>480p相当</td><td>約20〜21秒(Extend込み)</td><td>非対応</td><td>不可</td></tr>
+      <tr><td><img class="rt-logo" src="../images/logos/midjourney.png" alt="">Midjourney</td><td>720p(HD、Standard以上)</td><td>約20〜21秒(Extend込み)</td><td>非対応</td><td>不可</td></tr>
       <tr><td><img class="rt-logo" src="../images/logos/runway.png" alt="">Runway</td><td>720p</td><td>10秒</td><td>非対応(編集機能で対応する場合あり)</td><td>不可(透かしあり)</td></tr>
-      <tr><td><img class="rt-logo" src="../images/logos/kling.png" alt="">Kling AI</td><td>4K</td><td>60秒(単体)</td><td>非対応</td><td>不可(透かし必須)</td></tr>
-      <tr><td><img class="rt-logo" src="../images/logos/luma.png" alt="">Luma Dream Machine</td><td>1080p+4Kアップスケール</td><td>約30秒(連続生成)</td><td>非対応</td><td>不可(透かしあり)</td></tr>
-      <tr><td><img class="rt-logo" src="../images/logos/pika.png" alt="">Pika</td><td>1080p</td><td>10秒</td><td>非対応</td><td>不可(透かしあり)</td></tr>
-      <tr><td><img class="rt-logo" src="../images/logos/pixverse.png" alt="">PixVerse</td><td>1080p(Proプラン)</td><td>4〜8秒</td><td>単一情報源のみ、未確認</td><td>未確認</td></tr>
+      <tr><td><img class="rt-logo" src="../images/logos/kling.png" alt="">Kling AI</td><td>4K</td><td>15秒(Kling 3.0の1回あたり)</td><td>対応(Kling 3.0以降、セリフを含むネイティブ音声)</td><td>不可(透かし必須)</td></tr>
+      <tr><td><img class="rt-logo" src="../images/logos/luma.png" alt="">Luma Dream Machine</td><td>1080p+4Kアップスケール</td><td>約30秒(連続生成)</td><td>自社モデルは非対応(音声付きの他社モデルあり)</td><td>不可(有料期間中の出力のみ商用可)</td></tr>
+      <tr><td><img class="rt-logo" src="../images/logos/pika.png" alt="">Pika</td><td>1080p</td><td>10秒</td><td>別機能で対応(効果音・音声の生成)</td><td>不可(透かしはなし)</td></tr>
+      <tr><td><img class="rt-logo" src="../images/logos/pixverse.png" alt="">PixVerse</td><td>1080p(V6)</td><td>15秒(V6)</td><td>対応(V6、セリフ・効果音・環境音)</td><td>未確認</td></tr>
       <tr><td><img class="rt-logo" src="../images/logos/veo.png" alt="">Google Veo(3.1)</td><td>4K</td><td>8秒(1080p/4K)</td><td>対応(効果音・環境音・セリフ)</td><td>未確認</td></tr>
     </table>
     </div>
-    <p class="rate-source">参考: <a href="https://docs.midjourney.com/hc/en-us" target="_blank" rel="noopener">Midjourney公式ヘルプ</a>、<a href="https://help.runwayml.com" target="_blank" rel="noopener">Runway公式ヘルプ</a>、<a href="https://kling.ai/docs" target="_blank" rel="noopener">Kling AI公式ドキュメント</a>、<a href="https://lumalabs.ai/learning-hub" target="_blank" rel="noopener">Luma公式ラーニングハブ</a>、<a href="https://deepmind.google/models/veo/" target="_blank" rel="noopener">Google DeepMind公式(Veo)</a>(2026年9月確認)</p>
+    <p class="rate-source">参考: <a href="https://docs.midjourney.com/hc/en-us" target="_blank" rel="noopener">Midjourney公式ヘルプ</a>、<a href="https://help.runwayml.com/hc/en-us" target="_blank" rel="noopener">Runway公式ヘルプ</a>、<a href="https://kling.ai/docs" target="_blank" rel="noopener">Kling AI公式ドキュメント</a>、<a href="https://lumalabs.ai/learning-hub" target="_blank" rel="noopener">Luma公式ラーニングハブ</a>、<a href="https://deepmind.google/models/veo/" target="_blank" rel="noopener">Google DeepMind公式(Veo)</a>(2026年9月確認)、<a href="https://docs.midjourney.com/hc/en-us/articles/37460773864589-Video" target="_blank" rel="noopener">Midjourney公式「Video」</a>、<a href="https://kling.ai/quickstart/klingai-video-3-model-user-guide" target="_blank" rel="noopener">Kling VIDEO 3.0公式ユーザーガイド</a>、<a href="https://kling.ai/quickstart/motion-control-user-guide" target="_blank" rel="noopener">Kling Motion Control公式ガイド</a>、<a href="https://kling.ai/blog/kling-4-vs-3" target="_blank" rel="noopener">Kling公式ブログ「Kling 4.0 vs 3.0」</a>、<a href="https://lumalabs.ai/pricing" target="_blank" rel="noopener">Luma公式料金ページ</a>、<a href="https://lumalabs.ai/legal/terms-of-service" target="_blank" rel="noopener">Luma利用規約</a>、<a href="https://pika.art/pricing" target="_blank" rel="noopener">Pika公式料金ページ</a>、<a href="https://pixverse.ai/en/model/pixverse-v6" target="_blank" rel="noopener">PixVerse V6公式ページ</a>(2026年10月16日確認)</p>
   </details>
 
   <p class="follow-x">制作の裏側や新しいツールの告知は <a href="https://x.com/uuhai0625" target="_blank" rel="noopener">@uuhai0625</a> で発信しています</p>
@@ -231,7 +231,7 @@
     </details>
     <details class="faq-item">
       <summary>無料プランで作った動画を商用利用できますか?</summary>
-      <p>ツールによって異なりますが、多くは無料プランに透かし(ウォーターマーク)が入り商用利用は認められていません。Midjourney・Runway・Kling AI・Luma・Pikaはいずれも有料プラン(多くはStandard相当)以上で商用利用権・透かしなし出力が付与されます。PixVerseとGoogle Veoは公式規約上の詳細な条件を一次情報で確認できておらず、利用前に必ず公式ToSを確認することをおすすめします。</p>
+      <p>ツールによって異なりますが、多くは無料プランでは透かし(ウォーターマーク)が入るか、商用利用が認められていません。Midjourney・Runway・Kling AI・Luma・Pikaはいずれも有料プラン以上で商用利用権が付与されます(多くは最安の有料プランから、Pikaは2番目のCreatorプランから)。PixVerseとGoogle Veoは公式規約上の詳細な条件を一次情報で確認できておらず、利用前に必ず公式ToSを確認することをおすすめします。</p>
     </details>
     <details class="faq-item">
       <summary>生成した動画の著作権は誰のものになりますか?</summary>
@@ -264,7 +264,7 @@
 </main>
 
 <footer class="site-footer">
-  <p>掲載している技術仕様・商用利用条件は、各社公式ドキュメント・利用規約をもとにした2026年9月時点の情報です。一次情報に到達できなかった項目は本文・表内に「未確認」と明記しています。生成AIツールの仕様・規約は頻繁に更新されるため、実際の利用前には必ず各社公式サイトでご確認ください。</p>
+  <p>掲載している技術仕様・商用利用条件は、各社公式ドキュメント・利用規約をもとにした2026年9月時点の情報です(一部は2026年10月16日に再確認)。一次情報に到達できなかった項目は本文・表内に「未確認」と明記しています。生成AIツールの仕様・規約は頻繁に更新されるため、実際の利用前には必ず各社公式サイトでご確認ください。</p>
   <p>この記事の一部のリンクは紹介(アフィリエイト)リンクで、該当箇所に「PR」と表示しています。リンク経由で契約されると当サイトに紹介料が入ることがあります。紹介料の有無は本文の記載内容・比較・評価に影響させていませんが、提携先へのリンクは「PR」表示付きのカード・ボタン形式で掲載しています。</p>
   <p><a href="../#about">運営者情報・プライバシーポリシー・お問い合わせ</a></p>
   <p>同じ作者の計算ツール: <a href="https://uuhai-keisan.github.io/">uuhai計算帳</a>(仕事と暮らしの計算)</p>

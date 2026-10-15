@@ -14,7 +14,7 @@ const RAKUTEN_API_AFFILIATE_ID = '567fd2ff.507b4e2c.567fd300.5261c56d';
 
 let productRequestId = 0;
 
-async function showProducts(keyword, labelText) {
+async function showProducts(keyword, labelText, opts = {}) {
   const grid = document.getElementById('product-grid');
   const label = document.getElementById('product-grid-label');
   if (!grid) return;
@@ -27,12 +27,21 @@ async function showProducts(keyword, labelText) {
   url.searchParams.set('accessKey', RAKUTEN_ACCESS_KEY);
   url.searchParams.set('affiliateId', RAKUTEN_API_AFFILIATE_ID);
   url.searchParams.set('keyword', keyword);
+  // 曖昧な語だとレビュー数順で関係ない商品が上位に来るため、除外語で絞る(2026-10-16)
+  if (opts.ng) url.searchParams.set('NGKeyword', opts.ng);
   url.searchParams.set('sort', '-reviewCount');
   url.searchParams.set('hits', '4');
   url.searchParams.set('format', 'json');
   try {
-    const res = await fetch(url.toString());
+    let res = await fetch(url.toString());
     if (requestId !== productRequestId) return;
+    // 楽天APIは1秒以内に続けて呼ぶと429になるので、計算ボタンを続けて押したときは1.1秒後に1回だけ再試行する。
+    if (res.status === 429) {
+      await new Promise((resolve) => setTimeout(resolve, 1100));
+      if (requestId !== productRequestId) return;
+      res = await fetch(url.toString());
+      if (requestId !== productRequestId) return;
+    }
     if (!res.ok) return;
     const data = await res.json();
     if (requestId !== productRequestId) return;
@@ -40,7 +49,7 @@ async function showProducts(keyword, labelText) {
     if (!items.length) return;
     grid.innerHTML = `<div class="product-band"><div class="product-band-grid">${items.map(cardHtml).join('')}</div></div>`;
     grid.classList.add('show');
-    if (label) { label.textContent = labelText; label.style.display = ''; }
+    if (label) { label.textContent = `${labelText}(楽天レビュー件数順)`; label.style.display = ''; }
   } catch (e) {
     // 失敗時は既存の検索リンクCTA(aff-card)に静かにフォールバック
   }
@@ -73,6 +82,7 @@ function cardHtml(item) {
     .replace(/"/g, '&quot;');
   return `
     <a class="product-card" href="${escapeAttr(item.itemUrl)}" target="_blank" rel="noopener sponsored">
+      <span class="pr-badge">PR</span>
       <img src="${escapeAttr(img)}" alt="${name}" loading="lazy" width="300" height="300">
       <p class="product-name">${name}</p>
       <p class="product-price">¥${price}</p>
@@ -147,8 +157,9 @@ let lastRatioPct = 0;
 // calc()側で100%に一括クランプする(D6: 極端な入力値でも算出根拠を隠さず通知するため)。
 function calcRatio() {
   if (mode === 'time') {
-    const hours = Math.max(0, Number(inputHours.value) || 0);
-    const workdays = Math.max(0, Number(inputWorkdays.value) || 0);
+    // 1日24時間・週7日を超える入力はありえないので、HTMLのmaxと同じ範囲に収める。
+    const hours = Math.min(24, Math.max(0, Number(inputHours.value) || 0));
+    const workdays = Math.min(7, Math.max(0, Number(inputWorkdays.value) || 0));
     const weeklyHours = hours * workdays;
     return weeklyHours / (24 * 7);
   }
@@ -167,13 +178,19 @@ function calcRatio() {
 // 初回計算後の「入力するたびに自動再計算」でも使い回せるようにする。
 function computeAndRender() {
   const expense = EXPENSES[selectExpense.value];
-  const amount = Math.max(0, Number(inputAmount.value) || 0);
+  const amount = Math.min(1000000000, Math.max(0, Number(inputAmount.value) || 0));
   const rawRatio = calcRatio();
   const ratio = Math.min(1, rawRatio);
   const ratioPct = Math.round(ratio * 1000) / 10;
 
-  if (rawRatio > 1) {
-    resultClampNotice.textContent = '※ 算出した按分率が100%を超えたため、100%に調整して計算しています。入力値(使用時間・稼働日数、または面積)をご確認ください。';
+  const clampNotes = [];
+  if (rawRatio > 1) clampNotes.push('算出した按分率が100%を超えたため、100%に調整して計算しています。入力値(使用時間・稼働日数、または面積)をご確認ください。');
+  if (mode === 'time' && ((Number(inputHours.value) || 0) > 24 || (Number(inputWorkdays.value) || 0) > 7)) {
+    clampNotes.push('使用時間は1日24時間・稼働日数は週7日までとして計算しています。');
+  }
+  if ((Number(inputAmount.value) || 0) > 1000000000) clampNotes.push('金額は10億円までとして計算しています。');
+  if (clampNotes.length) {
+    resultClampNotice.textContent = `※ ${clampNotes.join(' ')}`;
     resultClampNotice.classList.add('show');
   } else {
     resultClampNotice.classList.remove('show');
@@ -252,7 +269,7 @@ function paramsFromState() {
 
 function updateShareUrl() {
   const params = paramsFromState();
-  history.replaceState(null, '', `${location.pathname}?${params.toString()}`);
+  (window.replaceUrlQuietly || history.replaceState.bind(history))(null, '', `${location.pathname}?${params.toString()}`);
 }
 
 // 共有・保存経路の流入計測用(2026-09-02追加)。ブラウザのアドレスバー(history.replaceState)には
@@ -396,7 +413,7 @@ function initFromQuery() {
   showFieldsForMode();
 
   const expense = params.get('expense');
-  if (expense && EXPENSES[expense]) selectExpense.value = expense;
+  if (expense && Object.prototype.hasOwnProperty.call(EXPENSES, expense)) selectExpense.value = expense;
   const amount = params.get('amount');
   if (amount) inputAmount.value = amount;
   if (mode === 'time') {

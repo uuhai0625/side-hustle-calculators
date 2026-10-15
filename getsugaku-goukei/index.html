@@ -33,11 +33,11 @@
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "datePublished": "2026-08-20",
-  "dateModified": "2026-08-29",
+  "dateModified": "2026-10-16",
   "mainEntity": [
     { "@type": "Question", "name": "この計算機は何を合計しているんですか?", "acceptedAnswer": { "@type": "Answer", "text": "生成AIチャットツール・AIコーディングツール・動画生成AIツール・パソコン電気代・減価償却費(月割り)など、AI副業でよく使う費用の月額を合計する簡易ダッシュボードです。サインアップや継続入力は不要で、選ぶ・入力するだけで目安がわかります。" } },
     { "@type": "Question", "name": "電気代や動画AIツールの金額はどう入れればいいですか?", "acceptedAnswer": { "@type": "Answer", "text": "それぞれ専用の計算機(在宅ワークのパソコン電気代計算機・動画作成AIツールの月額料金シミュレーター)で試算した金額を、こちらの入力欄にそのまま入力してください。" } },
-    { "@type": "Question", "name": "経費按分や確定申告の計算はできますか?", "acceptedAnswer": { "@type": "Answer", "text": "いいえ、このページは支出の合計目安を出すだけです。経費計上額の按分は「副業の経費按分計算機」、減価償却は「減価償却費計算機」をご利用ください。" } },
+    { "@type": "Question", "name": "経費按分や確定申告の計算はできますか?", "acceptedAnswer": { "@type": "Answer", "text": "いいえ、このページは支出の合計目安を出すだけです。経費計上額の按分は副業の経費按分計算機、減価償却は減価償却費計算機をご利用ください。" } },
     { "@type": "Question", "name": "複数のチャットAI・コーディングツールを併用している場合はどうすればいいですか?", "acceptedAnswer": { "@type": "Answer", "text": "現在は1ツールずつ選ぶ形式です。併用している場合は、2つ目以降の月額を「その他」欄に追加で入力してください。" } },
     { "@type": "Question", "name": "保存や履歴機能はありますか?", "acceptedAnswer": { "@type": "Answer", "text": "ありません。「結果のURLをコピー」を使えば、選んだ内容を含んだリンクとして共有・保存できます。" } }
   ]
@@ -58,7 +58,7 @@
     "priceCurrency": "JPY"
   },
   "datePublished": "2026-08-20",
-  "dateModified": "2026-08-29"
+  "dateModified": "2026-10-16"
 }
 </script>
 <!-- breadcrumb-ld:start 自動生成: _tools/build_nav.py(手編集すると次回実行で上書きされる) -->
@@ -95,9 +95,10 @@
       <select id="select-chat">
         <option value="none">利用しない</option>
         <option value="chatgpt_free">ChatGPT 無料版(¥0)</option>
-        <option value="chatgpt_go">ChatGPT Go(¥1,400)</option>
+        <option value="chatgpt_go">ChatGPT Go(約¥1,272)</option>
         <option value="chatgpt_plus" selected>ChatGPT Plus(約¥3,180)</option>
-        <option value="chatgpt_pro">ChatGPT Pro(¥16,800)</option>
+        <option value="chatgpt_pro">ChatGPT Pro $100(約¥15,900)</option>
+        <option value="chatgpt_pro200">ChatGPT Pro $200(約¥31,800)</option>
         <option value="claude_pro">Claude Pro(約¥3,180)</option>
         <option value="claude_max5">Claude Max 5x(約¥15,900)</option>
         <option value="claude_max20">Claude Max 20x(約¥31,800)</option>
@@ -115,19 +116,23 @@
         <option value="none">利用しない</option>
         <option value="copilot_free">GitHub Copilot Free(¥0)</option>
         <option value="copilot_pro" selected>GitHub Copilot Pro(約¥1,590)</option>
-        <option value="codex_go">OpenAI Codex(ChatGPT Go・¥1,400)</option>
+        <option value="codex_go">OpenAI Codex(ChatGPT Go・約¥1,272)</option>
+        <option value="cursor_plus">Cursor Plus(約¥1,272)</option>
         <option value="claude_pro_code">Claude Code Pro(約¥3,180)</option>
-        <option value="cursor_pro">Cursor Pro(約¥3,180)</option>
-        <option value="copilot_proplus">GitHub Copilot Pro+(約¥6,200)</option>
         <option value="codex_plus">OpenAI Codex(ChatGPT Plus・約¥3,180)</option>
+        <option value="cursor_premium">Cursor Premium(約¥4,770)</option>
+        <option value="copilot_proplus">GitHub Copilot Pro+(約¥6,200)</option>
         <option value="claude_max5_code">Claude Code Max 5x(約¥15,900)</option>
-        <option value="cursor_proplus">Cursor Pro+(約¥9,540)</option>
         <option value="copilot_max">GitHub Copilot Max(約¥15,900)</option>
-        <option value="codex_pro">OpenAI Codex(ChatGPT Pro・¥16,800)</option>
+        <option value="codex_pro">OpenAI Codex(ChatGPT Pro $100・約¥15,900)</option>
+        <option value="cursor_super">Cursor Super(約¥15,900)</option>
         <option value="claude_max20_code">Claude Code Max 20x(約¥31,800)</option>
+        <option value="codex_pro200">OpenAI Codex(ChatGPT Pro $200・約¥31,800)</option>
         <option value="cursor_ultra">Cursor Ultra(約¥31,800)</option>
+        <option value="cursor_pro">Cursor Pro・旧プラン(既存契約者のみ、約¥3,180)</option>
+        <option value="cursor_proplus">Cursor Pro+・旧プラン(既存契約者のみ、約¥9,540)</option>
       </select>
-      <span class="field-hint"><a href="../ai-coding-tools/">AIコーディングツール料金比較</a>で詳しく比較できます</span>
+      <span class="field-hint"><a href="../ai-coding-tools/">AIコーディングツール料金比較</a>で詳しく比較できます。Cursorの新プランで他社モデル(Claude・GPT等)を使った分は別料金のため、「その他」欄に足してください</span>
     </div>
 
     <div class="field">
@@ -243,7 +248,7 @@
 </main>
 
 <footer class="site-footer">
-  <p>掲載している料金は、各サービスの公式サイトをもとにした2026年8月時点の目安です。動画AIツール・電気代・減価償却費の金額は使用量によって変わるため、各専用計算機での試算結果を入力してご利用ください。最新の料金・仕様は各サービスの公式サイトでご確認ください。</p>
+  <p>掲載している料金は、各サービスの公式サイトをもとにした目安です(ChatGPT・OpenAI Codex・Cursor・GitHub Copilotは2026年10月時点、それ以外は2026年8月時点)。ドル建てのプランは為替159円/ドル(2026年8月時点の目安)で円に換算しています。日本から申し込むと円建てで表示・請求される場合があるため、実際の金額は各サービスの契約画面で確認してください。動画AIツール・電気代・減価償却費の金額は使用量によって変わるため、各専用計算機での試算結果を入力してご利用ください。最新の料金・仕様は各サービスの公式サイトでご確認ください。</p>
   <p>このページの一部のリンクは紹介(アフィリエイト)リンクで、該当箇所に「PR」と表示しています。リンク経由で購入されると当サイトに紹介料が入ることがあります。紹介料の有無は、本文の記載内容・比較・計算結果に影響させていません。</p>
   <p><a href="../#about">運営者情報・プライバシーポリシー・お問い合わせ</a></p>
   <p>同じ作者の計算ツール: <a href="https://uuhai-keisan.github.io/">uuhai計算帳</a>(仕事と暮らしの計算)</p>

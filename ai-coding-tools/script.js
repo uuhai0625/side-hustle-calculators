@@ -34,8 +34,8 @@ const RECOMMENDATIONS = {
   completion: {
     few: {
       headline: 'まずは無料プランで様子見',
-      advice: 'GitHub Copilot Free(コード補完2,000回/月)や、Claude Code・Codexの無料枠でまず試してみてください。本当に上限に達してから有料プランを検討すれば十分です。',
-      highlight: [['claude', 'free'], ['codex', 'free'], ['cursor', 'free'], ['copilot', 'free']],
+      advice: 'GitHub Copilot Free(コード補完2,000回/月)や、OpenAI Codex(ChatGPT Freeに含まれる)・Cursorの無料プランでまず試してみてください。Claude Codeは無料プランでは使えず、Claude Pro以上の有料プランが必要です。本当に上限に達してから有料プランを検討すれば十分です。',
+      highlight: [['codex', 'free'], ['cursor', 'free'], ['copilot', 'free']],
     },
     daily: {
       headline: 'GitHub Copilot Pro($10/月・約¥1,590)',
@@ -191,7 +191,7 @@ function paramsFromState() {
 
 function updateShareUrl() {
   const params = paramsFromState();
-  history.replaceState(null, '', `${location.pathname}?${params.toString()}`);
+  (window.replaceUrlQuietly || history.replaceState.bind(history))(null, '', `${location.pathname}?${params.toString()}`);
 }
 
 function shareText(headline) {
@@ -238,9 +238,9 @@ function initFromQuery() {
   const params = new URLSearchParams(location.search);
   const task = params.get('task');
   const freq = params.get('freq');
-  if (!task || !TASK_LABELS[task]) return;
+  if (!task || !Object.prototype.hasOwnProperty.call(TASK_LABELS, task)) return;
   selectTask.value = task;
-  if (freq && FREQ_LABELS[freq]) selectFreq.value = freq;
+  if (freq && Object.prototype.hasOwnProperty.call(FREQ_LABELS, freq)) selectFreq.value = freq;
   calc();
 }
 

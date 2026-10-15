@@ -34,8 +34,15 @@ async function showProducts(keyword, labelText, opts = {}) {
   url.searchParams.set('hits', '4');
   url.searchParams.set('format', 'json');
   try {
-    const res = await fetch(url.toString());
+    let res = await fetch(url.toString());
     if (requestId !== productRequestId) return;
+    // 楽天APIは1秒以内に続けて呼ぶと429になるので、1.1秒後に1回だけ再試行する。
+    if (res.status === 429) {
+      await new Promise((resolve) => setTimeout(resolve, 1100));
+      if (requestId !== productRequestId) return;
+      res = await fetch(url.toString());
+      if (requestId !== productRequestId) return;
+    }
     if (!res.ok) return;
     const data = await res.json();
     if (requestId !== productRequestId) return;
@@ -43,7 +50,7 @@ async function showProducts(keyword, labelText, opts = {}) {
     if (!items.length) return;
     grid.innerHTML = `<div class="product-band"><div class="product-band-grid">${items.map(cardHtml).join('')}</div></div>`;
     grid.classList.add('show');
-    if (label) { label.textContent = labelText; label.style.display = ''; }
+    if (label) { label.textContent = `${labelText}(楽天レビュー件数順)`; label.style.display = ''; }
   } catch (e) {
     // 失敗時は既存の検索リンクCTA(aff-card)に静かにフォールバック
   }
@@ -76,6 +83,7 @@ function cardHtml(item) {
     .replace(/"/g, '&quot;');
   return `
     <a class="product-card" href="${escapeAttr(item.itemUrl)}" target="_blank" rel="noopener sponsored">
+      <span class="pr-badge">PR</span>
       <img src="${escapeAttr(img)}" alt="${name}" loading="lazy" width="300" height="300">
       <p class="product-name">${name}</p>
       <p class="product-price">¥${price}</p>
@@ -89,6 +97,13 @@ function clamp(value, min, max) {
 // D6: 極端な入力値でも算出根拠を隠さず通知するため、クランプが実際に働いた項目を記録し、
 // calc完了時にresult-clamp-noticeへまとめて表示する。
 let clampNotes = [];
+// 為替レート欄: 空欄なら既定の159円。0や負の値は「未入力」扱いにせず、下限100円に収めて注意書きを出す。
+function rateInput(el) {
+  if (String(el.value).trim() === '') return 159;
+  const v = Number(el.value);
+  return Number.isFinite(v) ? v : 159;
+}
+
 function clampNoted(value, min, max, label) {
   const clamped = clamp(value, min, max);
   if (clamped !== value) clampNotes.push(`${label}を${clamped}`);
@@ -127,27 +142,31 @@ function bookEquivalentNote(monthlyJpy) {
   return ` 参考までに、Kindle絵本1冊(¥480・70%印税想定、配信コスト控除前の概算)に換算すると、月あたり約${books}冊分の売上に相当します。`;
 }
 
-// ---- ツール別の料金データ(2026年8月、Perplexity+WEB検索で複数の比較記事を横断確認した参考値) ----
+// ---- ツール別の料金データ(2026年8月、Perplexity+WEB検索で複数の比較記事を横断確認した参考値。
+// Midjourney・Runway・Luma・Pikaは2026-10-16に各社公式ページで再確認して更新) ----
 
+// Midjourney: 公式ドキュメント「Comparing Midjourney Plans」「GPU Speed」「Video」(2026-10-16確認)。
+// 動画のRelaxモードはPro・Megaのみ(SD画質のみ)。BasicはSD画質のみ。
 const MJ_INFO = { name: 'Midjourney', url: 'https://www.midjourney.com/' };
 const MJ_PLANS = {
-  basic:    { label: 'Basic($10)', priceUsd: 10, fastMin: 198 },
+  basic:    { label: 'Basic($10)', priceUsd: 10, fastMin: 200 },
   standard: { label: 'Standard($30)', priceUsd: 30, fastMin: 900 },
-  pro:      { label: 'Pro($60)', priceUsd: 60, fastMin: 1800 },
-  mega:     { label: 'Mega($120)', priceUsd: 120, fastMin: 3600 },
+  pro:      { label: 'Pro($60)', priceUsd: 60, fastMin: 1800, relaxVideo: true },
+  mega:     { label: 'Mega($120)', priceUsd: 120, fastMin: 3600, relaxVideo: true },
 };
-const MJ_STILL_MIN = 1;      // 静止画1枚あたりのFast時間の目安(分)
-const MJ_ANIMATE_MIN = 26;   // 動画化(Animate)1本あたりのFast時間の目安(分)
+const MJ_STILL_MIN = 1;      // 静止画の生成1回あたりのFast時間の目安(分、公式「about one minute」)
+const MJ_ANIMATE_MIN = 8;    // 動画化(Animate)1回=SD画質4本1組のFast時間(分、公式。HD画質は26分)
 const MJ_EXTRA_USD_PER_MIN = 4 / 60; // 追加Fast時間は$4/時間
 
-const RW_INFO = { name: 'Runway', url: 'https://runwayml.com/' };
+const RW_INFO = { name: 'Runway', url: 'https://runway.com/' };
 const RW_PLANS = {
   standard: { label: 'Standard($15)', priceUsd: 15, credits: 625 },
   pro:      { label: 'Pro($35)', priceUsd: 35, credits: 2250 },
   max:      { label: 'Max($95)', priceUsd: 95, credits: 9500 },
 };
+// Gen-4.5は公式料金ページ(runway.com/pricing、2026-10-16確認)の「12 credits per second」。
 const RW_MODELS = {
-  gen45:     { label: 'Gen-4.5', creditsPerSec: 25 },
+  gen45:     { label: 'Gen-4.5', creditsPerSec: 12 },
   gen4:      { label: 'Gen-4', creditsPerSec: 12 },
   gen4turbo: { label: 'Gen-4 Turbo', creditsPerSec: 5 },
 };
@@ -155,9 +174,10 @@ const RW_EXTRA_USD_PER_CREDIT = 0.01; // 追加クレジットは公開されて
 
 // 「5秒動画あたりの消費クレジット」を共通の単位にして横並び比較できるようにした5ツール。
 // usdPerCreditExtraは各ツールのエントリープランの実質単価から算出した参考値(公式の追加購入単価が非公開のため)。
+// 公式の追加購入単価が確認できたツールはextraLabelにその出典を書き、その単価を使う。
 const CREDIT5S_TOOLS = {
   kling: {
-    name: 'Kling AI', url: 'https://klingai.com/',
+    name: 'Kling AI', url: 'https://kling.ai/',
     creditsPer5Sec: 40, usdPerCreditExtra: 0.015,
     plans: {
       standard: { label: 'Standard($10)', priceUsd: 10, credits: 660 },
@@ -166,22 +186,25 @@ const CREDIT5S_TOOLS = {
       ultra:    { label: 'Ultra($180)', priceUsd: 180, credits: 26000 },
     },
   },
+  // Luma: 公式料金ページ(lumalabs.ai/pricing、2026-10-16確認)。5秒の消費量はRay3.2・720p・SDRの100クレジット。
   luma: {
-    name: 'Luma Dream Machine', url: 'https://lumalabs.ai/dream-machine',
-    creditsPer5Sec: 330, usdPerCreditExtra: 0.00312,
+    name: 'Luma Dream Machine', url: 'https://lumalabs.ai/app',
+    creditsPer5Sec: 100, usdPerCreditExtra: 0.003,
     plans: {
-      lite:      { label: 'Lite($9.99)', priceUsd: 9.99, credits: 3200 },
-      plus:      { label: 'Plus($29.99)', priceUsd: 29.99, credits: 10000 },
-      unlimited: { label: 'Unlimited($94.99)', priceUsd: 94.99, credits: 10000, relaxedUnlimited: true },
+      plus:  { label: 'Plus($30)', priceUsd: 30, credits: 10000 },
+      pro:   { label: 'Pro($90)', priceUsd: 90, credits: 40000 },
+      ultra: { label: 'Ultra($300)', priceUsd: 300, credits: 150000 },
     },
   },
+  // Pika: 公式料金ページ(pika.art/pricing、2026-10-16確認)。5秒の消費量は同ページの目安表にあるSeedance 2.5・720p・5秒の122クレジット。
+  // 追加購入は公式の「60 credits per $1」(パックは$25から)。
   pika: {
     name: 'Pika', url: 'https://pika.art/',
-    creditsPer5Sec: 31, usdPerCreditExtra: 0.0143,
+    creditsPer5Sec: 122, usdPerCreditExtra: 1 / 60, extraLabel: 'Pika公式の追加購入単価(1ドルあたり60クレジット、購入は$25の1,500クレジットから)',
     plans: {
-      standard: { label: 'Standard($10)', priceUsd: 10, credits: 700 },
-      pro:      { label: 'Pro($35)', priceUsd: 35, credits: 2300 },
-      fancy:    { label: 'Fancy($95)', priceUsd: 95, credits: 6000 },
+      starter: { label: 'Starter($10)', priceUsd: 10, credits: 900 },
+      creator: { label: 'Creator($35)', priceUsd: 35, credits: 3150 },
+      fancy:   { label: 'Fancy($95)', priceUsd: 95, credits: 8550 },
     },
   },
   pixverse: {
@@ -228,21 +251,20 @@ function calcCredit5s(toolKey, plan, videos, seconds, rate) {
   const tool = CREDIT5S_TOOLS[toolKey];
   const neededCredits = Math.round(videos * (seconds / 5) * tool.creditsPer5Sec);
   const overCredits = Math.max(0, neededCredits - plan.credits);
-  const extraUsd = plan.relaxedUnlimited ? 0 : overCredits * tool.usdPerCreditExtra;
+  const extraUsd = overCredits * tool.usdPerCreditExtra;
   const totalUsd = plan.priceUsd + extraUsd;
   const totalJpy = Math.round(totalUsd * rate);
   let advice;
-  if (plan.relaxedUnlimited) {
-    advice = `このプランは付与クレジットを使い切っても低速の無制限モードで生成を続けられるため、追加費用は発生しない想定です。`;
-  } else if (overCredits > 0) {
-    advice = `プランのクレジットだけでは約${overCredits.toLocaleString('ja-JP')}クレジット足りない見込みです。追加クレジットの単価はエントリープランの実質単価($${tool.usdPerCreditExtra}/credit)を参考値にしています、正確な単価は${tool.name}のアカウント画面でご確認ください。`;
+  if (overCredits > 0) {
+    const extraBasis = tool.extraLabel
+      ? `${tool.extraLabel}を使っています。`
+      : `エントリープランの実質単価($${tool.usdPerCreditExtra}/credit)を参考値にしています、正確な単価は${tool.name}のアカウント画面でご確認ください。`;
+    advice = `プランのクレジットだけでは約${overCredits.toLocaleString('ja-JP')}クレジット足りない見込みです。追加クレジットの単価は${extraBasis}`;
   } else {
     advice = `選んだプランのクレジットの範囲内に収まる見込みです。`;
   }
   const creditsPerVideo = tool.creditsPer5Sec * (seconds / 5);
-  const capacityText = plan.relaxedUnlimited
-    ? '低速モードなら本数無制限'
-    : `月あたり約${Math.max(0, Math.floor(plan.credits / creditsPerVideo)).toLocaleString('ja-JP')}本相当`;
+  const capacityText = `月あたり約${Math.max(0, Math.floor(plan.credits / creditsPerVideo)).toLocaleString('ja-JP')}本相当`;
   return {
     totalUsd, totalJpy,
     note: `${tool.name} ${plan.label}、動画${videos}本×${seconds}秒で試算`,
@@ -257,14 +279,17 @@ function calcMj(plan, videos, candidates, rate) {
   const extraUsd = overMin * MJ_EXTRA_USD_PER_MIN;
   const totalUsd = plan.priceUsd + extraUsd;
   const totalJpy = Math.round(totalUsd * rate);
+  const relaxNote = plan.relaxVideo
+    ? 'このプランはFast時間を使い切っても、SD画質の動画ならRelaxモード(低速)で追加費用なしに生成を続けられます(HD画質はFastモードのみ)。'
+    : '';
   const advice = overMin > 0
-    ? `プランのFast時間だけでは約${Math.ceil(overMin / 6) / 10}時間分足りない見込みです。追加購入(1時間$4)は割高になりやすいため、必要な追加時間が大きい場合は上位プランへの切り替えも検討してください。`
+    ? `プランのFast時間だけでは約${Math.ceil(overMin / 6) / 10}時間分足りない見込みです。追加購入(1時間$4)は割高になりやすいため、必要な追加時間が大きい場合は上位プランへの切り替えも検討してください。${relaxNote}`
     : `選んだプランのFast時間の範囲内に収まる見込みです。Fast時間は使い切っても翌月に繰り越されません。`;
   const minPerVideo = candidates * MJ_STILL_MIN + MJ_ANIMATE_MIN;
   const capacity = Math.max(0, Math.floor(plan.fastMin / minPerVideo));
   return {
     totalUsd, totalJpy,
-    note: `Midjourney ${plan.label}、動画${videos}本(候補${candidates}枚+Animate)で試算`,
+    note: `Midjourney ${plan.label}、動画${videos}本(候補${candidates}枚+Animate・SD画質)で試算`,
     sub: `Fast時間の目安:必要${neededMin}分 / プラン付与${plan.fastMin}分(月あたり約${capacity.toLocaleString('ja-JP')}本相当)・為替${rate}円/ドル`,
     advice,
   };
@@ -310,9 +335,9 @@ const inputRwSeconds = document.getElementById('input-rw-seconds');
 const inputRate = document.getElementById('input-fx-rate');
 
 // 各ツールの初期表示プラン。既定の試算条件(動画8本×5秒)で追加費用が出ない、
-// 一番安いプランをデフォルトにしている(veoのみ最安のAI Plusだと既定条件で
-// 足りないため、無理なく収まるAI Proを初期値にした)。
-const CREDIT5S_DEFAULT_PLAN = { kling: 'standard', luma: 'lite', pika: 'standard', pixverse: 'standard', veo: 'pro' };
+// 一番安いプランをデフォルトにしている(veoは最安のAI Plus、pikaは最安のStarterだと
+// 既定条件で足りないため、収まるAI Pro・Creatorを初期値にした)。
+const CREDIT5S_DEFAULT_PLAN = { kling: 'standard', luma: 'plus', pika: 'creator', pixverse: 'standard', veo: 'pro' };
 
 function refreshToolFields() {
   const tool = selectTool.value;
@@ -348,7 +373,7 @@ let lastParts = null;
 function computeAndRenderSingle() {
   // HTMLのmin/max属性は直接入力・クエリパラメータ経由の値を弾かないため、
   // 計算時に必ずここでも同じ範囲にクランプする(denki-daiの実装と同じ方針)。
-  const rate = clampNoted(Number(inputRate.value) || 159, 100, 300, '為替レート');
+  const rate = clampNoted(rateInput(inputRate), 100, 300, '為替レート');
   const tool = selectTool.value;
   let result;
 
@@ -455,7 +480,7 @@ const inputComboRate = document.getElementById('input-combo-rate');
 // No.54(2026-09-06): 数値計算とテキスト更新だけを担う部分を独立させ、
 // 初回計算後の「入力するたびに自動再計算」でも使い回せるようにする。
 function computeAndRenderCombo() {
-  const rate = clampNoted(Number(inputComboRate.value) || 159, 100, 300, '為替レート');
+  const rate = clampNoted(rateInput(inputComboRate), 100, 300, '為替レート');
   const videos = clampNoted(Math.round(Number(inputComboVideos.value) || 0), 1, 60, '動画本数');
   const seconds = clampNoted(Math.round(Number(inputComboSeconds.value) || 0), 1, 30, '秒数');
   const candidates = clampNoted(Math.round(Number(inputComboCandidates.value) || 0), 1, 20, '候補数');
@@ -482,16 +507,18 @@ function computeAndRenderCombo() {
   const parts = checked.map((row) => {
     const select = document.getElementById(row.selectId);
     if (row.key === 'mj') {
-      const plan = MJ_PLANS[select.value];
+      // 共有URLのプラン名が存在しない(改廃・改変)場合は既定プランで代用し、計算を止めない
+      const plan = (Object.prototype.hasOwnProperty.call(MJ_PLANS, select.value) && MJ_PLANS[select.value]) || MJ_PLANS.standard;
       return { name: MJ_INFO.name, ...calcMj(plan, videos, candidates, rate) };
     }
     if (row.key === 'runway') {
-      const plan = RW_PLANS[select.value];
+      const plan = (Object.prototype.hasOwnProperty.call(RW_PLANS, select.value) && RW_PLANS[select.value]) || RW_PLANS.standard;
       const model = RW_MODELS.gen4;
       return { name: RW_INFO.name, ...calcRunway(plan, model, videos, seconds, rate) };
     }
     const toolData = CREDIT5S_TOOLS[row.key];
-    const plan = toolData.plans[select.value];
+    // 2026-10-16にLuma・Pikaのプラン名が変わったため、旧プラン名入りの共有URLでも計算が止まらないよう先頭プランで代用する
+    const plan = (Object.prototype.hasOwnProperty.call(toolData.plans, select.value) && toolData.plans[select.value]) || Object.values(toolData.plans)[0];
     return { name: toolData.name, ...calcCredit5s(row.key, plan, videos, seconds, rate) };
   });
 
@@ -500,7 +527,7 @@ function computeAndRenderCombo() {
 
   resultAmount.textContent = totalJpy.toLocaleString('ja-JP');
   resultNote.textContent = `${parts.map((p) => p.name).join(' + ')} を併用した場合の合計`;
-  resultSub.textContent = `動画${videos}本×${seconds}秒(Midjourneyのみ候補${candidates}枚+Animate)・為替${rate}円/ドル(合計 $${totalUsd.toFixed(2)})`;
+  resultSub.textContent = `動画${videos}本×${seconds}秒(Midjourneyのみ候補${candidates}枚+Animate・SD画質)・為替${rate}円/ドル(合計 $${totalUsd.toFixed(2)})`;
   // No.77(2026-09-12): 単体モードと同様、月間コスト合計シミュレーターへの反映リンクを追加。
   resultAdvice.innerHTML = 'それぞれのツールの詳しい前提は下の内訳をご確認ください。同じ動画を複数ツールで作る想定のほか、工程を分担する場合(静止画はA、仕上げはBなど)の合計目安としてもご利用いただけます。' + bookEquivalentNote(totalJpy)
     + ` <a href="../getsugaku-goukei/?video=${totalJpy}">月間コスト合計シミュレーターに反映する</a>`;
@@ -622,7 +649,7 @@ function paramsFromState() {
 
 function updateShareUrl() {
   const params = paramsFromState();
-  history.replaceState(null, '', `${location.pathname}?${params.toString()}`);
+  (window.replaceUrlQuietly || history.replaceState.bind(history))(null, '', `${location.pathname}?${params.toString()}`);
 }
 
 // 共有・保存経路の流入計測用(2026-09-02追加)。ブラウザのアドレスバー(history.replaceState)には
@@ -815,7 +842,7 @@ function initFromQuery() {
         const select = document.getElementById(row.selectId);
         checkbox.checked = true;
         select.disabled = false;
-        if (planValue) select.value = planValue;
+        if (planValue && [...select.options].some((o) => o.value === planValue)) select.value = planValue;
         document.getElementById(`combo-row-${row.key}`).classList.add('active');
       });
       calcCombo();
@@ -823,25 +850,25 @@ function initFromQuery() {
     return;
   }
   const tool = params.get('tool');
-  if (tool && TOOL_INFO[tool]) { selectTool.value = tool; refreshToolFields(); }
+  if (tool && Object.prototype.hasOwnProperty.call(TOOL_INFO, tool)) { selectTool.value = tool; refreshToolFields(); }
   const rate = params.get('rate');
   if (rate) inputRate.value = rate;
   const mjPlan = params.get('mj_plan');
-  if (mjPlan && MJ_PLANS[mjPlan]) selectMjPlan.value = mjPlan;
+  if (mjPlan && Object.prototype.hasOwnProperty.call(MJ_PLANS, mjPlan)) selectMjPlan.value = mjPlan;
   const mjVideos = params.get('mj_videos');
   if (mjVideos) inputMjVideos.value = mjVideos;
   const mjCandidates = params.get('mj_candidates');
   if (mjCandidates) inputMjCandidates.value = mjCandidates;
   const rwPlan = params.get('rw_plan');
-  if (rwPlan && RW_PLANS[rwPlan]) selectRwPlan.value = rwPlan;
+  if (rwPlan && Object.prototype.hasOwnProperty.call(RW_PLANS, rwPlan)) selectRwPlan.value = rwPlan;
   const rwModel = params.get('rw_model');
-  if (rwModel && RW_MODELS[rwModel]) selectRwModel.value = rwModel;
+  if (rwModel && Object.prototype.hasOwnProperty.call(RW_MODELS, rwModel)) selectRwModel.value = rwModel;
   const rwVideos = params.get('rw_videos');
   if (rwVideos) inputRwVideos.value = rwVideos;
   const rwSeconds = params.get('rw_seconds');
   if (rwSeconds) inputRwSeconds.value = rwSeconds;
   const c5sPlan = params.get('c5s_plan');
-  if (c5sPlan) selectCredit5sPlan.value = c5sPlan;
+  if (c5sPlan && [...selectCredit5sPlan.options].some((o) => o.value === c5sPlan)) selectCredit5sPlan.value = c5sPlan;
   const c5sVideos = params.get('c5s_videos');
   if (c5sVideos) inputC5sVideos.value = c5sVideos;
   const c5sSeconds = params.get('c5s_seconds');

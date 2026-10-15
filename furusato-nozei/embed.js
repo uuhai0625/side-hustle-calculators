@@ -70,10 +70,12 @@ function calcResult(input) {
   const incomeTaxBasic = incomeTaxBasicDeduction(totalIncome);
   const incomeTaxableRaw = totalIncome - socialInsuranceDeduction - spouseDeductionIncomeTax - dependentsDeductionIncomeTax - incomeTaxBasic;
   const incomeTaxable = Math.floor(Math.max(0, incomeTaxableRaw) / 1000) * 1000;
-  const rate = marginalIncomeTaxRate(incomeTaxable);
+  // 判定に使う額が0円未満(所得税がかからない人)なら、特例控除の割合は90%=所得税率0%扱い(米子市等の計算資料)。
+  const rate = incomeTaxableRaw < 0 ? 0 : marginalIncomeTaxRate(incomeTaxable);
 
   const rawLimit = (residentIncomeLevy * 0.20) / (0.90 - rate * 1.021) + 2000;
-  const limit = Math.max(0, Math.floor(rawLimit / 1000) * 1000);
+  // 住民税の所得割がかからなければ控除の上限もない(式の+2,000円だけが残らないようにする)。
+  const limit = residentIncomeLevy > 0 ? Math.max(0, Math.floor(rawLimit / 1000) * 1000) : 0;
 
   return {
     salaryIncome, sideProfit, blueDeduction, sideTaxableIncome, totalIncome,
@@ -81,6 +83,7 @@ function calcResult(input) {
     needsFinalReturn: sideTaxableIncome > 200000,
     blueAbsorbed: (input.sideType === 'blue10' || input.sideType === 'blue65') && sideProfit <= blueDeduction && sideProfit > 0,
     outOfScope: totalIncome > 24000000,
+    noLevy: residentIncomeLevy <= 0,
   };
 }
 
@@ -98,13 +101,30 @@ const resultClampNotice = document.getElementById('result-clamp-notice');
 // script.js側と同じ上限クランプ(2026-09-12追加、同期維持ルール[[project_furusato_calc_site]]No.10参照)。
 const MAX_INCOME_INPUT = 100000000;
 
+// 本体と同じく桁区切りのカンマを表示する(2026-10-16)。
+function parseMoneyInput(el) {
+  return Number(String(el.value).replace(/,/g, '')) || 0;
+}
+function formatMoneyInput(el) {
+  const digits = el.value.replace(/[^0-9]/g, '');
+  el.value = digits ? Number(digits).toLocaleString('ja-JP') : '';
+}
+[inputSalary, inputSideIncome, inputSideExpense].forEach((el) => {
+  formatMoneyInput(el);
+  el.addEventListener('input', () => formatMoneyInput(el));
+});
+
+function rawInputOverMax() {
+  return [inputSalary, inputSideIncome, inputSideExpense].some((el) => parseMoneyInput(el) > MAX_INCOME_INPUT);
+}
+
 function readInput() {
   return {
-    salary: Math.min(MAX_INCOME_INPUT, Math.max(0, Number(inputSalary.value) || 0)),
+    salary: Math.min(MAX_INCOME_INPUT, Math.max(0, parseMoneyInput(inputSalary))),
     hasSpouse: selectSpouse.value === '1',
-    dependents: Math.min(10, Math.max(0, Number(inputDependents.value) || 0)),
-    sideIncome: Math.min(MAX_INCOME_INPUT, Math.max(0, Number(inputSideIncome.value) || 0)),
-    sideExpense: Math.min(MAX_INCOME_INPUT, Math.max(0, Number(inputSideExpense.value) || 0)),
+    dependents: Math.round(Math.min(10, Math.max(0, Number(inputDependents.value) || 0))),
+    sideIncome: Math.min(MAX_INCOME_INPUT, Math.max(0, parseMoneyInput(inputSideIncome))),
+    sideExpense: Math.min(MAX_INCOME_INPUT, Math.max(0, parseMoneyInput(inputSideExpense))),
     sideType: selectSideType.value,
   };
 }
@@ -125,6 +145,14 @@ function calc() {
   }
   if (r.blueAbsorbed) {
     notices.push('副業の利益が青色申告特別控除額の範囲内に収まっているため、総所得金額への算入額は0円です。');
+  }
+  if (String(inputSalary.value).trim() === '') {
+    notices.push('給与収入(額面)を入力すると計算できます。');
+  } else if (r.noLevy) {
+    notices.push('住民税の所得割がかからない所得のため、寄附しても税金の控除はほとんど受けられません(寄附額のほぼ全額が自己負担になります)。');
+  }
+  if (rawInputOverMax()) {
+    notices.push('給与収入・副業の金額は1億円までとして計算しています。');
   }
   if (r.outOfScope) {
     notices.push('総所得金額が2,400万円を超えており、この計算機が想定する範囲外です。');

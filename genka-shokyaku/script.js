@@ -14,7 +14,7 @@ const RAKUTEN_API_AFFILIATE_ID = '567fd2ff.507b4e2c.567fd300.5261c56d';
 
 let productRequestId = 0;
 
-async function showProducts(keyword, labelText) {
+async function showProducts(keyword, labelText, opts = {}) {
   const grid = document.getElementById('product-grid');
   const label = document.getElementById('product-grid-label');
   if (!grid) return;
@@ -27,12 +27,21 @@ async function showProducts(keyword, labelText) {
   url.searchParams.set('accessKey', RAKUTEN_ACCESS_KEY);
   url.searchParams.set('affiliateId', RAKUTEN_API_AFFILIATE_ID);
   url.searchParams.set('keyword', keyword);
+  // 曖昧な語だとレビュー数順で関係ない商品が上位に来るため、除外語で絞る(2026-10-16)
+  if (opts.ng) url.searchParams.set('NGKeyword', opts.ng);
   url.searchParams.set('sort', '-reviewCount');
   url.searchParams.set('hits', '4');
   url.searchParams.set('format', 'json');
   try {
-    const res = await fetch(url.toString());
+    let res = await fetch(url.toString());
     if (requestId !== productRequestId) return;
+    // 楽天APIは1秒以内に続けて呼ぶと429になるので、計算ボタンを続けて押したときは1.1秒後に1回だけ再試行する。
+    if (res.status === 429) {
+      await new Promise((resolve) => setTimeout(resolve, 1100));
+      if (requestId !== productRequestId) return;
+      res = await fetch(url.toString());
+      if (requestId !== productRequestId) return;
+    }
     if (!res.ok) return;
     const data = await res.json();
     if (requestId !== productRequestId) return;
@@ -40,7 +49,7 @@ async function showProducts(keyword, labelText) {
     if (!items.length) return;
     grid.innerHTML = `<div class="product-band"><div class="product-band-grid">${items.map(cardHtml).join('')}</div></div>`;
     grid.classList.add('show');
-    if (label) { label.textContent = labelText; label.style.display = ''; }
+    if (label) { label.textContent = `${labelText}(楽天レビュー件数順)`; label.style.display = ''; }
   } catch (e) {
     // 失敗時は既存の検索リンクCTA(aff-card)に静かにフォールバック
   }
@@ -71,6 +80,7 @@ function cardHtml(item) {
     .replace(/"/g, '&quot;');
   return `
     <a class="product-card" href="${escapeAttr(item.itemUrl)}" target="_blank" rel="noopener sponsored">
+      <span class="pr-badge">PR</span>
       <img src="${escapeAttr(img)}" alt="${name}" loading="lazy" width="300" height="300">
       <p class="product-name">${name}</p>
       <p class="product-price">¥${price}</p>
@@ -192,6 +202,17 @@ function isBlueReturn() {
   return document.querySelector('input[name="filing"]:checked').value === 'blue';
 }
 
+// type=monthに対応しないブラウザでは自由入力になるので、YYYY-MM以外は既定値にする(文字列比較で特例の境を判定するため)。
+const YM_PATTERN = /^\d{4}-(0[1-9]|1[0-2])$/;
+function readAcquiredYM() {
+  const v = String(inputAcquired.value).trim();
+  if (YM_PATTERN.test(v)) return v;
+  // 「2026-4」「2026/4」「2026年4月」なども受け付ける(type=monthに対応しないブラウザ向け)
+  const m = v.match(/^(\d{4})\s*[-\/.年]\s*(\d{1,2})/);
+  if (m && Number(m[2]) >= 1 && Number(m[2]) <= 12) return `${m[1]}-${String(Number(m[2])).padStart(2, '0')}`;
+  return defaultAcquiredYM();
+}
+
 function tokureiThreshold(acquiredYM) {
   return acquiredYM >= TOKUREI_REFORM_YM ? TOKUREI_THRESHOLD_NEW : TOKUREI_THRESHOLD_OLD;
 }
@@ -213,8 +234,8 @@ function eligibleMethods(amount, blueReturn, acquiredYM, years) {
 }
 
 function updateMethodOptions() {
-  const amount = Math.max(0, Math.round(Number(inputAmount.value) || 0));
-  const acquiredYM = inputAcquired.value || defaultAcquiredYM();
+  const amount = Math.min(1000000000, Math.max(0, Math.round(Number(inputAmount.value) || 0)));
+  const acquiredYM = readAcquiredYM();
   const years = currentYears();
   const { tier, methods } = eligibleMethods(amount, isBlueReturn(), acquiredYM, years);
 
@@ -272,8 +293,8 @@ function defaultAcquiredYM() {
 // No.54(2026-09-06): 数値計算とテキスト更新だけを担う部分を独立させ、
 // 初回計算後の「入力するたびに自動再計算」でも使い回せるようにする。
 function computeAndRender() {
-  const amount = Math.max(0, Math.round(Number(inputAmount.value) || 0));
-  const acquiredYM = inputAcquired.value || defaultAcquiredYM();
+  const amount = Math.min(1000000000, Math.max(0, Math.round(Number(inputAmount.value) || 0)));
+  const acquiredYM = readAcquiredYM();
   const years = currentYears();
   const blueReturn = isBlueReturn();
   const category = CATEGORIES[selectCategory.value];
@@ -312,7 +333,7 @@ function calc() {
   // aff-cardのhrefはHTMLにも同じURLを静的に書いてある(JS失敗時の保険)。キーワードを変える時はHTML側も直す
   affCard.href = affiliateUrl('資産管理 ラベルライター');
   affCard.classList.add('show');
-  showProducts('ラベルライター 家庭用', '固定資産の管理に人気のアイテム');
+  showProducts('ラベルライター 家庭用', '固定資産の管理に人気のアイテム', { ng: '写真 フォト スマホプリンター' });
   resultCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
@@ -332,7 +353,8 @@ function renderMethodContent(methodKey) {
   const methodObj = methods.find((m) => m.key === methodKey) || methods[0];
 
   resultAmount.textContent = yen(firstYear.amount);
-  resultNote.textContent = `${base.category.label} 取得価額¥${yen(amount)} / ${methodObj.label}`;
+  const amountCapped = (Number(inputAmount.value) || 0) > 1000000000;
+  resultNote.textContent = `${base.category.label} 取得価額¥${yen(amount)}${amountCapped ? '(10億円までとして計算)' : ''} / ${methodObj.label}`;
 
   if (methodKey === 'normal') {
     resultSub.textContent = `完了予定:${rows[rows.length - 1].year}年(初年度は${13 - am}か月分で按分)`;
@@ -417,7 +439,7 @@ function paramsFromState() {
 
 function updateShareUrl() {
   const params = paramsFromState();
-  history.replaceState(null, '', `${location.pathname}?${params.toString()}`);
+  (window.replaceUrlQuietly || history.replaceState.bind(history))(null, '', `${location.pathname}?${params.toString()}`);
 }
 
 // 共有・保存経路の流入計測用(2026-09-02追加)。ブラウザのアドレスバー(history.replaceState)には
@@ -550,7 +572,7 @@ function initFromQuery() {
     });
   }
   const category = params.get('category');
-  if (category && CATEGORIES[category]) selectCategory.value = category;
+  if (category && Object.prototype.hasOwnProperty.call(CATEGORIES, category)) selectCategory.value = category;
   const years = params.get('years');
   if (years) inputCustomYears.value = years;
   updateCategoryUI();
@@ -558,7 +580,7 @@ function initFromQuery() {
   const amount = params.get('amount');
   if (amount) inputAmount.value = amount;
   const acquired = params.get('acquired');
-  if (acquired) inputAcquired.value = acquired;
+  if (acquired && YM_PATTERN.test(acquired)) inputAcquired.value = acquired;
   const filing = params.get('filing');
   if (filing === 'white') document.querySelector('input[name="filing"][value="white"]').checked = true;
 

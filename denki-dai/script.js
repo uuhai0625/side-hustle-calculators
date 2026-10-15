@@ -16,7 +16,7 @@ const RAKUTEN_API_AFFILIATE_ID = '567fd2ff.507b4e2c.567fd300.5261c56d';
 let productRequestId = 0;
 
 // ワットチェッカーは価格が計算結果の金額と連動しないため、goshugi-kodenと同じ単純な人気順4件表示を採用。
-async function showProducts(keyword, labelText) {
+async function showProducts(keyword, labelText, opts = {}) {
   const grid = document.getElementById('product-grid');
   const label = document.getElementById('product-grid-label');
   if (!grid) return;
@@ -29,12 +29,21 @@ async function showProducts(keyword, labelText) {
   url.searchParams.set('accessKey', RAKUTEN_ACCESS_KEY);
   url.searchParams.set('affiliateId', RAKUTEN_API_AFFILIATE_ID);
   url.searchParams.set('keyword', keyword);
+  // 曖昧な語だとレビュー数順で関係ない商品が上位に来るため、除外語で絞る(2026-10-16)
+  if (opts.ng) url.searchParams.set('NGKeyword', opts.ng);
   url.searchParams.set('sort', '-reviewCount');
   url.searchParams.set('hits', '4');
   url.searchParams.set('format', 'json');
   try {
-    const res = await fetch(url.toString());
+    let res = await fetch(url.toString());
     if (requestId !== productRequestId) return;
+    // 楽天APIは1秒以内に続けて呼ぶと429になるので、計算ボタンを続けて押したときは1.1秒後に1回だけ再試行する。
+    if (res.status === 429) {
+      await new Promise((resolve) => setTimeout(resolve, 1100));
+      if (requestId !== productRequestId) return;
+      res = await fetch(url.toString());
+      if (requestId !== productRequestId) return;
+    }
     if (!res.ok) return;
     const data = await res.json();
     if (requestId !== productRequestId) return;
@@ -42,7 +51,7 @@ async function showProducts(keyword, labelText) {
     if (!items.length) return;
     grid.innerHTML = `<div class="product-band"><div class="product-band-grid">${items.map(cardHtml).join('')}</div></div>`;
     grid.classList.add('show');
-    if (label) { label.textContent = labelText; label.style.display = ''; }
+    if (label) { label.textContent = `${labelText}(楽天レビュー件数順)`; label.style.display = ''; }
   } catch (e) {
     // 失敗時は既存の検索リンクCTA(aff-card)に静かにフォールバック
   }
@@ -75,6 +84,7 @@ function cardHtml(item) {
     .replace(/"/g, '&quot;');
   return `
     <a class="product-card" href="${escapeAttr(item.itemUrl)}" target="_blank" rel="noopener sponsored">
+      <span class="pr-badge">PR</span>
       <img src="${escapeAttr(img)}" alt="${name}" loading="lazy" width="300" height="300">
       <p class="product-name">${name}</p>
       <p class="product-price">¥${price}</p>
@@ -182,7 +192,7 @@ function calc() {
   // aff-cardのhrefはHTMLにも同じURLを静的に書いてある(JS失敗時の保険)。キーワードを変える時はHTML側も直す
   affCard.href = affiliateUrl('ワットチェッカー');
   affCard.classList.add('show');
-  showProducts('ワットチェッカー', '電気代を正確に知るための人気アイテム');
+  showProducts('ワットチェッカー', '電気代を正確に知るための人気アイテム', { ng: 'タイマー' });
 
   resultCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
@@ -219,7 +229,7 @@ function paramsFromState() {
 
 function updateShareUrl() {
   const params = paramsFromState();
-  history.replaceState(null, '', `${location.pathname}?${params.toString()}`);
+  (window.replaceUrlQuietly || history.replaceState.bind(history))(null, '', `${location.pathname}?${params.toString()}`);
 }
 
 // 共有・保存経路の流入計測用(2026-09-02追加)。ブラウザのアドレスバー(history.replaceState)には
@@ -357,7 +367,7 @@ function initFromQuery() {
     });
   }
   const device = params.get('device');
-  if (!device || !DEVICES[device]) return;
+  if (!device || !Object.prototype.hasOwnProperty.call(DEVICES, device)) return;
   selectDevice.value = device;
   const monitors = params.get('monitors');
   if (monitors && ['0', '1', '2', '3'].includes(monitors)) selectMonitors.value = monitors;

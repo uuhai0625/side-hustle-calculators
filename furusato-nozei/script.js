@@ -42,8 +42,15 @@ async function showFurusatoProducts(category, maxPrice) {
   url.searchParams.set('hits', '4');
   url.searchParams.set('format', 'json');
   try {
-    const res = await fetch(url.toString());
+    let res = await fetch(url.toString());
     if (requestId !== productRequestId) return;
+    // 楽天APIは1秒以内に続けて呼ぶと429になる。入力を続けて変えた直後でも商品が消えないよう、1.1秒後に1回だけ再試行する。
+    if (res.status === 429) {
+      await new Promise((resolve) => setTimeout(resolve, 1100));
+      if (requestId !== productRequestId) return;
+      res = await fetch(url.toString());
+      if (requestId !== productRequestId) return;
+    }
     if (!res.ok) { grid.classList.remove('show'); grid.innerHTML = ''; return; }
     const data = await res.json();
     if (requestId !== productRequestId) return;
@@ -60,6 +67,15 @@ async function showFurusatoProducts(category, maxPrice) {
     // 新しいリクエストに追い越されている場合はそちらがaria-busyを管理するので触らない
     if (requestId === productRequestId) grid.setAttribute('aria-busy', 'false');
   }
+}
+
+// 上限額が0円(住民税の所得割がかからない)のときは「上限額で選べる返礼品」を出さない。
+function hideFurusatoProducts() {
+  ++productRequestId;
+  const grid = document.getElementById('product-grid');
+  const label = document.getElementById('product-grid-label');
+  if (grid) { grid.classList.remove('show'); grid.innerHTML = ''; grid.setAttribute('aria-busy', 'false'); }
+  if (label) label.style.display = 'none';
 }
 
 // 楽天のサムネイルCDNはURL末尾の_ex=WxHパラメータで実際の画素数が変わる
@@ -82,7 +98,12 @@ function cardHtml(item, category) {
   const imgRaw = item.mediumImageUrls && item.mediumImageUrls[0];
   const img = upscaleImage(typeof imgRaw === 'string' ? imgRaw : (imgRaw && imgRaw.imageUrl) || '');
   const price = Number(item.itemPrice).toLocaleString('ja-JP');
+  // 自治体側の装飾文(【…】・＼…／)は外す(「ポイント」「総合1位」等の訴求が混ざるため)。
   const name = String(item.itemName || '')
+    .replace(/【[^】]*】/g, '')
+    .replace(/＼[^／]*／/g, '')
+    .replace(/\s+/g, ' ')
+    .trim()
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
@@ -160,10 +181,12 @@ function calcResult(input) {
   const incomeTaxBasic = incomeTaxBasicDeduction(totalIncome);
   const incomeTaxableRaw = totalIncome - socialInsuranceDeduction - spouseDeductionIncomeTax - dependentsDeductionIncomeTax - incomeTaxBasic;
   const incomeTaxable = Math.floor(Math.max(0, incomeTaxableRaw) / 1000) * 1000;
-  const rate = marginalIncomeTaxRate(incomeTaxable);
+  // 判定に使う額が0円未満(所得税がかからない人)なら、特例控除の割合は90%=所得税率0%扱い(米子市等の計算資料)。
+  const rate = incomeTaxableRaw < 0 ? 0 : marginalIncomeTaxRate(incomeTaxable);
 
   const rawLimit = (residentIncomeLevy * 0.20) / (0.90 - rate * 1.021) + 2000;
-  const limit = Math.max(0, Math.floor(rawLimit / 1000) * 1000);
+  // 住民税の所得割がかからなければ控除の上限もない(式の+2,000円だけが残らないようにする)。
+  const limit = residentIncomeLevy > 0 ? Math.max(0, Math.floor(rawLimit / 1000) * 1000) : 0;
 
   return {
     salaryIncome, sideProfit, blueDeduction, sideTaxableIncome, totalIncome,
@@ -171,6 +194,7 @@ function calcResult(input) {
     needsFinalReturn: sideTaxableIncome > 200000,
     blueAbsorbed: (input.sideType === 'blue10' || input.sideType === 'blue65') && sideProfit <= blueDeduction && sideProfit > 0,
     outOfScope: totalIncome > 24000000,
+    noLevy: residentIncomeLevy <= 0,
   };
 }
 
@@ -207,11 +231,15 @@ function parseMoneyInput(el) {
   return Number(String(el.value).replace(/,/g, '')) || 0;
 }
 
+function rawInputOverMax() {
+  return [inputSalary, inputSideIncome, inputSideExpense].some((el) => parseMoneyInput(el) > MAX_INCOME_INPUT);
+}
+
 function readInput() {
   return {
     salary: Math.min(MAX_INCOME_INPUT, Math.max(0, parseMoneyInput(inputSalary))),
     hasSpouse: selectSpouse.value === '1',
-    dependents: Math.min(10, Math.max(0, Number(inputDependents.value) || 0)),
+    dependents: Math.round(Math.min(10, Math.max(0, Number(inputDependents.value) || 0))),
     sideIncome: Math.min(MAX_INCOME_INPUT, Math.max(0, parseMoneyInput(inputSideIncome))),
     sideExpense: Math.min(MAX_INCOME_INPUT, Math.max(0, parseMoneyInput(inputSideExpense))),
     sideType: selectSideType.value,
@@ -319,6 +347,14 @@ function computeAndRender() {
   if (r.blueAbsorbed) {
     notices.push('副業の利益が青色申告特別控除額の範囲内に収まっているため、総所得金額への算入額は0円です(上限額は給与のみの場合とほぼ変わりません)。');
   }
+  if (String(inputSalary.value).trim() === '') {
+    notices.push('給与収入(額面)を入力すると計算できます。');
+  } else if (r.noLevy) {
+    notices.push('住民税の所得割がかからない所得のため、寄附しても税金の控除はほとんど受けられません(寄附額のほぼ全額が自己負担になります)。');
+  }
+  if (rawInputOverMax()) {
+    notices.push('給与収入・副業の金額は1億円までとして計算しています。');
+  }
   if (r.outOfScope) {
     notices.push('総所得金額が2,400万円を超えており、この計算機が想定する範囲外です。基礎控除の逓減など考慮していない要素があるため、表示額の精度はさらに低くなります。');
   }
@@ -337,13 +373,17 @@ function computeAndRender() {
   productCategoryField.style.display = '';
   const category = selectProductCategory.value;
   affCard.href = affiliateUrl(furusatoSearchUrl(category, r.limit));
-  affCard.classList.add('show');
-  showFurusatoProducts(category, r.limit || 3000);
+  // 上限額が0円(控除がほぼ受けられない)のときは、返礼品を探すPRカードも出さない
+  affCard.classList.toggle('show', r.limit > 0);
+  if (r.limit > 0) showFurusatoProducts(category, r.limit);
+  else hideFurusatoProducts();
 }
 
+// 共有URLから開いたときの自動計算は計算ボタンのクリックとして数えない(calc_clickの水増し防止)。
+let calcFromQuery = false;
 function calc() {
   // 計算実行率を見るためのGA4イベント(2026-08-31追加)。ローカル環境ではga.jsがgtagを定義しないため存在チェック必須。
-  if (typeof gtag === 'function') {
+  if (!calcFromQuery && typeof gtag === 'function') {
     gtag('event', 'calc_click', { page_path: location.pathname });
   }
   computeAndRender();
@@ -368,7 +408,8 @@ document.getElementById('btn-calc').addEventListener('click', calc);
 selectProductCategory.addEventListener('change', () => {
   const category = selectProductCategory.value;
   affCard.href = affiliateUrl(furusatoSearchUrl(category, lastLimit));
-  showFurusatoProducts(category, lastLimit || 3000);
+  if (lastLimit > 0) showFurusatoProducts(category, lastLimit);
+  else hideFurusatoProducts();
 });
 
 // No.54(2026-09-06): 初回計算より後は、他の入力を変えるたびに再度ボタンを押さなくても
@@ -400,7 +441,7 @@ function paramsFromState(input) {
 
 function updateShareUrl(input) {
   const params = paramsFromState(input);
-  history.replaceState(null, '', `${location.pathname}?${params.toString()}`);
+  (window.replaceUrlQuietly || history.replaceState.bind(history))(null, '', `${location.pathname}?${params.toString()}`);
 }
 
 // 共有・保存経路の流入計測用(2026-09-02追加)。ブラウザのアドレスバー(history.replaceState)には
@@ -602,8 +643,13 @@ function initFromQuery() {
   const sideExpense = params.get('sideexpense');
   if (sideExpense) { inputSideExpense.value = sideExpense; formatMoneyInput(inputSideExpense); }
   const sideType = params.get('sidetype');
-  if (sideType && SIDE_TYPE_LABEL[sideType]) selectSideType.value = sideType;
-  calc();
+  if (sideType && Object.prototype.hasOwnProperty.call(SIDE_TYPE_LABEL, sideType)) selectSideType.value = sideType;
+  calcFromQuery = true;
+  try {
+    calc();
+  } finally {
+    calcFromQuery = false;
+  }
 }
 
 initFromQuery();

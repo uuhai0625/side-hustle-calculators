@@ -1814,3 +1814,7 @@ html.qshow .share-row { display: flex; }
 /* 道具ガイドの結論→「選ぶときの基準」へのジャンプ(2026-10-09)。語の途中で折り返さず、飛んだ先の見出しが画面上端に張り付かないようにする */
 .manner-box a[href^="#"] { white-space: nowrap; }
 h2[id] { scroll-margin-top: 16px; }
+/* 極端に大きい金額でも結果欄が画面幅からはみ出さないように(2026-10-16) */
+#result-amount{overflow-wrap:anywhere}
+/* Midjourneyのロゴは細い線画で、小さく縮めると灰色にかすれるので濃くする(2026-10-16) */
+img[src$="midjourney.png"]{filter:contrast(2.2) brightness(.9)}
