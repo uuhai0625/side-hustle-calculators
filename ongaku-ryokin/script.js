@@ -1,20 +1,5 @@
-// RAKUTEN_AFFILIATE_ID: uuhai0625ブランド用の楽天アフィリエイトID(相場ノート・他計算機と同一)。
-const RAKUTEN_AFFILIATE_ID = '567f9cc6.631b3687.567f9cc7.3d3a8a85';
-
-function affiliateUrl(keyword) {
-  const searchUrl = `https://search.rakuten.co.jp/search/mall/${encodeURIComponent(keyword)}/?s=5`;
-  if (!RAKUTEN_AFFILIATE_ID) return searchUrl;
-  const encoded = encodeURIComponent(searchUrl);
-  return `https://hb.afl.rakuten.co.jp/hgc/${RAKUTEN_AFFILIATE_ID}/?pc=${encoded}&link_type=text&ut=eyJwYWdlIjoidXJsIiwidHlwZSI6InRleHQiLCJjb2wiOjF9`;
-}
-
 // この計算機は金額ではなくツール・プランのおすすめを診断するため、ai-chat-tools/ai-coding-toolsと
-// 同様に楽天商品検索APIによる動的なおすすめ商品グリッドは使わず、aff-cardの静的リンクのみ表示する。
-const affCard = document.getElementById('aff-card');
-if (affCard) {
-  // aff-cardのhrefはHTMLにも同じURLを静的に書いてある(JS失敗時の保険)。キーワードを変える時はHTML側も直す
-  affCard.href = affiliateUrl('モニターヘッドホン');
-}
+// 同様に楽天商品検索APIによる動的なおすすめ商品グリッドは使わず、aff-card(HTMLに書いた楽天公式ツールのリンク)のみ表示する。
 
 // 主な用途 × 本気度 のルールベース診断。
 // Suno・Udioはクレジット制で1曲あたりの消費クレジットが尺・モデル・編集操作によって変わり、

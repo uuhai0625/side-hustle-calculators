@@ -36,6 +36,10 @@ if (GA_MEASUREMENT_ID && !isLocalDev) {
     if (e.type === 'auxclick' && e.button !== 1) return;
     const link = e.target.closest('.aff-card, .product-card, .tool-cta, .logo-chip[rel~="sponsored"]');
     if (!link) return;
+    // aff-cardは外枠がdivで、中に楽天公式ツールの<a>をそのまま置いている(2026-10-17、楽天ガイドライン対応)。
+    // リンク以外を押した場合は数えず、URLは中の<a>から取る。
+    const anchor = link.matches('a') ? link : e.target.closest('a');
+    if (!anchor || !link.contains(anchor)) return;
     // category/price: furusato-nozeiの返礼品カードのみdata-category/data-price属性を持つ(2026-08-31追加)。
     // 他ページのproduct-cardには存在しないため、そのままundefinedになりイベント自体には影響しない。
     gtag('event', 'affiliate_click', {
@@ -44,7 +48,7 @@ if (GA_MEASUREMENT_ID && !isLocalDev) {
         : link.classList.contains('logo-chip') ? 'logo_chip' : 'aff_card',
       link_id: link.id || link.dataset.tool || '',
       // ふるさと納税の検索リンクには上限額(max)が入るので数値を伏せる。
-      link_url: (link.href || '').replace(/(max(?:Price)?(?:=|%3D))\d+/gi, '$1-'),
+      link_url: (anchor.href || '').replace(/(max(?:Price)?(?:=|%3D))\d+/gi, '$1-'),
       page_path: location.pathname,
       category: link.dataset.category || undefined,
       price: link.dataset.price || undefined,

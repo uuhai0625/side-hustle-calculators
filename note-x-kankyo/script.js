@@ -1,13 +1,3 @@
-// RAKUTEN_AFFILIATE_ID: uuhai0625ブランド用の楽天アフィリエイトID(相場ノート・他計算機と同一)。
-const RAKUTEN_AFFILIATE_ID = '567f9cc6.631b3687.567f9cc7.3d3a8a85';
-
-function affiliateUrl(keyword) {
-  const searchUrl = `https://search.rakuten.co.jp/search/mall/${encodeURIComponent(keyword)}/?s=5`;
-  if (!RAKUTEN_AFFILIATE_ID) return searchUrl;
-  const encoded = encodeURIComponent(searchUrl);
-  return `https://hb.afl.rakuten.co.jp/hgc/${RAKUTEN_AFFILIATE_ID}/?pc=${encoded}&link_type=text&ut=eyJwYWdlIjoidXJsIiwidHlwZSI6InRleHQiLCJjb2wiOjF9`;
-}
-
 const RAKUTEN_APP_ID = 'f9f8dd97-c7a4-4ae1-a2c1-38b4572a702e';
 const RAKUTEN_ACCESS_KEY = 'pk_gJd3Q0JkttKeBF4DcfYjD8zYljezjxNxEFiUssXZhFs';
 const RAKUTEN_API_AFFILIATE_ID = '567fd2ff.507b4e2c.567fd300.5261c56d';
@@ -76,8 +66,5 @@ async function showProducts(keyword, labelText, opts = {}) {
     // 失敗時は既存の検索リンクCTA(aff-card)に静かにフォールバック
   }
 }
-
-// aff-cardのhrefはHTMLにも同じURLを静的に書いてある(JS失敗時の保険)。キーワードを変える時はHTML側も直す
-document.getElementById('aff-card').href = affiliateUrl('ノートパソコンスタンド');
 
 showProducts('ノートパソコンスタンド', 'note・X運用の作業環境に人気のアイテム', { ng: 'プロジェクター' });
