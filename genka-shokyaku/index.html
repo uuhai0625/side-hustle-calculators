@@ -4,12 +4,12 @@
 <script>/* utm_source等だけの流入では結果欄を出さない */ if (/[?&](amount|acquired|category)=/.test(location.search)) document.documentElement.classList.add('qshow');</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>減価償却費 計算機(10万円以上の機材)|AI副業そろばん</title>
-<meta name="description" content="パソコン・タブレット・カメラなど10万円以上の機材を購入した際の、減価償却費(経費計上額)を年ごとに試算できる無料ツールです。一括償却資産・少額減価償却資産の特例にも対応。">
+<title>減価償却費 計算機|iPad・パソコンの耐用年数と経費(10万円以上)|AI副業そろばん</title>
+<meta name="description" content="iPad・パソコン・カメラなど10万円以上の機材を購入した際の、減価償却費(経費計上額)を年ごとに試算できる無料ツールです。iPad・タブレットの耐用年数(4年)、一括償却資産・少額減価償却資産の特例にも対応。">
 
 <meta property="og:type" content="website">
-<meta property="og:title" content="減価償却費 計算機(10万円以上の機材)|AI副業そろばん">
-<meta property="og:description" content="パソコン・タブレット・カメラなど10万円以上の機材を購入した際の、減価償却費を年ごとに試算できる無料ツールです。一括償却資産・少額減価償却資産の特例にも対応。">
+<meta property="og:title" content="減価償却費 計算機|iPad・パソコンの耐用年数と経費(10万円以上)|AI副業そろばん">
+<meta property="og:description" content="iPad・パソコン・カメラなど10万円以上の機材を購入した際の、減価償却費を年ごとに試算できる無料ツールです。iPad・タブレットの耐用年数(4年)、一括償却資産・少額減価償却資産の特例にも対応。">
 <meta property="og:locale" content="ja_JP">
 <meta property="og:url" content="https://uuhai0625.github.io/side-hustle-calculators/genka-shokyaku/">
 <meta property="og:image" content="https://uuhai0625.github.io/side-hustle-calculators/images/og-image.jpg">
@@ -33,9 +33,10 @@
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "datePublished": "2026-08-20",
-  "dateModified": "2026-10-16",
+  "dateModified": "2026-10-17",
   "mainEntity": [
     { "@type": "Question", "name": "10万円未満の機材はどうなりますか?", "acceptedAnswer": { "@type": "Answer", "text": "10万円未満の資産は、通常は「消耗品費」として購入した年に全額を経費計上できます。減価償却は不要です。この計算機は10万円以上の資産(減価償却が必要になるもの)を対象としています。" } },
+    { "@type": "Question", "name": "iPadなどのタブレットの耐用年数は何年ですか?", "acceptedAnswer": { "@type": "Answer", "text": "iPadなどのタブレットは、パソコンと同じ「器具及び備品」の「電子計算機(パーソナルコンピュータ)」として、法定耐用年数4年で扱うのが一般的です。この計算機でも「パソコン・タブレット」を選ぶと4年で計算します。なお、取得価額が10万円未満のiPadは減価償却をせず、購入した年に消耗品費として全額を経費にできます。区分に迷う場合は税務署・税理士にご確認ください。" } },
     { "@type": "Question", "name": "一括償却資産と通常の減価償却、少額減価償却資産の特例はどう違いますか?", "acceptedAnswer": { "@type": "Answer", "text": "一括償却資産は、取得価額10万円以上20万円未満の資産を、実際の法定耐用年数に関わらず3年間で均等に経費化できる制度で、月割り計算が不要というシンプルさがあります。通常の減価償却は、資産カテゴリごとの法定耐用年数に応じて経費を分散する原則的な方法です。少額減価償却資産の特例は、青色申告者が一定額未満の資産を購入した年に全額経費化できる制度で、対象額や年間上限に条件があります。どれを選ぶかは資産の内容や事業の状況によって異なるため、最終的な判断は税理士・税務署にご確認ください。" } },
     { "@type": "Question", "name": "少額減価償却資産の特例は誰でも使えますか?", "acceptedAnswer": { "@type": "Answer", "text": "青色申告をしている個人事業主(常時使用する従業員数が400人以下などの要件あり。2026年3月31日までの取得分は500人以下)が対象です。白色申告では利用できません。対象となる取得価額の上限は、2026年3月31日までの取得分は30万円未満、2026年4月1日以後の取得分は40万円未満に引き上げられています。年間の合計上限は300万円です(事業を営んだ期間が1年に満たない場合は月割りで上限が少なくなります)。" } },
     { "@type": "Question", "name": "白色申告でも一括償却資産は使えますか?", "acceptedAnswer": { "@type": "Answer", "text": "はい。一括償却資産(10万円以上20万円未満・3年均等償却)は青色申告・白色申告のどちらでも利用できます。少額減価償却資産の特例(青色申告者専用)とは対象者の条件が異なる点にご注意ください。" } },
@@ -49,7 +50,7 @@
   "@type": "WebApplication",
   "name": "減価償却費計算機",
   "url": "https://uuhai0625.github.io/side-hustle-calculators/genka-shokyaku/",
-  "description": "パソコン・タブレット・カメラなど10万円以上の機材を購入した際の、減価償却費(経費計上額)を年ごとに試算できる無料ツールです。一括償却資産・少額減価償却資産の特例にも対応。",
+  "description": "iPad・パソコン・カメラなど10万円以上の機材を購入した際の、減価償却費(経費計上額)を年ごとに試算できる無料ツールです。iPad・タブレットの耐用年数(4年)、一括償却資産・少額減価償却資産の特例にも対応。",
   "applicationCategory": "UtilitiesApplication",
   "operatingSystem": "Any",
   "offers": {
@@ -58,7 +59,7 @@
     "priceCurrency": "JPY"
   },
   "datePublished": "2026-08-20",
-  "dateModified": "2026-10-16"
+  "dateModified": "2026-10-17"
 }
 </script>
 <!-- breadcrumb-ld:start 自動生成: _tools/build_nav.py(手編集すると次回実行で上書きされる) -->
@@ -92,7 +93,7 @@
     <div class="field">
       <label for="select-category">資産のカテゴリ</label>
       <select id="select-category">
-        <option value="pc" selected>パソコン・タブレット(液晶ペンタブレット含む)</option>
+        <option value="pc" selected>パソコン・タブレット(iPad・液晶ペンタブレット含む)</option>
         <option value="camera">カメラ・ビデオカメラ</option>
         <option value="office">モニター・プリンター・スキャナーなどの事務機器</option>
         <option value="custom">その他(耐用年数を直接指定)</option>
@@ -192,7 +193,7 @@
     <div class="rate-table-wrap">
     <table class="rate-table">
       <tr><th>資産カテゴリ</th><th>法定耐用年数</th></tr>
-      <tr><td>パソコン・タブレット(液晶ペンタブレット含む)</td><td>4年</td></tr>
+      <tr><td>パソコン・タブレット(iPad・液晶ペンタブレット含む)</td><td>4年</td></tr>
       <tr><td>カメラ・ビデオカメラ</td><td>5年</td></tr>
       <tr><td>モニター・プリンター・スキャナーなどの事務機器</td><td>5年</td></tr>
     </table>
@@ -213,6 +214,10 @@
     <details class="faq-item">
       <summary>10万円未満の機材はどうなりますか?</summary>
       <p>10万円未満の資産は、通常は「消耗品費」として購入した年に全額を経費計上できます。減価償却は不要です。この計算機は10万円以上の資産(減価償却が必要になるもの)を対象としています。</p>
+    </details>
+    <details class="faq-item">
+      <summary>iPadなどのタブレットの耐用年数は何年ですか?</summary>
+      <p>iPadなどのタブレットは、パソコンと同じ「器具及び備品」の「電子計算機(パーソナルコンピュータ)」として、法定耐用年数4年で扱うのが一般的です。この計算機でも「パソコン・タブレット」を選ぶと4年で計算します。なお、取得価額が10万円未満のiPadは減価償却をせず、購入した年に消耗品費として全額を経費にできます。区分に迷う場合は税務署・税理士にご確認ください。</p>
     </details>
     <details class="faq-item">
       <summary>一括償却資産と通常の減価償却、少額減価償却資産の特例はどう違いますか?</summary>

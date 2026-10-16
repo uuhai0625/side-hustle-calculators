@@ -88,7 +88,7 @@ function cardHtml(item) {
 }
 
 const CATEGORIES = {
-  pc:     { label: 'パソコン・タブレット(液晶ペンタブレット含む)', years: 4 },
+  pc:     { label: 'パソコン・タブレット(iPad・液晶ペンタブレット含む)', years: 4 },
   camera: { label: 'カメラ・ビデオカメラ', years: 5 },
   office: { label: 'モニター・プリンター・スキャナーなどの事務機器', years: 5 },
   custom: { label: 'その他(耐用年数を直接指定)', years: null },
