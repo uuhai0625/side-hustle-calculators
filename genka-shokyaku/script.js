@@ -157,8 +157,10 @@ function renderScheduleChart(rows) {
   });
   const pathD = points.map((p, i) => `${i === 0 ? 'M' : 'L'}${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(' ');
   const circles = points.map((p) => `<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="4" fill="#35f2b0"></circle>`).join('');
-  const valueLabels = points.map((p) => `<text x="${p.x.toFixed(1)}" y="${Math.max(12, p.y - 10).toFixed(1)}" text-anchor="middle" font-size="12" fill="#e8ece9">¥${yen(p.r.amount)}</text>`).join('');
-  const yearLabels = points.map((p) => `<text x="${p.x.toFixed(1)}" y="${H - 8}" text-anchor="middle" font-size="12" fill="#8a938e">${p.r.year}</text>`).join('');
+  // 両端のラベルが枠で切れないよう、最初は左揃え・最後は右揃えにする
+  const anchor = (i) => (n > 1 && i === 0 ? 'start' : n > 1 && i === n - 1 ? 'end' : 'middle');
+  const valueLabels = points.map((p, i) => `<text x="${p.x.toFixed(1)}" y="${Math.max(12, p.y - 10).toFixed(1)}" text-anchor="${anchor(i)}" font-size="12" fill="#e8ece9">¥${yen(p.r.amount)}</text>`).join('');
+  const yearLabels = points.map((p, i) => `<text x="${p.x.toFixed(1)}" y="${H - 8}" text-anchor="${anchor(i)}" font-size="12" fill="#8a938e">${p.r.year}</text>`).join('');
   const axisLine = `<line x1="${padL}" y1="${padT + innerH}" x2="${padL + innerW}" y2="${padT + innerH}" stroke="#2b332a" stroke-width="1"></line>`;
   scheduleChart.innerHTML = `${axisLine}<path d="${pathD}" fill="none" stroke="#35f2b0" stroke-width="2"></path>${circles}${valueLabels}${yearLabels}`;
 }

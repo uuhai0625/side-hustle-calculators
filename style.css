@@ -138,7 +138,9 @@ a { color: var(--navy); }
   .site-header { padding: 22px 0 14px; }
   .site-nav { flex-wrap: nowrap; justify-content: flex-start; overflow-x: auto; margin: 12px -16px 0; padding: 0 16px; scrollbar-width: none; }
   .site-nav::-webkit-scrollbar { display: none; }
-  .site-nav a { flex: 0 0 auto; }
+  .site-nav a { flex: 0 0 auto; padding: 12px 10px; }
+  /* 右に続きがあることが分かるよう、右端だけ文字を薄くする(影は付けない) */
+  .site-nav { padding-right: 40px; -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 36px), transparent); mask-image: linear-gradient(to right, #000 calc(100% - 36px), transparent); }
 }
 
 /* ---- 段階を意識した導線コピー(まだ始めていない読者への案内) ---- */
@@ -156,7 +158,7 @@ a { color: var(--navy); }
 }
 .update-date {
   margin: 6px 0 0;
-  font-size: 0.7rem;
+  font-size: 0.8125rem;
   color: var(--ink-sub);
 }
 /* 12〜1月の駆け込み需要期のみJSでshowクラスを付与する季節性リマインド(2026-09-01追加、furusato-nozei限定)。 */
@@ -504,7 +506,7 @@ a { color: var(--navy); }
   border: 1.5px solid var(--line-input);
   border-radius: 10px;
   font-size: 1rem;
-  font-family: "JetBrains Mono", inherit;
+  font-family: "JetBrains Mono", "Noto Sans JP", monospace;
   color: var(--ink);
   background-color: #0e1210;
 }
@@ -631,7 +633,7 @@ a { color: var(--navy); }
 }
 .breakdown-bar-value {
   color: var(--ink);
-  font-family: "JetBrains Mono", monospace;
+  font-family: "JetBrains Mono", "Noto Sans JP", monospace;
   font-weight: 600;
   white-space: nowrap;
   flex-shrink: 0;
@@ -798,7 +800,7 @@ a { color: var(--navy); }
   margin: 0 0 2px;
 }
 .reco-card .reco-price {
-  font-family: "JetBrains Mono", monospace;
+  font-family: "JetBrains Mono", "Noto Sans JP", monospace;
   font-size: 0.82rem;
   color: var(--navy);
 }
@@ -970,7 +972,7 @@ html.qshow .share-row { display: flex; }
 .aff-card .aff-pr,
 .tool-cta .aff-pr,
 .logo-chip .aff-pr {
-  font-size: 0.68rem;
+  font-size: 0.75rem;
   color: #1a1206;
   background: var(--gold);
   padding: 2px 7px;
@@ -1033,6 +1035,8 @@ html.qshow .share-row { display: flex; }
   display: none;
 }
 .rate-table-box.show { display: block; }
+/* 計算結果の直後に来る箱(genkaの年別グラフ等)が結果カードに貼り付かないように */
+.calc-layout + .rate-table-box { margin-top: 24px; }
 .rate-table-box h2 {
   margin: 0 0 4px;
   font-size: 1rem;
@@ -1282,7 +1286,7 @@ html.qshow .share-row { display: flex; }
   position: absolute;
   top: 8px;
   right: 8px;
-  font-size: 0.6rem;
+  font-size: 0.75rem;
   font-weight: 700;
   color: #1a1206;
   background: var(--gold);
@@ -1342,7 +1346,7 @@ html.qshow .share-row { display: flex; }
   content: "PR";
   display: inline-block;
   margin-left: 8px;
-  font-size: 0.68rem;
+  font-size: 0.75rem;
   font-weight: 700;
   text-transform: none;
   letter-spacing: normal;
@@ -1660,8 +1664,8 @@ html.qshow .share-row { display: flex; }
   background: var(--slate-soft);
   border-left: 3px solid var(--navy);
   border-radius: 8px;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.8rem;
+  font-family: "JetBrains Mono", "Noto Sans JP", monospace;
+  font-size: 0.875rem;
   color: var(--ink);
   line-height: 1.7;
   overflow-x: auto;
@@ -1733,7 +1737,7 @@ html.qshow .share-row { display: flex; }
   border: 1px solid var(--line);
   border-radius: 8px;
   color: var(--ink-sub);
-  font-family: "JetBrains Mono", monospace;
+  font-family: "JetBrains Mono", "Noto Sans JP", monospace;
   font-size: 0.78rem;
   padding: 10px 12px;
   margin: 8px 0 10px;
@@ -1780,7 +1784,7 @@ html.qshow .share-row { display: flex; }
   max-width: 720px;
   margin: 40px auto 0;
   padding: 24px 20px 40px;
-  font-size: 0.76rem;
+  font-size: 0.8125rem;
   color: var(--ink-sub);
   line-height: 1.8;
   border-top: 1px solid var(--line);
