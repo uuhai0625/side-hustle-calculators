@@ -31,7 +31,7 @@ async function showFurusatoProducts(category, maxPrice) {
   url.searchParams.set('keyword', `ふるさと納税 ${category}`);
   if (maxPrice) url.searchParams.set('maxPrice', String(Math.floor(maxPrice)));
   url.searchParams.set('sort', '-reviewCount');
-  url.searchParams.set('hits', '4');
+  url.searchParams.set('hits', '8');
   url.searchParams.set('format', 'json');
   try {
     let res = await fetch(url.toString());
@@ -46,11 +46,13 @@ async function showFurusatoProducts(category, maxPrice) {
     if (!res.ok) { grid.classList.remove('show'); grid.innerHTML = ''; return; }
     const data = await res.json();
     if (requestId !== productRequestId) return;
-    const items = (data.Items || []).map((entry) => entry.Item || entry);
+    const items = (data.Items || []).map((entry) => entry.Item || entry)
+      .filter((item) => !PROMO_WORDS.test(cleanName(item)))
+      .slice(0, 4);
     if (!items.length) { grid.classList.remove('show'); grid.innerHTML = ''; return; }
     grid.innerHTML = `<div class="product-band"><div class="product-band-grid">${items.map((item) => cardHtml(item, category)).join('')}</div></div>`;
     grid.classList.add('show');
-    if (label) { label.textContent = 'あなたの上限額で選べる人気の返礼品(楽天レビュー件数順)'; label.style.display = ''; }
+    if (label) { label.textContent = '上限額の目安以内で選べる返礼品(楽天レビュー件数の多い順)'; label.style.display = ''; }
   } catch (e) {
     // 失敗時は既存の検索リンクCTA(aff-card)に静かにフォールバック、スケルトンも消す
     grid.classList.remove('show');
@@ -86,16 +88,24 @@ function escapeAttr(value) {
     .replace(/'/g, '&#39;');
 }
 
+// 返礼品名(装飾除去後)に販促語を含む商品は表示しない(2026-10-17、総務省の「寄附先の選択を阻害する表現」の例に合わせた)。
+// 「限定」「購入」「ポイント」は通常の商品名にも入る(数量限定等)ため対象にしない。
+const PROMO_WORDS = /お得|コスパ|還元|セール|最安|今だけ|半額|割引|特価/;
+
+// 自治体側の装飾文(【…】・＼…／)は外す(「ポイント」「総合1位」等の訴求が混ざるため)。
+function cleanName(item) {
+  return String(item.itemName || '')
+    .replace(/【[^】]*】/g, '')
+    .replace(/＼[^／]*／/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
 function cardHtml(item, category) {
   const imgRaw = item.mediumImageUrls && item.mediumImageUrls[0];
   const img = upscaleImage(typeof imgRaw === 'string' ? imgRaw : (imgRaw && imgRaw.imageUrl) || '');
   const price = Number(item.itemPrice).toLocaleString('ja-JP');
-  // 自治体側の装飾文(【…】・＼…／)は外す(「ポイント」「総合1位」等の訴求が混ざるため)。
-  const name = String(item.itemName || '')
-    .replace(/【[^】]*】/g, '')
-    .replace(/＼[^／]*／/g, '')
-    .replace(/\s+/g, ' ')
-    .trim()
+  const name = cleanName(item)
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
@@ -203,6 +213,9 @@ const resultSub = document.getElementById('result-sub');
 const resultAdvice = document.getElementById('result-advice');
 const resultClampNotice = document.getElementById('result-clamp-notice');
 const affCard = document.getElementById('aff-card');
+const affSub = document.getElementById('aff-sub');
+const resultMeaning = document.getElementById('result-meaning');
+const resultJump = document.getElementById('result-jump');
 const followCta = document.getElementById('follow-cta');
 const otherAspLinks = document.querySelector('.other-asp-links');
 const shareRow = document.getElementById('share-row');
@@ -357,7 +370,7 @@ function computeAndRender() {
     resultClampNotice.classList.remove('show');
   }
 
-  resultAdvice.textContent = 'これは概算です。社会保険料控除は給与収入の15%、住民税の調整控除は考慮せずに計算しています。正確な金額は前年の住民税課税決定通知書等でご確認のうえ、実際の寄附は上限額よりやや少なめにするのが安全です(税務上の最終判断は税理士・税務署にご確認ください)。';
+  resultAdvice.textContent = 'この金額は概算の目安です(社会保険料控除は給与収入の15%で計算し、住民税の調整控除は含めていません)。実際の上限は変わることがあるため、寄附するときはこの額より少なめにし、前年の住民税課税決定通知書の「所得割額」で確認してください(税務上の最終判断は税理士・税務署にご確認ください)。' + (r.limit > 0 ? '目安がついたら、下から返礼品を探せます。' : '');
 
   lastLimit = r.limit;
   updateShareUrl(input);
@@ -367,6 +380,11 @@ function computeAndRender() {
   showAffLink(category);
   // 上限額が0円(控除がほぼ受けられない)のときは、返礼品を探すPRカードも出さない
   affCard.classList.toggle('show', r.limit > 0);
+  resultMeaning.hidden = r.limit <= 0;
+  const procedure = r.needsFinalReturn ? '確定申告' : '確定申告(または条件を満たす場合はワンストップ特例)';
+  resultMeaning.textContent = `この金額までの寄附なら、同じ年の寄附の合計について${procedure}の手続きをした場合、自己負担は2,000円で収まる目安です(概算。他の控除や入力内容により変わります)。`;
+  resultJump.hidden = r.limit <= 0;
+  affSub.textContent = `楽天ふるさと納税の検索結果が新しいタブで開きます(全価格帯の表示)。寄附額の合計が上限額の目安(¥${Math.round(r.limit).toLocaleString('ja-JP')})より少なめになるように選んでください。`;
   if (r.limit > 0) showFurusatoProducts(category, r.limit);
   else hideFurusatoProducts();
 }
@@ -396,6 +414,14 @@ function calc() {
 }
 
 document.getElementById('btn-calc').addEventListener('click', calc);
+
+// 結果直下の「返礼品を探す」: ハッシュ遷移だとGA4の履歴変更検知でPVが水増しされうるため、スクロールとフォーカス移動をJSで行う(hrefはJSなし用のフォールバック)。
+resultJump.addEventListener('click', (e) => {
+  e.preventDefault();
+  affCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  affCard.setAttribute('tabindex', '-1');
+  affCard.focus({ preventScroll: true });
+});
 
 selectProductCategory.addEventListener('change', () => {
   const category = selectProductCategory.value;
@@ -601,7 +627,7 @@ btnSaveImage.addEventListener('click', async () => {
   }, 'image/png');
 });
 
-// 12〜1月の駆け込み需要期(12月31日が寄附期限)のみ季節性リマインドを表示。
+// 10〜12月の駆け込み需要期(12月31日が寄附期限)のみ季節性リマインドを表示。
 function initSeasonalReminder() {
   const banner = document.getElementById('seasonal-reminder');
   if (!banner) return;

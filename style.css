@@ -977,6 +977,24 @@ div.aff-card .aff-title a:focus-visible::after { outline: 2px solid var(--gold);
 .aff-card .aff-text { flex: 1; }
 .aff-card .aff-title { font-weight: 700; font-size: 0.92rem; margin: 0 0 2px; }
 .aff-card .aff-sub { font-size: 0.78rem; color: var(--ink-sub); margin: 0; }
+/* ふるさと納税: 結果直下の意味づけ一文と「返礼品を探す」へのページ内リンク(2026-10-17)。hidden属性はdisplay指定に負けるので明示 */
+.furusato-main .result-meaning { font-size: 0.88rem; color: var(--ink-sub); line-height: 1.7; margin: 8px 0 12px; }
+.furusato-main .result-jump {
+  display: inline-block;
+  padding: 11px 20px;
+  margin-bottom: 14px;
+  border: 1.5px solid var(--gold);
+  border-radius: 999px;
+  color: var(--gold);
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: box-shadow 0.15s ease;
+}
+.furusato-main .result-jump:hover { box-shadow: var(--glow-amber); }
+.furusato-main #aff-card { scroll-margin-top: 16px; }
+.furusato-main .result-jump[hidden] { display: none; }
+.furusato-main .other-asp-links { margin-bottom: 18px; }
 .aff-card .aff-pr,
 .tool-cta .aff-pr,
 .logo-chip .aff-pr {
