@@ -31,7 +31,7 @@ async function showFurusatoProducts(category, maxPrice) {
   url.searchParams.set('keyword', `ふるさと納税 ${category}`);
   if (maxPrice) url.searchParams.set('maxPrice', String(Math.floor(maxPrice)));
   url.searchParams.set('sort', '-reviewCount');
-  url.searchParams.set('hits', '8');
+  url.searchParams.set('hits', '20');
   url.searchParams.set('format', 'json');
   try {
     let res = await fetch(url.toString());
