@@ -152,19 +152,27 @@
   </div>
   </div>
   <!-- 返礼品への導線は結果の直後に置く(2026-10-09、以前は早見表2つの下で結果から約1800px離れていた) -->
-  <a class="aff-card" id="aff-card" href="https://hb.afl.rakuten.co.jp/hgc/567f9cc6.631b3687.567f9cc7.3d3a8a85/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fevent%2F%25E8%2582%2589%2F%3Fev%3D40&amp;link_type=text&amp;ut=eyJwYWdlIjoidXJsIiwidHlwZSI6InRleHQiLCJjb2wiOjF9" target="_blank" rel="noopener sponsored">
-    <span class="aff-icon icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></span>
+  <!-- 楽天リンクは公式「URLからリンク作成」の出力をそのまま置く(2026-10-17、楽天ガイドライン対応)。選択中のジャンルの1本だけ表示 -->
+  <div class="aff-card" id="aff-card" role="group" aria-label="PR:楽天ふるさと納税の検索結果へのリンク(新しいタブで開きます)">
+    <span class="aff-icon icon-svg" aria-hidden="true"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></span>
     <div class="aff-text">
-      <p class="aff-title">上限額の範囲で返礼品を探す</p>
-      <p class="aff-sub">楽天ふるさと納税で見てみる</p>
+      <p class="aff-title">
+        <span class="aff-link" data-category="肉"><a href="https://hb.afl.rakuten.co.jp/hgc/567f9cc6.631b3687.567f9cc7.3d3a8a85/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fevent%2F%E8%82%89%2F%3Fev%3D40&link_type=text&ut=eyJwYWdlIjoidXJsIiwidHlwZSI6InRleHQiLCJjb2wiOjF9" target="_blank" rel="nofollow sponsored noopener" style="word-wrap:break-word;">楽天ふるさと納税で肉の返礼品を探す</a></span>
+        <span class="aff-link" data-category="海鮮" hidden><a href="https://hb.afl.rakuten.co.jp/hgc/567f9cc6.631b3687.567f9cc7.3d3a8a85/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fevent%2F%E6%B5%B7%E9%AE%AE%2F%3Fev%3D40&link_type=text&ut=eyJwYWdlIjoidXJsIiwidHlwZSI6InRleHQiLCJjb2wiOjF9" target="_blank" rel="nofollow sponsored noopener" style="word-wrap:break-word;">楽天ふるさと納税で海鮮の返礼品を探す</a></span>
+        <span class="aff-link" data-category="米" hidden><a href="https://hb.afl.rakuten.co.jp/hgc/567f9cc6.631b3687.567f9cc7.3d3a8a85/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fevent%2F%E7%B1%B3%2F%3Fev%3D40&link_type=text&ut=eyJwYWdlIjoidXJsIiwidHlwZSI6InRleHQiLCJjb2wiOjF9" target="_blank" rel="nofollow sponsored noopener" style="word-wrap:break-word;">楽天ふるさと納税で米の返礼品を探す</a></span>
+        <span class="aff-link" data-category="フルーツ" hidden><a href="https://hb.afl.rakuten.co.jp/hgc/567f9cc6.631b3687.567f9cc7.3d3a8a85/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fevent%2F%E3%83%95%E3%83%AB%E3%83%BC%E3%83%84%2F%3Fev%3D40&link_type=text&ut=eyJwYWdlIjoidXJsIiwidHlwZSI6InRleHQiLCJjb2wiOjF9" target="_blank" rel="nofollow sponsored noopener" style="word-wrap:break-word;">楽天ふるさと納税でフルーツの返礼品を探す</a></span>
+        <span class="aff-link" data-category="スイーツ" hidden><a href="https://hb.afl.rakuten.co.jp/hgc/567f9cc6.631b3687.567f9cc7.3d3a8a85/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fevent%2F%E3%82%B9%E3%82%A4%E3%83%BC%E3%83%84%2F%3Fev%3D40&link_type=text&ut=eyJwYWdlIjoidXJsIiwidHlwZSI6InRleHQiLCJjb2wiOjF9" target="_blank" rel="nofollow sponsored noopener" style="word-wrap:break-word;">楽天ふるさと納税でスイーツの返礼品を探す</a></span>
+        <span class="aff-link" data-category="日用品" hidden><a href="https://hb.afl.rakuten.co.jp/hgc/567f9cc6.631b3687.567f9cc7.3d3a8a85/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fevent%2F%E6%97%A5%E7%94%A8%E5%93%81%2F%3Fev%3D40&link_type=text&ut=eyJwYWdlIjoidXJsIiwidHlwZSI6InRleHQiLCJjb2wiOjF9" target="_blank" rel="nofollow sponsored noopener" style="word-wrap:break-word;">楽天ふるさと納税で日用品の返礼品を探す</a></span>
+      </p>
+      <p class="aff-sub">全価格帯の検索結果を開きます(新しいタブ)</p>
     </div>
     <span class="aff-pr">PR</span>
-  </a>
+  </div>
   <p class="other-asp-links">他のサイトも見てみる: <a href="https://www.furunavi.jp/" target="_blank" rel="noopener">ふるなび</a>・<a href="https://www.satofull.jp/" target="_blank" rel="noopener">さとふる</a>(このサイトは提携していない参考リンクです。返礼品の表示は楽天のみ連携しています)</p>
 
   <div id="product-section">
     <div class="field" id="product-category-field" style="display:none; max-width: 320px; margin: 24px auto 0;">
-      <label for="select-product-category">上限額で選べる返礼品ジャンル</label>
+      <label for="select-product-category">返礼品ジャンル(上の楽天リンクと下の商品が切り替わります)</label>
       <select id="select-product-category">
         <option value="肉" selected>肉</option>
         <option value="海鮮">海鮮</option>

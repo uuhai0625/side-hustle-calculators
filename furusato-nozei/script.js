@@ -1,17 +1,9 @@
-// RAKUTEN_AFFILIATE_ID: uuhai0625ブランド用の楽天アフィリエイトID(相場ノート・副業そろばん他ページと同一)。
-const RAKUTEN_AFFILIATE_ID = '567f9cc6.631b3687.567f9cc7.3d3a8a85';
-
-// 楽天ふるさと納税の検索ページはev=40のイベント検索(通常のsearch/mallとは別URL体系)。
-function furusatoSearchUrl(keyword, maxPrice) {
-  const params = new URLSearchParams({ ev: '40' });
-  if (maxPrice) params.set('max', String(Math.floor(maxPrice)));
-  return `https://search.rakuten.co.jp/search/event/${encodeURIComponent(keyword)}/?${params.toString()}`;
-}
-
-function affiliateUrl(searchUrl) {
-  if (!RAKUTEN_AFFILIATE_ID) return searchUrl;
-  const encoded = encodeURIComponent(searchUrl);
-  return `https://hb.afl.rakuten.co.jp/hgc/${RAKUTEN_AFFILIATE_ID}/?pc=${encoded}&link_type=text&ut=eyJwYWdlIjoidXJsIiwidHlwZSI6InRleHQiLCJjb2wiOjF9`;
+// 検索リンク(aff-card)の楽天アフィリエイトリンクは公式「URLからリンク作成」の出力をindex.htmlにそのまま置いている
+// (2026-10-17、楽天ガイドライン対応: JSでURLを組み立てない)。ここではジャンルに合う1本の表示を切り替えるだけ。
+function showAffLink(category) {
+  document.querySelectorAll('#aff-card .aff-link').forEach((el) => {
+    el.hidden = el.dataset.category !== category;
+  });
 }
 
 const RAKUTEN_APP_ID = 'f9f8dd97-c7a4-4ae1-a2c1-38b4572a702e';
@@ -372,7 +364,7 @@ function computeAndRender() {
 
   productCategoryField.style.display = '';
   const category = selectProductCategory.value;
-  affCard.href = affiliateUrl(furusatoSearchUrl(category, r.limit));
+  showAffLink(category);
   // 上限額が0円(控除がほぼ受けられない)のときは、返礼品を探すPRカードも出さない
   affCard.classList.toggle('show', r.limit > 0);
   if (r.limit > 0) showFurusatoProducts(category, r.limit);
@@ -407,7 +399,7 @@ document.getElementById('btn-calc').addEventListener('click', calc);
 
 selectProductCategory.addEventListener('change', () => {
   const category = selectProductCategory.value;
-  affCard.href = affiliateUrl(furusatoSearchUrl(category, lastLimit));
+  showAffLink(category);
   if (lastLimit > 0) showFurusatoProducts(category, lastLimit);
   else hideFurusatoProducts();
 });
