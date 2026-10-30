@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://uuhai0625.github.io/side-hustle-calculators/</loc>
-    <lastmod>2026-10-30</lastmod>
+    <lastmod>2026-10-31</lastmod>
   </url>
   <url>
     <loc>https://uuhai0625.github.io/side-hustle-calculators/denki-dai/</loc>
@@ -87,5 +87,9 @@
   <url>
     <loc>https://uuhai0625.github.io/side-hustle-calculators/gyomu-jidoka-ai-kaisetsu/</loc>
     <lastmod>2026-09-30</lastmod>
+  </url>
+  <url>
+    <loc>https://uuhai0625.github.io/side-hustle-calculators/ai-subsc-keihi/</loc>
+    <lastmod>2026-10-31</lastmod>
   </url>
 </urlset>

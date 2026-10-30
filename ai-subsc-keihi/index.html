@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<script>/* utm_source等だけの流入では結果欄を出さない */ if (/[?&](price)=/.test(location.search)) document.documentElement.classList.add('qshow');</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ChatGPT・Claudeは経費になる?勘定科目・按分・インボイス|AI副業そろばん</title>
+<meta name="description" content="ChatGPT・Claude・MidjourneyなどAIサブスクの料金は、副業(雑所得・事業所得)でも経費にできます。勘定科目の例、私用と兼用のときの按分、インボイス・年払い・ドル払いの扱いと、年間の経費額を出す計算機をまとめました。">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="ChatGPT・Claudeは経費になる?勘定科目・按分・インボイス|AI副業そろばん">
+<meta property="og:description" content="AIサブスクの料金を副業の経費にするときの勘定科目・按分・インボイスと、年間の経費額の計算機。">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:url" content="https://uuhai0625.github.io/side-hustle-calculators/ai-subsc-keihi/">
+<meta property="og:image" content="https://uuhai0625.github.io/side-hustle-calculators/images/og-image.jpg">
+<meta property="og:image:width" content="1520">
+<meta property="og:image:height" content="800">
+<link rel="canonical" href="https://uuhai0625.github.io/side-hustle-calculators/ai-subsc-keihi/">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ChatGPT・Claudeは経費になる?勘定科目・按分・インボイス">
+<meta name="twitter:description" content="AIサブスクの料金を副業の経費にするときの勘定科目・按分・インボイスと、年間の経費額の計算機。">
+<meta name="twitter:image" content="https://uuhai0625.github.io/side-hustle-calculators/images/og-image.jpg">
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%230a0d0c'/><rect x='6' y='7' width='20' height='18' rx='3' fill='none' stroke='%2335f2b0' stroke-width='2'/><line x1='6' y1='16' x2='26' y2='16' stroke='%2335f2b0' stroke-width='2'/><circle cx='11' cy='11.5' r='2.4' fill='%2335f2b0'/><circle cx='21' cy='11.5' r='2.4' fill='%2335f2b0'/><circle cx='11' cy='20.5' r='2.4' fill='%23ffb454'/><circle cx='21' cy='20.5' r='2.4' fill='%2335f2b0'/></svg>">
+<meta name="theme-color" content="#0a0d0c">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "datePublished": "2026-10-31",
+  "dateModified": "2026-10-31",
+  "mainEntity": [
+    { "@type": "Question", "name": "ChatGPTやClaudeの料金の勘定科目は何ですか?", "acceptedAnswer": { "@type": "Answer", "text": "法令で決まった科目はありません。「通信費」「支払手数料」のほか、「ソフトウェア利用料」のような科目を自分で作る人もいます。大切なのは、一度決めた科目を毎年続けて使うことです。" } },
+    { "@type": "Question", "name": "私用と兼用している場合は、どうすればいいですか?", "acceptedAnswer": { "@type": "Answer", "text": "副業で使った割合だけを経費にします(家事按分)。所得税基本通達45-2では、業務に使う部分が50%以下でも、その部分を明らかに区分できれば経費にしてよいとされています。使用時間の記録など、割合を説明できる根拠を残しておきます。" } },
+    { "@type": "Question", "name": "副業が雑所得でも経費にできますか?", "acceptedAnswer": { "@type": "Answer", "text": "できます。雑所得も「総収入金額−必要経費」で計算します(所得税法35条)。ただし雑所得の赤字は給与など他の所得と相殺できません。また、給与を1か所から受けて年末調整を受けている人で、副業の所得が20万円以下なら所得税の確定申告は不要です(医療費控除などで確定申告する場合は副業分も含めます)。住民税の申告は別に必要なので、お住まいの市区町村で確認してください。" } },
+    { "@type": "Question", "name": "インボイス(適格請求書)は関係ありますか?", "acceptedAnswer": { "@type": "Answer", "text": "消費税を一般課税で申告している人だけが関係します。消費税の申告をしていない人(免税事業者)や、簡易課税・2割特例・3割特例を使う人は、海外サブスクのインボイスの有無で納める税額は変わりません。一般課税の人は、請求書の記載と国税庁の適格請求書発行事業者公表サイトで登録の有無を確かめてください。" } },
+    { "@type": "Question", "name": "年払い(年額プラン)は、払った年に全額を経費にできますか?", "acceptedAnswer": { "@type": "Answer", "text": "原則は、その年に使った月数分だけを経費にします。ただし、支払った日から1年以内に受けるサービスの前払いで、毎年続けて支払った年の経費にしている場合は、払った年に全額を経費にできます(所得税基本通達37-30の2)。年によって処理を変えることはできません。" } },
+    { "@type": "Question", "name": "iPhoneやAndroidのアプリから払った場合、領収書はどこで取れますか?", "acceptedAnswer": { "@type": "Answer", "text": "アプリ内課金の請求元はAppleやGoogleになります。iPhoneならAppleの購入履歴、AndroidならGoogle Playの注文履歴から領収書を確認できます。2025年4月からは、アプリストア経由の海外サービスはAppleやGoogleが提供者とみなされて消費税を納める仕組み(プラットフォーム課税)になっています。" } }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "AIサブスク(ChatGPT・Claude等)の経費計算機",
+  "url": "https://uuhai0625.github.io/side-hustle-calculators/ai-subsc-keihi/",
+  "description": "ChatGPT・Claude・MidjourneyなどAIサブスクの料金を、使った月数と副業で使う割合から年間の経費額にする無料ツールです。",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "JPY"
+  },
+  "datePublished": "2026-10-31",
+  "dateModified": "2026-10-31"
+}
+</script>
+<!-- breadcrumb-ld:start 自動生成: _tools/build_nav.py(手編集すると次回実行で上書きされる) -->
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "AI副業そろばん", "item": "https://uuhai0625.github.io/side-hustle-calculators/"}, {"@type": "ListItem", "position": 2, "name": "AIサブスク(ChatGPT・Claude等)の経費計算機", "item": "https://uuhai0625.github.io/side-hustle-calculators/ai-subsc-keihi/"}]}
+</script>
+<!-- breadcrumb-ld:end -->
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="site-logo heading-font" href="../">AI副業<span class="accent">そろばん</span></a>
+    <h1 class="site-tagline">ChatGPT・Claudeは経費になる?AIサブスクの経費計算機</h1>
+    <!-- site-nav:start 自動生成: _tools/build_nav.py(手編集すると次回実行で上書きされる) -->
+    <nav class="site-nav" aria-label="カテゴリ">
+      <a href="../#hajime">始める方へ</a><a href="../#calc" aria-current="true">計算機</a><a href="../#toolguide">ツール選び</a><a href="../#kaisetsu">深掘り解説</a><a href="../#craft">道具ガイド</a>
+    </nav>
+    <!-- site-nav:end -->
+  </div>
+</header>
+
+<main class="wrap">
+  <!-- breadcrumb:start 自動生成: _tools/build_nav.py(手編集すると次回実行で上書きされる) -->
+  <nav class="breadcrumb" aria-label="パンくずリスト"><ol><li><a href="../">トップ</a></li><li><a href="../#calc">計算機</a></li><li aria-current="page">AIサブスク(ChatGPT・Claude等)の経費計算機</li></ol></nav>
+  <!-- breadcrumb:end -->
+  <p class="stage-note">ChatGPTなどAIサブスクの料金のうち、今年の経費にできる額を計算できます。このページには広告(PR)を含み、該当箇所に「PR」と表示しています。</p>
+
+  <div class="manner-box show">
+    <h2>結論</h2>
+    <ul>
+      <li><strong>経費になる:</strong> ChatGPT・Claude・MidjourneyなどのAIサブスクは、副業に使った分を経費にできます。副業が雑所得でも同じです。</li>
+      <li><strong>勘定科目:</strong> 法令の決まりはなく、「通信費」や「支払手数料」がよく使われます。一度決めたら毎年同じ科目を使います。</li>
+      <li><strong>私用と兼用なら:</strong> 副業で使った割合だけを経費にします(按分)。割合の根拠は記録して残します。</li>
+    </ul>
+  </div>
+
+  <div class="calc-layout">
+  <div class="calc-card">
+    <div class="field">
+      <label for="select-service">使っているサービス</label>
+      <select id="select-service">
+        <optgroup label="チャットAI">
+          <option value="chatgpt_go">ChatGPT Go</option>
+          <option value="chatgpt_plus" selected>ChatGPT Plus</option>
+          <option value="chatgpt_pro">ChatGPT Pro $100</option>
+          <option value="chatgpt_pro200">ChatGPT Pro $200</option>
+          <option value="claude_pro">Claude Pro</option>
+          <option value="claude_max5">Claude Max 5x</option>
+          <option value="claude_max20">Claude Max 20x</option>
+          <option value="gemini_plus">Google AI Plus</option>
+          <option value="gemini_pro">Google AI Pro</option>
+          <option value="gemini_ultra5">Google AI Ultra 5x</option>
+        </optgroup>
+        <optgroup label="コーディングAI">
+          <option value="copilot_pro">GitHub Copilot Pro</option>
+          <option value="copilot_proplus">GitHub Copilot Pro+</option>
+          <option value="cursor_plus">Cursor Plus</option>
+          <option value="cursor_premium">Cursor Premium</option>
+        </optgroup>
+        <optgroup label="画像生成AI">
+          <option value="mj_basic">Midjourney Basic</option>
+          <option value="mj_standard">Midjourney Standard</option>
+          <option value="mj_pro">Midjourney Pro</option>
+          <option value="mj_mega">Midjourney Mega</option>
+        </optgroup>
+        <optgroup label="その他">
+          <option value="other">その他(金額を入力)</option>
+        </optgroup>
+      </select>
+    </div>
+    <div class="field">
+      <label for="input-price">月額(円)</label>
+      <input type="number" id="input-price" inputmode="numeric" min="0" step="10" value="3180" aria-describedby="price-hint">
+      <span class="field-hint" id="price-hint">サービスを選ぶと目安額(公式の税抜価格を1ドル=159円で換算)が入ります。消費税が上乗せされることがあるので、カード明細の円の金額(税込)に書き換えてください。</span>
+    </div>
+    <div class="field">
+      <label for="input-months">今年使った月数(か月)</label>
+      <input type="number" id="input-months" inputmode="numeric" min="1" max="12" step="1" value="12">
+    </div>
+    <div class="field">
+      <label for="input-ratio">副業で使う割合(%)</label>
+      <input type="number" id="input-ratio" inputmode="numeric" min="0" max="100" step="5" value="50" aria-describedby="ratio-hint">
+      <span class="field-hint" id="ratio-hint">例: 副業専用のアカウントなら100%、仕事と私用で半々なら50%。時間で割合を出すなら<a href="../keihi-anbun/">経費按分計算機</a>が使えます。</span>
+    </div>
+    <button class="btn-calc" id="btn-calc" type="button">年間の経費額を計算する</button>
+  </div>
+
+  <div class="result-card" id="result-card" role="status" aria-live="polite">
+    <p class="result-label">今年の経費にできる額の目安</p>
+    <p class="result-amount"><span class="yen">¥</span><span id="result-amount">--</span></p>
+    <p class="result-note" id="result-note"></p>
+    <p class="result-sub" id="result-sub"></p>
+    <div class="result-advice" id="result-advice"></div>
+    <div class="share-row" id="share-row">
+      <button class="share-btn" id="btn-copy-link" type="button">結果のURLをコピー</button>
+    </div>
+  </div>
+  </div>
+
+  <div class="detail-section" id="todo">
+    <h2>経費にするためにやること</h2>
+    <ul>
+      <li>毎月の請求書・領収書(PDFやメール)を保存しておきます。アプリから払った場合はAppleやGoogleの購入履歴が領収書になります。</li>
+      <li>帳簿には、日付・科目・金額・内容を書きます。例: ChatGPT Plusに3,180円を払い、副業で使う割合が50%なら「10/5 通信費 1,590円 ChatGPT Plus(支払額3,180円のうち50%)」。個人のカードで払った分は、仕訳では「通信費 1,590円 / 事業主借 1,590円」になります。</li>
+      <li>割合の根拠(副業に使った時間のメモなど)を残しておきます。</li>
+      <li>副業の所得が20万円以下で所得税の確定申告をしない場合でも、住民税の申告は必要です。詳しくはお住まいの市区町村で確認してください。</li>
+    </ul>
+    <p>複数のAIサブスクの月額をまとめて出したいときは<a href="../getsugaku-goukei/">AI副業 月間コスト合計シミュレーター</a>、電気代や家賃の按分は<a href="../keihi-anbun/">経費按分計算機</a>を使ってください。</p>
+  </div>
+
+  <div class="rate-table-box show">
+    <h2>サービスごとの請求元</h2>
+    <p class="rate-table-note">ウェブサイトから直接申し込んだ場合の請求元です。インボイス(適格請求書発行事業者)の登録は、国税庁の公表サイトで2026年10月30日に確認しました。</p>
+    <table class="rate-table">
+      <tr><th scope="col">サービス(請求元)</th><th scope="col">インボイス登録</th></tr>
+      <tr><td>ChatGPT(OpenAI OpCo, LLC)</td><td>登録あり</td></tr>
+      <tr><td>Claude(Anthropic, PBC)</td><td>登録あり</td></tr>
+      <tr><td>GitHub Copilot(GitHub, Inc.)</td><td>登録あり</td></tr>
+      <tr><td>Google AI Pro など(Google)</td><td>未確認</td></tr>
+      <tr><td>Midjourney(Midjourney, Inc.)</td><td>未確認</td></tr>
+      <tr><td>Cursor(Anysphere, Inc.)</td><td>未確認</td></tr>
+    </table>
+    <p class="rate-source">iPhone・Androidのアプリ内で払った場合、請求元はAppleまたはGoogleになります。登録の有無は変わることがあるので、最新の状態は<a href="https://www.invoice-kohyo.nta.go.jp/" target="_blank" rel="noopener">国税庁 適格請求書発行事業者公表サイト</a>と請求書の記載で確かめてください。</p>
+  </div>
+
+  <div class="detail-section" id="calc-basis">
+    <h2>この計算機の計算根拠</h2>
+    <p class="calc-formula">今年の経費 = 月額 × 今年使った月数 × 副業で使う割合</p>
+    <p>サービスを選ぶと入る月額は、各社の公式料金(ドル建ては1ドル=159円で換算、2026年8〜10月に確認)をもとにした目安です。実際の経費には、カード明細などに載っている円の金額を使ってください。</p>
+  </div>
+
+  <div class="detail-section">
+    <h2>消費税・年払い・ドル払いの扱い</h2>
+    <h3>消費税(一般課税の人だけ関係します)</h3>
+    <p>消費税の申告をしていない人(免税事業者)、簡易課税の人、2割特例(個人は令和8年分まで)や3割特例(令和9年分・令和10年分)を使う人は、海外サブスクの消費税の扱いで納める税額は変わりません。一般課税で申告している人は、インボイスの有無で仕入税額控除ができるかが変わります。Team・Businessなどの事業者向けプランはリバースチャージの対象になり得ますが、当分の間は、一般課税で課税売上割合が95%以上の人や、簡易課税・2割特例の人は申告が要りません。当てはまるか迷う場合は、税理士や税務署に確認してください。</p>
+    <h3>年払い(年額プラン)</h3>
+    <p>原則は、その年に使った月数分だけを経費にします。支払った日から1年以内のサービスの前払いで、毎年続けて支払った年の経費にしている場合は、払った年に全額を経費にできます(<a href="https://www.nta.go.jp/law/tsutatsu/kihon/shotoku/05/09.htm" target="_blank" rel="noopener">所得税基本通達37-30の2</a>)。</p>
+    <h3>ドル払いの円換算</h3>
+    <p>原則は取引日の為替の仲値(TTM)で円に換算します(<a href="https://www.nta.go.jp/law/tsutatsu/kihon/shotoku/11a/01.htm" target="_blank" rel="noopener">所得税基本通達57の3-2</a>)。継続して使うなら、経費は電信売相場(TTS)で換算してもかまいません。実務では、カード明細に載った円の金額で記帳する人が多いですが、それを直接認めた国税庁の資料は見つかっていません。迷う場合は税務署に確認してください。</p>
+  </div>
+
+  <div class="detail-section" id="kaikei-soft">
+    <h2>帳簿づけを楽にしたい人へ(会計ソフト)</h2>
+    <p>サブスクが数件だけなら、表計算ソフトで記録すれば十分です。事業所得として申告する人や、取引が多くカード明細の取り込み・仕訳を自動にしたい人は、確定申告ソフトを使う方法もあります。無料プランには機能の制限があり、料金や無料で使える範囲は変わることがあるので、各社のページで確かめてください。</p>
+    <div class="tool-cta a8-cta" id="a8-mf" role="group" aria-label="PR マネーフォワード クラウド確定申告">
+      <span class="tool-cta-text"><span class="tool-cta-title"><a href="https://px.a8.net/svt/ejp?a8mat=4BEIP8+FIGNR6+4JGQ+BWVTE" rel="nofollow">無料の確定申告自動化ソフト マネーフォワード クラウド確定申告</a>
+<img border="0" width="1" height="1" src="https://www12.a8.net/0.gif?a8mat=4BEIP8+FIGNR6+4JGQ+BWVTE" alt=""></span></span>
+      <span class="aff-pr">PR</span>
+    </div>
+    <div class="tool-cta a8-cta" id="a8-yayoi" role="group" aria-label="PR やよいの白色申告オンライン">
+      <span class="tool-cta-text"><span class="tool-cta-title"><a href="https://px.a8.net/svt/ejp?a8mat=4BEL1O+5GH3YA+35XE+601S2" rel="nofollow">やよいの白色申告オンライン</a>
+<img border="0" width="1" height="1" src="https://www13.a8.net/0.gif?a8mat=4BEL1O+5GH3YA+35XE+601S2" alt=""></span></span>
+      <span class="aff-pr">PR</span>
+    </div>
+  </div>
+
+  <p class="follow-x">制作の裏側や新しいツールの告知は <a href="https://x.com/uuhai0625" target="_blank" rel="noopener">@uuhai0625</a> で発信しています</p>
+
+  <div class="faq-section">
+    <h2>よくある質問</h2>
+    <details class="faq-item">
+      <summary>ChatGPTやClaudeの料金の勘定科目は何ですか?</summary>
+      <p>法令で決まった科目はありません。「通信費」「支払手数料」のほか、「ソフトウェア利用料」のような科目を自分で作る人もいます。大切なのは、一度決めた科目を毎年続けて使うことです。</p>
+    </details>
+    <details class="faq-item">
+      <summary>私用と兼用している場合は、どうすればいいですか?</summary>
+      <p>副業で使った割合だけを経費にします(家事按分)。所得税基本通達45-2では、業務に使う部分が50%以下でも、その部分を明らかに区分できれば経費にしてよいとされています。使用時間の記録など、割合を説明できる根拠を残しておきます。</p>
+    </details>
+    <details class="faq-item">
+      <summary>副業が雑所得でも経費にできますか?</summary>
+      <p>できます。雑所得も「総収入金額−必要経費」で計算します(所得税法35条)。ただし雑所得の赤字は給与など他の所得と相殺できません。また、給与を1か所から受けて年末調整を受けている人で、副業の所得が20万円以下なら所得税の確定申告は不要です(医療費控除などで確定申告する場合は副業分も含めます)。住民税の申告は別に必要なので、お住まいの市区町村で確認してください。</p>
+    </details>
+    <details class="faq-item">
+      <summary>インボイス(適格請求書)は関係ありますか?</summary>
+      <p>消費税を一般課税で申告している人だけが関係します。消費税の申告をしていない人(免税事業者)や、簡易課税・2割特例・3割特例を使う人は、海外サブスクのインボイスの有無で納める税額は変わりません。一般課税の人は、請求書の記載と国税庁の適格請求書発行事業者公表サイトで登録の有無を確かめてください。</p>
+    </details>
+    <details class="faq-item">
+      <summary>年払い(年額プラン)は、払った年に全額を経費にできますか?</summary>
+      <p>原則は、その年に使った月数分だけを経費にします。ただし、支払った日から1年以内に受けるサービスの前払いで、毎年続けて支払った年の経費にしている場合は、払った年に全額を経費にできます(所得税基本通達37-30の2)。年によって処理を変えることはできません。</p>
+    </details>
+    <details class="faq-item">
+      <summary>iPhoneやAndroidのアプリから払った場合、領収書はどこで取れますか?</summary>
+      <p>アプリ内課金の請求元はAppleやGoogleになります。iPhoneならAppleの購入履歴、AndroidならGoogle Playの注文履歴から領収書を確認できます。2025年4月からは、アプリストア経由の海外サービスはAppleやGoogleが提供者とみなされて消費税を納める仕組み(プラットフォーム課税)になっています。</p>
+    </details>
+  </div>
+
+  <p class="rate-source">参考: <a href="https://www.nta.go.jp/law/tsutatsu/kihon/shotoku/07/01.htm" target="_blank" rel="noopener">所得税基本通達45-1・45-2(家事関連費)</a>、<a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1900.htm" target="_blank" rel="noopener">タックスアンサーNo.1900</a>、<a href="https://www.nta.go.jp/law/tsutatsu/kihon/shotoku/05/09.htm" target="_blank" rel="noopener">所得税基本通達37-30の2</a>、<a href="https://www.nta.go.jp/law/tsutatsu/kihon/shotoku/11a/01.htm" target="_blank" rel="noopener">所得税基本通達57の3-2</a>、<a href="https://www.nta.go.jp/publication/pamph/pdf/cross-kokunai.pdf" target="_blank" rel="noopener">国境を越えた役務の提供に係る消費税の課税(国税庁)</a>、<a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shohi/6568.htm" target="_blank" rel="noopener">タックスアンサーNo.6568 プラットフォーム課税</a>、<a href="https://www.nta.go.jp/taxes/shiraberu/zeimokubetsu/shohi/keigenzeiritsu/invoice_2tokurei.htm" target="_blank" rel="noopener">2割特例 特設ページ</a>(いずれも2026年10月30日確認)</p>
+
+  <!-- related:start 自動生成: _tools/build_nav.py(手編集すると次回実行で上書きされる) -->
+  <nav class="related-tools" aria-label="関連ページ">
+    <h2>次に見るなら</h2>
+    <div class="related-tools-list">
+      <a class="related-tool-link" href="../keihi-anbun/"><span class="icon-svg" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2h12v19l-3-2-3 2-3-2-3 2V2z"/><line x1="9" y1="7" x2="15" y2="7"/><line x1="9" y1="11" x2="15" y2="11"/><line x1="9" y1="15" x2="13" y2="15"/></svg></span><span class="related-tool-text"><span class="related-tool-title">副業の経費按分計算機</span><span class="related-tool-comment">電気代・家賃などを時間や面積で按分</span></span></a>
+      <a class="related-tool-link" href="../getsugaku-goukei/"><span class="icon-svg" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></span><span class="related-tool-text"><span class="related-tool-title">AI副業 月間コスト合計シミュレーター</span><span class="related-tool-comment">使っているAIツールの月額をまとめて計算</span></span></a>
+      <a class="related-tool-link" href="../furusato-nozei/"><span class="icon-svg" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></span><span class="related-tool-text"><span class="related-tool-title">ふるさと納税 控除上限額シミュレーター(副業対応)</span><span class="related-tool-comment">経費を引いた所得でふるさと納税の上限を試算</span></span></a>
+    </div>
+    <h3 class="related-sub">同じカテゴリ(計算機)のページ</h3>
+    <div class="related-tools-list related-compact">
+      <a class="related-tool-link" href="../denki-dai/"><span class="icon-svg" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z"/></svg></span><span class="related-tool-title">在宅ワークのパソコン電気代計算機</span></a>
+      <a class="related-tool-link" href="../douga-ryokin/"><span class="icon-svg" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="13" height="12" rx="1.5"/><path d="M16 10.5 21 7v10l-5-3.5z"/></svg></span><span class="related-tool-title">動画作成AIツールの月額料金シミュレーター</span></a>
+      <a class="related-tool-link" href="../genka-shokyaku/"><span class="icon-svg" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="4" height="17"/><rect x="10" y="9" width="4" height="12"/><rect x="17" y="14" width="4" height="7"/></svg></span><span class="related-tool-title">減価償却費計算機</span></a>
+    </div>
+  </nav>
+  <!-- related:end -->
+
+</main>
+
+<footer class="site-footer">
+  <p>本ページの内容は一般的な考え方の紹介であり、税務上の助言ではありません。実際の経費の扱いや申告方法については、税理士または税務署にご確認のうえご自身の判断で行ってください。</p>
+  <p>このページの一部のリンクは紹介(アフィリエイト)リンクで、該当箇所に「PR」と表示しています。リンク経由で申し込まれると当サイトに紹介料が入ることがあります。紹介料の有無は、本文の記載内容・計算結果に影響させていません。</p>
+  <p><a href="../#about">運営者情報・プライバシーポリシー・お問い合わせ</a></p>
+  <p>同じ作者の計算ツール: <a href="https://uuhai-keisan.github.io/">uuhai計算帳</a>(仕事と暮らしの計算)</p>
+</footer>
+
+<script src="../ga.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
