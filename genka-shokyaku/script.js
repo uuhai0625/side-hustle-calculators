@@ -295,9 +295,10 @@ function computeAndRender() {
 
   if (tier === 'under10') {
     base = null;
-    resultAmount.textContent = yen(amount);
-    resultNote.textContent = '10万円未満のため、購入した年に全額を消耗品費として経費計上できます。';
-    resultSub.textContent = '減価償却は不要です(この計算機の対象外)。';
+    // 空欄・0円のまま計算すると「¥0・全額を消耗品費に」と言い切ってしまうので、入力を促す(2026-10-30)。
+    resultAmount.textContent = amount > 0 ? yen(amount) : '--';
+    resultNote.textContent = amount > 0 ? '10万円未満のため、購入した年に全額を消耗品費として経費計上できます。' : '取得価額(購入時の合計金額)を入力してください。';
+    resultSub.textContent = amount > 0 ? '減価償却は不要です(この計算機の対象外)。' : '';
     resultAdvice.textContent = '';
     resultBreakdown.innerHTML = '';
     resultBreakdown.classList.remove('show');

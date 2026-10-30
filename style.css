@@ -145,7 +145,8 @@ a { color: var(--navy); }
 
 /* ---- 段階を意識した導線コピー(まだ始めていない読者への案内) ---- */
 .stage-note {
-  margin: 8px 0 0;
+  /* 下は次のカードと文字が接しないための最小の間隔(2026-10-30。次の要素のmargin-topが大きければそちらが効く) */
+  margin: 8px 0 16px;
   /* No.75(2026-09-12): デジタル庁基準(本文最小14px)に合わせて0.8rem(12.8px)から引き上げ */
   font-size: 0.875rem;
   color: var(--ink-sub);
@@ -477,7 +478,8 @@ a { color: var(--navy); }
 }
 .field select {
   width: 100%;
-  padding: 12px 14px;
+  /* 右は下向き矢印の分を空け、長い選択肢の文字が矢印に重ならないようにする(2026-10-30) */
+  padding: 12px 40px 12px 14px;
   border: 1.5px solid var(--line-input);
   border-radius: 10px;
   font-size: 1rem;
@@ -1400,10 +1402,9 @@ div.aff-card .aff-title a:focus-visible::after { outline: 2px solid var(--gold);
 
 /* ---- Xフォロー導線 ---- */
 .follow-x {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
+  /* flexだと文と@リンクが別々の箱になりスマホで3列に割れるので、1つの文として中央寄せにする(2026-10-30) */
+  display: block;
+  text-align: center;
   margin: 0 0 24px;
   padding: 12px 16px;
   font-size: 0.82rem;

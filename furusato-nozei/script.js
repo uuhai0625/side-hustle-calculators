@@ -355,7 +355,9 @@ function computeAndRender() {
   const input = readInput();
   const r = calcResult(input);
 
-  animateResultAmount(lastLimit, r.limit);
+  // 給与が空欄のまま計算すると上限0円と読めてしまうので、金額は「--」のままにする(2026-10-30)。
+  if (String(inputSalary.value).trim() === '') resultAmount.textContent = '--';
+  else animateResultAmount(lastLimit, r.limit);
   resultNote.textContent = `給与所得¥${Math.round(r.salaryIncome).toLocaleString('ja-JP')} + 副業所得¥${Math.round(r.sideTaxableIncome).toLocaleString('ja-JP')}(${SIDE_TYPE_LABEL[input.sideType]}) = 総所得金額¥${Math.round(r.totalIncome).toLocaleString('ja-JP')}`;
   resultSub.textContent = `住民税額の基準になる所得割額(概算):¥${Math.round(r.residentIncomeLevy).toLocaleString('ja-JP')} / 適用された所得税率:${Math.round(r.rate * 100)}%`;
   updateIncomeBar(r);
