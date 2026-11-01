@@ -129,7 +129,7 @@ function cardHtml(item, category) {
   return `
     <a class="product-card" href="${escapeAttr(item.itemUrl)}" target="_blank" rel="noopener sponsored" data-category="${escapeAttr(category)}" data-price="${escapeAttr(item.itemPrice)}">
       <span class="pr-badge">PR</span>
-      <img src="${escapeAttr(img)}" alt="${name}" loading="lazy" width="300" height="300">
+      <img src="${escapeAttr(img)}" alt="" loading="lazy" width="300" height="300">
       <p class="product-name">${name}</p>
       <p class="product-price">¥${price}</p>
     </a>`;

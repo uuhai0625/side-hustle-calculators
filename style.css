@@ -212,7 +212,7 @@ a { color: var(--navy); }
   margin-top: 2px;
 }
 .tool-card-body { flex: 1; min-width: 0; }
-.tool-card h2 {
+.tool-card h3 {
   margin: 0 0 6px;
   font-size: 1.1rem;
   color: var(--ink);
