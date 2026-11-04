@@ -495,6 +495,21 @@ a { color: var(--navy); }
   outline: 2px solid var(--navy);
   outline-offset: 2px;
 }
+/* スキップリンク(furusato-nozeiのみ設置)。フォーカスされた時だけ左上に出す */
+.skip-link {
+  position: absolute;
+  left: 8px;
+  top: -48px;
+  z-index: 100;
+  padding: 8px 14px;
+  background: var(--navy);
+  color: #0a0d0c;
+  font-weight: 700;
+  border-radius: 6px;
+  text-decoration: none;
+}
+.skip-link:focus { top: 8px; }
+#main-content:focus { outline: none; }
 .field select:focus, .field input:focus {
   outline: none;
   border-color: var(--navy);

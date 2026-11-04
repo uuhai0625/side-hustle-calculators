@@ -55,6 +55,7 @@ async function showFurusatoProducts(category, maxPrice) {
     if (label) { label.textContent = '上限額の目安以内で選べる返礼品(楽天レビュー件数の多い順)'; label.style.display = ''; }
   } catch (e) {
     // 失敗時は既存の検索リンクCTA(aff-card)に静かにフォールバック、スケルトンも消す
+    console.error('楽天APIの返礼品取得に失敗', e);
     grid.classList.remove('show');
     grid.innerHTML = '';
   } finally {
@@ -439,6 +440,14 @@ resultJump.addEventListener('click', (e) => {
   affCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
   affCard.setAttribute('tabindex', '-1');
   affCard.focus({ preventScroll: true });
+});
+
+// スキップリンクもハッシュ遷移させない(GA4の履歴変更でPVが水増しされるため、result-jumpと同じ扱い)
+document.querySelector('.skip-link').addEventListener('click', (e) => {
+  e.preventDefault();
+  const main = document.getElementById('main-content');
+  main.scrollIntoView({ block: 'start' });
+  main.focus({ preventScroll: true });
 });
 
 selectProductCategory.addEventListener('change', () => {
