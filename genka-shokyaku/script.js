@@ -366,6 +366,8 @@ function renderMethodContent(methodKey) {
   // innerHTMLへの変更もXSSリスクはない。
   const monthlyDepreciation = Math.round(firstYear.amount / 12);
   advice += ` <a href="../getsugaku-goukei/?depreciation=${monthlyDepreciation}">月間コスト合計シミュレーターに反映する(月割り¥${yen(monthlyDepreciation)})</a>`;
+  // No.127: 方式によって合計が変わると誤解されないよう、方式が複数ある時は違いが主に「経費にする年」だと先に添える
+  if (methods.length > 1) advice = 'どの方法でも、経費にできる合計はほぼ同じです(通常の減価償却だけは最後に1円を帳簿に残します)。違うのは主に、経費にする年の配分です。 ' + advice;
   resultAdvice.innerHTML = advice;
 
   if (methods.length > 1) {

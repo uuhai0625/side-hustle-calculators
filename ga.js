@@ -1,4 +1,5 @@
-// GA4計測(2026-08-15導入、プロパティ「副業そろばん」)。診断ツール群・相場ノートと同じ空文字ガードパターン。
+// GA4計測(2026-08-15導入、プロパティ「副業そろばん」)。※全ページ共通のため、計算結果の読み上げ(下のNo.127)も同居している。差し替える時は読み上げ部分を消さないこと。
+// 診断ツール群・相場ノートと同じ空文字ガードパターン。
 const GA_MEASUREMENT_ID = 'G-P6QWLBJZJH';
 // ローカル開発サーバー(_devserver.ps1)からのアクセスを除外するガード。
 // これがないとClaudeの動作確認のたびに本番GA4にダミーのpageview/eventが記録されてしまう
@@ -9,6 +10,26 @@ const isLocalDev = ['localhost', '127.0.0.1', '[::1]', ''].includes(location.hos
 // 共有用のクエリ(年収など)をURLへ書き込むので、gtagが差し替える前の元の関数を取っておき、URLの書き換えにはこちらを使う
 // (入力値がGA4に届くのと、同じ人の再計算でPVが水増しされるのを防ぐ、2026-10-16)。
 window.replaceUrlQuietly = History.prototype.replaceState.bind(history);
+// 結果カードは計算前にdisplay:noneのため、最初の結果がスクリーンリーダーに読まれない(No.127、2026-11-20)。
+// 非表示→表示に変わった時だけ、画面外の読み上げ欄に要点(見出し・金額・条件)を入れる。2回目以降の更新はカード自身のaria-liveに任せる。
+document.addEventListener('DOMContentLoaded', () => {
+  const card = document.getElementById('result-card');
+  if (!card || !card.hasAttribute('aria-live')) return;
+  const live = document.createElement('p');
+  live.setAttribute('role', 'status');
+  live.style.cssText = 'position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0';
+  document.body.appendChild(live);
+  let shown = card.classList.contains('show');
+  new MutationObserver(() => {
+    const now = card.classList.contains('show');
+    if (now && !shown) {
+      const pick = (sel) => ((card.querySelector(sel) || {}).textContent || '').replace(/\s+/g, ' ').trim();
+      live.textContent = '';
+      setTimeout(() => { live.textContent = [pick('.result-label'), pick('.result-amount'), pick('.result-note')].filter(Boolean).join(' '); setTimeout(() => { live.textContent = ''; }, 8000); }, 100);
+    }
+    shown = now;
+  }).observe(card, { attributes: true, attributeFilter: ['class'] });
+});
 if (GA_MEASUREMENT_ID && !isLocalDev) {
   const gaScript = document.createElement('script');
   gaScript.async = true;

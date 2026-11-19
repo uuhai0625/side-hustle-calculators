@@ -161,11 +161,12 @@ function computeAndRender() {
   const initHigh = pc.high;
   const monthlyLow = genre.toolLow + ELEC_MONTHLY;
   const monthlyHigh = genre.toolHigh + ELEC_MONTHLY;
-  const totalLow = initLow + monthlyLow * 3;
-  const totalHigh = initHigh + monthlyHigh * 3;
+  // No.127: 「¥93〜¥114,493」のような細かすぎる目安にならないよう、合計は100円単位に丸める
+  const totalLow = Math.round((initLow + monthlyLow * 3) / 100) * 100;
+  const totalHigh = Math.round((initHigh + monthlyHigh * 3) / 100) * 100;
 
   resultAmount.textContent = `¥${totalLow.toLocaleString('ja-JP')}〜¥${totalHigh.toLocaleString('ja-JP')}`;
-  resultNote.textContent = `${genre.label}・${pc.label}の場合`;
+  resultNote.textContent = `${genre.label}・${pc.label}の場合の目安(100円単位で丸めています)`;
   resultSub.textContent = `内訳:初期費用 ¥${initLow.toLocaleString('ja-JP')}〜¥${initHigh.toLocaleString('ja-JP')} / 月々の目安(ツール+電気代) ¥${monthlyLow.toLocaleString('ja-JP')}〜¥${monthlyHigh.toLocaleString('ja-JP')} ×3ヶ月`;
 
   const linkHtml = genre.link ? ` くわしくは<a href="${genre.link.href}">${genre.link.label}</a>もあわせてご覧ください。` : '';
