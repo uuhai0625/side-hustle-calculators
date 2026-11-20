@@ -230,6 +230,7 @@ const resultSub = document.getElementById('result-sub');
 const resultAdvice = document.getElementById('result-advice');
 const resultClampNotice = document.getElementById('result-clamp-notice');
 const affCard = document.getElementById('aff-card');
+const rakutenCard = document.getElementById('rakuten-card');
 const affSub = document.getElementById('aff-sub');
 const resultMeaning = document.getElementById('result-meaning');
 const resultJump = document.getElementById('result-jump');
@@ -399,6 +400,7 @@ function computeAndRender() {
   showAffLink(category);
   // 上限額が0円(控除がほぼ受けられない)のときは、返礼品を探すPRカードも出さない
   affCard.classList.toggle('show', r.limit > 0);
+  rakutenCard.classList.toggle('show', r.limit > 0);
   resultMeaning.hidden = r.limit <= 0;
   const procedure = r.needsFinalReturn ? '確定申告' : '確定申告(または条件を満たす場合はワンストップ特例)';
   resultMeaning.textContent = `この金額までの寄附なら、同じ年の寄附の合計について${procedure}の手続きをした場合、自己負担は2,000円で収まる目安です(概算。他の控除や入力内容により変わります)。`;

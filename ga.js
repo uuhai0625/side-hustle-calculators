@@ -63,7 +63,9 @@ if (GA_MEASUREMENT_ID && !isLocalDev) {
     if (!anchor || !link.contains(anchor)) return;
     // category/price: furusato-nozeiの返礼品カードのみdata-category/data-price属性を持つ(2026-08-31追加)。
     // 他ページのproduct-cardには存在しないため、そのままundefinedになりイベント自体には影響しない。
-    gtag('event', 'affiliate_click', {
+    // 楽天カード(furusato-nozeiの#rakuten-card、2026-11-21)は別のイベント名にする。link_idはGA4のカスタムディメンション未登録で
+    // レポートで分けられないため。affiliate_clickに混ぜると、ふるさと納税の12/1・1/10判定(楽天の返礼品クリック)が変わる
+    gtag('event', link.id === 'rakuten-card' ? 'card_affiliate_click' : 'affiliate_click', {
       link_type: link.classList.contains('product-card') ? 'product_card'
         : link.classList.contains('tool-cta') ? 'tool_cta'
         : link.classList.contains('logo-chip') ? 'logo_chip' : 'aff_card',
