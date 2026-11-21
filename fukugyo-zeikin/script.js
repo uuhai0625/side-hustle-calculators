@@ -210,7 +210,12 @@ function calc() {
   resultCard.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
 }
 
-document.getElementById('btn-calc').addEventListener('click', calc);
+// 計算ボタンを押した数(calc_click、2026-11-22)。迷っている人が計算まで進んだかを判定日に見る。
+// 共有URLから開いたときの自動計算は数えない。ローカル環境ではgtagがないので存在チェックする。
+document.getElementById('btn-calc').addEventListener('click', () => {
+  if (typeof gtag === 'function') gtag('event', 'calc_click', { page_path: location.pathname });
+  calc();
+});
 
 let liveRecalcTimer = null;
 function scheduleLiveRecalc() {
