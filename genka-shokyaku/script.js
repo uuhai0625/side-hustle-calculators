@@ -1,82 +1,3 @@
-const RAKUTEN_APP_ID = 'f9f8dd97-c7a4-4ae1-a2c1-38b4572a702e';
-const RAKUTEN_ACCESS_KEY = 'pk_gJd3Q0JkttKeBF4DcfYjD8zYljezjxNxEFiUssXZhFs';
-const RAKUTEN_API_AFFILIATE_ID = '567fd2ff.507b4e2c.567fd300.5261c56d';
-
-let productRequestId = 0;
-
-async function showProducts(keyword, labelText, opts = {}) {
-  const grid = document.getElementById('product-grid');
-  const label = document.getElementById('product-grid-label');
-  if (!grid) return;
-  const requestId = ++productRequestId;
-  grid.innerHTML = '';
-  grid.classList.remove('show');
-  if (label) label.style.display = 'none';
-  const url = new URL('https://openapi.rakuten.co.jp/ichibams/api/IchibaItem/Search/20260701');
-  url.searchParams.set('applicationId', RAKUTEN_APP_ID);
-  url.searchParams.set('accessKey', RAKUTEN_ACCESS_KEY);
-  url.searchParams.set('affiliateId', RAKUTEN_API_AFFILIATE_ID);
-  url.searchParams.set('keyword', keyword);
-  // 曖昧な語だとレビュー数順で関係ない商品が上位に来るため、除外語で絞る(2026-10-16)
-  if (opts.ng) url.searchParams.set('NGKeyword', opts.ng);
-  url.searchParams.set('sort', '-reviewCount');
-  url.searchParams.set('hits', '4');
-  url.searchParams.set('format', 'json');
-  try {
-    let res = await fetch(url.toString());
-    if (requestId !== productRequestId) return;
-    // 楽天APIは1秒以内に続けて呼ぶと429になるので、計算ボタンを続けて押したときは1.1秒後に1回だけ再試行する。
-    if (res.status === 429) {
-      await new Promise((resolve) => setTimeout(resolve, 1100));
-      if (requestId !== productRequestId) return;
-      res = await fetch(url.toString());
-      if (requestId !== productRequestId) return;
-    }
-    if (!res.ok) return;
-    const data = await res.json();
-    if (requestId !== productRequestId) return;
-    const items = (data.Items || []).map((entry) => entry.Item || entry);
-    if (!items.length) return;
-    grid.innerHTML = `<div class="product-band"><div class="product-band-grid">${items.map(cardHtml).join('')}</div></div>`;
-    grid.classList.add('show');
-    if (label) { label.textContent = `${labelText}(楽天レビュー件数順)`; label.style.display = ''; }
-  } catch (e) {
-    // 失敗時は既存の検索リンクCTA(aff-card)に静かにフォールバック
-  }
-}
-
-function upscaleImage(url) {
-  return url.replace(/_ex=\d+x\d+/, '_ex=300x300');
-}
-
-// 楽天APIの値をHTML属性に入れる前のエスケープ(furusato-nozeiと同じ)
-function escapeAttr(value) {
-  return String(value || '')
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39;');
-}
-
-function cardHtml(item) {
-  const imgRaw = item.mediumImageUrls && item.mediumImageUrls[0];
-  const img = upscaleImage(typeof imgRaw === 'string' ? imgRaw : (imgRaw && imgRaw.imageUrl) || '');
-  const price = Number(item.itemPrice).toLocaleString('ja-JP');
-  const name = String(item.itemName || '')
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;');
-  return `
-    <a class="product-card" href="${escapeAttr(item.itemUrl)}" target="_blank" rel="noopener sponsored">
-      <span class="pr-badge">PR</span>
-      <img src="${escapeAttr(img)}" alt="${name}" loading="lazy" width="300" height="300">
-      <p class="product-name">${name}</p>
-      <p class="product-price">¥${price}</p>
-    </a>`;
-}
-
 const CATEGORIES = {
   pc:     { label: 'パソコン・タブレット(iPad・液晶ペンタブレット含む)', years: 4 },
   camera: { label: 'カメラ・ビデオカメラ', years: 5 },
@@ -113,7 +34,6 @@ const scheduleTable = document.getElementById('schedule-table');
 const scheduleChart = document.getElementById('schedule-chart');
 const btnDownloadCsv = document.getElementById('btn-download-csv');
 let lastScheduleRows = [];
-const affCard = document.getElementById('aff-card');
 const shareRow = document.getElementById('share-row');
 const btnCopyLink = document.getElementById('btn-copy-link');
 const btnShareX = document.getElementById('btn-share-x');
@@ -323,8 +243,6 @@ function calc() {
   computeAndRender();
   resultCard.classList.add('show');
   shareRow.classList.add('show');
-  affCard.classList.add('show');
-  showProducts('ラベルライター 家庭用', '固定資産の管理に人気のアイテム', { ng: '写真 フォト スマホプリンター' });
   resultCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 

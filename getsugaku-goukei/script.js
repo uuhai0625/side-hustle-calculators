@@ -1,4 +1,3 @@
-const affCard = document.getElementById('aff-card');
 
 // ai-chat-tools/ai-coding-toolsの各プラン表の価格をそのまま流用(ChatGPT・Codex・Cursor・Copilotは2026年10月、
 // Claude・Geminiは2026年8月に確認。ドル建ては為替159円/ドルで換算)。
@@ -137,7 +136,6 @@ function computeAndRender() {
     resultBreakdown.classList.remove('show');
   }
 
-  if (affCard) affCard.classList.add('show');
   lastTotal = total;
   updateShareUrl();
 }
