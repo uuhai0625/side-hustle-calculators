@@ -39,9 +39,9 @@
      "reason": "始めた後の毎月のコストを把握"
     },
     {
-     "slug": "ai-chat-tools",
+     "slug": "fukugyo-zeikin",
      "query": "",
-     "reason": "ほぼ全ジャンルで使うチャットAIの料金"
+     "reason": "税金と会社バレの不安を自分の数字で確認"
     }
    ]
   },
@@ -61,9 +61,9 @@
      "reason": "始めた後にかかる毎月のコスト"
     },
     {
-     "slug": "ai-chat-tools",
+     "slug": "fukugyo-zeikin",
      "query": "",
-     "reason": "ほぼ全ジャンルで使うチャットAIの料金"
+     "reason": "売上の見込みから税金と手取りを確認"
     }
    ]
   },
@@ -174,6 +174,28 @@
      "slug": "ai-subsc-keihi",
      "query": "",
      "reason": "AIサブスクのうち経費にできる額を計算"
+    }
+   ]
+  },
+  "fukugyo-zeikin": {
+   "category": "calc",
+   "label": "副業の税金計算機(20万円ルール・住民税)",
+   "icon": "<path d=\"M4 4h16v16H4z\"/><path d=\"M8 9h8M8 13h5\"/><circle cx=\"16\" cy=\"16\" r=\"2.5\"/>",
+   "next": [
+    {
+     "slug": "ai-subsc-keihi",
+     "query": "",
+     "reason": "AI代のうち経費にできる額を計算"
+    },
+    {
+     "slug": "furusato-nozei",
+     "query": "",
+     "reason": "副業の所得を入れてふるさと納税の上限を試算"
+    },
+    {
+     "slug": "hajimekata",
+     "query": "",
+     "reason": "運営者の実例で始め方の流れを確認"
     }
    ]
   },

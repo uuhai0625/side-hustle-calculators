@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (now && !shown) {
       const pick = (sel) => ((card.querySelector(sel) || {}).textContent || '').replace(/\s+/g, ' ').trim();
       live.textContent = '';
-      setTimeout(() => { live.textContent = [pick('.result-label'), pick('.result-amount'), pick('.result-note')].filter(Boolean).join(' '); setTimeout(() => { live.textContent = ''; }, 8000); }, 100);
+      setTimeout(() => { live.textContent = [pick('.result-label'), pick('.result-amount'), pick('.result-note'), pick('.result-judge')].filter(Boolean).join(' '); setTimeout(() => { live.textContent = ''; }, 8000); }, 100);
     }
     shown = now;
   }).observe(card, { attributes: true, attributeFilter: ['class'] });

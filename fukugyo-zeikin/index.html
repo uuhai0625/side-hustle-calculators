@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<script>/* utm_source等だけの流入では結果欄を出さない */ if (/[?&](salary)=/.test(location.search)) document.documentElement.classList.add('qshow');</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>副業は20万円以下なら確定申告不要?税金・住民税・会社バレの計算機|AI副業そろばん</title>
+<meta name="description" content="会社員の副業は、所得が20万円以下なら所得税の確定申告は不要ですが、住民税の申告は必要です。給与の年収と副業の売上・経費を入れると、確定申告が要るか、副業で増える税金と手元に残る額の目安がわかります。住民税で会社にバレる仕組みもまとめました。">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="副業は20万円以下なら確定申告不要?税金・住民税・会社バレの計算機|AI副業そろばん">
+<meta property="og:description" content="給与の年収と副業の売上・経費から、確定申告が要るか、副業で増える税金と手元に残る額の目安を計算します。">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:url" content="https://uuhai0625.github.io/side-hustle-calculators/fukugyo-zeikin/">
+<meta property="og:image" content="https://uuhai0625.github.io/side-hustle-calculators/images/og-image.jpg">
+<meta property="og:image:width" content="1520">
+<meta property="og:image:height" content="800">
+<link rel="canonical" href="https://uuhai0625.github.io/side-hustle-calculators/fukugyo-zeikin/">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="副業は20万円以下なら確定申告不要?税金と住民税の計算機">
+<meta name="twitter:description" content="給与の年収と副業の売上・経費から、確定申告が要るか、副業で増える税金と手元に残る額の目安を計算します。">
+<meta name="twitter:image" content="https://uuhai0625.github.io/side-hustle-calculators/images/og-image.jpg">
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%230a0d0c'/><rect x='6' y='7' width='20' height='18' rx='3' fill='none' stroke='%2335f2b0' stroke-width='2'/><line x1='6' y1='16' x2='26' y2='16' stroke='%2335f2b0' stroke-width='2'/><circle cx='11' cy='11.5' r='2.4' fill='%2335f2b0'/><circle cx='21' cy='11.5' r='2.4' fill='%2335f2b0'/><circle cx='11' cy='20.5' r='2.4' fill='%23ffb454'/><circle cx='21' cy='20.5' r='2.4' fill='%2335f2b0'/></svg>">
+<meta name="theme-color" content="#0a0d0c">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "datePublished": "2026-11-22",
+  "dateModified": "2026-11-22",
+  "mainEntity": [
+    { "@type": "Question", "name": "副業が20万円以下なら、確定申告はしなくていいですか?", "acceptedAnswer": { "@type": "Answer", "text": "給与を1か所から受けて年末調整を受けている会社員で、給与以外の所得(売上から経費を引いた額)の合計が20万円以下なら、所得税の確定申告は不要です。ただし、医療費控除やふるさと納税(ワンストップ特例を使わない場合)などで確定申告をするときは、20万円以下の副業の所得も含めて申告します。" } },
+    { "@type": "Question", "name": "20万円以下でも住民税の申告は必要ですか?", "acceptedAnswer": { "@type": "Answer", "text": "必要です。20万円以下で所得税の確定申告をしない場合でも、住民税には同じ扱いがないため、お住まいの市区町村に住民税の申告をします。確定申告をした場合は、その内容が市区町村に伝わるので、別に住民税の申告をする必要はありません。" } },
+    { "@type": "Question", "name": "20万円は売上ですか、利益ですか?", "acceptedAnswer": { "@type": "Answer", "text": "所得、つまり売上(収入)から経費を引いた額で判定します。AIツールの月額のうち副業に使った分なども経費になるので、売上が20万円を超えていても、経費を引いて20万円以下なら所得税の確定申告は不要です。" } },
+    { "@type": "Question", "name": "副業は住民税で会社にバレますか?", "acceptedAnswer": { "@type": "Answer", "text": "住民税を給料から天引き(特別徴収)にしていると、副業分の住民税も会社の天引き額に加わり、額の変化から気づかれることがあります。確定申告書(第二表)の住民税の欄で、給与以外の所得の住民税を「自分で納付」にすると、副業分を自分で納める形にできる場合があります。申告の内容によっては天引きになることがあり、扱いは市区町村によって違い、確実に知られない方法ではありません。" } },
+    { "@type": "Question", "name": "AI副業の所得は雑所得ですか、事業所得ですか?", "acceptedAnswer": { "@type": "Answer", "text": "社会通念上「事業」といえる規模かどうかで判断されます。国税庁の通達(所得税基本通達35-2)では、取引を記録した帳簿書類を保存していない場合は、原則として業務に係る雑所得になるとされています(収入が300万円を超え、事業と認められる事実がある場合は除く)。始めたばかりの小さな副業は雑所得になることが多いです。" } }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "副業の税金計算機(20万円ルール・住民税)",
+  "url": "https://uuhai0625.github.io/side-hustle-calculators/fukugyo-zeikin/",
+  "description": "会社員の副業について、所得税の確定申告が要るか(20万円ルール)と、副業で増える税金・手元に残る額の目安を計算する無料ツールです。",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "JPY"
+  },
+  "datePublished": "2026-11-22",
+  "dateModified": "2026-11-22"
+}
+</script>
+<!-- breadcrumb-ld:start 自動生成: _tools/build_nav.py(手編集すると次回実行で上書きされる) -->
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "AI副業そろばん", "item": "https://uuhai0625.github.io/side-hustle-calculators/"}, {"@type": "ListItem", "position": 2, "name": "副業の税金計算機(20万円ルール・住民税)", "item": "https://uuhai0625.github.io/side-hustle-calculators/fukugyo-zeikin/"}]}
+</script>
+<!-- breadcrumb-ld:end -->
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="site-logo heading-font" href="../">AI副業<span class="accent">そろばん</span></a>
+    <h1 class="site-tagline">副業は20万円以下なら確定申告不要?税金と住民税の計算機</h1>
+    <!-- site-nav:start 自動生成: _tools/build_nav.py(手編集すると次回実行で上書きされる) -->
+    <nav class="site-nav" aria-label="カテゴリ">
+      <a href="../#hajime">始める方へ</a><a href="../#calc" aria-current="true">計算機</a><a href="../#toolguide">ツール選び</a><a href="../#kaisetsu">深掘り解説</a><a href="../#craft">道具ガイド</a>
+    </nav>
+    <!-- site-nav:end -->
+  </div>
+</header>
+
+<main class="wrap">
+  <!-- breadcrumb:start 自動生成: _tools/build_nav.py(手編集すると次回実行で上書きされる) -->
+  <nav class="breadcrumb" aria-label="パンくずリスト"><ol><li><a href="../">トップ</a></li><li><a href="../#calc">計算機</a></li><li aria-current="page">副業の税金計算機(20万円ルール・住民税)</li></ol></nav>
+  <!-- breadcrumb:end -->
+  <p class="stage-note">LINEスタンプ・note・電子書籍など、AIで小さく始める会社員の副業向けの計算機です。売上の見込みとAIツール代などの経費を入れると、確定申告が要るか、税金を引いて手元にいくら残るかがわかります。このページには広告(PR)を含み、該当箇所に「PR」と表示しています。</p>
+
+  <div class="manner-box show">
+    <h2>結論</h2>
+    <ul>
+      <li><strong>所得税:</strong> 会社員(給与1か所・年末調整あり)で、副業の所得(売上−経費)が年20万円以下なら、確定申告は不要です。</li>
+      <li><strong>住民税:</strong> 20万円以下でも申告が必要です。確定申告をしない人は、お住まいの市区町村に申告します。</li>
+      <li><strong>会社に知られるか:</strong> 主に住民税の天引き額から気づかれます。副業分を自分で納める選び方はありますが、確実ではありません。いちばん確実なのは、先に就業規則で副業が認められているかを確かめることです。</li>
+    </ul>
+  </div>
+
+  <div class="calc-layout">
+  <div class="calc-card">
+    <div class="field">
+      <label for="input-salary">本業の給与の年収(額面・円)</label>
+      <input type="text" id="input-salary" inputmode="numeric" value="4500000" aria-describedby="salary-hint">
+      <span class="field-hint" id="salary-hint">源泉徴収票の「支払金額」。見込みでもかまいません。</span>
+    </div>
+    <div class="field">
+      <label for="input-side-income">副業の1年間の売上(円)</label>
+      <input type="text" id="input-side-income" inputmode="numeric" value="120000" aria-describedby="side-hint">
+      <span class="field-hint" id="side-hint">LINEスタンプ・電子書籍・note・アフィリエイトなどの入金額の合計。これから始める人は見込みで(見当がつかなければ、まず月1万円=年12万円で)。</span>
+    </div>
+    <div class="field">
+      <label for="input-side-expense">副業の経費(円)</label>
+      <input type="text" id="input-side-expense" inputmode="numeric" value="30000" aria-describedby="expense-hint">
+      <span class="field-hint" id="expense-hint">AIツールの月額のうち副業に使った分など。<a href="../ai-subsc-keihi/">AIサブスクの経費計算機</a>で出せます。</span>
+    </div>
+    <div class="field">
+      <label for="select-side-type">副業の所得の種類</label>
+      <select id="select-side-type" aria-describedby="type-hint">
+        <option value="zatsu" selected>雑所得(よくわからない場合はこちら)</option>
+        <option value="white">事業所得(白色申告)</option>
+        <option value="blue10">事業所得(青色申告・10万円控除)</option>
+        <option value="blue65">事業所得(青色申告・65万円控除、e-Taxで期限内に申告)</option>
+      </select>
+      <span class="field-hint" id="type-hint">始めたばかりの小さな副業は、雑所得になることが多いです。事業所得は、開業届を出して帳簿をつけている人向けです。</span>
+    </div>
+    <div class="field">
+      <label class="check-label"><input type="checkbox" id="check-other-filing"> 医療費控除や、ふるさと納税を確定申告でするなど、ほかの理由で確定申告をする予定がある</label>
+    </div>
+    <button class="btn-calc" id="btn-calc" type="button">税金と申告の要否を計算する</button>
+  </div>
+
+  <div class="result-card" id="result-card" role="status" aria-live="polite">
+    <p class="result-label">副業で手元に残る目安(1年分、税金を引いた後)</p>
+    <p class="result-amount"><span class="yen">¥</span><span id="result-amount">--</span></p>
+    <p class="result-note" id="result-note"></p>
+    <ul class="result-judge" id="result-judge"></ul>
+    <p class="result-sub" id="result-sub"></p>
+    <div class="result-advice" id="result-advice"></div>
+    <div class="share-row" id="share-row">
+      <button class="share-btn" id="btn-copy-link" type="button">結果のURLをコピー</button>
+    </div>
+    <p class="result-note">コピーするURLには、入力した年収・売上・経費が含まれます。</p>
+  </div>
+  </div>
+
+  <div class="detail-section" id="mijikai">
+    <h2>迷っている人へ: 税金は「怖いから始めない」理由にしなくていい</h2>
+    <p>副業の税金は、売上から経費を引いた「所得」にかかります。会社員なら、副業の所得が年20万円までは所得税の確定申告が要らず、増えるのは住民税(所得の約10%)だけです。たとえば所得が10万円なら、住民税は約1万円増え、約9万円が手元に残ります。</p>
+    <p>やることは2つだけです。入金と経費の記録を残すことと、確定申告をしない年は、お住まいの市区町村へ住民税の申告をすることです。始める前にかかる費用は<a href="../kaishi-cost/">初期費用シミュレーター</a>で、運営者の実際の数字は<a href="../hajimekata/">AI副業の始め方</a>で確かめられます。</p>
+  </div>
+
+  <div class="detail-section" id="todo">
+    <h2>副業の所得に応じてやること</h2>
+    <h3>20万円以下の人</h3>
+    <ul>
+      <li>所得税の確定申告は不要です(青色申告の10万円控除を受ける人は、控除後の所得で判定します)。ただし医療費控除・ふるさと納税(ワンストップ特例を使わない場合)・住宅ローン控除の1年目などで確定申告をするなら、副業の所得も含めて申告します。</li>
+      <li>住民税の申告を、お住まいの市区町村にします。期限や申告書は市区町村の案内で確かめてください。</li>
+      <li>入金と経費の記録(明細・領収書)は残しておきます。20万円以下かどうかを示すのにも、住民税の申告にも使います。事業所得の人は、確定申告をしない場合も帳簿と書類の保存が義務です。</li>
+    </ul>
+    <h3>20万円を超える人</h3>
+    <ul>
+      <li>翌年2月中旬〜3月15日ごろに所得税の確定申告をします。住民税の申告は別に要りません。</li>
+      <li>確定申告書の第二表「住民税・事業税に関する事項」の「給与・公的年金等以外の所得に係る住民税の徴収方法」で、副業分の住民税の納め方を選べます。自分で納めたい場合は「自分で納付」に○を付けます。ただし申告の内容によっては特別徴収(給料から天引き)になることがあり、扱いは市区町村によります。</li>
+      <li>副業がアルバイトなどの給与の場合は、この計算機の対象外です。給与の副業分は本業の会社から天引きされ、「自分で納付」は選べないのが一般的です。</li>
+    </ul>
+  </div>
+
+  <div class="detail-section" id="calc-basis">
+    <h2>この計算機の計算根拠</h2>
+    <p class="calc-formula">手元に残る額 = 副業の利益(売上−経費) − 副業で増える税金<br>副業で増える税金 = (副業ありの所得税+住民税) − (副業なしの所得税+住民税)</p>
+    <p>2026年分(2027年に申告する分)の給与所得控除・所得税の基礎控除(令和8年度税制改正後)と所得税の速算表、復興特別所得税(2.1%)、住民税の所得割(10%、基礎控除43万円)で計算しています。社会保険料は給与の15%で概算し、配偶者や扶養の控除、住民税の調整控除・均等割は入れていません。所得税の確定申告が不要な場合は、所得税は増えない(住民税だけ増える)として計算しています。所得税の額は復興特別所得税を含みます。青色申告の65万円控除は、e-Taxで期限内に申告する前提です(紙で出すと55万円)。合計所得が489万円・655万円などの境目をまたぐと、所得税の基礎控除が段で減るため、増える税金が副業の利益より多くなることがあります。給与の年収が高い人(目安として2,000万円超)は、社会保険料の上限などで目安の精度が下がります。実際の税額は、ほかの控除や自治体によって変わります。</p>
+  </div>
+
+  <div class="detail-section" id="kaikei-soft">
+    <h2>確定申告をする人へ(会計ソフト)</h2>
+    <p>取引が数件だけなら、表計算ソフトで記録して国税庁の確定申告書等作成コーナーで申告すれば十分です。取引が多く、カード明細の取り込みや仕訳を自動にしたい人は、確定申告ソフトを使う方法もあります。無料プランには機能の制限があり、料金や無料で使える範囲は変わることがあるので、各社のページで確かめてください。</p>
+    <div class="tool-cta a8-cta" id="a8-mf" role="group" aria-label="PR マネーフォワード クラウド確定申告">
+      <span class="tool-cta-text"><span class="tool-cta-title"><a href="https://px.a8.net/svt/ejp?a8mat=4BEIP8+FIGNR6+4JGQ+BWVTE" rel="nofollow">無料の確定申告自動化ソフト マネーフォワード クラウド確定申告</a>
+<img border="0" width="1" height="1" src="https://www12.a8.net/0.gif?a8mat=4BEIP8+FIGNR6+4JGQ+BWVTE" alt=""></span></span>
+      <span class="aff-pr">PR</span>
+    </div>
+    <div class="tool-cta a8-cta" id="a8-yayoi" role="group" aria-label="PR やよいの白色申告オンライン">
+      <span class="tool-cta-text"><span class="tool-cta-title"><a href="https://px.a8.net/svt/ejp?a8mat=4BEL1O+5GH3YA+35XE+601S2" rel="nofollow">やよいの白色申告オンライン</a>
+<img border="0" width="1" height="1" src="https://www13.a8.net/0.gif?a8mat=4BEL1O+5GH3YA+35XE+601S2" alt=""></span></span>
+      <span class="aff-pr">PR</span>
+    </div>
+  </div>
+
+  <p class="follow-x">制作の裏側や新しいツールの告知は <a href="https://x.com/uuhai0625" target="_blank" rel="noopener">@uuhai0625</a> で発信しています</p>
+
+  <div class="faq-section">
+    <h2>よくある質問</h2>
+    <details class="faq-item">
+      <summary>副業が20万円以下なら、確定申告はしなくていいですか?</summary>
+      <p>給与を1か所から受けて年末調整を受けている会社員で、給与以外の所得(売上から経費を引いた額)の合計が20万円以下なら、所得税の確定申告は不要です。ただし、医療費控除やふるさと納税(ワンストップ特例を使わない場合)などで確定申告をするときは、20万円以下の副業の所得も含めて申告します。</p>
+    </details>
+    <details class="faq-item">
+      <summary>20万円以下でも住民税の申告は必要ですか?</summary>
+      <p>必要です。20万円以下で所得税の確定申告をしない場合でも、住民税には同じ扱いがないため、お住まいの市区町村に住民税の申告をします。確定申告をした場合は、その内容が市区町村に伝わるので、別に住民税の申告をする必要はありません。</p>
+    </details>
+    <details class="faq-item">
+      <summary>20万円は売上ですか、利益ですか?</summary>
+      <p>所得、つまり売上(収入)から経費を引いた額で判定します。AIツールの月額のうち副業に使った分なども経費になるので、売上が20万円を超えていても、経費を引いて20万円以下なら所得税の確定申告は不要です。</p>
+    </details>
+    <details class="faq-item">
+      <summary>副業は住民税で会社にバレますか?</summary>
+      <p>住民税を給料から天引き(特別徴収)にしていると、副業分の住民税も会社の天引き額に加わり、額の変化から気づかれることがあります。確定申告書(第二表)の住民税の欄で、給与以外の所得の住民税を「自分で納付」にすると、副業分を自分で納める形にできる場合があります。申告の内容によっては天引きになることがあり、扱いは市区町村によって違い、確実に知られない方法ではありません。</p>
+    </details>
+    <details class="faq-item">
+      <summary>AI副業の所得は雑所得ですか、事業所得ですか?</summary>
+      <p>社会通念上「事業」といえる規模かどうかで判断されます。国税庁の通達(所得税基本通達35-2)では、取引を記録した帳簿書類を保存していない場合は、原則として業務に係る雑所得になるとされています(収入が300万円を超え、事業と認められる事実がある場合は除く)。始めたばかりの小さな副業は雑所得になることが多いです。</p>
+    </details>
+  </div>
+
+  <p class="rate-source">参考: <a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1900.htm" target="_blank" rel="noopener">タックスアンサーNo.1900(給与所得者で確定申告が必要な人)</a>、<a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1900_qa.htm" target="_blank" rel="noopener">同Q&A</a>、<a href="https://www.nta.go.jp/taxes/shiraberu/shinkoku/tebiki/2025/03/order6/3-6_02.htm" target="_blank" rel="noopener">確定申告の手引き(住民税・事業税に関する事項)</a>、<a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/2260.htm" target="_blank" rel="noopener">タックスアンサーNo.2260 所得税の税率</a>、<a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1199.htm" target="_blank" rel="noopener">No.1199 基礎控除</a>、<a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1410.htm" target="_blank" rel="noopener">No.1410 給与所得控除</a>、<a href="https://www.nta.go.jp/law/tsutatsu/kihon/shotoku/04/09.htm" target="_blank" rel="noopener">所得税基本通達35-2</a>、<a href="https://www.city.yokohama.lg.jp/kurashi/koseki-zei-hoken/zeikin/faq/answer2.html" target="_blank" rel="noopener">横浜市 住民税の申告のよくある質問</a>(いずれも2026年11月22日確認)</p>
+
+  <!-- related:start 自動生成: _tools/build_nav.py(手編集すると次回実行で上書きされる) -->
+  <nav class="related-tools" aria-label="関連ページ">
+    <h2>次に見るなら</h2>
+    <div class="related-tools-list">
+      <a class="related-tool-link" href="../ai-subsc-keihi/"><span class="icon-svg" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="7" y1="15" x2="11" y2="15"/></svg></span><span class="related-tool-text"><span class="related-tool-title">AIサブスク(ChatGPT・Claude等)の経費計算機</span><span class="related-tool-comment">AI代のうち経費にできる額を計算</span></span></a>
+      <a class="related-tool-link" href="../furusato-nozei/"><span class="icon-svg" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></span><span class="related-tool-text"><span class="related-tool-title">ふるさと納税 控除上限額シミュレーター(副業対応)</span><span class="related-tool-comment">副業の所得を入れてふるさと納税の上限を試算</span></span></a>
+      <a class="related-tool-link" href="../hajimekata/"><span class="icon-svg" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m14.5 9.5-2 5-5 2 2-5z"/></svg></span><span class="related-tool-text"><span class="related-tool-title">AI副業の始め方</span><span class="related-tool-comment">運営者の実例で始め方の流れを確認</span></span></a>
+    </div>
+    <h3 class="related-sub">同じカテゴリ(計算機)のページ</h3>
+    <div class="related-tools-list related-compact">
+      <a class="related-tool-link" href="../denki-dai/"><span class="icon-svg" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z"/></svg></span><span class="related-tool-title">在宅ワークのパソコン電気代計算機</span></a>
+      <a class="related-tool-link" href="../keihi-anbun/"><span class="icon-svg" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2h12v19l-3-2-3 2-3-2-3 2V2z"/><line x1="9" y1="7" x2="15" y2="7"/><line x1="9" y1="11" x2="15" y2="11"/><line x1="9" y1="15" x2="13" y2="15"/></svg></span><span class="related-tool-title">副業の経費按分計算機</span></a>
+      <a class="related-tool-link" href="../douga-ryokin/"><span class="icon-svg" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="13" height="12" rx="1.5"/><path d="M16 10.5 21 7v10l-5-3.5z"/></svg></span><span class="related-tool-title">動画作成AIツールの月額料金シミュレーター</span></a>
+      <a class="related-tool-link" href="../genka-shokyaku/"><span class="icon-svg" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="4" height="17"/><rect x="10" y="9" width="4" height="12"/><rect x="17" y="14" width="4" height="7"/></svg></span><span class="related-tool-title">減価償却費計算機</span></a>
+      <a class="related-tool-link" href="../getsugaku-goukei/"><span class="icon-svg" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></span><span class="related-tool-title">AI副業 月間コスト合計シミュレーター</span></a>
+    </div>
+  </nav>
+  <!-- related:end -->
+
+</main>
+
+<footer class="site-footer">
+  <p>本ページの内容は一般的な考え方の紹介であり、税務上の助言ではありません。実際の税額や申告方法については、税理士・税務署・お住まいの市区町村にご確認のうえご自身の判断で行ってください。</p>
+  <p>このページの一部のリンクは紹介(アフィリエイト)リンクで、該当箇所に「PR」と表示しています。リンク経由で申し込まれると当サイトに紹介料が入ることがあります。紹介料の有無は、本文の記載内容・計算結果に影響させていません。</p>
+  <p><a href="../#about">運営者情報・プライバシーポリシー・お問い合わせ</a></p>
+  <p>同じ作者の計算ツール: <a href="https://uuhai-keisan.github.io/">uuhai計算帳</a>(仕事と暮らしの計算)</p>
+</footer>
+
+<script src="../ga.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
