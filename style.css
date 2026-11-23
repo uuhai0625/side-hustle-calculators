@@ -1880,3 +1880,13 @@ h2[id] { scroll-margin-top: 16px; }
 #result-amount{overflow-wrap:anywhere}
 /* Midjourneyのロゴは細い線画で、小さく縮めると灰色にかすれるので濃くする(2026-10-16) */
 img[src$="midjourney.png"]{filter:contrast(2.2) brightness(.9)}
+
+/* 役に立ちましたか(2026-11-24) */
+.helpful-box { margin: 28px 0 8px; padding: 14px 18px; border: 1px solid var(--line-input); border-radius: 12px; text-align: center; font-size: 0.9rem; }
+.helpful-box p { margin: 0 0 10px; }
+.helpful-box .helpful-buttons { display: flex; gap: 10px; justify-content: center; }
+.helpful-box button { min-width: 96px; padding: 9px 14px; border-radius: 10px; border: 1px solid currentColor; background: transparent; color: var(--navy); font: inherit; cursor: pointer; }
+.helpful-box button:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+.helpful-box button:disabled { cursor: default; opacity: 0.55; }
+.helpful-box button[aria-pressed="true"] { opacity: 1; background: rgba(53, 242, 176, 0.12); }
+.helpful-box .helpful-thanks { margin: 10px 0 0; font-size: 0.82rem; color: var(--ink-sub); min-height: 1em; }

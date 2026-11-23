@@ -44,9 +44,28 @@ function incomeTax(taxable) {
 
 // 住民税の所得割(10%)。調整控除などの細かい差は省く。
 function residentTax(totalIncome, social) {
+  if (totalIncome <= 450000) return 0; // 非課税の目安(東京23区など、扶養する家族がいない単身。自治体で違う)
   const t = Math.floor(Math.max(0, totalIncome - social - residentBasicDeduction(totalIncome)) / 1000) * 1000;
   return t * 0.10;
 }
+
+// 公的年金等控除(年金以外の合計所得1,000万円以下の場合、国税庁No.1600)。65歳以上と65歳未満で最低額が違う。
+function pensionDeduction(income, over65) {
+  if (income <= (over65 ? 3300000 : 1300000)) return over65 ? 1100000 : 600000;
+  if (income <= 4100000) return income * 0.25 + 275000;
+  if (income <= 7700000) return income * 0.15 + 685000;
+  if (income <= 10000000) return income * 0.05 + 1455000;
+  return 1955000;
+}
+
+// 本業の立場(2026-11-24、会社員以外にも広げた)。base=入力欄の意味。
+const STATUS = {
+  kaishain: { label: '会社員・公務員(給与)', base: '本業の給与の年収(額面・円)', hint: '源泉徴収票の「支払金額」。見込みでもかまいません。' },
+  jigyo: { label: 'フリーランス・自営業', base: '本業の所得(青色申告特別控除と社会保険料を引いた後、円)', hint: '本業の売上から経費・青色申告特別控除・国民健康保険料や国民年金などを引いた額。見込みでもかまいません。青色申告特別控除は1人1つなので、副業の種類は雑所得か白色で計算します。' },
+  nenkin65: { label: '年金を受け取っている(65歳以上)', base: '公的年金の年額(円)', hint: '源泉徴収票(公的年金等)の「支払金額」。65歳以上かどうかは、その年の12月31日時点で判定します。' },
+  nenkin: { label: '年金を受け取っている(65歳未満)', base: '公的年金の年額(円)', hint: '源泉徴収票(公的年金等)の「支払金額」。' },
+  none: { label: '本業の収入なし(専業・無職など)', base: '本業の所得(なければ0、円)', hint: '本業がなければ0のままで計算します。家族の扶養に入っている方は、扶養内の副業計算機のほうが合っています。' },
+};
 
 const SIDE_TYPE_LABEL = {
   zatsu: '雑所得',
@@ -56,15 +75,24 @@ const SIDE_TYPE_LABEL = {
 };
 
 function calcResult(input) {
-  const salaryIncome = Math.max(0, input.salary - salaryDeduction(input.salary));
-  const social = input.salary * 0.15;
+  const st = input.status;
+  let salaryIncome; // 本業の所得(給与所得・事業所得・年金の雑所得)
+  if (st === 'kaishain') salaryIncome = Math.max(0, input.salary - salaryDeduction(input.salary));
+  else if (st === 'nenkin65' || st === 'nenkin') salaryIncome = Math.max(0, input.salary - pensionDeduction(input.salary, st === 'nenkin65'));
+  else salaryIncome = input.salary; // 自営業は所得をそのまま、収入なしは0の想定
+  // 社会保険料は会社員だけ給与の15%で概算。それ以外は人によって大きく違うので入れない(増える税金の差にはほぼ効かない)。
+  // 入力があればそれを使う(国民年金・国保・介護保険料など。本業0の人には効きが大きい)。
+  const social = input.social > 0 ? input.social : (st === 'kaishain' ? input.salary * 0.15 : 0);
   const sideProfit = input.sideIncome - input.sideExpense; // 売上−経費(赤字もそのまま)
   const isBlue = input.sideType === 'blue10' || input.sideType === 'blue65';
   // 青色10万円控除は確定申告をしなくても受けられる。20万円の判定は10万円控除後の所得で行う(国税庁 質疑応答)。
   const under20 = Math.max(0, sideProfit - (isBlue ? 100000 : 0)) <= 200000;
-  const mustFile = !under20 || input.salary > 20000000;
+  const pensionExempt = (st === 'nenkin65' || st === 'nenkin') && input.salary <= 4000000 && under20; // 年金の申告不要制度
+  let mustFile;
+  if (st === 'kaishain') mustFile = !under20 || input.salary > 20000000;
+  else if (pensionExempt) mustFile = false;
+  else mustFile = null; // 収入なし・年金で申告不要制度に当たらない: 所得税が出るかで決まる(下で判定)
   // 65万円控除は期限内の申告(e-Tax等)が条件。65万円を選んだ人は申告する前提で計算する。
-  const files = mustFile || input.otherFiling || input.sideType === 'blue65';
   const blueDeduction = input.sideType === 'blue65' ? 650000 : isBlue ? 100000 : 0;
   const sideIncomeForTax = Math.max(0, sideProfit - blueDeduction);
 
@@ -72,6 +100,8 @@ function calcResult(input) {
   const withIncome = salaryIncome + sideIncomeForTax;
   const itBase = incomeTax(baseIncome - social - incomeTaxBasicDeduction(baseIncome));
   const itWith = incomeTax(withIncome - social - incomeTaxBasicDeduction(withIncome));
+  if (mustFile === null) mustFile = itWith > 0;
+  const files = mustFile || input.otherFiling || input.sideType === 'blue65';
   // 申告しない場合、20万円以下の副業の所得に所得税はかからない(住民税だけ増える)。
   const incomeTaxUp = files ? Math.max(0, Math.round(itWith - itBase)) : 0;
   const residentUp = Math.max(0, Math.round(residentTax(withIncome, social) - residentTax(baseIncome, social)));
@@ -79,15 +109,34 @@ function calcResult(input) {
 
   return {
     sideProfit, blueDeduction, sideIncomeForTax, under20, mustFile, files, isBlue,
-    incomeTaxUp, residentUp, taxUp,
+    incomeTaxUp, residentUp, taxUp, pensionExempt, status: st,
     takeHome: Math.max(0, sideProfit) - taxUp,
     loss: sideProfit < 0,
-    highSalary: input.salary > 20000000,
+    highSalary: st === 'kaishain' && input.salary > 20000000,
   };
 }
 
 const MAX_INPUT = 100000000;
 const inputSalary = document.getElementById('input-salary');
+const selectStatus = document.getElementById('select-status');
+const inputSocial = document.getElementById('input-social');
+const labelSalary = document.getElementById('label-salary');
+const salaryHint = document.getElementById('salary-hint-text');
+function applyStatusLabel() {
+  const s = STATUS[selectStatus.value] || STATUS.kaishain;
+  labelSalary.textContent = s.base;
+  salaryHint.textContent = s.hint;
+  // 自営業は本業で青色申告特別控除を使っている前提なので、副業に青色の控除は付けない(1人1つ)。
+  const jigyo = selectStatus.value === 'jigyo';
+  [...selectSideType.options].forEach((o) => { if (o.value.startsWith('blue')) o.disabled = jigyo; });
+  if (jigyo && selectSideType.value.startsWith('blue')) selectSideType.value = 'zatsu';
+}
+selectStatus.addEventListener('change', () => {
+  // 立場が変わると入力欄の意味(給与・所得・年金)が変わるので、前の金額は残さない。
+  inputSalary.value = selectStatus.value === 'none' ? '0' : '';
+  applyStatusLabel();
+  scheduleLiveRecalc();
+});
 const inputSideIncome = document.getElementById('input-side-income');
 const inputSideExpense = document.getElementById('input-side-expense');
 const selectSideType = document.getElementById('select-side-type');
@@ -121,7 +170,9 @@ function readMoney(el) {
 function readInput() {
   overMax = false;
   return {
+    status: Object.prototype.hasOwnProperty.call(STATUS, selectStatus.value) ? selectStatus.value : 'kaishain',
     salary: readMoney(inputSalary),
+    social: readMoney(inputSocial),
     sideIncome: readMoney(inputSideIncome),
     sideExpense: readMoney(inputSideExpense),
     sideType: Object.prototype.hasOwnProperty.call(SIDE_TYPE_LABEL, selectSideType.value) ? selectSideType.value : 'zatsu',
@@ -151,11 +202,11 @@ function computeAndRender() {
     resultAdvice.textContent = '';
     updateShareUrl();
   };
-  if ([input.salary, input.sideIncome, input.sideExpense].some(Number.isNaN)) {
+  if ([input.salary, input.sideIncome, input.sideExpense, input.social].some(Number.isNaN)) {
     clear('金額は数字で入力してください(例: 4500000 や 450万)。');
     return;
   }
-  if (input.salary <= 0) { clear('本業の給与の年収(額面)を入力してください。'); return; }
+  if (input.salary <= 0 && input.status !== 'none' && input.status !== 'jigyo') { clear(`${STATUS[input.status].base.replace(/\(.*\)$/, '')}を入力してください。`); return; }
   if (input.sideIncome <= 0 && input.sideExpense <= 0) { clear('副業の1年間の売上(見込みでも可)を入力してください。'); return; }
 
   const r = calcResult(input);
@@ -167,7 +218,15 @@ function computeAndRender() {
   resultNote.textContent = note;
 
   let filing;
-  if (r.highSalary) filing = '必要(給与の年収が2,000万円を超える人は、副業の額にかかわらず確定申告が必要です)';
+  if (r.status !== 'kaishain' && input.otherFiling) filing = '必要(医療費控除などで確定申告をするので、副業の所得も含めて申告します)';
+  else if (r.status === 'jigyo' && r.mustFile) filing = '必要(本業の確定申告に、副業の所得も合わせて申告します)';
+  else if (r.status !== 'kaishain' && r.loss && input.sideType !== 'zatsu') filing = '義務は副業だけでは生じません。ただし赤字を本業の所得と差し引く(税金を戻す)には確定申告が必要です';
+  else if (r.status !== 'kaishain' && !r.pensionExempt) {
+    filing = r.mustFile
+      ? `必要(本業と副業を合わせた所得に所得税がかかるため${r.status === 'none' || r.status === 'jigyo' ? '' : '。年金の申告不要制度(年金400万円以下かつほかの所得20万円以下)にも当たりません'})`
+      : '義務はありません(合わせた所得に所得税がかからない目安)。住民税の申告が必要な場合があるので、市区町村で確かめてください';
+  } else if (r.pensionExempt && !input.otherFiling) filing = '不要(年金の申告不要制度: 公的年金400万円以下で、副業の所得が20万円以下)。住民税の申告が必要な場合があるので、市区町村で確かめてください';
+  else if (r.highSalary) filing = '必要(給与の年収が2,000万円を超える人は、副業の額にかかわらず確定申告が必要です)';
   else if (!r.under20) filing = `必要(副業の所得が20万円を超えています${r.isBlue ? '。青色10万円控除を引いた後で判定' : ''})`;
   else if (input.otherFiling) filing = '必要(医療費控除などで確定申告をするので、20万円以下の副業の所得も含めて申告します)';
   else if (r.loss && input.sideType !== 'zatsu') filing = '義務はありません。ただし赤字を給与と差し引く(税金を戻す)には確定申告が必要です';
@@ -182,7 +241,7 @@ function computeAndRender() {
   if (r.loss) {
     sub = input.sideType === 'zatsu'
       ? '副業が赤字です。雑所得の赤字は給与と差し引きできないので、税金は増えも減りもしません。'
-      : '副業が赤字です。事業所得の赤字は、確定申告で給与と差し引ける(税金が戻る)ことがあります。この計算機では戻る額は出していません。';
+      : `副業が赤字です。事業所得の赤字は、確定申告で${input.status === 'kaishain' ? '給与' : '本業の所得'}と差し引ける(税金が戻る)ことがあります。この計算機では戻る額は出していません。`;
   } else if (r.takeHome < 0) {
     sub += '基礎控除が所得の段で一気に減るため、副業の利益より増える税金のほうが多くなっています。';
   }
@@ -190,6 +249,15 @@ function computeAndRender() {
   resultSub.textContent = sub;
 
   let advice;
+  if (r.status !== 'kaishain') {
+    advice = '国民健康保険料(75歳以上は後期高齢者医療の保険料)は所得に応じて決まるので、副業の所得が増えると上がることがあります。この計算には入っていません。';
+    if (r.residentUp > 0 && r.status !== 'jigyo') advice += '住民税が0円からかかるようになると、住民税非課税世帯向けの給付や介護保険料の段階が変わることがあります。市区町村で確かめてください。';
+    if (r.status === 'none') advice += '家族の扶養に入っている方は、扶養内の副業計算機で扶養から外れないかも確かめてください。';
+    if (r.status === 'jigyo') advice += '同じ事業の延長なら、本業と副業を分けず1つの事業所得にまとめることもあります。';
+    resultAdvice.textContent = advice;
+    updateShareUrl();
+    return;
+  }
   if (r.taxUp <= 0) {
     advice = '副業で住民税は増えないため、会社の天引き額は変わりません。';
   } else {
@@ -223,12 +291,14 @@ function scheduleLiveRecalc() {
   clearTimeout(liveRecalcTimer);
   liveRecalcTimer = setTimeout(computeAndRender, 300);
 }
-[inputSalary, inputSideIncome, inputSideExpense].forEach((el) => el.addEventListener('input', scheduleLiveRecalc));
+[inputSalary, inputSideIncome, inputSideExpense, inputSocial].forEach((el) => el.addEventListener('input', scheduleLiveRecalc));
 [selectSideType, checkOtherFiling].forEach((el) => el.addEventListener('change', scheduleLiveRecalc));
 
 function paramsFromState() {
   const params = new URLSearchParams();
+  if (selectStatus.value !== 'kaishain') params.set('status', selectStatus.value);
   params.set('salary', inputSalary.value);
+  if (inputSocial.value) params.set('social', inputSocial.value);
   params.set('side', inputSideIncome.value);
   params.set('cost', inputSideExpense.value);
   params.set('type', selectSideType.value);
@@ -292,8 +362,11 @@ function initFromQuery() {
       page_path: location.pathname,
     });
   }
-  if (!params.get('salary')) return;
+  if (!params.has('salary')) return;
+  const status = params.get('status');
+  if (status && Object.prototype.hasOwnProperty.call(STATUS, status)) { selectStatus.value = status; applyStatusLabel(); }
   inputSalary.value = params.get('salary');
+  inputSocial.value = params.get('social') || '';
   if (params.has('side')) inputSideIncome.value = params.get('side');
   if (params.has('cost')) inputSideExpense.value = params.get('cost');
   const type = params.get('type');

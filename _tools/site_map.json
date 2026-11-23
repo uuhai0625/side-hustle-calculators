@@ -45,6 +45,28 @@
     }
    ]
   },
+  "genre-erabi": {
+   "category": "hajime",
+   "label": "AI副業の種類と選び方(8ジャンル比較)",
+   "icon": "<rect x=\"3\" y=\"3\" width=\"8\" height=\"8\" rx=\"1.5\"/><rect x=\"13\" y=\"3\" width=\"8\" height=\"8\" rx=\"1.5\"/><rect x=\"3\" y=\"13\" width=\"8\" height=\"8\" rx=\"1.5\"/><path d=\"M15 17h6M18 14v6\"/>",
+   "next": [
+    {
+     "slug": "kaishi-cost",
+     "query": "",
+     "reason": "選んだジャンルの初期費用を試算"
+    },
+    {
+     "slug": "hajimekata",
+     "query": "",
+     "reason": "運営者の実例と払う前のチェック"
+    },
+    {
+     "slug": "fukugyo-zeikin",
+     "query": "",
+     "reason": "売上の見込みから税金と手取りを確認"
+    }
+   ]
+  },
   "kaishi-cost": {
    "category": "hajime",
    "label": "AI副業を始める初期費用シミュレーター",

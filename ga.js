@@ -80,3 +80,36 @@ if (GA_MEASUREMENT_ID && !isLocalDev) {
   document.addEventListener('click', onAffiliateClick);
   document.addEventListener('auxclick', onAffiliateClick);
 }
+
+// 「このページは役に立ちましたか」(2026-11-24、ユーザー「本当に役立っているかを数で見たい」)。
+// .helpful-boxのボタンでhelpful_yes/helpful_noを送る。判定日(No.128)に、ページごとのyes/noを見る。
+// ローカルではgtagがないので送らず、お礼の表示だけ確かめられる。
+document.addEventListener('click', (e) => {
+  const btn = e.target.closest('.helpful-box button[data-helpful]');
+  if (!btn) return;
+  const box = btn.closest('.helpful-box');
+  if (box.dataset.voted) return;
+  box.dataset.voted = '1';
+  // yes/noはイベント名で分ける(引数はカスタムディメンション未登録だとレポートで分けられないため)。
+  if (typeof gtag === 'function') gtag('event', btn.dataset.helpful === 'yes' ? 'helpful_yes' : 'helpful_no', { page_path: location.pathname });
+  try { sessionStorage.setItem('helpful:' + location.pathname, btn.dataset.helpful); } catch (err) { /* 保存できなくても動く */ }
+  const msg = box.querySelector('.helpful-thanks');
+  box.querySelectorAll('button').forEach((b) => { b.disabled = true; b.setAttribute('aria-pressed', String(b === btn)); });
+  if (msg) msg.textContent = btn.dataset.helpful === 'yes'
+    ? 'ありがとうございます。今後の改善に使います。'
+    : 'ありがとうございます。足りなかった点は、運営者のX(@uuhai0625)に教えていただけると助かります。';
+  // ボタンを使えなくするとフォーカスが先頭に戻るので、お礼の文へ移す。
+  if (msg) { msg.setAttribute('tabindex', '-1'); msg.focus(); }
+});
+// 同じタブで投票済みなら、読み込み時から投票済みにしておく(再読み込みで何度も数えないため)。
+document.addEventListener('DOMContentLoaded', () => {
+  let voted = null;
+  try { voted = sessionStorage.getItem('helpful:' + location.pathname); } catch (err) { voted = null; }
+  if (!voted) return;
+  document.querySelectorAll('.helpful-box').forEach((box) => {
+    box.dataset.voted = '1';
+    box.querySelectorAll('button').forEach((b) => { b.disabled = true; b.setAttribute('aria-pressed', String(b.dataset.helpful === voted)); });
+    const msg = box.querySelector('.helpful-thanks');
+    if (msg) msg.textContent = '回答ありがとうございました。';
+  });
+});
