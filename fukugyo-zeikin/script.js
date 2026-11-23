@@ -291,7 +291,10 @@ function scheduleLiveRecalc() {
   clearTimeout(liveRecalcTimer);
   liveRecalcTimer = setTimeout(computeAndRender, 300);
 }
-[inputSalary, inputSideIncome, inputSideExpense, inputSocial].forEach((el) => el.addEventListener('input', scheduleLiveRecalc));
+[inputSalary, inputSideIncome, inputSideExpense, inputSocial].forEach((el) => {
+  el.addEventListener('input', scheduleLiveRecalc);
+  el.addEventListener('keydown', (e) => { if (e.key === 'Enter') document.getElementById('btn-calc').click(); });
+});
 [selectSideType, checkOtherFiling].forEach((el) => el.addEventListener('change', scheduleLiveRecalc));
 
 function paramsFromState() {

@@ -196,6 +196,11 @@
      "slug": "ai-subsc-keihi",
      "query": "",
      "reason": "AIサブスクのうち経費にできる額を計算"
+    },
+    {
+     "slug": "genre-erabi",
+     "query": "",
+     "reason": "ほかのAI副業と費用・取り分を比較"
     }
    ]
   },
@@ -218,6 +223,11 @@
      "slug": "hajimekata",
      "query": "",
      "reason": "運営者の実例で始め方の流れを確認"
+    },
+    {
+     "slug": "genre-erabi",
+     "query": "",
+     "reason": "ほかのAI副業と費用・取り分を比較"
     }
    ]
   },
@@ -526,6 +536,11 @@
      "slug": "genka-shokyaku",
      "query": "",
      "reason": "機材の購入費を経費にする考え方"
+    },
+    {
+     "slug": "genre-erabi",
+     "query": "",
+     "reason": "ほかのAI副業と費用・取り分を比較"
     }
    ]
   },
@@ -548,6 +563,11 @@
      "slug": "genka-shokyaku",
      "query": "",
      "reason": "10万円以上の機材を経費にする"
+    },
+    {
+     "slug": "genre-erabi",
+     "query": "",
+     "reason": "ほかのAI副業と費用・取り分を比較"
     }
    ]
   },
@@ -570,6 +590,11 @@
      "slug": "genka-shokyaku",
      "query": "",
      "reason": "機材の購入費を経費にする考え方"
+    },
+    {
+     "slug": "genre-erabi",
+     "query": "",
+     "reason": "ほかのAI副業と費用・取り分を比較"
     }
    ]
   }

@@ -4,11 +4,11 @@
 <script>/* utm_source等だけの流入では結果欄を出さない */ if (/[?&](salary)=/.test(location.search)) document.documentElement.classList.add('qshow');</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>扶養内で副業はいくらまで?外れる線を計算【2026年分】パート・主婦・学生|AI副業そろばん</title>
+<title>扶養内で副業はいくらまで?2026年の扶養の線を計算|AI副業そろばん</title>
 <meta name="description" content="2026年分の扶養の線は合計所得62万円(パートの給与だけなら年収136万円)に。パートの給与と副業の売上・経費から、扶養から外れるか、副業をあといくら増やせるかを計算します。配偶者特別控除・特定親族特別控除・健康保険の130万円・150万円にも対応。">
 
 <meta property="og:type" content="website">
-<meta property="og:title" content="扶養内で副業はいくらまで?外れる線を計算【2026年分】パート・主婦・学生|AI副業そろばん">
+<meta property="og:title" content="扶養内で副業はいくらまで?2026年の扶養の線を計算|AI副業そろばん">
 <meta property="og:description" content="パートの給与と副業の売上・経費から、税金と健康保険の扶養の判定と、副業をあといくら増やせるかの目安を計算します。">
 <meta property="og:locale" content="ja_JP">
 <meta property="og:url" content="https://uuhai0625.github.io/side-hustle-calculators/fuyou-fukugyo/">
@@ -26,8 +26,8 @@
 <meta name="theme-color" content="#0a0d0c">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../style.css">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@700;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css?v=20261124">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -128,7 +128,7 @@
       <span class="field-hint" id="commute-hint">税金では数えませんが、健康保険の扶養の判定では収入に入ります。</span>
     </div>
     <div class="field">
-      <label class="check-label"><input type="checkbox" id="check-senior"> 60歳以上、または障害がある(健康保険の線が180万円未満になります)</label>
+      <label class="check-label"><input type="checkbox" id="check-senior"> 60歳以上、または障害がある(健康保険の線が180万円未満になります。このチェックは共有URLに含めません)</label>
     </div>
     <button class="btn-calc" id="btn-calc" type="button">扶養の判定を計算する</button>
   </div>
@@ -143,14 +143,14 @@
     <div class="share-row" id="share-row">
       <button class="share-btn" id="btn-copy-link" type="button">結果のURLをコピー</button>
     </div>
-    <p class="result-note">コピーするURLには、入力した給与・売上・経費が含まれます。</p>
+    <p class="result-note">コピーするURLには、扶養の種類と、入力した給与・交通費・売上・経費が含まれます(60歳以上・障害のチェックは含めません)。</p>
   </div>
   </div>
 
   <div class="detail-section" id="lines">
     <h2>扶養の線の一覧(2026年分)</h2>
     <div class="rate-table-wrap" tabindex="0" role="region" aria-label="扶養の線の一覧">
-    <table class="rate-table">
+    <table class="rate-table rate-table-feature">
       <thead><tr><th scope="col">線</th><th scope="col">合計所得(パートの給与だけなら年収)</th><th scope="col">超えるとどうなるか</th></tr></thead>
       <tr><td>本人の住民税</td><td>45万円(119万円)※東京23区などの目安</td><td>本人に住民税がかかり始める</td></tr>
       <tr><td>配偶者控除・扶養控除</td><td>62万円(136万円)</td><td>扶養控除はなくなる。配偶者・19〜22歳の子は下の控除に切り替わる</td></tr>
@@ -179,7 +179,7 @@
   <div class="helpful-box" role="group" aria-label="このページの評価">
     <p>このページは役に立ちましたか?</p>
     <div class="helpful-buttons"><button type="button" data-helpful="yes" aria-pressed="false">はい</button><button type="button" data-helpful="no" aria-pressed="false">いいえ</button></div>
-    <p class="helpful-thanks" role="status"></p>
+    <p class="helpful-thanks"></p>
   </div>
 
   <p class="follow-x">制作の裏側や新しいツールの告知は <a href="https://x.com/uuhai0625" target="_blank" rel="noopener">@uuhai0625</a> で発信しています</p>
@@ -234,7 +234,7 @@
   <p>同じ作者の計算ツール: <a href="https://uuhai-keisan.github.io/">uuhai計算帳</a>(仕事と暮らしの計算)</p>
 </footer>
 
-<script src="../ga.js"></script>
-<script src="script.js"></script>
+<script src="../ga.js?v=20261124"></script>
+<script src="script.js?v=20261124"></script>
 </body>
 </html>

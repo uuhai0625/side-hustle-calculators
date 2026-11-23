@@ -281,7 +281,6 @@ function paramsFromState() {
   params.set('side', inputSideIncome.value);
   params.set('cost', inputSideExpense.value);
   if (inputCommute.value) params.set('commute', inputCommute.value);
-  if (checkSenior.checked) params.set('senior', '1');
   return params;
 }
 
@@ -348,7 +347,6 @@ function initFromQuery() {
   inputSideIncome.value = params.get('side') || '';
   inputSideExpense.value = params.get('cost') || '';
   inputCommute.value = params.get('commute') || '';
-  checkSenior.checked = params.get('senior') === '1';
   calc();
 }
 

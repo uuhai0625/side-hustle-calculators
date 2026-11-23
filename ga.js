@@ -11,24 +11,40 @@ const isLocalDev = ['localhost', '127.0.0.1', '[::1]', ''].includes(location.hos
 // (入力値がGA4に届くのと、同じ人の再計算でPVが水増しされるのを防ぐ、2026-10-16)。
 window.replaceUrlQuietly = History.prototype.replaceState.bind(history);
 // 結果カードは計算前にdisplay:noneのため、最初の結果がスクリーンリーダーに読まれない(No.127、2026-11-20)。
-// 非表示→表示に変わった時だけ、画面外の読み上げ欄に要点(見出し・金額・条件)を入れる。2回目以降の更新はカード自身のaria-liveに任せる。
+// 非表示→表示に変わった時だけ、画面外の読み上げ欄に要点(見出し・金額・条件)を入れる。
+// 2回目以降も、カード全体(約500字・ボタン込み)を毎回読み上げないよう、カード自体のaria-liveは切り、
+// 入力が落ち着いてから(1秒)要点だけを同じ読み上げ欄に入れる(2026-11-24、a11yレビュー)。
 document.addEventListener('DOMContentLoaded', () => {
   const card = document.getElementById('result-card');
   if (!card || !card.hasAttribute('aria-live')) return;
+  card.removeAttribute('aria-live');
+  card.removeAttribute('role');
   const live = document.createElement('p');
   live.setAttribute('role', 'status');
   live.style.cssText = 'position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0';
   document.body.appendChild(live);
   let shown = card.classList.contains('show');
+  let shownAt = 0;
   new MutationObserver(() => {
     const now = card.classList.contains('show');
     if (now && !shown) {
+      shownAt = Date.now();
       const pick = (sel) => ((card.querySelector(sel) || {}).textContent || '').replace(/\s+/g, ' ').trim();
       live.textContent = '';
       setTimeout(() => { live.textContent = [pick('.result-label'), pick('.result-amount'), pick('.result-note'), pick('.result-judge')].filter(Boolean).join(' '); setTimeout(() => { live.textContent = ''; }, 8000); }, 100);
     }
     shown = now;
   }).observe(card, { attributes: true, attributeFilter: ['class'] });
+  let updateTimer = null;
+  const amount = card.querySelector('.result-amount');
+  if (amount) new MutationObserver(() => {
+    if (!card.classList.contains('show') || Date.now() - shownAt < 1500) return; // 最初の表示は上の読み上げに任せる
+    clearTimeout(updateTimer);
+    updateTimer = setTimeout(() => {
+      const pick = (sel) => ((card.querySelector(sel) || {}).textContent || '').replace(/\s+/g, ' ').trim();
+      live.textContent = [pick('.result-label'), pick('.result-amount')].filter(Boolean).join(' ');
+    }, 1000);
+  }).observe(amount, { childList: true, characterData: true, subtree: true });
 });
 if (GA_MEASUREMENT_ID && !isLocalDev) {
   const gaScript = document.createElement('script');

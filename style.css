@@ -33,7 +33,8 @@ html, body {
 }
 
 body {
-  font-family: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", sans-serif;
+  /* 本文は端末の文字を使う(2026-11-24、Noto Sans JPの読み込みがモバイル転送量の大半だったため外した) */
+  font-family: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic UI", "Yu Gothic", Meiryo, "Noto Sans JP", sans-serif;
   background:
     radial-gradient(720px 420px at 50% -80px, rgba(53, 242, 176, 0.10), transparent 70%),
     var(--bg);
@@ -526,6 +527,12 @@ a { color: var(--navy); }
   font-family: "JetBrains Mono", "Noto Sans JP", monospace;
   color: var(--ink);
   background-color: #0e1210;
+}
+/* 上の枠線指定が:focusの枠色を打ち消していたので、後ろで改めて指定する(2026-11-24、a11yレビュー) */
+.field input[type="number"]:focus,
+.field input[type="month"]:focus,
+.field input[type="text"]:focus {
+  border-color: var(--navy);
 }
 /* type="month"はブラウザ既定のカレンダーピッカーアイコンがダーク背景で見えなくなるため、
    color-schemeでアイコン自体をダーク基調用に切り替える(No.71、2026-09-12)。 */
@@ -1194,7 +1201,7 @@ div.a8-cta .tool-cta-title a:focus-visible::after { outline: 2px solid var(--gol
   font-weight: 400;
   color: var(--ink-sub);
   white-space: normal;
-  font-family: "Noto Sans JP", "Hiragino Sans", sans-serif;
+  font-family: inherit;
 }
 .rate-table-wrap .rate-table-feature {
   min-width: 620px;
@@ -1222,7 +1229,7 @@ div.a8-cta .tool-cta-title a:focus-visible::after { outline: 2px solid var(--gol
   font-weight: 400;
   color: var(--ink-sub);
   white-space: normal;
-  font-family: "Noto Sans JP", "Hiragino Sans", sans-serif;
+  font-family: inherit;
 }
 .rate-table-matrix .plan-name {
   display: block;
@@ -1889,4 +1896,11 @@ img[src$="midjourney.png"]{filter:contrast(2.2) brightness(.9)}
 .helpful-box button:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
 .helpful-box button:disabled { cursor: default; opacity: 0.55; }
 .helpful-box button[aria-pressed="true"] { opacity: 1; background: rgba(53, 242, 176, 0.12); }
-.helpful-box .helpful-thanks { margin: 10px 0 0; font-size: 0.82rem; color: var(--ink-sub); min-height: 1em; }
+.helpful-box .helpful-thanks { margin: 10px 0 0; font-size: 0.82rem; color: var(--ink-sub); min-height: 3.2em; }
+
+/* トップの「あなたはどれ?」(2026-11-24、読者の立場ごとの入口。カードの重複をやめた代わり) */
+.who-box { margin: 16px 0 24px; padding: 14px 18px; border: 1px solid var(--line-input); border-radius: 12px; background: var(--bg-card); font-size: 0.88rem; }
+.who-box .who-title { margin: 0 0 6px; font-weight: 700; color: var(--gold); }
+.who-box ul { margin: 0; padding-left: 1.2em; }
+.who-box li { margin: 6px 0; line-height: 1.7; }
+.who-box .who-note { margin: 8px 0 0; font-size: 0.8rem; color: var(--ink-sub); }
