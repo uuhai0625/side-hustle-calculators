@@ -109,7 +109,7 @@ function money(v) {
 // 全角数字・カンマ・「450万」も読む。読めない入力はNaNを返し、黙って0円にしない。
 let overMax = false;
 function readMoney(el) {
-  const raw = String(el.value).normalize('NFKC').replace(/[,\s円]/g, '');
+  const raw = String(el.value).normalize('NFKC').replace(/[,\s円¥￥]/g, '');
   if (raw === '') return 0;
   const man = raw.match(/^(\d+(?:\.\d+)?)万$/);
   const n = man ? Number(man[1]) * 10000 : (/^\d+(?:\.\d+)?$/.test(raw) ? Number(raw) : NaN);

@@ -199,6 +199,28 @@
     }
    ]
   },
+  "fuyou-fukugyo": {
+   "category": "calc",
+   "label": "扶養内の副業計算機(パート・主婦・学生)",
+   "icon": "<circle cx=\"9\" cy=\"8\" r=\"3\"/><circle cx=\"17\" cy=\"9\" r=\"2.2\"/><path d=\"M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6\"/><path d=\"M15 15.5c.6-.3 1.3-.5 2-.5 2.2 0 4 1.8 4 4\"/>",
+   "next": [
+    {
+     "slug": "fukugyo-zeikin",
+     "query": "",
+     "reason": "会社員の副業の税金と会社バレを確認"
+    },
+    {
+     "slug": "kaishi-cost",
+     "query": "",
+     "reason": "始める前に初期費用を試算"
+    },
+    {
+     "slug": "ai-subsc-keihi",
+     "query": "",
+     "reason": "AI代のうち経費にできる額を計算"
+    }
+   ]
+  },
   "ai-subsc-keihi": {
    "category": "calc",
    "label": "AIサブスク(ChatGPT・Claude等)の経費計算機",
