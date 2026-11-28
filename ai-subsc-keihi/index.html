@@ -4,12 +4,12 @@
 <script>/* utm_source等だけの流入では結果欄を出さない */ if (/[?&](price)=/.test(location.search)) document.documentElement.classList.add('qshow');</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ChatGPT・Claudeは経費になる?勘定科目・按分・インボイス|AI副業そろばん</title>
-<meta name="description" content="ChatGPT・Claude・MidjourneyなどAIサブスクの料金は、副業(雑所得・事業所得)でも経費にできます。勘定科目の例、私用と兼用のときの按分、インボイス・年払い・ドル払いの扱いと、年間の経費額を出す計算機をまとめました。">
+<title>ChatGPT・Claudeは経費になる?勘定科目・仕訳例・按分・インボイス|AI副業そろばん</title>
+<meta name="description" content="ChatGPT・Claude・MidjourneyなどAIサブスクの料金は、副業(雑所得・事業所得)でも経費にできます。勘定科目と仕訳の例、私用と兼用のときの按分、インボイス・年払い・ドル払いの扱いと、年間の経費額を出す計算機をまとめました。">
 
 <meta property="og:type" content="website">
-<meta property="og:title" content="ChatGPT・Claudeは経費になる?勘定科目・按分・インボイス|AI副業そろばん">
-<meta property="og:description" content="AIサブスクの料金を副業の経費にするときの勘定科目・按分・インボイスと、年間の経費額の計算機。">
+<meta property="og:title" content="ChatGPT・Claudeは経費になる?勘定科目・仕訳例・按分・インボイス|AI副業そろばん">
+<meta property="og:description" content="AIサブスクの料金を副業の経費にするときの勘定科目・仕訳例・按分・インボイスと、年間の経費額の計算機。">
 <meta property="og:locale" content="ja_JP">
 <meta property="og:url" content="https://uuhai0625.github.io/side-hustle-calculators/ai-subsc-keihi/">
 <meta property="og:image" content="https://uuhai0625.github.io/side-hustle-calculators/images/og-image.jpg">
@@ -18,8 +18,8 @@
 <link rel="canonical" href="https://uuhai0625.github.io/side-hustle-calculators/ai-subsc-keihi/">
 
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="ChatGPT・Claudeは経費になる?勘定科目・按分・インボイス">
-<meta name="twitter:description" content="AIサブスクの料金を副業の経費にするときの勘定科目・按分・インボイスと、年間の経費額の計算機。">
+<meta name="twitter:title" content="ChatGPT・Claudeは経費になる?勘定科目・仕訳例・按分・インボイス">
+<meta name="twitter:description" content="AIサブスクの料金を副業の経費にするときの勘定科目・仕訳例・按分・インボイスと、年間の経費額の計算機。">
 <meta name="twitter:image" content="https://uuhai0625.github.io/side-hustle-calculators/images/og-image.jpg">
 
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%230a0d0c'/><rect x='6' y='7' width='20' height='18' rx='3' fill='none' stroke='%2335f2b0' stroke-width='2'/><line x1='6' y1='16' x2='26' y2='16' stroke='%2335f2b0' stroke-width='2'/><circle cx='11' cy='11.5' r='2.4' fill='%2335f2b0'/><circle cx='21' cy='11.5' r='2.4' fill='%2335f2b0'/><circle cx='11' cy='20.5' r='2.4' fill='%23ffb454'/><circle cx='21' cy='20.5' r='2.4' fill='%2335f2b0'/></svg>">
@@ -33,9 +33,10 @@
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "datePublished": "2026-10-31",
-  "dateModified": "2026-11-24",
+  "dateModified": "2026-11-29",
   "mainEntity": [
     { "@type": "Question", "name": "ChatGPTやClaudeの料金の勘定科目は何ですか?", "acceptedAnswer": { "@type": "Answer", "text": "法令で決まった科目はありません。「通信費」「支払手数料」のほか、「ソフトウェア利用料」のような科目を自分で作る人もいます。大切なのは、一度決めた科目を毎年続けて使うことです。" } },
+    { "@type": "Question", "name": "ChatGPTやClaudeの料金の仕訳はどう書きますか?", "acceptedAnswer": { "@type": "Answer", "text": "個人のカードで払った場合は「通信費 / 事業主借」、事業用の口座から引き落とされた場合は「通信費 / 普通預金」と書くのが一般的です。私用と兼用なら、副業で使った割合の額だけを通信費にします。例: ChatGPT Plusの3,180円を個人のカードで払い、副業で50%使うなら「通信費 1,590円 / 事業主借 1,590円」です。年額プランの例は本文の「仕訳の例」の表にあります。" } },
     { "@type": "Question", "name": "私用と兼用している場合は、どうすればいいですか?", "acceptedAnswer": { "@type": "Answer", "text": "副業で使った割合だけを経費にします(家事按分)。所得税基本通達45-2では、業務に使う部分が50%以下でも、その部分を明らかに区分できれば経費にしてよいとされています。使用時間の記録など、割合を説明できる根拠を残しておきます。" } },
     { "@type": "Question", "name": "副業が雑所得でも経費にできますか?", "acceptedAnswer": { "@type": "Answer", "text": "できます。雑所得も「総収入金額−必要経費」で計算します(所得税法35条)。ただし雑所得の赤字は給与など他の所得と相殺できません。また、給与を1か所から受けて年末調整を受けている人で、副業の所得が20万円以下なら所得税の確定申告は不要です(医療費控除などで確定申告する場合は副業分も含めます)。住民税の申告は別に必要なので、お住まいの市区町村で確認してください。" } },
     { "@type": "Question", "name": "インボイス(適格請求書)は関係ありますか?", "acceptedAnswer": { "@type": "Answer", "text": "消費税を一般課税で申告している人だけが関係します。消費税の申告をしていない人(免税事業者)や、簡易課税・2割特例・3割特例を使う人は、海外サブスクのインボイスの有無で納める税額は変わりません。一般課税の人は、請求書の記載と国税庁の適格請求書発行事業者公表サイトで登録の有無を確かめてください。" } },
@@ -59,7 +60,7 @@
     "priceCurrency": "JPY"
   },
   "datePublished": "2026-10-31",
-  "dateModified": "2026-11-24"
+  "dateModified": "2026-11-29"
 }
 </script>
 <!-- breadcrumb-ld:start 自動生成: _tools/build_nav.py(手編集すると次回実行で上書きされる) -->
@@ -73,7 +74,7 @@
 <header class="site-header">
   <div class="wrap">
     <a class="site-logo heading-font" href="../">AI副業<span class="accent">そろばん</span></a>
-    <h1 class="site-tagline">ChatGPT・Claudeは経費になる?AIサブスクの経費計算機</h1>
+    <h1 class="site-tagline">ChatGPT・Claudeは経費になる?仕訳例つきAIサブスクの経費計算機</h1>
     <!-- site-nav:start 自動生成: _tools/build_nav.py(手編集すると次回実行で上書きされる) -->
     <nav class="site-nav" aria-label="カテゴリ">
       <a href="../#hajime">始める方へ</a><a href="../#calc" aria-current="true">計算機</a><a href="../#toolguide">ツール選び</a><a href="../#kaisetsu">深掘り解説</a><a href="../#craft">道具ガイド</a>
@@ -171,6 +172,22 @@
     <p>複数のAIサブスクの月額をまとめて出したいときは<a href="../getsugaku-goukei/">AI副業 月間コスト合計シミュレーター</a>、電気代や家賃の按分は<a href="../keihi-anbun/">経費按分計算機</a>を使ってください。</p>
   </div>
 
+  <div class="rate-table-box show" id="shiwake">
+    <h2>仕訳の例(ChatGPT・Claudeなどの月額・年額)</h2>
+    <p class="rate-table-note">ChatGPT Plus(月3,180円)を例にした仕訳です。金額はカード明細に載った円の額を使います。科目は「支払手数料」などでもかまいません。</p>
+    <table class="rate-table rate-table-feature">
+      <tr><th scope="col">場面</th><th scope="col">仕訳(借方 / 貸方)</th></tr>
+      <tr><td>個人のカードで月額を払い、副業だけに使う</td><td>通信費 3,180円 / 事業主借 3,180円</td></tr>
+      <tr><td>個人のカードで月額を払い、副業で50%使う</td><td>通信費 1,590円 / 事業主借 1,590円</td></tr>
+      <tr><td>事業用の口座から引き落とされた</td><td>通信費 3,180円 / 普通預金 3,180円</td></tr>
+      <tr><td>事業用の口座で全額を記帳し、年末に1年分の私用分(50%)を除く</td><td>事業主貸 19,080円 / 通信費 19,080円</td></tr>
+      <tr><td>年額プラン(例: 38,160円)を個人のカードで払い、払った年に全額を経費にする</td><td>通信費 38,160円 / 事業主借 38,160円</td></tr>
+      <tr><td>年額プランを、使った月数分だけ経費にする(払った日)</td><td>前払費用 38,160円 / 事業主借 38,160円</td></tr>
+      <tr><td>同上(毎月、使った1か月分)</td><td>通信費 3,180円 / 前払費用 3,180円</td></tr>
+    </table>
+    <p class="rate-source">複式簿記の仕訳が求められるのは、主に青色申告特別控除(55万円・65万円)を受ける人です。白色申告や雑所得の人は、日付・金額・内容を書いた記録でかまいません。年額プランを払った年に全額を経費にできる条件と、ドル払いの円換算は、下の「消費税・年払い・ドル払いの扱い」にあります。</p>
+  </div>
+
   <div class="rate-table-box show">
     <h2>サービスごとの請求元</h2>
     <p class="rate-table-note">ウェブサイトから直接申し込んだ場合の請求元です。インボイス(適格請求書発行事業者)の登録は、国税庁の公表サイトで2026年10月30日に確認しました。</p>
@@ -230,6 +247,10 @@
     <details class="faq-item">
       <summary>ChatGPTやClaudeの料金の勘定科目は何ですか?</summary>
       <p>法令で決まった科目はありません。「通信費」「支払手数料」のほか、「ソフトウェア利用料」のような科目を自分で作る人もいます。大切なのは、一度決めた科目を毎年続けて使うことです。</p>
+    </details>
+    <details class="faq-item">
+      <summary>ChatGPTやClaudeの料金の仕訳はどう書きますか?</summary>
+      <p>個人のカードで払った場合は「通信費 / 事業主借」、事業用の口座から引き落とされた場合は「通信費 / 普通預金」と書くのが一般的です。私用と兼用なら、副業で使った割合の額だけを通信費にします。例: ChatGPT Plusの3,180円を個人のカードで払い、副業で50%使うなら「通信費 1,590円 / 事業主借 1,590円」です。年額プランの例は本文の「仕訳の例」の表にあります。</p>
     </details>
     <details class="faq-item">
       <summary>私用と兼用している場合は、どうすればいいですか?</summary>
