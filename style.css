@@ -1206,6 +1206,17 @@ div.a8-cta .tool-cta-title a:focus-visible::after { outline: 2px solid var(--gol
 .rate-table-wrap .rate-table-feature {
   min-width: 620px;
 }
+.rate-table-feature th:last-child { text-align: left; }
+/* 仕訳の例(ai-subsc-keihi、2026-11-29): 借方・貸方の2列は左寄せ・通常の太さ。科目名と金額は途中で改行しない */
+.rate-table-shiwake td:last-child, .rate-table-shiwake th:last-child {
+  text-align: left;
+  font-weight: 400;
+  color: inherit;
+  white-space: normal;
+  font-family: inherit;
+}
+.rate-table-shiwake th:last-child { font-weight: 700; color: var(--ink-sub); }
+.rate-table .nw { white-space: nowrap; }
 /* ツール比較マトリクス(層×ツールの格子表)用の上書き
    (2026-08-16追加: 通常のrate-tableは最終列=価格を前提にした右寄せ太字ルールを持つが、
    マトリクスは全列がツールの列のため、価格は.price要素で個別にスタイルする) */

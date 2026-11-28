@@ -27,7 +27,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@700;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../style.css?v=20261124">
+<link rel="stylesheet" href="../style.css?v=20261129">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -51,7 +51,7 @@
   "@type": "WebApplication",
   "name": "AIサブスク(ChatGPT・Claude等)の経費計算機",
   "url": "https://uuhai0625.github.io/side-hustle-calculators/ai-subsc-keihi/",
-  "description": "ChatGPT・Claude・MidjourneyなどAIサブスクの料金を、使った月数と副業で使う割合から年間の経費額にする無料ツールです。",
+  "description": "ChatGPT・Claude・MidjourneyなどAIサブスクの料金を、使った月数と副業で使う割合から年間の経費額にする無料ツールです。勘定科目と仕訳の例つき。",
   "applicationCategory": "UtilitiesApplication",
   "operatingSystem": "Any",
   "offers": {
@@ -173,19 +173,26 @@
   </div>
 
   <div class="rate-table-box show" id="shiwake">
-    <h2>仕訳の例(ChatGPT・Claudeなどの月額・年額)</h2>
-    <p class="rate-table-note">ChatGPT Plus(月3,180円)を例にした仕訳です。金額はカード明細に載った円の額を使います。科目は「支払手数料」などでもかまいません。</p>
-    <table class="rate-table rate-table-feature">
-      <tr><th scope="col">場面</th><th scope="col">仕訳(借方 / 貸方)</th></tr>
-      <tr><td>個人のカードで月額を払い、副業だけに使う</td><td>通信費 3,180円 / 事業主借 3,180円</td></tr>
-      <tr><td>個人のカードで月額を払い、副業で50%使う</td><td>通信費 1,590円 / 事業主借 1,590円</td></tr>
-      <tr><td>事業用の口座から引き落とされた</td><td>通信費 3,180円 / 普通預金 3,180円</td></tr>
-      <tr><td>事業用の口座で全額を記帳し、年末に1年分の私用分(50%)を除く</td><td>事業主貸 19,080円 / 通信費 19,080円</td></tr>
-      <tr><td>年額プラン(例: 38,160円)を個人のカードで払い、払った年に全額を経費にする</td><td>通信費 38,160円 / 事業主借 38,160円</td></tr>
-      <tr><td>年額プランを、使った月数分だけ経費にする(払った日)</td><td>前払費用 38,160円 / 事業主借 38,160円</td></tr>
-      <tr><td>同上(毎月、使った1か月分)</td><td>通信費 3,180円 / 前払費用 3,180円</td></tr>
+    <h2 id="shiwake-h">仕訳の例(ChatGPT・Claudeなどの月額・年額)</h2>
+    <p class="rate-table-note">ChatGPT Plus(月3,180円)を例にした仕訳です。この例ではカード明細に載った円の額を使っています(換算の原則は下の「ドル払いの円換算」)。科目は「支払手数料」などでもかまいません。借方は増えた費用など、貸方はお金の出どころなどを書く欄です。</p>
+    <table class="rate-table rate-table-shiwake" aria-labelledby="shiwake-h">
+      <thead><tr><th scope="col">場面</th><th scope="col">借方</th><th scope="col">貸方</th></tr></thead>
+      <tbody>
+      <tr><td>個人のカードで月額を払い、副業だけに使う</td><td><span class="nw">通信費</span> <span class="nw">3,180円</span></td><td><span class="nw">事業主借</span> <span class="nw">3,180円</span></td></tr>
+      <tr><td>個人のカードで月額を払い、副業で50%使う</td><td><span class="nw">通信費</span> <span class="nw">1,590円</span></td><td><span class="nw">事業主借</span> <span class="nw">1,590円</span></td></tr>
+      <tr><td>事業用の口座から引き落とされた</td><td><span class="nw">通信費</span> <span class="nw">3,180円</span></td><td><span class="nw">普通預金</span> <span class="nw">3,180円</span></td></tr>
+      <tr><td>事業用の口座で全額を記帳し、年末に1年分の私用分(3,180円×12か月×50%)を除く</td><td><span class="nw">事業主貸</span> <span class="nw">19,080円</span></td><td><span class="nw">通信費</span> <span class="nw">19,080円</span></td></tr>
+      <tr><td>年額プラン(仮に月額×12の38,160円とした場合)を個人のカードで払い、払った年に全額を経費にする</td><td><span class="nw">通信費</span> <span class="nw">38,160円</span></td><td><span class="nw">事業主借</span> <span class="nw">38,160円</span></td></tr>
+      <tr><td>年額プランを月割りで経費にする(払った日)</td><td><span class="nw">前払費用</span> <span class="nw">38,160円</span></td><td><span class="nw">事業主借</span> <span class="nw">38,160円</span></td></tr>
+      <tr><td>年額プランを月割りで経費にする(毎月、使った1か月分)</td><td><span class="nw">通信費</span> <span class="nw">3,180円</span></td><td><span class="nw">前払費用</span> <span class="nw">3,180円</span></td></tr>
+      </tbody>
     </table>
-    <p class="rate-source">複式簿記の仕訳が求められるのは、主に青色申告特別控除(55万円・65万円)を受ける人です。白色申告や雑所得の人は、日付・金額・内容を書いた記録でかまいません。年額プランを払った年に全額を経費にできる条件と、ドル払いの円換算は、下の「消費税・年払い・ドル払いの扱い」にあります。</p>
+    <ul class="rate-source">
+      <li><strong>事業主借:</strong> 個人のお金(個人のカードなど)で副業の支払いをしたときの相手の科目です。</li>
+      <li><strong>事業主貸:</strong> 副業のお金を私用に回したときの科目です。私用分を経費から除くときにも使います。</li>
+      <li><strong>前払費用:</strong> 先に払ったが、まだ使っていない期間の分です。使った月の分だけ通信費に移します。</li>
+    </ul>
+    <p class="rate-source">複式簿記の仕訳が求められるのは、青色申告特別控除の55万円・65万円を受ける人です。青色申告でも10万円控除の人や白色申告の人は、日付・相手・金額などを書く簡易な帳簿でかまいません。雑所得の人も、記録と領収書を残しておきます(前々年の業務の収入が300万円を超えると、領収書などの保存が義務になります)。年額プランを払った年に全額を経費にできる条件と、ドル払いの円換算は、下の「消費税・年払い・ドル払いの扱い」にあります。</p>
   </div>
 
   <div class="rate-table-box show">
